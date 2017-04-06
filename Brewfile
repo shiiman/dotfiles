@@ -1,4 +1,5 @@
 tap 'caskroom/cask'
+tap 'caskroom/versions'
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/php'
@@ -50,7 +51,6 @@ cask 'vlc'
 cask 'sqlitebrowser'
 cask 'evernote'
 cask 'table-tool'
-cask 'clipmenu-dev'
 mas 'LINE', id: 539883307
 mas 'Xcode', id: 497799835
 mas 'Memory Clean 2', id: 1114591412
