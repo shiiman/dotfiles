@@ -1,0 +1,35 @@
+# zshをインストール
+if type yum >/dev/null 2>&1 && ! type zsh >/dev/null 2>&1; then
+    sudo yum -y install zsh
+elif type apt-get >/dev/null 2>&1 && ! type zsh >/dev/null 2>&1; then
+     sudo apt-get -y install zsh
+fi
+
+# gitをインストール
+if type yum >/dev/null 2>&1 && ! type git >/dev/null 2>&1; then
+    sudo yum -y install git
+elif type apt-get >/dev/null 2>&1 && ! type git >/dev/null 2>&1; then
+     sudo apt-get -y install git
+fi
+
+# gccをインストール
+if type yum >/dev/null 2>&1 && ! type gcc >/dev/null 2>&1; then
+    sudo yum -y install gcc
+elif type apt-get >/dev/null 2>&1 && ! type gcc >/dev/null 2>&1; then
+     sudo apt-get -y install gcc
+fi
+
+# vimのプラグイン管理dein用のフォルダ作成
+mkdir -p ~/.dein
+# deinの設定ファイルコピー
+\cp -f $SSHHOME/.sshrc.d/dein.toml ~/.dein/dein.toml
+\cp -f $SSHHOME/.sshrc.d/dein_lazy.toml ~/.dein/dein_lazy.toml
+
+# .vimrcの読み込み
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+
+# .zshrcの読み込み先変更し、zsh起動
+if type zsh >/dev/null 2>&1; then
+    export ZDOTDIR=$SSHHOME/.sshrc.d/
+    zsh
+fi
