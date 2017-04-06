@@ -1,9 +1,16 @@
 #!/bin/bash
 
 # Homebrewのインストール
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ! type brew >/dev/null 2>&1; then
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
 # gitから設定ファイルをclone
+if ! type git >/dev/null 2>&1; then
+	brew install git
+fi
 git clone https://github.com/bayguh/dotfiles.git ~/dotfiles
+
 # 設定ファイルフォルダに移動
 cd ~/dotfiles
 # bundleインストール
