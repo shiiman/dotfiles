@@ -1,7 +1,7 @@
 # ドットファイル管理用リポジトリ
 
 
-▼ 導入・更新
+▼ ドットファイル管理の導入・更新
 
 1. githubに管理用のリポジトリを作成
 
@@ -17,14 +17,14 @@ cd ~/dotfiles
 
 4. シンボリックリンクを貼る(面倒なのでシェル化)
 
-`vi ~/dotfiles/setup.sh`
+`vi ~/dotfiles/dotfile_setup.sh`
 
 シェル内で「ln -sf ~/dotfiles/.zshrc ~/.zshrc」みたいなことをやる
 
 
 ```
-chmod +x ~/dotfiles/setup.sh
-sh ~/dotfiles/setup.sh
+chmod +x ~/dotfiles/dotfile_setup.sh
+sh ~/dotfiles/dotfile_setup.sh
 ```
 
 5. gitに上げる
@@ -46,5 +46,13 @@ git push -u origin master
 ```
 git clone https://github.com/xxx/dotfiles.git  ~/dotfiles
 cd ~/dotfiles
-sh ~/dotfiles/setup.sh
+sh ~/dotfiles/dotfile_setup.sh
 ```
+
+---
+
+▼ macの初期設定
+`
+curl -fsSL https://raw.githubusercontent.com/bayguh/dotfiles/master/mac_setup.sh | bash
+`
+※ 内部でdotfile_setup.shも呼んでいる
