@@ -19,7 +19,8 @@ cd ~/dotfiles
 
 `vi ~/dotfiles/setup.sh`
 
-    シェル内で「ln -sf ~/dotfiles/.zshrc ~/.zshrc」みたいなことをやる
+シェル内で「ln -sf ~/dotfiles/.zshrc ~/.zshrc」みたいなことをやる
+
 
 ```
 chmod +x ~/dotfiles/setup.sh
@@ -37,3 +38,4 @@ git push -u origin master
 
 6. 更新
 ドットファイルに追加/変更があったら、同手順でgitにpushしておく
+
