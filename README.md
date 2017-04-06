@@ -6,18 +6,25 @@
 1. githubに管理用のリポジトリを作成
 
 2. ローカルにdotfile管理用のディレクトリ作成
-`mkdir ~/dotfiles`
-`cd ~/dotfiles`
+```
+mkdir ~/dotfiles
+cd ~/dotfiles
+```
 
 3. 管理したいドットファイルを2.で作成したディレクトリに移動
+
 `mv ~/.zshrc ./`
 
 4. シンボリックリンクを貼る(面倒なのでシェル化)
+
 `vi ~/dotfiles/setup.sh`
+
     シェル内で「ln -sf ~/dotfiles/.zshrc ~/.zshrc」みたいなことをやる
 
-`chmod +x ~/dotfiles/setup.sh`
-`sh ~/dotfiles/setup.sh`
+```
+chmod +x ~/dotfiles/setup.sh
+sh ~/dotfiles/setup.sh
+```
 
 5. gitに上げる
 ```
