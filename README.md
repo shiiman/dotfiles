@@ -52,7 +52,7 @@ sh ~/dotfiles/dotfile_setup.sh
 ---
 
 ▼ macの初期設定
-`
-curl -fsSL https://raw.githubusercontent.com/bayguh/dotfiles/master/mac_setup.sh | bash
-`
+
+`curl -fsSL https://raw.githubusercontent.com/bayguh/dotfiles/master/mac_setup.sh | bash`
+
 ※ 内部でdotfile_setup.shも呼んでいる
