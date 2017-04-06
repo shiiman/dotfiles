@@ -44,7 +44,7 @@ git push -u origin master
 ▼ セットアップ手順
 
 ```
-git clone https://github.com/xxx/dotfiles.git  ~/dotfiles
+git clone https://github.com/xxxx/dotfiles.git  ~/dotfiles
 cd ~/dotfiles
 sh ~/dotfiles/dotfile_setup.sh
 ```
@@ -53,6 +53,6 @@ sh ~/dotfiles/dotfile_setup.sh
 
 ▼ macの初期設定
 
-`curl -fsSL https://raw.githubusercontent.com/bayguh/dotfiles/master/mac_setup.sh | bash`
+`curl -fsSL https://raw.githubusercontent.com/xxxx/dotfiles/master/mac_setup.sh | bash`
 
 ※ 内部でdotfile_setup.shも呼んでいる
