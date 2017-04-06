@@ -19,4 +19,9 @@ brew tap Homebrew/bundle
 brew bundle
 # dotfileの設定
 sh ~/dotfiles/dotfile_setup.sh
-
+# zshをシェルリストに追加
+sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
+# デフォルトシェルをzshに変更
+chsh -s /usr/local/bin/zsh
+# finderで隠しファイルの表示
+defaults write com.apple.finder AppleShowAllFiles TRUE
