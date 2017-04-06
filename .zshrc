@@ -102,6 +102,10 @@ if type nvim >/dev/null 2>&1; then
     alias vi='nvim'
 fi
 
+if type ag >/dev/null 2>&1; then
+    alias grep='ag'
+fi
+
 
 ###########################################################
 #  グロブの設定                                             #
