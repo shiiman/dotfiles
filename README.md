@@ -39,3 +39,12 @@ git push -u origin master
 6. 更新
 ドットファイルに追加/変更があったら、同手順でgitにpushしておく
 
+---
+
+▼ セットアップ手順
+
+```
+git clone https://github.com/xxx/dotfiles.git  ~/dotfiles
+cd ~/dotfiles
+sh ~/dotfiles/setup.sh
+```
