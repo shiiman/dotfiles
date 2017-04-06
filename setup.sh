@@ -9,6 +9,19 @@ do
     ln -sf ~/dotfiles/$file ~/$file
 done
 
+#################################################################
+# vim関連                                                       #
+#################################################################
+# neovimの設定ファイル管理用のフォルダ作成
+if [ ! -d ~/.config/nvim ]; then
+    mkdir -p ~/.config/nvim
+fi
+
+# neovimの設定ファイルをシンボリックリンク化
+ln -sf ~/dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
+# vimも同じ設定ファイルを使う
+ln -sf ~/dotfiles/.config/nvim/init.vim ~/.vimrc
+
 # vimのプラグインパッケージ管理用のフォルダ作成
 if [ ! -d ~/.dein ]; then
     mkdir ~/.dein
