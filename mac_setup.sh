@@ -26,5 +26,8 @@ sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
 # デフォルトシェルをzshに変更
 chsh -s /usr/local/bin/zsh
 
+# fzfをインストール
+sh /usr/local/opt/fzf/install
+
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
