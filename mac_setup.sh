@@ -40,9 +40,18 @@ fi
 # neovimでpython3を使えるように設定
 pip3 install --user --upgrade neovim
 
-# font Rickyの設定
+# font Rictyの設定
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
+
+# vimのプラグインlightlineでRictyを使う
+git clone https://github.com/Lokaltog/vim-powerline.git /tmp/vim-powerline
+fontforge -lang=py -script /tmp/vim-powerline/fontpatcher/fontpatcher ~/Library/Fonts/Ricty-Regular.ttf
+fontforge -lang=py -script /tmp/vim-powerline/fontpatcher/fontpatcher ~/Library/Fonts/Ricty-Bold.ttf
+mv Ricty-Regular-Powerline.ttf ~/Library/Fonts/
+mv Ricty-Bold-Powerline.ttf ~/Library/Fonts/
+rm -rf /tmp/vim-powerline
+fc-cache -fv
 
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
