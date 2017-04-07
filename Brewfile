@@ -21,8 +21,9 @@ brew 'the_silver_searcher'
 brew 'tree'
 brew 'watch'
 brew 'wget'
-brew 'vim', args: ['with-lua']
+brew 'fish'
 brew 'zsh', args: ['without-etcdir']
+brew 'vim', args: ['with-lua']
 brew 'homebrew/php/php71'
 brew 'homebrew/php/composer'
 brew 'neovim/neovim/neovim'
