@@ -29,5 +29,11 @@ chsh -s /usr/local/bin/zsh
 # fzfをインストール
 sh /usr/local/opt/fzf/install
 
+# gcloud補完設定
+if [ ! -f .config/gcloud/gcloud-zsh-completion ]; then
+    mkdir -p  ~/.config/gcloud
+    git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
+fi
+
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
