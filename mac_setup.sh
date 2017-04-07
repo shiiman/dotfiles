@@ -37,6 +37,9 @@ if [ ! -f .config/gcloud/gcloud-zsh-completion ]; then
     git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
 fi
 
+# neovimでpython3を使えるように設定
+pip3 install --user --upgrade neovim
+
 # font Rickyの設定
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
