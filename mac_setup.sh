@@ -18,6 +18,8 @@ brew tap Homebrew/bundle
 # アプリインストール
 brew bundle
 
+##################################################################
+
 # dotfileの設定
 sh ~/dotfiles/dotfile_setup.sh
 
@@ -34,6 +36,10 @@ if [ ! -f .config/gcloud/gcloud-zsh-completion ]; then
     mkdir -p  ~/.config/gcloud
     git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
 fi
+
+# font Rickyの設定
+cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
+fc-cache -vf
 
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
