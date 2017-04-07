@@ -2,11 +2,10 @@
 path=(~/bin(N-/) /usr/local/bin(N-/) ~/pear/bin(N-/) ${path})
 export XDG_CONFIG_HOME=~/.config
 
-# GCS
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/a12665/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/a12665/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/a12665/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/a12665/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 ###########################################################
@@ -279,4 +278,3 @@ setopt noclobber
 # キーバインド無効
 bindkey -r '^J'
 bindkey -r '^O'
-
