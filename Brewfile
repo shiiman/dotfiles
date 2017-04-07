@@ -51,7 +51,8 @@ cask 'p4merge'
 cask 'vlc'
 cask 'sqlitebrowser'
 cask 'table-tool'
+# cask 'simple-comic'
 # cask 'astah-community'
 mas 'LINE', id: 539883307
 mas 'Memory Clean 2', id: 1114591412
-mas 'Xcode', id: 497799835
+# mas 'Xcode', id: 497799835
