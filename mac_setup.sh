@@ -62,9 +62,10 @@ ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 # PHP_CodeSnifferインストール
 curl -O http://pear.php.net/go-pear.phar
 php -d detect_unicode=0 go-pear.phar
-source ~/.zshrc
+source ~/.bashrc
 pear install PHP_CodeSniffer
 rm -rf go-pear.phar
 
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
+
