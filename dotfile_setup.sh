@@ -13,7 +13,7 @@ done
 # vim関連                                                       #
 #################################################################
 # neovimの設定ファイル管理用のフォルダ作成
-if [ ! -d ~/.config/nvim ]; then
+if [ ! -e ~/.config/nvim ]; then
     mkdir -p ~/.config/nvim
 fi
 
@@ -23,7 +23,7 @@ ln -sf ~/dotfiles/.config/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ~/dotfiles/.config/nvim/init.vim ~/.vimrc
 
 # vimのプラグインパッケージ管理用のフォルダ作成
-if [ ! -d ~/.dein ]; then
+if [ ! -e ~/.dein ]; then
     mkdir ~/.dein
 fi
 
@@ -35,7 +35,7 @@ ln -sf ~/dotfiles/.dein/dein_lazy.toml ~/.dein/dein_lazy.toml
 # sshrc関連                                                     #
 #################################################################
 # sshrcの設定ファイル管理用のフォルダ作成
-if [ ! -d ~/.sshrc.d ]; then
+if [ ! -e ~/.sshrc.d ]; then
     mkdir ~/.sshrc.d
 fi
 
