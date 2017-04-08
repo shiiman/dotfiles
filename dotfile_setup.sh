@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 通常のドットファイルを定義
-DOT_FILES=(.bashrc .zshrc .sshrc .gitconfig)
+DOT_FILES=(.zshrc .sshrc .gitconfig)
 
 # ホームディレクトリ配下にシンボリックリンクをはる
 for file in ${DOT_FILES[@]}
