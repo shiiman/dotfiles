@@ -66,3 +66,17 @@ $RECYCLE.BIN/
 
 # MYSQL Workbench backup file
 *.mwb.bak
+
+# sublime cache data
+encoding_cache.json
+oscrypto-ca-bundle.crt
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.merged-ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+c2u_tmp/
+ColorPicker/
+Color Highlighter/themes/

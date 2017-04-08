@@ -53,5 +53,8 @@ fc-cache -fv
 # neovimでpython3を使えるように設定
 pip3 install --user --upgrade neovim
 
+# sublime textの設定
+sh ~/dotfiles/SublimeText3/sublime_setup.sh
+
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
