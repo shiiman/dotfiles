@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 通常のドットファイルを定義
-DOT_FILES=(.zshrc .sshrc .gitconfig)
+DOT_FILES=(.bashrc .zshrc .sshrc .gitconfig)
 
 # ホームディレクトリ配下にシンボリックリンクをはる
 for file in ${DOT_FILES[@]}
@@ -39,6 +39,8 @@ if [ ! -e ~/.sshrc.d ]; then
     mkdir ~/.sshrc.d
 fi
 
+# bashの設定ファイルをシンボリックリンク化
+ln -sf ~/dotfiles/.bashrc ~/.sshrc.d/.bashrc
 # zshの設定ファイルをシンボリックリンク化
 ln -sf ~/dotfiles/.zshrc ~/.sshrc.d/.zshrc
 # vimの設定ファイルをシンボリックリンク化
