@@ -50,6 +50,15 @@ alias ....='cd ../../..'
 alias ll='ls -l'
 alias la='ls -a'
 
+# cdの後にlsとpwdを実行
+function cdls() {
+    # cdがaliasでループするので\をつける
+    \cd $1;
+    la;
+    pwd;
+}
+alias cd=cdls
+
 if type nvim >/dev/null 2>&1; then
     alias vi='nvim'
 fi
@@ -81,13 +90,4 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\]] % "
-
-# cdの後にlsとpwdを実行
-function cdls() {
-    # cdがaliasでループするので\をつける
-    \cd $1;
-    la;
-    pwd;
-}
-alias cd=cdls
 
