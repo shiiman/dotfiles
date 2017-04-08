@@ -1,0 +1,1 @@
+{"url": "https://github.com/SublimeLinter/SublimeLinter-phpmd", "dependencies": [], "sublime_text": ">=3000", "version": "1.1.0", "description": "SublimeLinter plugin for php, using phpmd.", "platforms": ["*"]}

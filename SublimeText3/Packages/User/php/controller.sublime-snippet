@@ -1,0 +1,57 @@
+<snippet>
+    <content><![CDATA[
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class ${1:Sample} extends My_Controller {
+
+    // private \$sample_ini;
+
+    /**
+     * コンストラクタ
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        // モデルのロード
+        // \$this->load->model( 'sample_model' );
+
+        // ライブラリのロード
+        // \$this->load->library( 'SampleLogic' );
+
+        // CSVのロード
+        // \$this->load->csv( 'sample_csv', 'sample_id' );
+
+        // INIのロード
+        // \$this->sample_ini = load_ini( 'sample.ini' );
+
+        // ヘルパーのロード
+        // \$this->load->helper( 'sample' );
+    }
+
+    /**
+     * ${2:サンプル}
+     */
+    public function index()
+    {
+        try {
+            // begin
+            ActiveConnection::begin();
+
+            // commit
+            ActiveConnection::commit();
+
+            \$this->output->set_api_output( \$this->data );
+        } catch( Exception \$e ) {
+            // rollback
+            ActiveConnection::rollback();
+            \$this->output->set_exception( \$e );
+        }
+    }
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>controller</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

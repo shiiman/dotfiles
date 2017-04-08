@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+extract_by(${1:array}, ${2:column}, ${3:column_value})
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>array_extract(特定の値だけ抽出)</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

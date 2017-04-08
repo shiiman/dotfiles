@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+app_log("${1:ERROR}", "${2:user_sumple:}" . var_export(${3:\$user_sumple}, TRUE));
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>log</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

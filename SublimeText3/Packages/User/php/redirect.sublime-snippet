@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+redirect( strtolower( __CLASS__ ) . '/${1:index}' );
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>redirect</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

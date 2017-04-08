@@ -1,0 +1,43 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AutoFileName",
+		"BracketHighlighter",
+		"Color Highlighter",
+		"ConvertToUTF8",
+		"CSS Snippets",
+		"DocBlockr",
+		"Emmet",
+		"GotoDocumentation",
+		"HTML5",
+		"INI",
+		"Japanize",
+		"JavaScript Snippets",
+		"jQuery",
+		"Package Control",
+		"php-snippets",
+		"phpfmt",
+		"ShellScriptImproved",
+		"SideBarEnhancements",
+		"Smart Delete",
+		"Smarty",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"SublimeLinter-contrib-htmllint",
+		"SublimeLinter-csslint",
+		"SublimeLinter-jshint",
+		"SublimeLinter-php",
+		"SublimeLinter-phpcs",
+		"SublimeLinter-phplint",
+		"SublimeLinter-phpmd",
+		"SublimeLinter-shellcheck",
+		"SyncedSideBar",
+		"TOML",
+		"TrailingSpaces",
+		"VimL"
+	]
+}

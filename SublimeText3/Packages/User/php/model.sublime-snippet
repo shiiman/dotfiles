@@ -1,0 +1,94 @@
+<snippet>
+    <content><![CDATA[
+<?php
+/**
+ * ${1:サンプルモデル}モデル
+ */
+class ${2:Sample_model} extends MY_Model
+{
+    // カラムリスト
+    public \$column_list = [
+        'user_sample_id' => 'int',
+        'level' => 'int'
+    ];
+
+    /**
+     * コンストラクタ
+     */
+    function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * 主キーで指定したレコード取得
+     *
+     * @param  ${3:model_sample_id} ${4:モデルサンプルID}
+     * @return 1レコード(空だったらnull)
+     */
+    public function get_by_primary_key( ${5:\$sample_id} )
+    {
+        \$this->select( array_keys( \$this->column_list ) );
+        \$this->where( '${6:sample_id}', ${7:\$sample_id} );
+        return \$this->get_record();
+    }
+
+    /**
+     * ユーザIDで指定したレコード取得
+     *
+     * @param  user_id ユーザID
+     * @return 複数レコード(空だったら[])
+     */
+    public function get_by_user_id( \$user_id )
+    {
+        \$this->select( array_keys( \$this->column_list ) );
+        \$this->where( 'user_id', \$user_id );
+        return \$this->get_list();
+    }
+
+    /**
+     * 更新
+     *
+     * @param  record レコード
+     * @param  user_id ユーザID
+     * @return 更新行数
+     */
+    public function update_by_user_id( \$record, \$user_id )
+    {
+        \$this->where( 'user_id', \$user_id );
+        \$this->update( \$record );
+        return \$this->affected_rows();
+    }
+
+    /**
+     * 論理削除
+     *
+     * @param  user_sample_id ユーザサンプルID
+     * @return 更新行数
+     */
+    public function delete_by_primary_key( \$user_sample_id )
+    {
+        \$this->where( 'user_sample_id', \$user_sample_id );
+        \$this->delete( \$this->table_name );
+        return \$this->affected_rows();
+    }
+
+    /***デバッグ用******************************************************************************************************/
+
+    /**
+     * 物理削除
+     * @param  user_id ユーザID
+     */
+    public function physical_delete_by_user_id( \$user_id )
+    {
+        \$this->where( 'user_id', \$user_id );
+        \$this->physical_delete();
+    }
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>model</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

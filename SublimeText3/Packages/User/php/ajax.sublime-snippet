@@ -1,0 +1,21 @@
+<snippet>
+    <content><![CDATA[
+\$.ajax({
+    type: "POST",
+    url: "{'${1:url}'|site_url}",
+    data: { ${2:key}: ${3:value} },
+    datatype : "json",
+    success: function(json_data) {
+        ${4:this}
+    },
+    error: function(error) {
+        console.log("Ajaxエラー");
+        console.log(error);
+    }
+});
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>ajax</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <!-- <scope>source.python</scope> -->
+</snippet>

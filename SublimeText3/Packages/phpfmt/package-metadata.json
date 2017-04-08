@@ -1,0 +1,1 @@
+{"url": "https://github.com/nanch/phpfmt_stable", "dependencies": [], "sublime_text": ">=3000", "version": "803.10.2", "description": "This is a stable snapshot (version 6125cf9) of the phpfmt plugin for Sublime Text", "platforms": ["osx", "linux", "windows"]}
