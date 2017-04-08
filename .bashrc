@@ -79,5 +79,15 @@ export LANG=ja_JP.UTF-8
 # 区切り文字の設定
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+# プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\]] % "
+
+# cdの後にlsとpwdを実行
+function cdls() {
+    # cdがaliasでループするので\をつける
+    \cd $1;
+    la;
+    pwd;
+}
+alias cd=cdls
 
