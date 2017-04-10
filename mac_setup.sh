@@ -13,6 +13,8 @@ git clone https://github.com/bayguh/dotfiles.git ~/dotfiles
 
 # 設定ファイルフォルダに移動
 cd ~/dotfiles
+# ローカルリポジトリにユーザのメールアドレス登録
+git config user.email hsnonsense5@gmail.com
 # bundleインストール
 brew tap Homebrew/bundle
 # アプリインストール
