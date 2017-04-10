@@ -256,9 +256,6 @@ setopt no_list_beep
 # rm * の前に確認をとる
 setopt rm_star_wait
 
-# コマンドのスペルを訂正する
-setopt correct
-
 # URLをエスケープする
 autoload -Uz url-quote-magic
 # 文字入力時にURLをエスケープする

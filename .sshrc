@@ -27,6 +27,8 @@ mkdir -p ~/.dein
 
 # .vimrcの読み込み
 export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
+# .bashrcの読み込み
+source $SSHHOME/.sshrc.d/.bashrc
 
 # .zshrcの読み込み先変更し、zsh起動
 if type zsh >/dev/null 2>&1; then
