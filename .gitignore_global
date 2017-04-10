@@ -1,0 +1,83 @@
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+#IntelliJ IDEA  Directory-based project format:
+.idea
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Windows Folder config file
+Desktop.ini
+
+# Windows Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Microsoft Office Lock File
+~$*.xls
+~$*.xlsx
+~$*.xlsm
+~$*.xltx
+~$*.xltm
+~$*.doc
+~$*.docx
+~$*.docm
+~$*.dotx
+~$*.dotm
+~$*.ppt
+~$*.pptx
+~$*.pptm
+~$*.potx
+~$*.potm
+
+# Windows shortcuts
+*.lnk
+
+# packing-only formats
+*.iso
+
+# package management formats
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# MYSQL Workbench backup file
+*.mwb.bak
+
+# sublime cache data
+encoding_cache.json
+oscrypto-ca-bundle.crt
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.merged-ca-bundle
+Package Control.system-ca-bundle
+Package Control.user-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+c2u_tmp/
+ColorPicker/
+Color Highlighter/themes/
