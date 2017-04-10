@@ -18,6 +18,10 @@ if [ ! -e ~/.zplug/init.zsh ]; then
     curl -sL zplug.sh/installer | zsh
 fi
 
+if [ ! -e ~/.zplug ]; then
+    git clone https://github.com/zplug/zplug ~/.zplug
+fi
+
 source ~/.zplug/init.zsh
 
 # プラグインを定義する
