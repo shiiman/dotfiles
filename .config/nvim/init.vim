@@ -30,8 +30,8 @@ if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
 
     " プラグインリストを収めた TOML ファイル
-    let s:toml      = expand('~/.dein/dein.toml')
-    let s:lazy_toml = expand('~/.dein/dein_lazy.toml')
+    let s:toml      = expand(s:dein_dir . 'dein.toml')
+    let s:lazy_toml = expand(s:dein_dir . 'dein_lazy.toml')
 
     " TOML を読み込み、キャッシュしておく
     call dein#load_toml(s:toml,      {'lazy': 0})
