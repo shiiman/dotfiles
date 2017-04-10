@@ -14,15 +14,19 @@ fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
 # zplugの設定                                              #
 ###########################################################
 
-if [ ! -e ~/.zplug/init.zsh ]; then
-    curl -sL zplug.sh/installer | zsh
+# pathの設定
+if [ -z "${SSHHOME+x}" ]; then
+    export ZPLUG_HOME=~/.zplug
+else
+    export ZPLUG_HOME=$SSHHOME/.zplug
 fi
 
-if [ ! -e ~/.zplug ]; then
-    git clone https://github.com/zplug/zplug ~/.zplug
+if [ ! -e $ZPLUG_HOME ]; then
+    # curl -sL zplug.sh/installer | zsh
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
 fi
 
-source ~/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 
 # プラグインを定義する
 zplug 'zsh-users/zsh-autosuggestions'
