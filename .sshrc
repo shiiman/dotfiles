@@ -27,10 +27,10 @@ if ([ -e /etc/debian_version ] || [ -e /etc/debian_release ]) && [ $LANG != "ja_
 fi
 
 # vimのプラグイン管理dein用のフォルダ作成
-mkdir -p ~/.dein
+mkdir -p $SSHHOME/.dein
 # deinの設定ファイルコピー
-\cp -f $SSHHOME/.sshrc.d/dein.toml ~/.dein/dein.toml
-\cp -f $SSHHOME/.sshrc.d/dein_lazy.toml ~/.dein/dein_lazy.toml
+\cp -f $SSHHOME/.sshrc.d/dein.toml $SSHHOME/.dein/dein.toml
+\cp -f $SSHHOME/.sshrc.d/dein_lazy.toml $SSHHOME/.dein/dein_lazy.toml
 
 # .vimrcの読み込み
 export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
