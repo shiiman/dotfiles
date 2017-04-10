@@ -6,7 +6,11 @@ if &compatible
 endif
 
 " deinパス設定
-let s:dein_dir = fnamemodify('~/.dein/', ':p')
+if exists("$SSHHOME")
+  let s:dein_dir = fnamemodify($SSHHOME . '/.dein/', ':p')
+else
+  let s:dein_dir = fnamemodify('~/.dein/', ':p')
+endif
 let s:dein_repo_dir = s:dein_dir . 'repos/github.com/Shougo/dein.vim'
 
 " gitがなければインストール
