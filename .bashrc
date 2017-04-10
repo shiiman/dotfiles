@@ -23,6 +23,14 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 
 ###########################################################
+# gitの設定                                                #
+###########################################################
+# 補完読み込み
+[ -f /usr/local/opt/git/etc/bash_completion.d/git-completion.bash ] && source /usr/local/opt/git/etc/bash_completion.d/git-completion.bash
+[ -f /usr/local/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash ] && source /usr/local/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash
+
+
+###########################################################
 #  lsの設定                                                #
 ###########################################################
 # lsコマンド時、自動で色がつく
