@@ -21,6 +21,7 @@ brew 'the_silver_searcher'
 brew 'tree'
 brew 'watch'
 brew 'wget'
+brew 'tmux'
 brew 'fish'
 brew 'zsh', args: ['without-etcdir']
 brew 'vim', args: ['with-lua']

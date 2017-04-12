@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 通常のドットファイルを定義
-DOT_FILES=(.bashrc .zshrc .sshrc .gitconfig .gitignore_global)
+DOT_FILES=(.bashrc .zshrc .sshrc .gitconfig .gitignore_global .tmux.conf)
 
 # ホームディレクトリ配下にシンボリックリンクをはる
 for file in ${DOT_FILES[@]}
