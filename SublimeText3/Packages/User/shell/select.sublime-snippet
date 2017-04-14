@@ -1,0 +1,14 @@
+<snippet>
+    <content><![CDATA[
+PS3='${1:output}'
+
+select ${2:cmd} in ${3:words}; do
+    ${4:}
+done
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>select</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.shell</scope>
+</snippet>
