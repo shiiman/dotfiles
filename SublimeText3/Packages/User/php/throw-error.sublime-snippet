@@ -1,9 +1,0 @@
-<snippet>
-    <content><![CDATA[
-throw new Exception('行数:' . __LINE__ . ' ${1:sphere_material_id} post error');
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <tabTrigger>throw-error</tabTrigger>
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <!-- <scope>source.python</scope> -->
-</snippet>

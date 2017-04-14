@@ -1,0 +1,59 @@
+<snippet>
+    <content><![CDATA[
+<?php
+/**
+ * ${1:ユーザサンプル}ロジック
+ */
+class ${2:UserSampleLogic} {
+
+    /**
+     * codeigniterインスタンス参照
+     * @var CI_Controller
+     */
+    private \$CI;
+    // private \$sample_ini;
+
+    /**
+     * コンストラクタ
+     */
+    function __construct()
+    {
+        \$this->CI =& get_instance();
+
+        // モデルのロード
+        // \$this->CI->load->model( 'sample_model' );
+
+        // ライブラリのロード
+        // \$this->CI->load->library( 'SampleLogic' );
+
+        // CSVのロード
+        // \$this->CI->load->csv( 'sample_csv', 'sample_id' );
+
+        // INIのロード
+        // \$this->sample_ini = load_ini( 'sample.ini' );
+
+        // ヘルパーのロード
+        // \$this->CI->load->helper( 'sample' );
+
+        // memcacheの読み込み
+        // \$this->CI->load->cache( 'memcache', 'memcache_appli' );
+    }
+
+    /**
+     * ${3:ユーザサンプル取得}
+     *
+     * @param user_id ユーザID
+     * @return ユーザサンプル
+     */
+    public function get_user_sample( \$user_sample = 1 )
+    {
+        return \$user_sample;
+    }
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>library</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.php</scope>
+</snippet>

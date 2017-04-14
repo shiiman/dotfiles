@@ -1,0 +1,22 @@
+<snippet>
+    <content><![CDATA[
+try {
+    // トランザクション処理
+    ActiveConnection::begin();
+
+    ${1:}
+
+    // コミット
+    ActiveConnection::commit();
+} catch ( Exception \$e ) {
+    // ロールバック
+    ActiveConnection::rollback();
+
+    \$this->output->set_exception( \$e );
+}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>transaction try-catch</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.php</scope>
+</snippet>

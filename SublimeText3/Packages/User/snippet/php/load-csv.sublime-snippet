@@ -1,0 +1,9 @@
+<snippet>
+    <content><![CDATA[
+\$this->load->csv('${1:sample_csv}', '${2:sample_id}');
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>load-csv</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.php</scope>
+</snippet>

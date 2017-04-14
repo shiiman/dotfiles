@@ -1,0 +1,56 @@
+<snippet>
+    <content><![CDATA[
+<?php
+/**
+ * ${1: model or Library }テスト
+ */
+class ${2: model or Library }Test extends BaseUnitTestCase
+{
+    protected \$tables = array(
+        "${3: model or Library }" => "${3: model or Library }"
+    );
+
+    public function setUp()
+    {
+        parent::setUp();
+        \$this->CI->load->model( "${3: model or Library }" );
+        \$this->CI->load->library( "${3: model or Library }" );
+    }
+
+    /**
+     *
+    * @dataProvider {4: メソッド名 }
+     */
+    public function test${5: メソッド名 }()
+    {
+        \$expected = ${6: 予想値 };
+        \$result = \$this->CI->${7: model or Library }->${8: メソッド名 }();
+        \$this->assertEquals( \$expected, \$result );
+        \$this->assertTrue( \$result );
+        \$this->assertFalse( \$result );
+        \$this->assertNull( \$result );
+        \$this->assertEmpty( \$result );
+    }
+
+    /**
+     * データプロバイダー: test{9: メソッド名 }
+     */
+    public function {10: メソッド名 }()
+    {
+        return [
+
+        ];
+    }
+
+    public function tearDown()
+    {
+        parent::tearDown();
+    }
+}
+
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <tabTrigger>php_unit_test</tabTrigger>
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>source.php</scope>
+</snippet>
