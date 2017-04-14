@@ -64,8 +64,7 @@ alias la='ls -a'
 
 # cdの後にlsとpwdを実行
 function cdlspwd() {
-    # cdがaliasでループするので\をつける
-    \cd $1;
+    cd $1;
     la;
     pwd;
 }
