@@ -15,10 +15,6 @@ repo = 'crusoexia/vim-monokai'
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-# コピペ履歴
-[[plugins]]
-repo  = 'Shougo/neoyank.vim'
-
 # 移動補助
 [[plugins]]
 repo  = 'easymotion/vim-easymotion'
@@ -31,25 +27,9 @@ repo  = 'ctrlpvim/ctrlp.vim'
 [[plugins]]
 repo = 'rhysd/accelerated-jk'
 
-# windowの幅調整をしやすくする
-[[plugins]]
-repo = 'simeji/winresizer'
-
-# 任意の単語や文字列をハイライト表示
-[[plugins]]
-repo = 't9md/vim-quickhl'
-
 # 自動的にとじ括弧を挿入
 [[plugins]]
 repo = 'cohama/lexima.vim'
-
-# 括弧や引用符などを編集
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-# コメントアウト
-[[plugins]]
-repo = 'tomtom/tcomment_vim'
 
 # grepにagを使う
 [[plugins]]
@@ -81,4 +61,25 @@ repo = 'scrooloose/nerdtree'
 # ディレクトリツリーに変更記号等を表示
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
+
+# コピペ履歴
+# [[plugins]]
+# repo  = 'Shougo/neoyank.vim'
+
+# windowの幅調整をしやすくする
+# [[plugins]]
+# repo = 'simeji/winresizer'
+
+# 任意の単語や文字列をハイライト表示
+# [[plugins]]
+# repo = 't9md/vim-quickhl'
+
+
+# 括弧や引用符などを編集
+# [[plugins]]
+# repo = 'tpope/vim-surround'
+
+# コメントアウト
+# [[plugins]]
+# repo = 'tomtom/tcomment_vim'
 

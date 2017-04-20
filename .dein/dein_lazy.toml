@@ -7,13 +7,6 @@ repo = 'Shougo/neocomplete.vim'
 if = 'has("lua")'
 on_i = 1
 
-# php補完 初回「:PhpMakeDict ja」をする
-[[plugins]]
-repo = 'violetyk/neocomplete-php.vim'
-if = 'has("lua")'
-on_i = 1
-depends = ['neocomplete.vim']
-
 # 補完 初回「:UpdateRemotePlugins」をする
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
@@ -27,3 +20,9 @@ on_i  = 1
 on_ft = ['snippet']
 depends = ['neosnippet-snippets']
 
+# php補完 初回「:PhpMakeDict ja」をする
+# [[plugins]]
+# repo = 'violetyk/neocomplete-php.vim'
+# if = 'has("lua")'
+# on_i = 1
+# depends = ['neocomplete.vim']
