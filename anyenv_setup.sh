@@ -9,6 +9,12 @@ if [ ! -e ~/.anyenv ]; then
     git clone https://github.com/znz/anyenv-git.git ~/.anyenv/plugins/anyenv-git
 fi
 
+echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> /tmp/anyenv.setting
+echo 'eval "$(anyenv init -)"' >> /tmp/anyenv.setting
+
+# シェルの再読込
+source /tmp/anyenv.setting
+
 # 各envのインストール
 anyenv install pyenv
 anyenv install rbenv
@@ -16,9 +22,6 @@ anyenv install phpenv
 anyenv install ndenv
 anyenv install goenv
 anyenv install jenv
-
-echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> /tmp/anyenv.setting
-echo 'eval "$(anyenv init -)"' >> /tmp/anyenv.setting
 
 # シェルの再読込
 source /tmp/anyenv.setting
