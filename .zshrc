@@ -1,5 +1,5 @@
 # pathを設定
-path=(~/bin(N-/) /usr/local/bin(N-/) ~/pear/bin(N-/) ${path})
+path=(~/bin(N-/) /usr/local/bin(N-/) ~/pear/bin(N-/) ~/.anyenv/bin(N-/) ${path})
 export XDG_CONFIG_HOME=~/.config
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -8,6 +8,10 @@ if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.i
 if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
 
 fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
+
+if [ -d $HOME/.anyenv ] ; then
+  eval "$(anyenv init -)"
+fi
 
 
 ###########################################################

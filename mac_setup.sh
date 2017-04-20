@@ -20,6 +20,7 @@ brew tap Homebrew/bundle
 # アプリインストール
 brew bundle
 
+
 ##################################################################
 
 # dotfileの設定
@@ -29,6 +30,9 @@ sh ~/dotfiles/dotfile_setup.sh
 sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
 # デフォルトシェルをzshに変更
 chsh -s /usr/local/bin/zsh
+
+# anyenvの設定
+sh ~/dotfiles/anyenv_setup.sh
 
 # fzfをインストール
 sh /usr/local/opt/fzf/install
@@ -62,10 +66,10 @@ sh ~/dotfiles/SublimeText3/sublime_setup.sh
 ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 
 # PHP_CodeSnifferインストール
-curl -O http://pear.php.net/go-pear.phar
-php -d detect_unicode=0 go-pear.phar
-~/pear/bin/pear install PHP_CodeSniffer
-rm -rf go-pear.phar
+# curl -O http://pear.php.net/go-pear.phar
+# php -d detect_unicode=0 go-pear.phar
+# ~/pear/bin/pear install PHP_CodeSniffer
+# rm -rf go-pear.phar
 
 # finderで隠しファイルの表示
 defaults write com.apple.finder AppleShowAllFiles TRUE
