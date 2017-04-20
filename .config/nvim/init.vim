@@ -346,15 +346,6 @@ set t_Co=256
 
 
 "###########################################################
-"# vim-quickhlの設定                                        #
-"###########################################################
-nmap <Leader>m <Plug>(quickhl-manual-this)
-xmap <Leader>m <Plug>(quickhl-manual-this)
-nmap <Leader><Leader> <Plug>(quickhl-manual-reset)
-xmap <Leader><Leader> <Plug>(quickhl-manual-reset)
-
-
-"###########################################################
 "# accelerated-jkの設定                                     #
 "###########################################################
 " j/kによる移動を速くする
@@ -553,12 +544,6 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 
 "###########################################################
-"# neocomplete_phpの設定                                    #
-"###########################################################
-let g:neocomplete_php_locale = 'ja'
-
-
-"###########################################################
 "# deocompleteの設定                                        #
 "###########################################################
 " スタート時に有効にする
@@ -626,7 +611,22 @@ map <Leader>k <Plug>(easymotion-k)
 
 
 "###########################################################
+"# neocomplete-phpの設定                                    #
+"###########################################################
+" let g:neocomplete_php_locale = 'ja'
+
+
+"###########################################################
+"# vim-quickhlの設定                                        #
+"###########################################################
+" nmap <Leader>m <Plug>(quickhl-manual-this)
+" xmap <Leader>m <Plug>(quickhl-manual-this)
+" nmap <Leader><Leader> <Plug>(quickhl-manual-reset)
+" xmap <Leader><Leader> <Plug>(quickhl-manual-reset)
+
+
+"###########################################################
 "# winresizerの設定                                         #
 "###########################################################
-let g:winresizer_start_key = '<C-t>'
+" let g:winresizer_start_key = '<C-t>'
 
