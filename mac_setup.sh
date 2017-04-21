@@ -20,7 +20,6 @@ brew tap Homebrew/bundle
 # アプリインストール
 brew bundle
 
-
 ##################################################################
 
 # dotfileの設定
@@ -38,14 +37,27 @@ sh ~/dotfiles/anyenv_setup.sh
 sh /usr/local/opt/fzf/install
 
 # gcloud補完設定
+# python2系が必要(3系では未対応)
 if [ ! -e ~/.config/gcloud/gcloud-zsh-completion ]; then
     mkdir -p  ~/.config/gcloud
     git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
 fi
 
+# sublime textの設定
+sh ~/dotfiles/SublimeText3/sublime_setup.sh
+
+# tarの設定変更
+ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
+
+# finderで隠しファイルの表示
+defaults write com.apple.finder AppleShowAllFiles TRUE
+killall Finder
+
 # font Rictyの設定
 cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -vf
+
+##################################################################
 
 # vimのプラグインlightlineでRictyを使う
 git clone https://github.com/Lokaltog/vim-powerline.git /tmp/vim-powerline
@@ -59,18 +71,8 @@ fc-cache -fv
 # neovimでpython3を使えるように設定
 pip3 install --user --upgrade neovim
 
-# sublime textの設定
-sh ~/dotfiles/SublimeText3/sublime_setup.sh
-
-# tarの設定変更
-ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
-
 # PHP_CodeSnifferインストール
 # curl -O http://pear.php.net/go-pear.phar
 # php -d detect_unicode=0 go-pear.phar
 # ~/pear/bin/pear install PHP_CodeSniffer
 # rm -rf go-pear.phar
-
-# finderで隠しファイルの表示
-defaults write com.apple.finder AppleShowAllFiles TRUE
-killall Finder
