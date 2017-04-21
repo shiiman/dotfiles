@@ -28,7 +28,6 @@ source /tmp/anyenv.setting
 
 # 各言語をインストール
 pyenv install 2.7.13
-pyenv install 3.6.1
 rbenv install 2.4.1
 phpenv install 7.1.4
 ndenv install v7.9.0
@@ -40,7 +39,7 @@ jenv add $(/usr/libexec/java_home -v 1.8)
 
 
 # 各言語のバージョン反映
-pyenv global 3.6.1
+pyenv global 2.7.13
 rbenv global 2.4.1
 phpenv global 7.1.4
 ndenv global v7.9.0
