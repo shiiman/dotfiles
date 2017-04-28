@@ -22,6 +22,8 @@ brew 'the_silver_searcher'
 brew 'tree'
 brew 'watch'
 brew 'wget'
+brew 'phpunit'
+brew 'memcached'
 brew 'tmux'
 brew 'fish'
 brew 'zsh', args: ['without-etcdir']
