@@ -26,6 +26,8 @@ brew 'wget'
 brew 'phpunit'
 brew 'memcached'
 brew 'tfenv'
+brew 'packer'
+brew 'packer-completion'
 brew 'tmux'
 brew 'fish'
 brew 'zsh', args: ['without-etcdir']
