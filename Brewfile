@@ -25,6 +25,7 @@ brew 'iproute2mac'
 brew 'wget'
 brew 'phpunit'
 brew 'memcached'
+brew 'tfenv'
 brew 'tmux'
 brew 'fish'
 brew 'zsh', args: ['without-etcdir']
