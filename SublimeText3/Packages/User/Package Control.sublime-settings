@@ -5,6 +5,8 @@
 	],
 	"installed_packages":
 	[
+		"Ansible",
+		"AnsibleSnippets",
 		"AutoFileName",
 		"BracketHighlighter",
 		"Color Highlighter",
@@ -34,6 +36,7 @@
 		"Smarty",
 		"SublimeCodeIntel",
 		"SublimeLinter",
+		"SublimeLinter-contrib-ansible-lint",
 		"SublimeLinter-contrib-htmllint",
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
