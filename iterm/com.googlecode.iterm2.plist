@@ -394,11 +394,11 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 364 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1696 277 937 465 1440 -180 1920 1057 </string>
+	<string>1085 1365 937 465 828 900 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 -176 1914 1053 1440 -180 1920 1057 </string>
+	<string>831 902 1914 1053 828 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>498 103 570 452 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1653,6 +1653,10 @@
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
 	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
 	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
@@ -1678,6 +1682,8 @@
 	<key>OpenBookmark</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
+	<false/>
+	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PointerActions</key>
 	<dict>
@@ -1714,6 +1720,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/a12665/dotfiles/iterm</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1727,7 +1735,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-04-12T00:57:06Z</date>
+	<date>2017-05-29T00:43:02Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
