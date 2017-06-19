@@ -345,6 +345,8 @@
 	<false/>
 	<key>HideTab</key>
 	<false/>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSFontPanelAttributes</key>
@@ -392,13 +394,13 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>658 91 634 274 0 0 1440 877 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 364 620 392 0 0 1440 877 </string>
+	<string>2090 318 620 392 1440 -180 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>1085 1365 937 465 828 900 1920 1057 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>831 902 1914 1053 828 900 1920 1057 </string>
+	<string>829 904 1914 1053 828 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>498 103 570 452 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1735,7 +1737,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-05-29T00:43:02Z</date>
+	<date>2017-06-16T00:43:15Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1753,6 +1755,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.15</string>
+	<string>3.1.beta.4</string>
 </dict>
 </plist>
