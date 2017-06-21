@@ -29,6 +29,7 @@ brew 'tfenv'
 brew 'packer'
 brew 'packer-completion'
 brew 'ansible'
+brew 'graphviz'
 brew 'tmux'
 brew 'fish'
 brew 'zsh', args: ['without-etcdir']
