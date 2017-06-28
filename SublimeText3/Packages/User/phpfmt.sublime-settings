@@ -1,5 +1,6 @@
 {
 	"format_on_save": true,
 	"php_bin": "/Users/a12665/.anyenv/envs/phpenv/shims/php",
-	"psr2": true
+	"psr2": true,
+	"version": 4
 }
