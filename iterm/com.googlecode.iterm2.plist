@@ -384,9 +384,9 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 364 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>170 443 918 381 0 0 1440 877 </string>
+	<string>998 1425 918 452 701 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>144 259 710 500 0 0 1440 877 </string>
+	<string>701 900 1920 1057 701 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>517 194 864 537 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1598,7 +1598,7 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 			<key>Thin Strokes</key>
 			<integer>1</integer>
 			<key>Transparency</key>
-			<real>0.090178901627218935</real>
+			<real>0.074563815967320451</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
