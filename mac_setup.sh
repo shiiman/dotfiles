@@ -53,19 +53,9 @@ ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 defaults write com.apple.finder AppleShowAllFiles TRUE
 killall Finder
 
-# font Rictyの設定
-cp -f /usr/local/opt/ricty/share/fonts/Ricty*.ttf ~/Library/Fonts/
-fc-cache -vf
-
 ##################################################################
 
-# vimのプラグインlightlineでRictyを使う
-git clone https://github.com/Lokaltog/vim-powerline.git /tmp/vim-powerline
-fontforge -lang=py -script /tmp/vim-powerline/fontpatcher/fontpatcher ~/Library/Fonts/Ricty-Regular.ttf
-fontforge -lang=py -script /tmp/vim-powerline/fontpatcher/fontpatcher ~/Library/Fonts/Ricty-Bold.ttf
-mv Ricty-Regular-Powerline.ttf ~/Library/Fonts/
-mv Ricty-Bold-Powerline.ttf ~/Library/Fonts/
-rm -rf /tmp/vim-powerline
+cp -f ~/dotfiles/Fonts/Ricty*.ttf ~/Library/Fonts/
 fc-cache -fv
 
 # neovimでpython3を使えるように設定
