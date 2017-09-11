@@ -36,7 +36,6 @@ brew 'zsh', args: ['without-etcdir']
 brew 'vim', args: ['with-lua']
 brew 'homebrew/php/composer'
 brew 'neovim/neovim/neovim'
-brew 'sanemat/font/ricty'
 cask 'google-japanese-ime'
 cask 'dropbox'
 cask 'evernote'
