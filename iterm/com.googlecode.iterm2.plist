@@ -386,7 +386,7 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>998 1425 918 452 701 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>701 900 1920 1057 701 900 1920 1057 </string>
+	<string>0 4 1440 873 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>517 194 864 537 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1681,7 +1681,7 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-11T07:07:52Z</date>
+	<date>2017-09-12T07:28:59Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1690,6 +1690,8 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 	<true/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
 	<string>3.1.beta.9</string>
 </dict>
