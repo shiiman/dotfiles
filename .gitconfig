@@ -1,5 +1,5 @@
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/a12665/.gitignore_global
 	quotepath = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -23,3 +23,5 @@
 [http]
 	sslVerify = false
 	postBuffer = 524288000
+[commit]
+	template = /Users/a12665/.stCommitMsg
