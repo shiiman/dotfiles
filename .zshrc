@@ -9,6 +9,9 @@ if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion
 
 fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
 
+# The next line enables shell command completion for aws.
+source /usr/local/share/zsh/site-functions/_aws
+
 if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
 fi
