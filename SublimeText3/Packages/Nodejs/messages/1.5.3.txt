@@ -1,5 +1,0 @@
-Version 1.5.3
--------------
-This is a bugfix release version
-
-* Fix Nodejs build system on Windows and Linux platforms

@@ -1,1 +1,0 @@
-{"description": "nodejs snippets and bindings for Sublime Text 3", "sublime_text": ">=3000", "platforms": ["osx", "linux", "windows"], "url": "https://github.com/tanepiper/SublimeText-Nodejs", "version": "2.0.0", "dependencies": []}
