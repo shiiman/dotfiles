@@ -1,3 +1,5 @@
 {
+	"format_on_save": false,
+	"php_bin": "/Users/a12665/.anyenv/envs/phpenv/shims/php",
 	"version": 1
 }

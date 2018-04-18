@@ -70,6 +70,7 @@ cask 'p4merge'
 cask 'vlc'
 cask 'sqlitebrowser'
 cask 'table-tool'
+cask "insomniax"
 # cask 'simple-comic'
 # cask 'astah-community'
 mas 'LINE', id: 539883307
