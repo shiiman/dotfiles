@@ -11,6 +11,8 @@ if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
 fi
 
+export GOPATH=${HOME}/go
+export PATH=$GOPATH/bin:$PATH
 
 ###########################################################
 # itermの設定                                              #
