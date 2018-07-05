@@ -1,0 +1,58 @@
+
+** 2018-07-05 18:29:15.325534 **:
+MarGo: MarGo build failed
+cmd: `['', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.05.19-1_go?.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+
+`
+exception: `Cannot find command `go``
+--------------------------------
+
+** 2018-07-05 18:29:15.330166 **:
+MarGo: Missing required environment variables: GOROOT
+See the `Quirks` section of USAGE.md for info
+--------------------------------
+
+** 2018-07-05 18:29:45.191480 **:
+GsComplete: Abort. Cannot start MarGo: Exception: Cannot find command `/Users/a12665/Library/Application Support/Sublime Text 3/Packages/User/GoSublime/osx-x64/bin/gosublime.margo_r18.05.19-1_go?.exe`
+--------------------------------
+
+** 2018-07-05 18:29:56.906737 **:
+GsComplete: Abort. Cannot start MarGo: Exception: Cannot find command `/Users/a12665/Library/Application Support/Sublime Text 3/Packages/User/GoSublime/osx-x64/bin/gosublime.margo_r18.05.19-1_go?.exe`
+--------------------------------
+
+** 2018-07-05 18:31:58.934926 **:
+GsComplete: Abort. Cannot start MarGo: Exception: Cannot find command `/Users/a12665/Library/Application Support/Sublime Text 3/Packages/User/GoSublime/osx-x64/bin/gosublime.margo_r18.05.19-1_go?.exe`
+--------------------------------
+
+** 2018-07-05 18:32:02.434207 **:
+GsComplete: Abort. Cannot start MarGo: Exception: Cannot find command `/Users/a12665/Library/Application Support/Sublime Text 3/Packages/User/GoSublime/osx-x64/bin/gosublime.margo_r18.05.19-1_go?.exe`
+--------------------------------
+
+** 2018-07-05 18:32:03.130670 **:
+GsComplete: Abort. Cannot start MarGo: Exception: Cannot find command `/Users/a12665/Library/Application Support/Sublime Text 3/Packages/User/GoSublime/osx-x64/bin/gosublime.margo_r18.05.19-1_go?.exe`
+--------------------------------
+
+** 2018-07-05 18:32:03.362879 **:
+GsComplete: Abort. Cannot start MarGo: Exception: Cannot find command `/Users/a12665/Library/Application Support/Sublime Text 3/Packages/User/GoSublime/osx-x64/bin/gosublime.margo_r18.05.19-1_go?.exe`
+--------------------------------
+
+** 2018-07-05 18:33:47.870166 **:
+MarGo: MarGo build failed
+cmd: `['', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.05.19-1_go?.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+
+`
+exception: `Cannot find command `go``
+--------------------------------
+
+** 2018-07-05 18:33:47.874829 **:
+MarGo: Missing required environment variables: GOROOT
+See the `Quirks` section of USAGE.md for info
+--------------------------------

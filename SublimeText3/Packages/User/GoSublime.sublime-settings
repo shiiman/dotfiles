@@ -1,0 +1,12 @@
+{
+  "fmt_cmd": ["goimports"],
+  "comp_lint_enabled": false,
+  "on_save": [
+    {
+      "cmd": "gs9o_open",
+      "args": {
+        "run": ["sh", "go build . errors && go test -i & go test && go vet && golint"],
+        "focus_view": false
+      }
+    }]
+}
