@@ -16,8 +16,8 @@ if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
 fi
 
-export GOPATH=${HOME}/go
-export PATH=$GOPATH/bin:$PATH
+export GOPATH=~/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 ###########################################################
 # zplugの設定                                              #
