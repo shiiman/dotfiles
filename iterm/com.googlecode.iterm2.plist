@@ -388,13 +388,19 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>1351 1398 620 392 701 900 1920 1057 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>970 1026 606 469 701 900 1920 1057 </string>
+	<string>970 976 606 469 701 900 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>-922 1462 918 494 -1219 900 1920 1057 </string>
+	<string>998 1441 918 494 701 900 1920 1057 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>99 293 592 584 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 4 1440 873 0 0 1440 877 </string>
+	<string>155 93 710 500 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>517 194 864 537 0 0 1440 877 </string>
+	<key>NeverWarnAboutShortLivedSessions_8DF9BADE-1DED-4EA6-94D0-068AD92166A9</key>
+	<true/>
+	<key>NeverWarnAboutShortLivedSessions_8DF9BADE-1DED-4EA6-94D0-068AD92166A9_selection</key>
+	<integer>0</integer>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1691,18 +1697,20 @@ Broadcast Input.Broadcast Input to All Panes in Current Tab</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-10-02T01:25:10Z</date>
+	<date>2018-07-19T00:54:48Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>SmartPlacement</key>
 	<true/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1529542656</real>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.1.3.beta.1</string>
+	<string>3.2.0beta7</string>
 </dict>
 </plist>
