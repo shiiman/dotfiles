@@ -13,6 +13,7 @@ brew 'mas'
 brew 'mcrypt'
 brew 'git'
 brew 'git-flow'
+brew "git-lfs"
 brew 'sshrc'
 brew 'fzf'
 brew 'gnu-tar'
@@ -29,6 +30,11 @@ brew 'iproute2mac'
 brew 'wget'
 brew 'phpunit'
 brew 'memcached'
+brew "kubernetes-cli"
+brew "kube-ps1"
+brew "kubectx"
+brew "kubernetes-helm"
+brew "stern"
 brew 'tfenv'
 brew 'packer'
 brew 'packer-completion'
@@ -40,6 +46,7 @@ brew 'zsh', args: ['without-etcdir']
 brew 'vim', args: ['with-lua']
 brew 'homebrew/php/composer'
 brew 'neovim/neovim/neovim'
+brew "mackerelio/mackerel-agent/mkr"
 cask 'google-japanese-ime'
 cask 'dropbox'
 cask 'evernote'
