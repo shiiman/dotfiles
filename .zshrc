@@ -227,6 +227,9 @@ autoload -Uz colors; colors
 PROMPT="[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}@%{${fg[blue]}%}%m%{${reset_color}%}] %# "
 RPROMPT="[%{${fg[green]}%}%*%{${reset_color}%}]"
 
+# kube-ps1
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+PS1='$(kube_ps1)'$PS1
 
 ###########################################################
 #  gitの設定                                               #
