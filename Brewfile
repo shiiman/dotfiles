@@ -5,6 +5,7 @@ tap 'homebrew/core'
 tap 'homebrew/php'
 tap 'neovim/neovim'
 tap 'sanemat/font'
+tap "shyiko/kubesec"
 tap 'mackerelio/mackerel-agent'
 brew 'mkr'
 brew 'coreutils'
@@ -47,6 +48,7 @@ brew 'vim', args: ['with-lua']
 brew 'homebrew/php/composer'
 brew 'neovim/neovim/neovim'
 brew "mackerelio/mackerel-agent/mkr"
+brew "shyiko/kubesec/kubesec"
 cask 'google-japanese-ime'
 cask 'dropbox'
 cask 'evernote'

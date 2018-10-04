@@ -216,6 +216,8 @@ bindkey "^[[Z" reverse-menu-complete
 bindkey "^p" history-beginning-search-backward
 bindkey "^n" history-beginning-search-forward
 
+# kubesec補完
+source <(kubesec completion zsh)
 
 ###########################################################
 #  プロンプトの設定                                         #
