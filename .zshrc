@@ -219,6 +219,9 @@ bindkey "^n" history-beginning-search-forward
 # kubesec補完
 source <(kubesec completion zsh)
 
+# helm補完
+source <(helm completion zsh) >& /dev/null
+
 ###########################################################
 #  プロンプトの設定                                         #
 ###########################################################
