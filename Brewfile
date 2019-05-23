@@ -1,88 +1,94 @@
-tap 'caskroom/cask'
-tap 'caskroom/versions'
-tap 'homebrew/bundle'
-tap 'homebrew/core'
-tap 'homebrew/php'
-tap 'neovim/neovim'
-tap 'sanemat/font'
+tap "caskroom/cask"
+tap "caskroom/versions"
+tap "homebrew/bundle"
+tap "homebrew/core"
+tap "mackerelio/mackerel-agent"
+tap "neovim/neovim"
+tap "sanemat/font"
 tap "shyiko/kubesec"
-tap 'mackerelio/mackerel-agent'
-brew 'mkr'
-brew 'coreutils'
-brew 'curl'
-brew 'mas'
-brew 'mcrypt'
-brew 'git'
-brew 'git-flow'
+brew "ansible"
+brew "autoconf"
+brew "automake"
+brew "coreutils"
+brew "curl"
+brew "fish"
+brew "fzf"
+brew "git"
+brew "git-flow"
 brew "git-lfs"
-brew 'sshrc'
-brew 'fzf'
-brew 'gnu-tar'
-brew 'htop'
-brew 'mysql'
-brew 'nginx'
-brew 'autoconf'
-brew 'automake'
-brew 'python3'
-brew 'the_silver_searcher'
-brew 'tree'
-brew 'watch'
-brew 'iproute2mac'
-brew 'wget'
-brew 'phpunit'
-brew 'memcached'
-brew "kubernetes-cli"
+brew "gnu-tar"
+brew "graphviz"
+brew "homebrew/core/composer"
+brew "htop"
+brew "iproute2mac"
 brew "kube-ps1"
 brew "kubectx"
+brew "kubernetes-cli"
 brew "kubernetes-helm"
-brew "stern"
-brew 'tfenv'
-brew 'packer'
-brew 'packer-completion'
-brew 'ansible'
-brew 'graphviz'
-brew 'tmux'
-brew 'fish'
-brew 'zsh', args: ['without-etcdir']
-brew 'vim', args: ['with-lua']
-brew 'homebrew/php/composer'
-brew 'neovim/neovim/neovim'
 brew "mackerelio/mackerel-agent/mkr"
+brew "mas"
+brew "mcrypt"
+brew "memcached"
+brew "mkr"
+brew "mysql"
+brew "neovim/neovim/neovim"
+brew "nginx"
+brew "packer"
+brew "packer-completion"
+brew "phpunit"
+brew "python3"
 brew "shyiko/kubesec/kubesec"
-cask 'google-japanese-ime'
-cask 'dropbox'
-cask 'evernote'
-cask 'google-chrome'
-cask 'thunderbird'
-cask 'keepassx'
-cask 'sublime-text'
-cask 'iterm2'
-cask 'sourcetree'
-cask 'google-cloud-sdk'
-cask 'awscli'
-cask 'java'
-cask 'java6'
-cask 'java7'
-cask 'slack'
-cask 'chatwork'
-cask 'appcleaner'
-cask 'sequel-pro'
-cask 'spectacle'
-cask 'virtualbox'
-cask 'alfred'
-cask 'xmind'
-cask 'skype'
-cask 'firefox'
-cask 'filezilla'
-cask 'mysqlworkbench'
-cask 'p4merge'
-cask 'vlc'
-cask 'sqlitebrowser'
-cask 'table-tool'
-cask "insomniax"
-cask "franz"
-# cask 'simple-comic'
-# cask 'astah-community'
-mas 'LINE', id: 539883307
-mas 'Memory Clean 2', id: 1114591412
-# mas 'Xcode', id: 497799835
+brew "sshrc"
+brew "stern"
+brew "tfenv"
+brew "the_silver_searcher"
+brew "tmux"
+brew "tree"
+brew "vim"#, args: ["with-lua"]
+brew "watch"
+brew "wget"
+brew "zsh"#, args: ["without-etcdir"]
+cask "alfred"
+cask "appcleaner"
+# cask "awscli"
+cask "chatwork"
+cask "clipy"
+cask "docker"
+cask "dropbox"
+cask "firefox"
+cask "google-chrome"
+cask "google-cloud-sdk"
+cask "google-japanese-ime"
+cask "google-japanese-ime-dev"
+cask "iterm2"
+cask "java"
+cask "java6"
+cask "keepassx"
+cask "mi"
+cask "mysqlworkbench"
+cask "sequel-pro"
+cask "skype"
+cask "slack"
+cask "sourcetree"
+cask "spectacle"
+cask "station"
+cask "sublime-text"
+cask "table-tool"
+cask "the-unarchiver"
+# cask "virtualbox" エラーになるのでコメントアウト
+cask "vlc"
+cask "xmind"
+# cask "astah-community"
+# cask "evernote"
+# cask "filezilla"
+# cask "franz"
+# cask "insomniax"
+# cask "java7"
+# cask "p4merge"
+# cask "simple-comic"
+# cask "sqlitebrowser"
+# cask "thunderbird"
+# masはApple Storeのログインしてから出ないとエラーになる
+mas "LINE", id: 539883307
+mas "Memory Clean 2", id: 1114591412
+mas "Xcode", id: 497799835

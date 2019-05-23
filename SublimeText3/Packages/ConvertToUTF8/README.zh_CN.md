@@ -2,12 +2,12 @@
 ------------------
 通过本插件，您可以编辑并保存目前编码不被 Sublime Text 支持的文件，特别是中日韩用户使用的 GB2312，GBK，BIG5，EUC-KR，EUC-JP 等。ConvertToUTF8 同时支持 Sublime Text 2 和 3。
 
-![ConvertToUTF8](http://dl.dropboxusercontent.com/u/31937639/ConvertToUTF8/ConvertToUTF8.gif)
+![ConvertToUTF8](https://seanliang.github.io/donate/ConvertToUTF8.gif)
 
-如果您觉得本插件有用并想给予支持，可通过支付宝或Paypal捐助。感谢！:)
+如果您觉得本插件有用并想给予支持，可通过支付宝或微信捐助。感谢！:)
 
-![支付宝钱包扫一下](http://dl.dropboxusercontent.com/u/31937639/alipay_code.png) 或 
-[![PayPal捐助](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=GP6Y25N7Q9E26&lc=US&item_name=Buy%20me%20a%20cup%20of%20coffee&item_number=ConvertToUTF8&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHostedGuest)
+![支付宝钱包扫一下](https://seanliang.github.io/donate/ap.png) ![微信扫一下](https://seanliang.github.io/donate/wx.png)
+
 
 注意
 ------------------
@@ -17,19 +17,20 @@
 
 安装
 ------------------
-推荐使用 [Package Control](https://sublime.wbond.net/installation) 查找 *ConvertToUTF8* 进行自动下载安装与更新。
+推荐使用 [Package Control](https://packagecontrol.io/installation) 查找 *ConvertToUTF8* 进行自动下载安装与更新。
 
 如需手工安装，请将本项目打包下载并解压，将解压后的文件夹名修改为 *ConvertToUTF8* ，然后将此文件夹移动到 Sublime Text 的 *Packages* 文件夹下（可通过 Sublime Text 菜单中的 Preferences > Browse Packages 找到 *Packages* 文件夹）。
 
 您的文件夹应该看起来是这样的：
 
-![Folder Hierarchy](http://dl.dropboxusercontent.com/u/31937639/ConvertToUTF8/hierarchy.png)
+![Folder Hierarchy](https://seanliang.github.io/donate/hierarchy.png)
 
 设置
 ------------------
 请查看 ConvertToUTF8.sublime-settings 文件获取详细信息。为防止更新插件时被覆盖，请将个人设置保存到 User 目录中名为 ConvertToUTF8.sublime-settings 文件中。您可以在 .sublime-project 文件（可通过 Project > Edit Project 打开）中指定项目专属设置（除 encoding_list 和 max_cache_size 外）。
 
 * encoding_list：检测失败时显示的编码列表
+* reset_diff_markers：在转换后重置差异标记（默认为 true）
 * max_cache_size：最大编码缓存数量，0 表示不缓存（默认为 100）
 * max_detect_lines：最大检测行数，0 表示不限制（默认为 600）
 * preview_action：预览文件时是否将其内容转换为 UTF-8（默认为 false）
