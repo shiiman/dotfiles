@@ -16,10 +16,12 @@ echo 'eval "$(anyenv init -)"' >> /tmp/anyenv.setting
 source /tmp/anyenv.setting
 
 # 各envのインストール
+anyenv install --init
+
 anyenv install pyenv
 anyenv install rbenv
 anyenv install phpenv
-anyenv install ndenv
+anyenv install nodenv
 anyenv install goenv
 anyenv install jenv
 
@@ -27,10 +29,10 @@ anyenv install jenv
 source /tmp/anyenv.setting
 
 # 各言語をインストール
-pyenv install 2.7.13
-rbenv install 2.4.1
-phpenv install 7.1.4
-ndenv install v7.9.0
+pyenv install 2.7.16
+rbenv install 2.6.3
+phpenv install 7.3.5
+nodenv install 12.3.1
 goenv install 1.8.1
 
 jenv add $(/usr/libexec/java_home -v 1.6)
@@ -39,10 +41,10 @@ jenv add $(/usr/libexec/java_home -v 1.8)
 
 
 # 各言語のバージョン反映
-pyenv global 2.7.13
-rbenv global 2.4.1
-phpenv global 7.1.4
-ndenv global v7.9.0
+pyenv global 2.7.16
+rbenv global 2.6.3
+phpenv global 7.3.5
+nodenv global 12.3.1
 goenv global 1.8.1
 jenv global 1.8
 
