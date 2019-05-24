@@ -46,7 +46,7 @@ rbenv global 2.6.3
 phpenv global 7.3.5
 nodenv global 12.3.1
 goenv global 1.8.1
-jenv global 1.8
+jenv global 12.0
 
 # シェルの再読込
 source /tmp/anyenv.setting
