@@ -29,7 +29,7 @@ anyenv install jenv
 source /tmp/anyenv.setting
 
 # 各言語をインストール
-pyenv install 2.7.16
+CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -v 2.7.16
 rbenv install 2.6.3
 phpenv install 7.3.5
 nodenv install 12.3.1
