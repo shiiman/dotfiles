@@ -28,10 +28,15 @@ anyenv install jenv
 # シェルの再読込
 source /tmp/anyenv.setting
 
+# macOS SDK header install
+if [[ `sw_vers` == *"10.14."* ]] ; then
+  sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+fi
+
 # 各言語をインストール
-CFLAGS="-I$(xcrun --show-sdk-path)/usr/include" pyenv install -v 2.7.16
+pyenv install 2.7.16
 rbenv install 2.6.3
-phpenv install 7.3.5
+phpenv install 7.2.18
 nodenv install 12.3.1
 goenv install 1.8.1
 
