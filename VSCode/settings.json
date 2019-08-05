@@ -19,5 +19,11 @@
     "trailing-spaces.regexp": "[ \t　]+",
     "editor.renderControlCharacters": true,
     "terminal.integrated.copyOnSelection": true,
-    "files.trimFinalNewlines": true
+    "files.trimFinalNewlines": true,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.cursorStyle": "block",
+    "editor.links": false,
+    "workbench.view.alwaysShowHeaderActions": true
 }
