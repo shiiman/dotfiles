@@ -86,6 +86,7 @@ cask "sublime-text"
 cask "table-tool"
 cask "the-unarchiver"
 #cask "virtualbox" #エラーになるのでコメントアウト
+cask "visual-studio-code"
 cask "vlc"
 cask "xmind"
 
