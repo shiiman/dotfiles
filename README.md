@@ -11,7 +11,7 @@ mkdir ~/dotfiles
 cd ~/dotfiles
 ```
 
-1. 管理したいドットファイルを2.で作成したディレクトリに移動
+3. 管理したいドットファイルを2.で作成したディレクトリに移動
 
 ```
 mv ~/.zshrc ./
@@ -40,7 +40,7 @@ git remote add origin https://github.com/xxxx/dotfiles.git
 git push -u origin master
 ```
 
-5 更新
+6. 更新
 ドットファイルに追加/変更があったら、同手順でgitにpushしておく
 
 ---
