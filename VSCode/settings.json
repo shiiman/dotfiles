@@ -1,15 +1,23 @@
 {
     "editor.renderWhitespace": "all",
+    "editor.tabSize": 4,
+    "editor.fontSize": 12,
     "editor.formatOnSave": true,
     "editor.snippetSuggestions": "top",
     "editor.tabCompletion": "on",
+    "explorer.confirmDragAndDrop": false,
+    "files.insertFinalNewline": true,
     "workbench.colorTheme": "Monokai",
     "workbench.activityBar.visible": true,
-    "explorer.confirmDragAndDrop": false,
     "window.zoomLevel": 0,
     "markdownlint.config": {
         "default": true,
         "MD029": false,
         "MD040": false
-    }
+    },
+    "trailing-spaces.trimOnSave": true,
+    "trailing-spaces.regexp": "[ \t　]+",
+    "editor.renderControlCharacters": true,
+    "terminal.integrated.copyOnSelection": true,
+    "files.trimFinalNewlines": true
 }
