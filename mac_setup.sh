@@ -46,6 +46,9 @@ fi
 # sublime textの設定
 sh ~/dotfiles/SublimeText3/sublime_setup.sh
 
+# vscode textの設定
+sh ~/dotfiles/VSCode/vscode_setup.sh
+
 # tarの設定変更
 ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 
