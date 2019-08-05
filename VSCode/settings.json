@@ -1,29 +1,29 @@
 {
-    "editor.renderWhitespace": "all",
-    "editor.tabSize": 4,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.cursorStyle": "block",
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
+    "editor.links": false,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all",
     "editor.snippetSuggestions": "top",
     "editor.tabCompletion": "on",
+    "editor.tabSize": 4,
     "explorer.confirmDragAndDrop": false,
     "files.insertFinalNewline": true,
-    "workbench.colorTheme": "Monokai",
-    "workbench.activityBar.visible": true,
-    "window.zoomLevel": 0,
+    "files.trimFinalNewlines": true,
     "markdownlint.config": {
         "default": true,
         "MD029": false,
         "MD040": false
     },
-    "trailing-spaces.trimOnSave": true,
-    "trailing-spaces.regexp": "[ \t　]+",
-    "editor.renderControlCharacters": true,
     "terminal.integrated.copyOnSelection": true,
-    "files.trimFinalNewlines": true,
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "editor.cursorStyle": "block",
-    "editor.links": false,
+    "trailing-spaces.regexp": "[ \t　]+",
+    "trailing-spaces.trimOnSave": true,
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": true,
+    "workbench.colorTheme": "Monokai",
     "workbench.view.alwaysShowHeaderActions": true
 }
