@@ -1,0 +1,10 @@
+{
+    "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true,
+    "editor.snippetSuggestions": "top",
+    "editor.tabCompletion": "on",
+    "workbench.colorTheme": "Monokai",
+    "workbench.activityBar.visible": true,
+    "explorer.confirmDragAndDrop": false,
+    "window.zoomLevel": 0
+}
