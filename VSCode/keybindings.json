@@ -49,5 +49,15 @@
     {
         "key": "ctrl+j",
         "command": "extension.jumpy-word"
+    },
+    {
+        "key": "ctrl+d ctrl+d",
+        "command": "editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+cmd+k",
+        "command": "-editor.action.deleteLines",
+        "when": "textInputFocus && !editorReadonly"
     }
 ]
