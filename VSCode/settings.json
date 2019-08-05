@@ -6,5 +6,10 @@
     "workbench.colorTheme": "Monokai",
     "workbench.activityBar.visible": true,
     "explorer.confirmDragAndDrop": false,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "markdownlint.config": {
+        "default": true,
+        "MD029": false,
+        "MD040": false
+    }
 }

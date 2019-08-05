@@ -31,5 +31,23 @@
     {
         "key": "ctrl+shift+`",
         "command": "-workbench.action.terminal.new"
+    },
+    {
+        "key": "cmd+k cmd+b",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "cmd+y",
+        "command": "redo",
+        "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "shift+cmd+z",
+        "command": "-redo",
+        "when": "textInputFocus && !editorReadonly"
     }
 ]
