@@ -7,10 +7,14 @@ donjayamanne.githistory
 dunstontc.viml
 eamodio.gitlens
 emilast.LogFileHighlighter
+felixfbecker.php-debug
+felixfbecker.php-intellisense
 formulahendry.auto-rename-tag
 googlecloudtools.cloudcode
 GrapeCity.gc-excelviewer
+higoka.php-cs-fixer
 IBM.output-colorizer
+ikappas.phpcs
 jsynowiec.vscode-insertdatestring
 mauve.terraform
 mechatroner.rainbow-csv
@@ -19,6 +23,7 @@ MS-CEINTL.vscode-language-pack-ja
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-vscode.Go
 mushan.vscode-paste-image
+neilbrayfield.php-docblocker
 nobuhito.printcode
 redhat.vscode-yaml
 richie5um2.vscode-sort-json
