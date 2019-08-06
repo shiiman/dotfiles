@@ -19,6 +19,7 @@ MS-CEINTL.vscode-language-pack-ja
 ms-kubernetes-tools.vscode-kubernetes-tools
 ms-vscode.Go
 mushan.vscode-paste-image
+nobuhito.printcode
 redhat.vscode-yaml
 richie5um2.vscode-sort-json
 RomanPeshkov.vscode-text-tables
@@ -26,6 +27,7 @@ RoscoP.ActiveFileInStatusBar
 sharat.vscode-brewfile
 shardulm94.trailing-spaces
 tomoki1207.pdf
+vscode-icons-team.vscode-icons
 vscoss.vscode-ansible
 wayou.vscode-todo-highlight
 wholroyd.jinja

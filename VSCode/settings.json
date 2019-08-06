@@ -34,6 +34,7 @@
     },
     "trailing-spaces.regexp": "[ \t　]+",
     "trailing-spaces.trimOnSave": true,
+    "vsicons.dontShowNewVersionMessage": true,
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
@@ -42,5 +43,6 @@
         "tab.activeBackground": "#fa5c3480"
     },
     "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "vscode-icons",
     "workbench.view.alwaysShowHeaderActions": true
 }
