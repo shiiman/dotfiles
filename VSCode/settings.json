@@ -2,6 +2,9 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "[terraform]": {
+        "editor.defaultFormatter": "mauve.terraform"
+    },
     "debug.inlineValues": true,
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
@@ -15,6 +18,7 @@
     "explorer.confirmDragAndDrop": false,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "git.confirmSync": false,
     "markdown.preview.breaks": true,
     "markdownlint.config": {
         "MD029": false,
@@ -26,6 +30,13 @@
     "search.showLineNumbers": true,
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.copyOnSelection": true,
+    "terraform.indexing": {
+        "enabled": false,
+        "exclude": [
+            "**/*"
+        ],
+        "liveIndexing": false
+    },
     "trailing-spaces.regexp": "[ \t　]+",
     "trailing-spaces.trimOnSave": true,
     "window.zoomLevel": 0,
