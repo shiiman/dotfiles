@@ -2,10 +2,11 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
-    "editor.cursorStyle": "block",
+    "debug.inlineValues": true,
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
     "editor.links": false,
+    "editor.occurrencesHighlight": false,
     "editor.renderControlCharacters": true,
     "editor.renderWhitespace": "all",
     "editor.snippetSuggestions": "top",
@@ -14,16 +15,25 @@
     "explorer.confirmDragAndDrop": false,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
+    "markdown.preview.breaks": true,
     "markdownlint.config": {
-        "default": true,
         "MD029": false,
-        "MD040": false
+        "MD040": false,
+        "default": true
     },
+    "search.collapseResults": "alwaysCollapse",
+    "search.location": "panel",
+    "search.showLineNumbers": true,
+    "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.copyOnSelection": true,
     "trailing-spaces.regexp": "[ \t　]+",
     "trailing-spaces.trimOnSave": true,
     "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
+    "workbench.colorCustomizations": {
+        "editor.findMatchBackground": "#fa5c3480",
+        "editor.selectionBackground": "#fa5c3480"
+    },
     "workbench.colorTheme": "Monokai",
     "workbench.view.alwaysShowHeaderActions": true
 }
