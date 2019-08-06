@@ -15,11 +15,12 @@ mauve.terraform
 mechatroner.rainbow-csv
 ms-azuretools.vscode-docker
 MS-CEINTL.vscode-language-pack-ja
+ms-kubernetes-tools.vscode-kubernetes-tools
 ms-vscode.Go
 mushan.vscode-paste-image
+redhat.vscode-yaml
 richie5um2.vscode-sort-json
 RomanPeshkov.vscode-text-tables
-satokaz.vscode-bs-ctrlchar-remover
 sharat.vscode-brewfile
 shardulm94.trailing-spaces
 tomoki1207.pdf
