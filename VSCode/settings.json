@@ -8,6 +8,9 @@
     "[terraform]": {
         "editor.defaultFormatter": "mauve.terraform"
     },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
     "debug.inlineValues": true,
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
