@@ -1,16 +1,4 @@
 {
-    "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "[terraform]": {
-        "editor.defaultFormatter": "mauve.terraform"
-    },
-    "[yaml]": {
-        "editor.defaultFormatter": "redhat.vscode-yaml"
-    },
     "cloudcode.awsExplorerVisible": true,
     "debug.inlineValues": true,
     "editor.fontSize": 12,
@@ -22,6 +10,7 @@
     "editor.snippetSuggestions": "top",
     "editor.tabCompletion": "on",
     "editor.tabSize": 4,
+    "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
