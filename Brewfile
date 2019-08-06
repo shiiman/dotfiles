@@ -83,6 +83,7 @@ cask "sourcetree"
 cask "spectacle"
 cask "station"
 cask "sublime-text"
+cask "tableplus"
 cask "table-tool"
 cask "the-unarchiver"
 #cask "virtualbox" #エラーになるのでコメントアウト
