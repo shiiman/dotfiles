@@ -11,6 +11,7 @@
     "[yaml]": {
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
+    "cloudcode.awsExplorerVisible": true,
     "debug.inlineValues": true,
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
