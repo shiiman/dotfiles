@@ -32,7 +32,8 @@
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "editor.findMatchBackground": "#fa5c3480",
-        "editor.selectionBackground": "#fa5c3480"
+        "editor.selectionBackground": "#fa5c3480",
+        "tab.activeBackground": "#fa5c3480"
     },
     "workbench.colorTheme": "Monokai",
     "workbench.view.alwaysShowHeaderActions": true
