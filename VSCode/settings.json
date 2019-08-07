@@ -51,6 +51,6 @@
         "tab.activeBackground": "#fa5c3480"
     },
     "workbench.colorTheme": "Monokai",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "vscode-icons-mac",
     "workbench.view.alwaysShowHeaderActions": true
 }
