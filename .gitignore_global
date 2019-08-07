@@ -4,6 +4,9 @@
 #IntelliJ IDEA  Directory-based project format:
 .idea
 
+#VScode IDEA  Directory-based project format:
+.vscode
+
 # OSX
 .DS_Store
 .AppleDouble
