@@ -1,4 +1,7 @@
 {
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
     "cloudcode.awsExplorerVisible": true,
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
@@ -20,6 +23,11 @@
         "MD040": false,
         "default": true
     },
+    //"php-cs-fixer.executablePath": "/usr/local/bin/php-cs-fixer",
+    "php-cs-fixer.formatHtml": true,
+    "php-cs-fixer.onsave": true,
+    "php-cs-fixer.rules": "@PSR2",
+    "php.suggest.basic": false,
     "search.collapseResults": "alwaysCollapse",
     "search.location": "panel",
     "search.showLineNumbers": true,

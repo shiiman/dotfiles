@@ -56,3 +56,13 @@ jenv global 12.0
 # シェルの再読込
 source /tmp/anyenv.setting
 rm -rf /tmp/anyenv.setting
+
+# ==============================================================
+
+## VScodeのphp debugを利用するためにはphp.iniに下記の設定が必要
+## php.iniのpath $HOME/.anyenv/envs/phpenv/versions/${php_version}/etc/conf.d
+
+# xdebug.remote_enable = 1
+# xdebug.remote_autostart = 1
+
+# ==============================================================
