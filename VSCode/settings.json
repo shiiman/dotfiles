@@ -23,7 +23,6 @@
         "MD040": false,
         "default": true
     },
-    "php.suggest.basic": false,
     "search.collapseResults": "alwaysCollapse",
     "search.location": "panel",
     "search.showLineNumbers": true,
