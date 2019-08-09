@@ -3,6 +3,7 @@
         "editor.defaultFormatter": "redhat.vscode-yaml"
     },
     "cloudcode.awsExplorerVisible": true,
+    "editor.foldingStrategy": "indentation",
     "editor.fontSize": 12,
     "editor.formatOnSave": true,
     "editor.links": false,
