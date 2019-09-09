@@ -1157,3 +1157,4 @@ Gocode env: gocode.margoEnv{LibPath:"/Users/a12665/.anyenv/envs/goenv/versions/1
 Gocode pkg: "."
 Gocode env: gocode.margoEnv{LibPath:"/Users/a12665/.anyenv/envs/goenv/versions/1.10.3/pkg/darwin_amd64:/Users/a12665/go/pkg/darwin_amd64", GOOS:"darwin", GOARCH:"amd64", Compiler:"gc", GOROOT:"/Users/a12665/.anyenv/envs/goenv/versions/1.10.3", GOPATH:"/Users/a12665/go", InstallSuffix:""}
 margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
+margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
