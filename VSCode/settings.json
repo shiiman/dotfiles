@@ -48,5 +48,20 @@
     },
     "workbench.colorTheme": "Monokai",
     "workbench.iconTheme": "vscode-icons-mac",
-    "workbench.view.alwaysShowHeaderActions": true
+    "workbench.view.alwaysShowHeaderActions": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.helm-path": "/Users/a12665/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+        "vs-kubernetes.kubectl-path": "/Users/a12665/.vs-kubernetes/tools/kubectl/kubectl",
+        "vs-kubernetes.draft-path": "/Users/a12665/.vs-kubernetes/tools/draft/darwin-amd64/draft"
+    },
+    "cloudcode.default-app-directory": {
+        "location": "/Users/a12665/Documents/sre/vscode_sample/cloudcode-projects"
+    },
+    "cloudcode.gke": {
+        "projectIds": [
+            "szp-sakura",
+            "engineer-szp"
+        ]
+    },
+    "go.useLanguageServer": true
 }
