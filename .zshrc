@@ -19,6 +19,7 @@ fi
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOBIN
+export PATH=~/.anyenv/envs/phpenv/versions/7.3.5/composer/vendor/bin:$PATH
 
 ###########################################################
 # zplugの設定                                              #

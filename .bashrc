@@ -13,6 +13,7 @@ fi
 
 export GOPATH=~/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH=~/.anyenv/envs/phpenv/versions/7.3.5/composer/vendor/bin:$PATH
 
 ###########################################################
 # itermの設定                                              #
