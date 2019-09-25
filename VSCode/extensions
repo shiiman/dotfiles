@@ -17,6 +17,7 @@ GrapeCity.gc-excelviewer
 gurumukhi.selected-lines-count
 IBM.output-colorizer
 jsynowiec.vscode-insertdatestring
+liximomo.sftp
 mauve.terraform
 mechatroner.rainbow-csv
 mikestead.dotenv
@@ -24,6 +25,12 @@ mkxml.vscode-filesize
 ms-azuretools.vscode-docker
 MS-CEINTL.vscode-language-pack-ja
 ms-kubernetes-tools.vscode-kubernetes-tools
+ms-vscode-remote.remote-containers
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode-remote.remote-ssh-explorer
+ms-vscode-remote.remote-wsl
+ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.Go
 mushan.vscode-paste-image
 neilbrayfield.php-docblocker

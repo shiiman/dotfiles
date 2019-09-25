@@ -60,7 +60,8 @@
     "cloudcode.gke": {
         "projectIds": [
             "szp-sakura",
-            "engineer-szp"
+            "engineer-szp",
+            "sakura-production"
         ]
     },
     "go.useLanguageServer": true
