@@ -25,7 +25,6 @@
         "default": true
     },
     "search.collapseResults": "alwaysCollapse",
-    "search.location": "panel",
     "search.showLineNumbers": true,
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.copyOnSelection": true,
@@ -52,10 +51,11 @@
     "vs-kubernetes": {
         "vs-kubernetes.helm-path": "/Users/a12665/.vs-kubernetes/tools/helm/darwin-amd64/helm",
         "vs-kubernetes.kubectl-path": "/Users/a12665/.vs-kubernetes/tools/kubectl/kubectl",
-        "vs-kubernetes.draft-path": "/Users/a12665/.vs-kubernetes/tools/draft/darwin-amd64/draft"
+        "vs-kubernetes.draft-path": "/Users/a12665/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+        "vs-kubernetes.minikube-path": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
     "cloudcode.default-app-directory": {
-        "location": "/Users/a12665/Documents/sre/vscode_sample/cloudcode-projects"
+        "location": "/Users/a12665/Documents/sre/vscode"
     },
     "cloudcode.gke": {
         "projectIds": [
@@ -64,5 +64,6 @@
             "sakura-production"
         ]
     },
-    "go.useLanguageServer": true
+    "go.useLanguageServer": true,
+    "[markdown]": {}
 }
