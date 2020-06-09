@@ -52,7 +52,8 @@
         "vs-kubernetes.helm-path": "/Users/a12665/.vs-kubernetes/tools/helm/darwin-amd64/helm",
         "vs-kubernetes.kubectl-path": "/Users/a12665/.vs-kubernetes/tools/kubectl/kubectl",
         "vs-kubernetes.draft-path": "/Users/a12665/.vs-kubernetes/tools/draft/darwin-amd64/draft",
-        "vs-kubernetes.minikube-path": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+        "vs-kubernetes.minikube-path": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vs-kubernetes.minikube-path.mac": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
     "cloudcode.default-app-directory": {
         "location": "/Users/a12665/Documents/sre/vscode"
@@ -65,5 +66,13 @@
         ]
     },
     "go.useLanguageServer": true,
-    "[markdown]": {}
+    "go.goroot": "/Users/a12665/.anyenv/envs/goenv/versions/1.12.5",
+    "go.gopath": "/Users/a12665/go/1.12.5",
+    "[markdown]": {},
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--config=${workspaceFolder}/.golangci.yml",
+        "--fast"
+    ],
+    "editor.largeFileOptimizations": false
 }
