@@ -94,5 +94,9 @@
         "key": "shift+alt+a",
         "command": "-editor.action.blockComment",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+cmd+s",
+        "command": "editor.action.insertSnippet"
     }
 ]

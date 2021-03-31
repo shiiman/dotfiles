@@ -14,6 +14,7 @@ fi
 export GOPATH=~/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=~/.anyenv/envs/phpenv/versions/7.3.5/composer/vendor/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 ###########################################################
 # itermの設定                                              #
@@ -85,6 +86,7 @@ if type ag >/dev/null 2>&1; then
     alias grep='ag'
 fi
 
+alias k='kubectl'
 
 ###########################################################
 #  ヒストリーの設定                                          #

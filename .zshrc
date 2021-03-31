@@ -20,6 +20,7 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOBIN
 export PATH=~/.anyenv/envs/phpenv/versions/7.3.5/composer/vendor/bin:$PATH
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 ###########################################################
 # zplugの設定                                              #
@@ -126,6 +127,7 @@ if type ag >/dev/null 2>&1; then
     alias grep='ag'
 fi
 
+alias k='kubectl'
 
 ###########################################################
 #  グロブの設定                                             #
@@ -305,3 +307,4 @@ setopt noclobber
 # キーバインド無効
 bindkey -r '^J'
 bindkey -r '^O'
+export PATH="/usr/local/opt/bzip2/bin:$PATH"

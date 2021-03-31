@@ -38,7 +38,6 @@
     "trailing-spaces.regexp": "[ \t　]+",
     "trailing-spaces.trimOnSave": true,
     "vsicons.dontShowNewVersionMessage": true,
-    "window.zoomLevel": 0,
     "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
         "editor.findMatchBackground": "#fa5c3480",
@@ -74,5 +73,14 @@
         "--config=${workspaceFolder}/.golangci.yml",
         "--fast"
     ],
-    "editor.largeFileOptimizations": false
+    "editor.largeFileOptimizations": false,
+    "python.formatting.provider": "none",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "workbench.startupEditor": "newUntitledFile",
+    "yaml.format.printWidth": 140
 }
