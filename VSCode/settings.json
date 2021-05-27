@@ -52,7 +52,8 @@
         "vs-kubernetes.kubectl-path": "/Users/a12665/.vs-kubernetes/tools/kubectl/kubectl",
         "vs-kubernetes.draft-path": "/Users/a12665/.vs-kubernetes/tools/draft/darwin-amd64/draft",
         "vs-kubernetes.minikube-path": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
-        "vs-kubernetes.minikube-path.mac": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+        "vs-kubernetes.minikube-path.mac": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vscode-kubernetes.minikube-path.mac": "/Users/a12665/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
     "cloudcode.default-app-directory": {
         "location": "/Users/a12665/Documents/sre/vscode"
@@ -65,8 +66,8 @@
         ]
     },
     "go.useLanguageServer": true,
-    "go.goroot": "/Users/a12665/.anyenv/envs/goenv/versions/1.12.5",
-    "go.gopath": "/Users/a12665/go/1.12.5",
+    "go.goroot": "/Users/a12665/.anyenv/envs/goenv/versions/1.16.0",
+    "go.gopath": "/Users/a12665/go/1.16.0",
     "[markdown]": {},
     "go.lintTool": "golangci-lint",
     "go.lintFlags": [
@@ -82,5 +83,15 @@
         }
     ],
     "workbench.startupEditor": "newUntitledFile",
-    "yaml.format.printWidth": 140
+    "yaml.format.printWidth": 160,
+    "go.toolsManagement.autoUpdate": true,
+    "go.toolsEnvVars": {
+        "GO111MODULE": "on"
+    },
+    "go.languageServerExperimentalFeatures": {
+        "diagnostics": true
+    },
+    "gopls": {
+        "experimentalWorkspaceModule": true
+    }
 }
