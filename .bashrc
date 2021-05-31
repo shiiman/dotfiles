@@ -11,9 +11,49 @@ if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
 fi
 
-export GOPATH=~/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export PATH=~/.anyenv/envs/phpenv/versions/7.3.5/composer/vendor/bin:$PATH
+if [ -e "$HOME/.anyenv/envs/phpenv" ]
+then
+    export PHPENV_ROOT="$HOME/.anyenv/envs/phpenv"
+    export PATH="$PHPENV_ROOT/bin:$PATH"
+    if command -v phpenv 1>/dev/null 2>&1
+    then
+        eval "$(phpenv init -)"
+    fi
+fi
+
+if [ -e "$HOME/.anyenv/envs/rbenv" ]
+then
+    export RBENV_ROOT="$HOME/.anyenv/envs/rbenv"
+    export PATH="$RBENV_ROOT/bin:$PATH"
+    if command -v rbenv 1>/dev/null 2>&1
+    then
+        eval "$(rbenv init -)"
+    fi
+fi
+
+if [ -e "$HOME/.anyenv/envs/nodenv" ]
+then
+    export NODENV_ROOT="$HOME/.anyenv/envs/nodenv"
+    export PATH="$NODENV_ROOT/bin:$PATH"
+    if command -v nodenv 1>/dev/null 2>&1
+    then
+        eval "$(nodenv init -)"
+    fi
+fi
+
+if [ -e "$HOME/.anyenv/envs/goenv" ]
+then
+    export GOENV_ROOT="$HOME/.anyenv/envs/goenv"
+    export PATH="$GOENV_ROOT/bin:$PATH"
+    if command -v goenv 1>/dev/null 2>&1
+    then
+        eval "$(goenv init -)"
+    fi
+    export PATH="$GOROOT/bin:$PATH"
+    export PATH="$PATH:$GOPATH/bin"
+fi
+
+export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 ###########################################################
@@ -78,8 +118,8 @@ function cdlspwd() {
 }
 alias cd=cdlspwd
 
-if type nvim >/dev/null 2>&1; then
-    alias vi='nvim'
+if type vim >/dev/null 2>&1; then
+    alias vi='vim'
 fi
 
 if type ag >/dev/null 2>&1; then
@@ -110,4 +150,3 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\]] % "
-
