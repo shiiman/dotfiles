@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# anyenvのインストール
+# anyenvのインストール.
 if [ ! -e ~/.anyenv ]; then
-    git clone https://github.com/riywo/anyenv ~/.anyenv
+    git clone https://github.com/anyenv/anyenv ~/.anyenv
     mkdir -p ~/.anyenv/plugins
     git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
     git clone git://github.com/aereal/anyenv-exec.git ~/.anyenv/plugins/anyenv-exe
@@ -18,12 +18,10 @@ source /tmp/anyenv.setting
 # 各envのインストール
 anyenv install --init
 
-anyenv install pyenv
-anyenv install rbenv
 anyenv install phpenv
+anyenv install rbenv
 anyenv install nodenv
 anyenv install goenv
-anyenv install jenv
 
 # シェルの再読込
 source /tmp/anyenv.setting
@@ -34,24 +32,31 @@ if [[ `sw_vers` == *"10.14."* ]] ; then
 fi
 
 # 各言語をインストール
-pyenv install 2.7.16
-rbenv install 2.6.3
-phpenv install 7.2.18
-nodenv install 12.3.1
-goenv install 1.8.1
-
-jenv add $(/usr/libexec/java_home -v 1.6)
-jenv add $(/usr/libexec/java_home -v 1.7)
-jenv add $(/usr/libexec/java_home -v 1.8)
-
+PHP_BUILD_CONFIGURE_OPTS="--disable-fpm \
+                          --disable-phpdbg \
+                          --enable-debug \
+                          --with-openssl=$(brew --prefix openssl) \
+                          --with-bz2=$(brew --prefix bzip2) \
+                          --with-iconv=$(brew --prefix libiconv) \
+                          --with-icu-dir=$(brew --prefix icu4c) \
+                          --with-tidy=$(brew --prefix tidy-html5) \
+                          --with-libzip=$(brew --prefix libzip) \
+                          --with-libxml-dir=$(brew --prefix libxml2) \
+                          --with-zlib \
+                          --with-zlib-dir=$(brew --prefix zlib) \
+                          --with-libedit=$(brew --prefix libedit) \
+                          --with-external-pcre=$(brew --prefix pcre2)" \
+PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j$(sysctl -n hw.logicalcpu_max)" \
+phpenv install --ini development 8.0.6
+rbenv install 3.0.1
+nodenv install 16.2.0
+goenv install 1.16.4
 
 # 各言語のバージョン反映
-pyenv global 2.7.16
-rbenv global 2.6.3
-phpenv global 7.3.5
-nodenv global 12.3.1
-goenv global 1.8.1
-jenv global 12.0
+phpenv global 8.0.6
+rbenv global 3.0.1
+nodenv global 16.2.0
+goenv global 1.16.4
 
 # シェルの再読込
 source /tmp/anyenv.setting

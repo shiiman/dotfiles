@@ -57,6 +57,8 @@ sh ~/dotfiles/dotfile_setup.sh
 
 ▼ macの初期設定
 
+App Storeにログインしてから下記を実行
+
 ```
 curl https://raw.githubusercontent.com/xxxx/dotfiles/master/mac_setup.sh | bash
 ```
