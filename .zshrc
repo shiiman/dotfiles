@@ -257,10 +257,15 @@ bindkey "^p" history-beginning-search-backward
 bindkey "^n" history-beginning-search-forward
 
 # kubesec補完
-source <(kubesec completion zsh)
+if type kubesec >/dev/null 2>&1; then
+    source <(kubesec completion zsh) >& /dev/null
+fi
 
 # helm補完
-source <(helm completion zsh) >& /dev/null
+if type kubesec >/dev/null 2>&1; then
+    source <(helm completion zsh) >& /dev/null
+fi
+
 
 ###########################################################
 #  プロンプトの設定                                         #
@@ -273,9 +278,11 @@ PROMPT="[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}@%{${fg[blue]}%
 RPROMPT="[%{${fg[green]}%}%*%{${reset_color}%}]"
 
 # kube-ps1
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
-PS1='$(kube_ps1)'$PS1
-kubeoff
+if [ -e "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]; then
+  source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+  PS1='$(kube_ps1)'$PS1
+  kubeoff
+fi
 
 ###########################################################
 #  gitの設定                                               #
