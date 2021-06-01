@@ -57,16 +57,6 @@ ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 defaults write com.apple.finder AppleShowAllFiles TRUE
 killall Finder
 
-# gitのグローバル設定.
-git config --global alias.st status
-git config --global alias.br branch
-git config --global alias.co checkout
-git config --global alias.ci commit
-git config --global color.ui true
-git config --global color.diff true
-git config --global color.status true
-git config --global color.branch true
-
 ##################################################################
 
 # フォントの設定.
