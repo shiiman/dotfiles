@@ -16,7 +16,6 @@
 		"Dockerfile Syntax Highlighting",
 		"Emmet",
 		"Golang Tools Integration",
-		"GoSublime",
 		"GotoDocumentation",
 		"HTML5",
 		"INI",
@@ -52,6 +51,6 @@
 		"Terraform",
 		"TOML",
 		"TrailingSpaces",
-		"VimL"
-	]
+		"VimL",
+	],
 }

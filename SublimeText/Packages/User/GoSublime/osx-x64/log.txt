@@ -1222,3 +1222,39 @@ go: cannot find GOROOT directory: /Users/a12665/.anyenv/envs/goenv/versions/1.10
 `
 exception: `None`
 --------------------------------
+
+** 2021-06-01 17:50:28.349708 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/bin/go', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.07.22-1_go?.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+go: cannot find GOROOT directory: /Users/a12665/.anyenv/envs/goenv/versions/1.10.3
+`
+exception: `None`
+--------------------------------
+
+** 2021-06-01 19:09:32.959738 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/bin/go', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.07.22-1_go?.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+go: cannot find GOROOT directory: /Users/a12665/.anyenv/envs/goenv/versions/1.10.3
+`
+exception: `None`
+--------------------------------
+
+** 2021-06-01 19:19:16.778432 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/Cellar/go/1.16.4/libexec/bin/go', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.07.22-1_go1.16.4.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+package gosublime/cmd/margo is not in GOROOT (/usr/local/Cellar/go/1.16.4/libexec/src/gosublime/cmd/margo)
+`
+exception: `None`
+--------------------------------
