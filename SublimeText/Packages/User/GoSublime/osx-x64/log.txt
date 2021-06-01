@@ -1210,3 +1210,15 @@ go: cannot find GOROOT directory: /Users/a12665/.anyenv/envs/goenv/versions/1.10
 `
 exception: `None`
 --------------------------------
+
+** 2021-06-01 17:34:44.965231 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/bin/go', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.07.22-1_go?.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+go: cannot find GOROOT directory: /Users/a12665/.anyenv/envs/goenv/versions/1.10.3
+`
+exception: `None`
+--------------------------------
