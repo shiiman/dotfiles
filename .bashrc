@@ -128,6 +128,16 @@ fi
 
 alias k='kubectl'
 
+# kubesec補完
+if type kubesec >/dev/null 2>&1; then
+    source <(kubesec completion bash) >& /dev/null
+fi
+
+# helm補完
+if type helm >/dev/null 2>&1; then
+    source <(helm completion bash) >& /dev/null
+fi
+
 ###########################################################
 #  ヒストリーの設定                                          #
 ###########################################################

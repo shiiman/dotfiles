@@ -38,7 +38,7 @@ ln -sf ~/dotfiles/VSCode/snippets "${packeges_path}/snippets"
 # ==============================================================
 
 # extensionのインストール =========================================
-cat ./extensions | while read line
+cat ~/dotfiles/VSCode/extensions | while read line
 do
     code --install-extension $line
 done

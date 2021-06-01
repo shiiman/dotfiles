@@ -30,6 +30,9 @@ sh ~/dotfiles/dotfile_setup.sh
 sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
 # デフォルトシェルをzshに変更.
 chsh -s /usr/local/bin/zsh
+# ディレクトリ権限変更.
+chmod 755 /usr/local/share/zsh
+chmod 755 /usr/local/share/zsh/site-functions
 
 # anyenvの設定.
 sh ~/dotfiles/anyenv_setup.sh
@@ -48,10 +51,12 @@ fi
 sh ~/dotfiles/SublimeText/sublime_setup.sh
 
 # vscode textの設定.
-sh ~/dotfiles/VSCode/vscode_setup.sh
+# 一度VSCodeを起動してから下記のshellを実行する必要がある
+# sh ~/dotfiles/VSCode/vscode_setup.sh
 
 # tarの設定変更.
-ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
+# TODO:
+# ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 
 # finderで隠しファイルの表示.
 defaults write com.apple.finder AppleShowAllFiles TRUE
