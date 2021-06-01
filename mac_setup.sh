@@ -50,13 +50,9 @@ fi
 # sublime textの設定.
 sh ~/dotfiles/SublimeText/sublime_setup.sh
 
-# vscode textの設定.
-# 一度VSCodeを起動してから下記のshellを実行する必要がある
-# sh ~/dotfiles/VSCode/vscode_setup.sh
 
 # tarの設定変更.
-# TODO:
-# ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
+ln -s /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
 
 # finderで隠しファイルの表示.
 defaults write com.apple.finder AppleShowAllFiles TRUE
