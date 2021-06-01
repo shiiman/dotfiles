@@ -214,7 +214,6 @@ setopt share_history
 ###########################################################
 # 補完機能を有効にする
 autoload -Uz compinit compdef; compinit
-compdef sshrc=ssh
 
 # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_param_slash
@@ -262,7 +261,7 @@ if type kubesec >/dev/null 2>&1; then
 fi
 
 # helm補完
-if type kubesec >/dev/null 2>&1; then
+if type helm >/dev/null 2>&1; then
     source <(helm completion zsh) >& /dev/null
 fi
 

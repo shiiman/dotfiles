@@ -1198,3 +1198,15 @@ margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrat
 margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
 margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
 margo: nsf/gocode is not enabled in go1.11. See https://margo.kuroku.io/b/migrate/?_r=gs
+
+** 2021-06-01 13:43:01.450542 **:
+MarGo: MarGo build failed
+cmd: `['/usr/local/bin/go', 'build', '-tags', '', '-v', '-o', 'gosublime.margo_r18.07.22-1_go?.exe', 'gosublime/cmd/margo']`
+stdout: `
+
+`
+stderr: `
+go: cannot find GOROOT directory: /Users/a12665/.anyenv/envs/goenv/versions/1.10.3
+`
+exception: `None`
+--------------------------------
