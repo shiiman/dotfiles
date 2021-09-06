@@ -9,7 +9,7 @@ fi
 if ! type git >/dev/null 2>&1; then
     brew install git
 fi
-git clone https://github.com/bayguh/dotfiles.git ~/dotfiles
+git clone https://github.com/shiiman/dotfiles.git ~/dotfiles
 
 # 設定ファイルフォルダに移動.
 cd ~/dotfiles
