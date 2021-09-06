@@ -60,7 +60,7 @@ sh ~/dotfiles/dotfile_setup.sh
 App Storeにログインしてから下記を実行
 
 ```
-curl https://raw.githubusercontent.com/bayguh/dotfiles/master/mac_setup.sh | bash
+curl https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.sh | bash
 ```
 
 ※ 内部でdotfile_setup.shも呼んでいる
