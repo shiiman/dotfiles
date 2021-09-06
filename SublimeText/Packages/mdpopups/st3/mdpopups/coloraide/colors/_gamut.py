@@ -55,7 +55,8 @@ def lch_chroma(base, color):
             if delta - 2 < threshold:
                 low = mapcolor.chroma
             else:
-                if abs(delta - 2) < threshold:
+                if abs(delta - 2) < threshold:  # pragma: no cover
+                    # Can this occur?
                     break
                 high = mapcolor.chroma
             mapcolor.chroma = (high + low) / 2
@@ -81,11 +82,13 @@ def clip(base, color):
 
         # Wrap the angle. Not technically out of gamut, but we will clean it up.
         if isinstance(a, Angle) and isinstance(b, Angle):
-            fit.append(value if 0.0 <= value <= 360.0 else value % 360.0)
+            fit.append(value % 360.0)
             continue
 
         # These parameters are unbounded
-        if not is_bound:
+        if not is_bound:  # pragma: no cover
+            # Will not execute unless we have a space that defines some coordinates
+            # as bound and others as not. We do not currently have such spaces.
             a = None
             b = None
 
@@ -101,11 +104,11 @@ def norm_angles(color):
     gamut = color._range
     fit = []
     for i, value in enumerate(channels):
-        a, b = gamut[i]
+        a = gamut[i][0]
 
         # Wrap the angle
-        if isinstance(a, Angle) and isinstance(b, Angle):
-            fit.append(value if 0.0 <= value <= 360.0 else value % 360.0)
+        if isinstance(a, Angle):
+            fit.append(value % 360.0)
             continue
 
         # Fit value in bounds.
@@ -124,11 +127,12 @@ class Gamut:
 
         space = (self.space() if space is None else space).lower()
         method = self.space() if method is None else method
-        if not self.in_gamut(space=space, tolerance=0.0):
-            clone = self.clone()
+        clone = self.clone()
+        if not clone.in_gamut(space=space, tolerance=0.0):
             clone.fit(method=method, in_place=True)
             return clone.coords()
-        return self.coords()
+        else:
+            return norm_angles(clone)
 
     def fit(self, space=None, *, method=None, in_place=False):
         """Fit the gamut using the provided method."""
@@ -152,17 +156,6 @@ class Gamut:
             c = self.convert(space)
         else:
             c = self.clone()
-
-        # If we are redirected to a different space to fit,
-        # fit that color space and normalize any angles afterwards
-        # TODO: Which fitting should we use?
-        if c.GAMUT is not None and False:  # pragma: no cover
-            c2 = self.convert(c.GAMUT)
-            c2.fit(method=method, in_place=True)
-            c.update(c2)
-            c._coords = norm_angles(c)
-            this.update(c)
-            return this
 
         # If we are perfectly in gamut, don't waste time fitting
         if c.in_gamut(tolerance=0.0):
@@ -188,9 +181,8 @@ class Gamut:
         # Check the color space specified for gamut checking.
         # If it proves to be in gamut, we will then test if the current
         # space is constrained properly.
-        # TODO: Do we really gain anything by doing this?
-        if self.GAMUT is not None:  # pragma: no cover
-            c2 = self.convert(self.GAMUT)
+        if self.GAMUT_CHECK is not None:
+            c2 = self.convert(self.GAMUT_CHECK)
             if not c2.in_gamut(tolerance=tolerance):
                 return False
 
@@ -201,7 +193,7 @@ class Gamut:
             is_bound = isinstance(self._range[i], GamutBound)
 
             # Angles will wrap, so no sense checking them
-            if isinstance(a, Angle) and isinstance(b, Angle):
+            if isinstance(a, Angle):
                 continue
 
             # These parameters are unbounded
