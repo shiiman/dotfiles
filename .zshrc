@@ -163,6 +163,8 @@ if type ag >/dev/null 2>&1; then
     alias grep='ag'
 fi
 
+
+alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 alias k='kubectl'
 
 ###########################################################
@@ -349,3 +351,6 @@ setopt noclobber
 # キーバインド無効
 bindkey -r '^J'
 bindkey -r '^O'
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
