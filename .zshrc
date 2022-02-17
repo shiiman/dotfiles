@@ -58,41 +58,81 @@ fi
 export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+
 ###########################################################
 # zplugの設定                                              #
 ###########################################################
 
-# pathの設定
-if [ -z "${SSHHOME+x}" ]; then
-    export ZPLUG_HOME=~/.zplug
-else
-    export ZPLUG_HOME=$SSHHOME/.zplug
+# # pathの設定
+# if [ -z "${SSHHOME+x}" ]; then
+#     export ZPLUG_HOME=~/.zplug
+# else
+#     export ZPLUG_HOME=$SSHHOME/.zplug
+# fi
+
+# if [ ! -e $ZPLUG_HOME ]; then
+#     # curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+#     git clone https://github.com/zplug/zplug $ZPLUG_HOME
+# fi
+
+# source $ZPLUG_HOME/init.zsh
+
+# # プラグインを定義する
+# zplug 'zsh-users/zsh-autosuggestions'
+# zplug 'zsh-users/zsh-completions'
+# zplug 'zsh-users/zsh-syntax-highlighting', defer:2
+# zplug 'zsh-users/zsh-history-substring-search'
+# zplug 'chrissicool/zsh-256color'
+# zplug 'b4b4r07/enhancd', use:init.sh
+# zplug "tcnksm/docker-alias", use:zshrc
+
+# # インストールする
+# if ! zplug check --verbose; then
+#   printf 'Install? [y/N]: '
+#   if read -q; then
+#     echo; zplug install
+#   fi
+# fi
+
+# zplug load --verbose
+
+###########################################################
+# zinitの設定                                              #
+###########################################################
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-if [ ! -e $ZPLUG_HOME ]; then
-    # curl -sL zplug.sh/installer | zsh
-    git clone https://github.com/zplug/zplug $ZPLUG_HOME
-fi
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-source $ZPLUG_HOME/init.zsh
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
 
-# プラグインを定義する
-zplug 'zsh-users/zsh-autosuggestions'
-zplug 'zsh-users/zsh-completions'
-zplug 'zsh-users/zsh-syntax-highlighting'
-zplug 'zsh-users/zsh-history-substring-search'
-zplug 'chrissicool/zsh-256color'
-zplug 'b4b4r07/enhancd', use:init.sh
+### End of Zinit's installer chunk
 
-# インストールする
-if ! zplug check --verbose; then
-  printf 'Install? [y/N]: '
-  if read -q; then
-    echo; zplug install
-  fi
-fi
+# プラグインのインストール.
+zinit light "zsh-users/zsh-autosuggestions"
+zinit light "zsh-users/zsh-completions"
+zinit light "zdharma-continuum/history-search-multi-word"
+zinit light 'chrissicool/zsh-256color'
 
-zplug load --verbose
+zinit ice wait'1' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting"
+zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
 
 
 ###########################################################
@@ -162,7 +202,6 @@ fi
 if type ag >/dev/null 2>&1; then
     alias grep='ag'
 fi
-
 
 alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 alias k='kubectl'
@@ -275,7 +314,7 @@ fi
 autoload -Uz colors; colors
 
 # プロンプト 右にカレントディレクトリと時刻を表示
-PROMPT="[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}@%{${fg[blue]}%}%m%{${reset_color}%}] %# "
+PROMPT="[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}@%{${fg[blue]}%}%m%{${reset_color}%} ~]$ "
 RPROMPT="[%{${fg[green]}%}%*%{${reset_color}%}]"
 
 # kube-ps1
@@ -351,6 +390,3 @@ setopt noclobber
 # キーバインド無効
 bindkey -r '^J'
 bindkey -r '^O'
-
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
