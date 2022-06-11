@@ -296,10 +296,10 @@ bindkey "^[[Z" reverse-menu-complete
 bindkey "^p" history-beginning-search-backward
 bindkey "^n" history-beginning-search-forward
 
-# kubesec補完
-if type kubesec >/dev/null 2>&1; then
-    source <(kubesec completion zsh) >& /dev/null
-fi
+# # kubesec補完
+# if type kubesec >/dev/null 2>&1; then
+#     source <(kubesec completion zsh) >& /dev/null
+# fi
 
 # helm補完
 if type helm >/dev/null 2>&1; then

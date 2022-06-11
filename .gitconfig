@@ -26,3 +26,5 @@
 	postBuffer = 524288000
 [commit]
 	template = ~/.stCommitMsg
+[pull]
+	rebase = false
