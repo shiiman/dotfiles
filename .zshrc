@@ -132,7 +132,7 @@ zinit light "zdharma-continuum/history-search-multi-word"
 zinit light 'chrissicool/zsh-256color'
 
 zinit ice wait'1' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting"
-zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
+#zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
 
 
 ###########################################################

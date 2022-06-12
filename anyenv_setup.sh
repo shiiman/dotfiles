@@ -47,16 +47,16 @@ PHP_BUILD_CONFIGURE_OPTS="--disable-fpm \
                           --with-libedit=$(brew --prefix libedit) \
                           --with-external-pcre=$(brew --prefix pcre2)" \
 PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j$(sysctl -n hw.logicalcpu_max)" \
-phpenv install --ini development 8.0.6
-rbenv install 3.0.1
-nodenv install 16.2.0
-goenv install 1.16.4
+phpenv install --ini development 8.1.7
+rbenv install 3.1.2
+nodenv install 18.3.0
+goenv install 1.18.0
 
 # 各言語のバージョン反映
-phpenv global 8.0.6
-rbenv global 3.0.1
-nodenv global 16.2.0
-goenv global 1.16.4
+phpenv global 8.1.7
+rbenv global 3.1.2
+nodenv global 18.3.0
+goenv global 1.18.0
 
 # シェルの再読込
 source /tmp/anyenv.setting
