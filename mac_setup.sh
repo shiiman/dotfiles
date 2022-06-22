@@ -54,10 +54,6 @@ fi
 # sublime textの設定.
 sh ~/dotfiles/SublimeText/sublime_setup.sh
 
-# tarの設定変更.
-#ln -sf /usr/local/opt/gnu-tar/bin/gtar /usr/local/bin/tar
-ln -sf /opt/homebrew/bin/gtar /usr/local/bin/tar
-
 # finderで隠しファイルの表示.
 defaults write com.apple.finder AppleShowAllFiles TRUE
 killall Finder
