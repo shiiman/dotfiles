@@ -1,5 +1,5 @@
 # pathを設定
-path=(~/bin /usr/local/bin /opt/homebrew/bin(N-/) ~/pear/bin ~/.anyenv ${path})
+path=(~/bin /usr/local/bin /opt/homebrew/bin ~/pear/bin ~/.anyenv ${path})
 export XDG_CONFIG_HOME=~/.config
 
 # The next line updates PATH for the Google Cloud SDK.
