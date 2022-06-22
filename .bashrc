@@ -7,6 +7,8 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.ba
 # The next line enables shell command completion for gcloud.
 if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'; fi
 
+USE_GKE_GCLOUD_AUTH_PLAGIN=TRUE
+
 if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
 fi
