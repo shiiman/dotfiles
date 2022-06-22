@@ -1,11 +1,11 @@
 # pathを設定
-path=(~/bin /usr/local/bin ~/pear/bin ~/.anyenv ${path})
+path=(~/bin /usr/local/bin /opt/homebrew/bin(N-/) ~/pear/bin ~/.anyenv ${path})
 export XDG_CONFIG_HOME=~/.config
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'; fi
 
 if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
@@ -53,7 +53,7 @@ then
     export PATH="$PATH:$GOPATH/bin"
 fi
 
-export PATH="/usr/local/opt/bzip2/bin:$PATH"
+#export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 ###########################################################
@@ -74,8 +74,8 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 # gitの設定                                                #
 ###########################################################
 # 補完読み込み
-[ -f /usr/local/opt/git/etc/bash_completion.d/git-completion.bash ] && source /usr/local/opt/git/etc/bash_completion.d/git-completion.bash
-[ -f /usr/local/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash ] && source /usr/local/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash
+[ -f /opt/homebrew/opt/git/etc/bash_completion.d/git-completion.bash ] && source /opt/homebrew/opt/git/etc/bash_completion.d/git-completion.bash
+[ -f /opt/homebrew/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash ] && source /opt/homebrew/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash
 
 
 ###########################################################
