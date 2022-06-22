@@ -2,6 +2,10 @@
 path=(~/bin(N-/) /usr/local/bin(N-/) ~/pear/bin(N-/) ~/.anyenv/bin(N-/) ${path})
 export XDG_CONFIG_HOME=~/.config
 
+if [ -e "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
