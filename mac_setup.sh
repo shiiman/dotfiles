@@ -51,7 +51,7 @@ if [ ! -e ~/.config/gcloud/gcloud-zsh-completion ]; then
     git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
 fi
 
-# sublime textの設定.
+# sublime textの設定.(一度sublimeを起動する必要があるかも.)
 sh ~/dotfiles/SublimeText/sublime_setup.sh
 
 # finderで隠しファイルの表示.
