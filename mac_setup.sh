@@ -42,7 +42,7 @@ sh ~/dotfiles/anyenv_setup.sh
 
 # fzfをインストール.
 #sh /usr/local/opt/fzf/install
-sh /opt/homebrew/bin/fzf/install
+sh /opt/homebrew/opt/fzf/install
 
 # gcloud補完設定.
 # python2系が必要(3系では未対応).
