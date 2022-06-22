@@ -1,5 +1,5 @@
 # pathを設定
-path=(~/bin(N-/) /usr/local/bin(N-/) ~/pear/bin(N-/) ~/.anyenv/bin(N-/) ${path})
+path=(~/bin(N-/) /usr/local/bin(N-/) /opt/homebrew/bin(N-/) ~/pear/bin(N-/) ~/.anyenv/bin(N-/) ${path})
 export XDG_CONFIG_HOME=~/.config
 
 if [ -e "/opt/homebrew/bin/brew" ]; then
@@ -7,9 +7,9 @@ if [ -e "/opt/homebrew/bin/brew" ]; then
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
 
 fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
 
@@ -59,7 +59,7 @@ then
     export PATH="$PATH:$GOPATH/bin"
 fi
 
-export PATH="/usr/local/opt/bzip2/bin:$PATH"
+#export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # added by Snowflake SnowSQL installer v1.2
@@ -290,7 +290,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /opt/homebrew/bin \
                    /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 # Shift-Tabで補完候補を逆順する("\e[Z"でも動作する)
@@ -322,8 +322,8 @@ PROMPT="[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}@%{${fg[blue]}%
 RPROMPT="[%{${fg[green]}%}%*%{${reset_color}%}]"
 
 # kube-ps1
-if [ -e "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]; then
-  source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+if [ -e "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh" ]; then
+  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
   PS1='$(kube_ps1)'$PS1
   kubeoff
 fi
