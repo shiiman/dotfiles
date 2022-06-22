@@ -61,7 +61,7 @@ brew "memcached"
 brew "minikube", link: false
 brew "mysql"
 brew "nginx"
-brew "openjdk"
+#brew "openjdk"
 brew "openssl@3"
 brew "packer"
 brew "packer-completion"
