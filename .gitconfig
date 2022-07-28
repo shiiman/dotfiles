@@ -1,7 +1,7 @@
 [core]
 	excludesfile = /Users/a12665/.gitignore_global
 	quotepath = false
-	editor = /usr/local/bin/vim
+	editor = /opt/homebrew/bin/vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
