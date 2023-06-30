@@ -13,7 +13,7 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 
 fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
 
-USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 if [ -d $HOME/.anyenv ] ; then
   eval "$(anyenv init -)"
