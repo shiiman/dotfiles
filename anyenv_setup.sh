@@ -50,13 +50,13 @@ PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j$(sysctl -n hw.logicalcpu_max)" \
 phpenv install --ini development 8.1.7
 rbenv install 3.1.2
 nodenv install 18.3.0
-goenv install 1.18.0
+goenv install 1.20.2
 
 # 各言語のバージョン反映
 phpenv global 8.1.7
 rbenv global 3.1.2
 nodenv global 18.3.0
-goenv global 1.18.0
+goenv global 1.20.2
 
 # シェルの再読込
 source /tmp/anyenv.setting

@@ -1,4 +1,12 @@
-# [phpfmt](https://github.com/phpfmt/fmt) support for Sublime Text 2/3
+# [phpfmt](https://github.com/driade/phpfmt8) support for Sublime Text 4 with PHP 8.x support
+
+[![PHPFmt](https://github.com/driade/phpfmt8/actions/workflows/github.yml/badge.svg)](https://github.com/driade/phpfmt8/actions/workflows/github.yml)
+
+This is project is a clone of https://github.com/nanch/phpfmt_stable with PHP 8 support and numerous bugfixes, since the original project is abandoned. 
+
+## Contributing
+
+Please don't hesitate opening a pull request or an issue in case you find somethign wrong. Provide as much information as you can, with code samples of the expected result, to make it easier to spot the error.
 
 ## Installation
 
@@ -7,7 +15,7 @@
 
 Plugin runs with PHP 7.0 or newer installed in the machine running the plugin.
 
-#### Install this plugin through Package Manager.
+#### Install this plugin through Package Manager
 
 - In Sublime Text press `ctrl+shift+P`
 - Choose `Package Control: Install Package`
@@ -15,7 +23,7 @@ Plugin runs with PHP 7.0 or newer installed in the machine running the plugin.
 
 #### Configuration (Windows)
 
-- Edit configuration file (`%AppData%\Sublime Text\Packages\phpfmt\phpfmt.sublime-settings`)
+- Edit configuration file (`%AppData%\Sublime Text\Packages\phpfmt\phpfmt.sublime-nings`)
 - For field `"php_bin"` enter the path to the php.exe
   Example: `"php_bin":"c:/PHP/php.exe"`
 
@@ -30,9 +38,11 @@ Plugin runs with PHP 7.0 or newer installed in the machine running the plugin.
 Prefer using the toggle options at command palette. However you might find yourself in need to setup where PHP is running, use this option below for the configuration file.
 ```
 {
-"php_bin":"/usr/local/bin/php",
+	"php_bin":"/usr/local/bin/php",
 }
 ```
+
+You may find an example configuration file in https://github.com/driade/phpfmt8/blob/master/driade.sublime-settings
 
 **The following features are available through command palette (`ctrl+shift+P` or `cmd+shift+P`) :**
 
@@ -47,6 +57,7 @@ Prefer using the toggle options at command palette. However you might find yours
  *  phpfmt: toggle PSR1 - Class and Methods names
  *  phpfmt: toggle PSR1
  *  phpfmt: toggle PSR2
+ *  phpfmt: toggle WP Coding Standards
  *  phpfmt: analyse this
  *  phpfmt: build autocomplete database
  *  phpfmt: getter and setter (camelCase)
@@ -103,6 +114,7 @@ Prefer using the toggle options at command palette. However you might find yours
  * PSR2MultilineFunctionParams       Break function parameters into multiple lines.
  * ReindentAndAlignObjOps            Align object operators.
  * ReindentSwitchBlocks              Reindent one level deeper the content of switch blocks.
+ * ReindentEnumBlocks                Reindent one level deeper the content of enum blocks.
  * RemoveIncludeParentheses          Remove parentheses from include declarations.
  * RemoveSemicolonAfterCurly         Remove semicolon after closing curly brace.
  * RemoveUseLeadingSlash             Remove leading slash in T_USE imports.
@@ -114,6 +126,8 @@ Prefer using the toggle options at command palette. However you might find yours
  * SmartLnAfterCurlyOpen             Add line break when implicit curly block is added.
  * SortUseNameSpace                  Organize use clauses by length and alphabetic order.
  * SpaceAroundControlStructures      Add space around control structures.
+ * SpaceAfterExclamationMark         Add space after exclamation mark.
+ * SpaceAroundParentheses            Add spaces inside parentheses.
  * SpaceAroundExclamationMark        Add spaces around exclamation mark.
  * SpaceBetweenMethods               Put space between methods.
  * StrictBehavior                    Activate strict option in array_search, base64_decode, in_array, array_keys, mb_detect_encoding. Danger! This pass leads to behavior change.
@@ -290,15 +304,7 @@ $d = new D();
 
 ### Troubleshooting
 - Be sure you can run PHP from the command line.
-- If you need support, please open an issue at [fmt issues](https://github.com/phpfmt/fmt/issues)
-
-### The Most FAQ
-
-***I want to use sublime-phpfmt, but it needs PHP 5.6 or newer and on my production
-server I have PHP 5.5 or older. What should I do?***
-
-Consider installing a standalone PHP 5.6 in a separate directory and have it *not*
-configured in the environment. Within the plugin, ensure `php_bin` parameter is pointed to this standalone installation.
+- If you need support, please open an issue at [fmt issues](https://github.com/driade/phpfmt8/issues)
 
 ### Acknowledgements
 - GoSublime - for the method to update the formatted buffer
