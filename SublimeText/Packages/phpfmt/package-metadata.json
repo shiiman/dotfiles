@@ -1,1 +1,1 @@
-{"dependencies": [], "url": "https://github.com/driade/phpfmt8", "sublime_text": ">=3000", "version": "855.0.0", "platforms": ["*"], "description": "PHPFMT support for Sublime Text 4, fork of https://github.com/nanch/phpfmt_stable with PHP 8 support"}
+{"platforms": ["*"], "version": "1001.0.0", "sublime_text": ">=3000", "url": "https://github.com/driade/phpfmt8", "dependencies": [], "description": "PHP formatter for Sublime Text 4, with PHP 8 support."}

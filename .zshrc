@@ -12,6 +12,7 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zs
 if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
 
 fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
+fpath=(~/.zsh/completion $fpath)
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 

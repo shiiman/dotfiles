@@ -2,18 +2,18 @@
 
 [![PHPFmt](https://github.com/driade/phpfmt8/actions/workflows/github.yml/badge.svg)](https://github.com/driade/phpfmt8/actions/workflows/github.yml)
 
-This is project is a clone of https://github.com/nanch/phpfmt_stable with PHP 8 support and numerous bugfixes, since the original project is abandoned. 
+This project is a clone of https://github.com/nanch/phpfmt_stable with PHP 8 support and numerous bugfixes, since the original project is abandoned. 
 
 ## Contributing
 
-Please don't hesitate opening a pull request or an issue in case you find somethign wrong. Provide as much information as you can, with code samples of the expected result, to make it easier to spot the error.
+Please don't hesitate opening a pull request or an issue in case you find something wrong. Provide as much information as you can, with code samples of the expected result, to make it easier to spot the error.
 
 ## Installation
 
 #### Requirements
 - **You must have a running copy of PHP on the machine you are running Sublime Text**
 
-Plugin runs with PHP 7.0 or newer installed in the machine running the plugin.
+Plugin runs with PHP 5.6 or newer installed in the machine running the plugin.
 
 #### Install this plugin through Package Manager
 

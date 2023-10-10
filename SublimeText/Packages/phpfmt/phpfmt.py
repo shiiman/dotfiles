@@ -125,9 +125,9 @@ def dofmt(eself, eview, sgter = None, src = None, force = False):
     print_debug("phpfmt (php_ver) cmd:\n", cmd_ver)
     print_debug("phpfmt (php_ver) out:\n", res.decode('utf-8'))
     print_debug("phpfmt (php_ver) err:\n", err.decode('utf-8'))
-    if ('PHP 5.3' in res.decode('utf-8') or 'PHP 5.3' in err.decode('utf-8') or 'PHP 5.4' in res.decode('utf-8') or 'PHP 5.4' in err.decode('utf-8') or 'PHP 5.5' in res.decode('utf-8') or 'PHP 5.5' in err.decode('utf-8') or 'PHP 5.6' in res.decode('utf-8') or 'PHP 5.6' in err.decode('utf-8')):
+    if ('PHP 5.3' in res.decode('utf-8') or 'PHP 5.3' in err.decode('utf-8') or 'PHP 5.4' in res.decode('utf-8') or 'PHP 5.4' in err.decode('utf-8') or 'PHP 5.5' in res.decode('utf-8') or 'PHP 5.5' in err.decode('utf-8')):
         s = debugEnvironment(php_bin, formatter_path)
-        sublime.message_dialog('Warning.\nPHP 7.0 or newer is required.\nPlease, upgrade your local PHP installation.\nDebug information:'+s)
+        sublime.message_dialog('Warning.\nPHP 5.6 or newer is required.\nPlease, upgrade your local PHP installation.\nDebug information:'+s)
         return False
 
     s = debugEnvironment(php_bin, formatter_path)
@@ -594,7 +594,7 @@ class AnalyseThisCommand(sublime_plugin.TextCommand):
         cmdOracle.append(oraclePath)
         cmdOracle.append("introspect")
         cmdOracle.append(lookTerm)
-        print_debug(cmdOracle+'asdasd')
+        print_debug(cmdOracle)
         if os.name == 'nt':
             startupinfo = subprocess.STARTUPINFO()
             startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
