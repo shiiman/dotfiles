@@ -2,15 +2,15 @@
 
 # anyenvのインストール.
 if [ ! -e ~/.anyenv ]; then
-    git clone https://github.com/anyenv/anyenv ~/.anyenv
-    mkdir -p ~/.anyenv/plugins
-    git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
-    git clone git://github.com/aereal/anyenv-exec.git ~/.anyenv/plugins/anyenv-exe
-    git clone https://github.com/znz/anyenv-git.git ~/.anyenv/plugins/anyenv-git
+  git clone https://github.com/anyenv/anyenv ~/.anyenv
+  mkdir -p ~/.anyenv/plugins
+  git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
+  git clone git://github.com/aereal/anyenv-exec.git ~/.anyenv/plugins/anyenv-exe
+  git clone https://github.com/znz/anyenv-git.git ~/.anyenv/plugins/anyenv-git
 fi
 
-echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> /tmp/anyenv.setting
-echo 'eval "$(anyenv init -)"' >> /tmp/anyenv.setting
+echo "export PATH=\"$HOME/.anyenv/bin:\$PATH\"" >>/tmp/anyenv.setting
+echo "eval \"\$(anyenv init -)\"" >>/tmp/anyenv.setting
 
 # シェルの再読込
 source /tmp/anyenv.setting
@@ -27,7 +27,7 @@ anyenv install goenv
 source /tmp/anyenv.setting
 
 # macOS SDK header install
-if [[ `sw_vers` == *"10.14."* ]] ; then
+if [[ $(sw_vers) == *"10.14."* ]]; then
   sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
 fi
 
@@ -47,16 +47,16 @@ PHP_BUILD_CONFIGURE_OPTS="--disable-fpm \
                           --with-libedit=$(brew --prefix libedit) \
                           --with-external-pcre=$(brew --prefix pcre2)" \
 PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j$(sysctl -n hw.logicalcpu_max)" \
-phpenv install --ini development 8.1.7
+  phpenv install --ini development 8.1.7
 rbenv install 3.1.2
-nodenv install 18.3.0
-goenv install 1.20.2
+nodenv install 23.11.0
+goenv install 1.24.2
 
 # 各言語のバージョン反映
 phpenv global 8.1.7
 rbenv global 3.1.2
-nodenv global 18.3.0
-goenv global 1.20.2
+nodenv global 23.11.0
+goenv global 1.24.2
 
 # シェルの再読込
 source /tmp/anyenv.setting

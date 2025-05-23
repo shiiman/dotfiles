@@ -1,5 +1,9 @@
 # pathを設定
-path=(~/bin(N-/) /usr/local/bin(N-/) /opt/homebrew/bin(N-/) ~/pear/bin(N-/) ~/.anyenv/bin(N-/) ${path})
+export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/pear/bin:$PATH"
+export PATH="$HOME/.anyenv/bin:$PATH"
 export XDG_CONFIG_HOME=~/.config
 
 if [ -e "/opt/homebrew/bin/brew" ]; then
@@ -16,46 +20,38 @@ fpath=(~/.zsh/completion $fpath)
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-if [ -d $HOME/.anyenv ] ; then
-  eval "$(anyenv init -)"
+if [ -d $HOME/.anyenv ]; then
+    eval "$(anyenv init -)"
 fi
 
-if [ -e "$HOME/.anyenv/envs/phpenv" ]
-then
+if [ -e "$HOME/.anyenv/envs/phpenv" ]; then
     export PHPENV_ROOT="$HOME/.anyenv/envs/phpenv"
     export PATH="$PHPENV_ROOT/bin:$PATH"
-    if command -v phpenv 1>/dev/null 2>&1
-    then
+    if command -v phpenv 1>/dev/null 2>&1; then
         eval "$(phpenv init -)"
     fi
 fi
 
-if [ -e "$HOME/.anyenv/envs/rbenv" ]
-then
+if [ -e "$HOME/.anyenv/envs/rbenv" ]; then
     export RBENV_ROOT="$HOME/.anyenv/envs/rbenv"
     export PATH="$RBENV_ROOT/bin:$PATH"
-    if command -v rbenv 1>/dev/null 2>&1
-    then
+    if command -v rbenv 1>/dev/null 2>&1; then
         eval "$(rbenv init -)"
     fi
 fi
 
-if [ -e "$HOME/.anyenv/envs/nodenv" ]
-then
+if [ -e "$HOME/.anyenv/envs/nodenv" ]; then
     export NODENV_ROOT="$HOME/.anyenv/envs/nodenv"
     export PATH="$NODENV_ROOT/bin:$PATH"
-    if command -v nodenv 1>/dev/null 2>&1
-    then
+    if command -v nodenv 1>/dev/null 2>&1; then
         eval "$(nodenv init -)"
     fi
 fi
 
-if [ -e "$HOME/.anyenv/envs/goenv" ]
-then
+if [ -e "$HOME/.anyenv/envs/goenv" ]; then
     export GOENV_ROOT="$HOME/.anyenv/envs/goenv"
     export PATH="$GOENV_ROOT/bin:$PATH"
-    if command -v goenv 1>/dev/null 2>&1
-    then
+    if command -v goenv 1>/dev/null 2>&1; then
         eval "$(goenv init -)"
     fi
     export PATH="$GOROOT/bin:$PATH"
@@ -113,14 +109,16 @@ export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" &&
+        print -P "%F{33} %F{34}Installation successful.%f%b" ||
         print -P "%F{160} The clone has failed.%f%b"
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+if typeset -p _comps >/dev/null 2>&1; then
+    _comps[zinit]=_zinit
+fi
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
@@ -138,9 +136,9 @@ zinit light "zsh-users/zsh-completions"
 zinit light "zdharma-continuum/history-search-multi-word"
 zinit light 'chrissicool/zsh-256color'
 
-zinit ice wait'1' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting"
+zinit ice wait'1' lucid
+zinit light "zdharma-continuum/fast-syntax-highlighting"
 #zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
-
 
 ###########################################################
 # itermの設定                                              #
@@ -148,13 +146,11 @@ zinit ice wait'1' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
 ###########################################################
 # fzfの設定                                                #
 ###########################################################
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 ###########################################################
 #  lsの設定                                                #
@@ -168,7 +164,6 @@ export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30
 # ZLS_COLORS設定
 export ZLS_COLORS=$LS_COLORS
 
-
 ###########################################################
 #  cdの設定                                               #
 ###########################################################
@@ -180,8 +175,10 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # cdの後にlsとpwdを実行
-chpwd() { ls -a; pwd }
-
+function chpwd() {
+    ls -a
+    pwd
+}
 
 ###########################################################
 #  aliasの設定                                             #
@@ -229,7 +226,6 @@ setopt glob_dots
 # 数値ソート
 setopt numeric_glob_sort
 
-
 ###########################################################
 #  ヒストリーの設定                                          #
 ###########################################################
@@ -256,12 +252,12 @@ setopt hist_no_store
 # 他のターミナルとヒストリーを共有
 setopt share_history
 
-
 ###########################################################
 #  補完の設定                                               #
 ###########################################################
 # 補完機能を有効にする
-autoload -Uz compinit compdef; compinit
+autoload -Uz compinit compdef
+compinit
 
 # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_param_slash
@@ -289,12 +285,12 @@ zstyle ':completion:*:default' menu select=2
 # 補完で大文字にもマッチ
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # 補完候補に色を付ける
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:default' list-colors "${LS_COLORS//:/ }"
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # sudo の後ろでコマンド名を補完する
 zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /opt/homebrew/bin \
-                   /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+    /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 # Shift-Tabで補完候補を逆順する("\e[Z"でも動作する)
 bindkey "^[[Z" reverse-menu-complete
@@ -310,15 +306,15 @@ bindkey "^n" history-beginning-search-forward
 
 # helm補完
 if type helm >/dev/null 2>&1; then
-    source <(helm completion zsh) >& /dev/null
+    source <(helm completion zsh) >&/dev/null
 fi
-
 
 ###########################################################
 #  プロンプトの設定                                         #
 ###########################################################
 # プロンプトに色を付ける
-autoload -Uz colors; colors
+autoload -Uz colors
+colors
 
 # プロンプト 右にカレントディレクトリと時刻を表示
 PROMPT="[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}@%{${fg[blue]}%}%m%{${reset_color}%} ~]$ "
@@ -326,9 +322,9 @@ RPROMPT="[%{${fg[green]}%}%*%{${reset_color}%}]"
 
 # kube-ps1
 if [ -e "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh" ]; then
-  source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
-  PS1='$(kube_ps1)'$PS1
-  kubeoff
+    source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+    PS1='$(kube_ps1)'$PS1
+    kubeoff
 fi
 
 ###########################################################
@@ -350,7 +346,6 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
 #precmd () { vcs_info }
 # プロンプト表示
 RPROMPT='${vcs_info_msg_0_}'$RPROMPT
-
 
 ###########################################################
 #  その他の設定                                             #
@@ -399,6 +394,6 @@ bindkey -r '^J'
 bindkey -r '^O'
 
 # proto
-export PROTO_HOME="$HOME/.proto";
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+export PROTO_HOME="$HOME/.proto"
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
 . "$HOME/.local/bin/env"
