@@ -347,7 +347,7 @@ zstyle ':vcs_info:*' formats "[%F{blue}%c%u%b%f]"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 
 # プロンプト表示直前にvcs_info呼び出し
-precmd () { vcs_info }
+#precmd () { vcs_info }
 # プロンプト表示
 RPROMPT='${vcs_info_msg_0_}'$RPROMPT
 
@@ -397,3 +397,8 @@ setopt noclobber
 # キーバインド無効
 bindkey -r '^J'
 bindkey -r '^O'
+
+# proto
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
+. "$HOME/.local/bin/env"
