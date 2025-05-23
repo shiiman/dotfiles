@@ -36,7 +36,6 @@ sh ~/dotfiles/dotfile_setup.sh
 # chmod 755 /usr/local/share/zsh
 # chmod 755 /usr/local/share/zsh/site-functions
 
-
 # anyenvの設定.
 sh ~/dotfiles/anyenv_setup.sh
 
@@ -47,7 +46,7 @@ sh /opt/homebrew/opt/fzf/install
 # gcloud補完設定.
 # python2系が必要(3系では未対応).
 if [ ! -e ~/.config/gcloud/gcloud-zsh-completion ]; then
-    mkdir -p  ~/.config/gcloud
+    mkdir -p ~/.config/gcloud
     git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
 fi
 

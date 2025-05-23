@@ -9,7 +9,7 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-if [ -d $HOME/.anyenv ]; then
+if [ -d "$HOME/.anyenv" ]; then
     eval "$(anyenv init -)"
 fi
 
@@ -102,7 +102,7 @@ alias la='ls -a'
 
 # cdの後にlsとpwdを実行
 function cdlspwd() {
-    cd $1
+    cd "$1"
     la
     pwd
 }
@@ -136,7 +136,7 @@ HISTFILE=~/.bash_history
 # メモリに保存されるヒストリの件数
 HISTSIZE=10000
 # 保存されるヒストリの件数
-SAVEHIST=10000
+export SAVEHIST=10000
 
 ###########################################################
 #  その他の設定                                             #
@@ -145,7 +145,7 @@ SAVEHIST=10000
 export LANG=ja_JP.UTF-8
 
 # 区切り文字の設定
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\] ~]$ "
