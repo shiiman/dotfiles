@@ -12,6 +12,9 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"BracketHighlighter",
+		"Emmet",
+		"TOML",
 		"Vintage",
 	],
 	"indent_to_bracket": true,
@@ -24,4 +27,5 @@
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": false,
+	"index_files": true,
 }

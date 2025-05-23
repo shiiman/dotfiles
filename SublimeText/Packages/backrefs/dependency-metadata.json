@@ -1,1 +1,0 @@
-{"platforms": ["*"], "url": "https://github.com/facelessuser/sublime-backrefs/issues", "sublime_text": ">=3000", "version": "1.10.0", "description": "Backrefs regular expression wrapper."}
