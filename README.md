@@ -58,9 +58,10 @@ sh ~/dotfiles/dotfile_setup.sh
 ▼ macの初期設定
 
 App Storeにログインしてから下記を実行
+HOMEBREW_GITHUB_API_TOKENはgithubの Personal Access Token
 
 ```
-curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.sh -o mac_setup.sh && bash mac_setup.sh
+HOMEBREW_GITHUB_API_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxx curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.sh -o mac_setup.sh && bash mac_setup.sh
 ```
 
 ※ 内部でdotfile_setup.shも呼んでいる
