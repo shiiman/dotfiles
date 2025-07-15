@@ -285,7 +285,7 @@ zstyle ':completion:*:default' menu select=2
 # 補完で大文字にもマッチ
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # 補完候補に色を付ける
-zstyle ':completion:*:default' list-colors "${LS_COLORS//:/ }"
+zstyle ':completion:*:default' list-colors "${LS_COLORS}"
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # sudo の後ろでコマンド名を補完する
@@ -355,6 +355,7 @@ typeset -U path cdpath fpath manpath
 
 # 文字コードをUTF-8に設定
 export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
 # 日本語ファイル名等8ビットを通す
 setopt print_eight_bit
 
