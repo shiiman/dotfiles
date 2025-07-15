@@ -40,14 +40,8 @@ brew bundle
 # dotfileの設定.
 sh ~/dotfiles/dotfile_setup.sh
 
-# zshがデフォルトになったのでコメントアウト.
-# # zshをシェルリストに追加.
-# sudo sh -c "echo /usr/local/bin/zsh >> /etc/shells"
-# #デフォルトシェルをzshに変更.
-# chsh -s /usr/local/bin/zsh
-# #ディレクトリ権限変更.
-# chmod 755 /usr/local/share/zsh
-# chmod 755 /usr/local/share/zsh/site-functions
+# デフォルトシェルをzshに変更.
+chsh -s /bin/zsh
 
 # anyenvの設定.
 sh ~/dotfiles/anyenv_setup.sh
