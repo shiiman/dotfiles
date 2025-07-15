@@ -394,6 +394,6 @@ bindkey -r '^J'
 bindkey -r '^O'
 
 # proto
-export PROTO_HOME="$HOME/.proto"
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
-. "$HOME/.local/bin/env"
+# export PROTO_HOME="$HOME/.proto"
+# export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+# . "$HOME/.local/bin/env"
