@@ -3,12 +3,20 @@
 # Homebrewのインストール.
 if ! type brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # Apple Silicon (M1/M2) と Intel Mac の両方に対応
+    # パスを明示的に通す
     if [ -d /opt/homebrew/bin ]; then
+        export PATH="/opt/homebrew/bin:$PATH"
         eval "$(/opt/homebrew/bin/brew shellenv)"
     elif [ -d /usr/local/bin ]; then
+        export PATH="/usr/local/bin:$PATH"
         eval "$(/usr/local/bin/brew shellenv)"
     fi
+fi
+
+# brewコマンドが本当に使えるか再確認
+if ! type brew >/dev/null 2>&1; then
+    echo "brewコマンドが見つかりません。Homebrewのインストール後、再度このスクリプトを実行してください。"
+    exit 1
 fi
 
 # GitHubから設定ファイルをclone.
