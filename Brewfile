@@ -127,6 +127,7 @@ cask "firefox"
 cask "fork"
 cask "iterm2"
 cask "kobo"
+cask "memory-clean-3"
 cask "mi"
 cask "ngrok"
 cask "p4v"
@@ -157,7 +158,6 @@ mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
-mas "Memory Clean 2", id: 1114591412
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
