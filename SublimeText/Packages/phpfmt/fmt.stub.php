@@ -4790,6 +4790,32 @@ EOT;
 	}
 
 	class ResizeSpaces extends FormatterPass {
+        
+        public static $reservedWords = [
+            '__halt_compiler' => 1,
+            'abstract' => 1, 'and' => 1, 'array' => 1, 'as' => 1,
+            'break' => 1,
+            'callable' => 1, 'case' => 1, 'catch' => 1, 'class' => 1, 'clone' => 1, 'const' => 1, 'continue' => 1,
+            'declare' => 1, 'default' => 1, 'die' => 1, 'do' => 1,
+            'echo' => 1, 'else' => 1, 'elseif' => 1, 'empty' => 1, 'enddeclare' => 1, 'endfor' => 1, 'endforeach' => 1, 'endif' => 1, 'endswitch' => 1, 'endwhile' => 1, 'eval' => 1, 'exit' => 1, 'extends' => 1,
+            'final' => 1, 'for' => 1, 'foreach' => 1, 'function' => 1,
+            'global' => 1, 'goto' => 1,
+            'if' => 1, 'implements' => 1, 'include' => 1, 'include_once' => 1, 'instanceof' => 1, 'insteadof' => 1, 'interface' => 1, 'isset' => 1,
+            'list' => 1,
+            'namespace' => 1, 'new' => 1,
+            'or' => 1,
+            'print' => 1, 'private' => 1, 'protected' => 1, 'public' => 1,
+            'require' => 1, 'require_once' => 1, 'return' => 1,
+            'static' => 1, 'switch' => 1,
+            'throw' => 1, 'trait' => 1, 'try' => 1,
+            'unset' => 1, 'use' => 1, 'var' => 1,
+            'while' => 1, 'xor' => 1,
+            'match' => 1, 'readonly' => 1,
+            'enum' => 1, 'yield' => 1, "yield from" => 1,
+            "true" => 1, "false" => 1, "null" => false,
+            "self" => 1, "parent" => 1, "static" =>1
+        ];
+
         public function candidate($source, $foundTokens) {
             $tkns = token_get_all($source);
 
@@ -4877,7 +4903,7 @@ EOT;
                 case T_AMPERSAND_FOLLOWED_BY_VAR_OR_VARARG:
                     if ($this->rightTokenIs(T_VARIABLE)) {
                         if (!$this->leftTokenIs([T_FUNCTION,ST_EQUAL, ST_PARENTHESES_OPEN, T_AS, ST_COMMA, T_DOUBLE_ARROW])) {
-                            if (! isset($this->tkns[$index - 1]) || $this->tkns[$index - 1][1] !== ' ') {
+                            if (! isset($this->tkns[$index - 1][1]) || $this->tkns[$index - 1][1] !== ' ') {
                                 $this->appendCode(" ");
                             }
                         }
@@ -4973,7 +4999,7 @@ EOT;
                     break;
 
                 case ST_COLON:
-                    list($prevId) = $this->inspectToken(-1);
+                    list($prevId, $prevText) = $this->inspectToken(-1);
                     list($nextId, $nextText) = $this->inspectToken(+1);
 
                     if (
@@ -5022,7 +5048,7 @@ EOT;
                     } elseif (T_STRING === $prevId) {
                         $this->appendCode($text . ' ');
                         break;
-                    } elseif (T_CLASS === $prevId) {
+                    } elseif (isset(static::$reservedWords[strtolower($prevText)])) {
                         $this->appendCode($text . ' ');
                         break;
                     }
@@ -6320,7 +6346,9 @@ EOT;
 			'throw' => 1, 'trait' => 1, 'try' => 1,
 			'unset' => 1, 'use' => 1, 'var' => 1,
 			'while' => 1, 'xor' => 1,
-            'match' => 1, 'readonly' => 1
+            'match' => 1, 'readonly' => 1,
+            // don't dare to add "enum", it can create troubles
+            'fn' => 1, 'yield' => 1, 'self' => 1, 'parent' => 1,
 		];
 
 		public function candidate($source, $foundTokens) {
@@ -6589,21 +6617,9 @@ EOT;
 					}
 					break;
                 case '?':
-                    $peek = null;
-                    $i = $this->ptr + 1;
-                    $futile_tokens = array_merge($this->ignoreFutileTokens, [T_STRING, T_ARRAY, T_NAME_RELATIVE, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED]);
-                    while (1) {
-                        if (count($this->tkns) <= ++$i) {
-                            break;
-                        }
-                        $mpeek = $this->tkns[$i];
-                        if (isset($mpeek[0]) && ! in_array($mpeek[0], $futile_tokens)) {
-                            $peek = $mpeek[0];
-                            break;
-                        }
-                    }
-                    if ($this->rightTokenIs([T_STRING, T_ARRAY, T_NAME_RELATIVE, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED]) && $peek === T_VARIABLE) {
-                        $type = '?';
+                    $tidx = $this->rightUsefulTokenIdx();
+                    if (in_array($this->tkns[$tidx][0], [T_STRING, T_ARRAY, T_NAME_RELATIVE, T_NAME_QUALIFIED, T_NAME_FULLY_QUALIFIED]) && (! isset($this->tkns[$tidx + 1]) || $this->tkns[$tidx + 1][0] !== '(')) {
+                       $this->tkns[$tidx][1] = $text . $this->tkns[$tidx][1];
                     } else {
                         $this->appendCode($text);
                     }
@@ -8316,6 +8332,8 @@ EOT;
             $isAttribute = false;
             $quote_stack = false;
 
+            $max = count($this->tkns);
+
 			while (list($index, $token) = $this->each($this->tkns)) {
 				list($id, $text) = $this->getToken($token);
 				$this->ptr = $index;;
@@ -8338,9 +8356,19 @@ EOT;
                     if ($this->hasLnAfter() && $this->rightTokenIs(ST_CURLY_CLOSE) && ! $isMatch) {
                         $this->appendCode(ST_SEMI_COLON);
                     }
+                    else
                     if ($this->hasLnAfter() && $this->rightTokenIs([T_COMMENT, T_DOC_COMMENT]) && ! $isMatch) {
                         $this->appendCode(ST_SEMI_COLON);
                     }
+                    else
+                    if ($this->rightUsefulTokenIs(T_VARIABLE) && $this->rightTokenIs([T_COMMENT, T_DOC_COMMENT])) {
+                        $this->appendCode(ST_SEMI_COLON);
+                    }
+                    else
+                    if ($this->ptr === $max - 2 && $this->rightTokenIs([T_COMMENT, T_DOC_COMMENT])) {
+                        $this->appendCode(ST_SEMI_COLON);
+                    }
+
                     break;
 
                 case T_ATTRIBUTE:
@@ -8392,6 +8420,9 @@ EOT;
                             $this->appendCode(ST_SEMI_COLON);
                             break;
                         }
+                    } else
+                    if ($this->rightUsefulTokenIs(T_VARIABLE) && $this->rightTokenIs([T_COMMENT, T_DOC_COMMENT])) {
+                        $this->appendCode(ST_SEMI_COLON);
                     }
 					break;
 
@@ -8509,6 +8540,19 @@ EOT;
 						$this->appendCode($text);
 						break;
 					}
+
+                    if ($this->rightUsefulTokenIs([
+                            ST_BITWISE_OR, ST_BITWISE_XOR, ST_CONCAT, ST_DIVIDE, ST_EQUAL, ST_MINUS, ST_PLUS, ST_QUESTION,
+                            ST_TIMES, T_AND_EQUAL, T_BOOLEAN_AND, T_BOOLEAN_OR, T_COALESCE, T_COALESCE_EQUAL, T_CONCAT_EQUAL,
+                            T_DIV_EQUAL, T_IS_EQUAL, T_IS_GREATER_OR_EQUAL, T_IS_IDENTICAL, T_IS_NOT_EQUAL,
+                            T_IS_NOT_IDENTICAL, T_IS_SMALLER_OR_EQUAL, T_LOGICAL_AND, T_LOGICAL_OR, T_LOGICAL_XOR, T_MOD_EQUAL,
+                            T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_POW, T_POW_EQUAL, T_SL, T_SL_EQUAL, T_SPACESHIP, T_SR_EQUAL,
+                            T_XOR_EQUAL, ST_IS_GREATER, ST_IS_SMALLER
+                    ])) {
+                        $this->appendCode($text);
+                        break;
+                    }
+
 					if ($touchedSingleColon && $ternary) {
 						$touchedSingleColon = false;
 						--$ternary;
@@ -9734,7 +9778,10 @@ EOT;
 				case ST_COLON:
 				case ST_QUESTION:
 					if ($this->hasLnBefore()) {
-						$this->appendCode($this->getIndent(+1));
+                        // is it an argument?
+                        if (! $this->leftUsefulTokenIs(ST_COMMA) && ! $this->leftUsefulTokenIs(ST_PARENTHESES_OPEN)) {
+						  $this->appendCode($this->getIndent(+1));
+                        }
 					}
 					$this->appendCode($text);
 					break;
@@ -10653,11 +10700,22 @@ EOT;
 			}
 
 			$return = '';
+            $i = count(array_filter($newTokens, function($token) {
+                return $token instanceof SurrogateToken;
+            }));
+
 			foreach ($newTokens as $idx => $token) {
 				if ($token instanceof SurrogateToken) {
 					$return .= array_shift($useStack);
 					if ($blanklineAfterUseBlock && !isset($useStack[0])) {
-						$return .= $this->newLine;
+                        $i--;
+                        if ($i > 0) {
+                            $return .= $this->newLine;
+                        } else { // last subrogate token. we need one an just one return after it
+                            if (isset($newTokens[$idx + 1]) && substr_count($newTokens[$idx + 1][1], $this->newLine) === 1) {
+                                $return .= $this->newLine;
+                            }
+                        }
 					}
 					continue;
 				} elseif (T_WHITESPACE == $token[0] && isset($newTokens[$idx - 1], $newTokens[$idx + 1]) && $newTokens[$idx - 1] instanceof SurrogateToken && $newTokens[$idx + 1] instanceof SurrogateToken) {
@@ -13204,7 +13262,7 @@ EOT;
 				switch ($id) {
 				case T_TRAIT:
 				case T_CLASS:
-					if ($this->leftUsefulTokenIs(T_DOUBLE_COLON)) {
+					if ($this->leftUsefulTokenIs(T_DOUBLE_COLON) || $this->rightUsefulTokenIs(ST_COLON)) {
 						$this->appendCode($text);
 						break;
 					}
