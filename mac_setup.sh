@@ -2,7 +2,7 @@
 
 # Homebrewのインストール.
 if ! type brew >/dev/null 2>&1; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     # パスを明示的に通す
     if [ -d /opt/homebrew/bin ]; then
         export PATH="/opt/homebrew/bin:$PATH"
