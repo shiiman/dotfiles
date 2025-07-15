@@ -3,7 +3,12 @@
 # Homebrewのインストール.
 if ! type brew >/dev/null 2>&1; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    # Apple Silicon (M1/M2) と Intel Mac の両方に対応
+    if [ -d /opt/homebrew/bin ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [ -d /usr/local/bin ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
 fi
 
 # GitHubから設定ファイルをclone.
