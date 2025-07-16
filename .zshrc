@@ -48,6 +48,22 @@ if [ -e "$HOME/.anyenv/envs/nodenv" ]; then
     fi
 fi
 
+if [ -e "$HOME/.anyenv/envs/pyenv" ]; then
+    export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    if command -v pyenv 1>/dev/null 2>&1; then
+        eval "$(pyenv init -)"
+    fi
+fi
+
+if [ -e "$HOME/.anyenv/envs/tfenv" ]; then
+    export TFENV_ROOT="$HOME/.anyenv/envs/tfenv"
+    export PATH="$TFENV_ROOT/bin:$PATH"
+    if command -v tfenv 1>/dev/null 2>&1; then
+        eval "$(tfenv init -)"
+    fi
+fi
+
 if [ -e "$HOME/.anyenv/envs/goenv" ]; then
     export GOENV_ROOT="$HOME/.anyenv/envs/goenv"
     export PATH="$GOENV_ROOT/bin:$PATH"

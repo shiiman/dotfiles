@@ -22,6 +22,8 @@ anyenv install phpenv
 anyenv install rbenv
 anyenv install nodenv
 anyenv install goenv
+anyenv install pyenv
+anyenv install tfenv
 
 # シェルの再読込
 source /tmp/anyenv.setting
@@ -32,31 +34,31 @@ if [[ $(sw_vers) == *"10.14."* ]]; then
 fi
 
 # 各言語をインストール
-PHP_BUILD_CONFIGURE_OPTS="--disable-fpm \
-                          --disable-phpdbg \
-                          --enable-debug \
-                          --with-openssl=$(brew --prefix openssl) \
-                          --with-bz2=$(brew --prefix bzip2) \
-                          --with-iconv=$(brew --prefix libiconv) \
-                          --with-icu-dir=$(brew --prefix icu4c) \
-                          --with-tidy=$(brew --prefix tidy-html5) \
-                          --with-libzip=$(brew --prefix libzip) \
-                          --with-libxml-dir=$(brew --prefix libxml2) \
-                          --with-zlib \
-                          --with-zlib-dir=$(brew --prefix zlib) \
-                          --with-libedit=$(brew --prefix libedit) \
-                          --with-external-pcre=$(brew --prefix pcre2)" \
-PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j$(sysctl -n hw.logicalcpu_max)" \
-  phpenv install --ini development 8.1.7
-rbenv install 3.1.2
-nodenv install 23.11.0
-goenv install 1.24.2
+# PHP_BUILD_CONFIGURE_OPTS="--disable-fpm \
+#                           --disable-phpdbg \
+#                           --enable-debug \
+#                           --with-openssl=$(brew --prefix openssl) \
+#                           --with-bz2=$(brew --prefix bzip2) \
+#                           --with-iconv=$(brew --prefix libiconv) \
+#                           --with-icu-dir=$(brew --prefix icu4c) \
+#                           --with-tidy=$(brew --prefix tidy-html5) \
+#                           --with-libzip=$(brew --prefix libzip) \
+#                           --with-libxml-dir=$(brew --prefix libxml2) \
+#                           --with-zlib \
+#                           --with-zlib-dir=$(brew --prefix zlib) \
+#                           --with-libedit=$(brew --prefix libedit) \
+#                           --with-external-pcre=$(brew --prefix pcre2)" \
+# PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j$(sysctl -n hw.logicalcpu_max)" \
+#   phpenv install --ini development 8.1.7
+# rbenv install 3.1.2
+# nodenv install 23.11.0
+# goenv install 1.24.2
 
 # 各言語のバージョン反映
-phpenv global 8.1.7
-rbenv global 3.1.2
-nodenv global 23.11.0
-goenv global 1.24.2
+# phpenv global 8.1.7
+# rbenv global 3.1.2
+# nodenv global 23.11.0
+# goenv global 1.24.2
 
 # シェルの再読込
 source /tmp/anyenv.setting
