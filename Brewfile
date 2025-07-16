@@ -97,6 +97,7 @@ cask "google-japanese-ime"
 cask "snowflake-snowsql"
 
 # masはApp Storeのログインしてからでないとエラーになる
+mas "Keynote", id: 409183694
 mas "LINE", id: 539883307
 mas "Windows App", id: 1295203466
 
