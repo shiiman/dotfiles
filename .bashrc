@@ -66,6 +66,8 @@ fi
 #export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 ###########################################################
 # itermの設定                                              #
 ###########################################################
@@ -128,9 +130,9 @@ if type vim >/dev/null 2>&1; then
     alias vi='vim'
 fi
 
-if type ag >/dev/null 2>&1; then
-    alias grep='ag'
-fi
+# if type ag >/dev/null 2>&1; then
+#     alias grep='ag'
+# fi
 
 alias k='kubectl'
 

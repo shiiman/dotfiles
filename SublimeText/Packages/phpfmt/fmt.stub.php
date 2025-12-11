@@ -1591,6 +1591,11 @@ namespace {
         define("T_AMPERSAND_NOT_FOLLOWED_BY_VAR_OR_VARARG", "&");
     }
 
+    // 8.5
+    if (!defined("T_PIPE")) {
+        define("T_PIPE", "|>");
+    }
+
 	abstract class FormatterPass {
 		protected $cache = [];
 
@@ -2627,6 +2632,7 @@ namespace {
 
 			'EliminateDuplicatedEmptyLines' => false,
 			'IndentTernaryConditions' => false,
+            'IndentPipeOperator' => false,
 			'ReindentComments' => false,
 			'ReindentEqual' => false,
 			'Reindent' => false,
@@ -5058,6 +5064,10 @@ EOT;
                     }
                     break;
 
+                case T_PIPE:
+                    $this->appendCode($text . " ");
+                    break;
+
                 case T_PRINT:
                     $this->appendCode($text . $this->getSpace(!$this->rightTokenIs([ST_PARENTHESES_OPEN])));
                     break;
@@ -6875,17 +6885,33 @@ EOT;
     final class WP {
         public static function decorate(CodeFormatter $fmt) {
             $fmt->enablePass('PSR2KeywordsLowerCase');
-            $fmt->enablePass('PSR2IndentWithSpace');
+            $fmt->disablePass('PSR2IndentWithSpace');
             $fmt->enablePass('PSR2LnAfterNamespace');
-            $fmt->enablePass('PSR2CurlyOpenNextLine');
+            $fmt->disablePass('PSR2CurlyOpenNextLine');
             $fmt->enablePass('PSR2ModifierVisibilityStaticOrder');
             $fmt->enablePass('PSR2SingleEmptyLineAndStripClosingTag');
             $fmt->enablePass('ReindentSwitchBlocks');
             $fmt->enablePass('ReindentEnumBlocks');
             $fmt->disablePass('ReindentComments');
-            $fmt->disablePass('StripNewlineWithinClassBody');
+            $fmt->enablePass('StripSpaceWithinControlStructures');
             $fmt->enablePass('WPResizeSpaces');
             $fmt->disablePass('ResizeSpaces');
+            $fmt->disablePass('EncapsulateNamespaces');
+            $fmt->enablePass('SpaceAroundControlStructures');
+            $fmt->enablePass('SpaceAfterExclamationMark');
+            $fmt->enablePass('SpaceAroundParentheses');
+            $fmt->enablePass('LongArray');
+            $fmt->disablePass('ShortArray');
+            $fmt->enablePass('MergeElseIf');
+            $fmt->disablePass('SplitElseIf');
+            $fmt->enablePass('ExtraCommaInArray');
+            $fmt->disablePass('StripExtraCommaInArray');
+            $fmt->enablePass('YodaComparisons');
+            $fmt->enablePass('AddMissingParentheses');
+            $fmt->enablePass('AutoPreincrement');
+            $fmt->enablePass('AlignGroupDoubleArrow');
+            $fmt->disablePass('AlignDoubleArrow');
+            $fmt->enablePass('AlignEquals');
         }
     }
 
@@ -7237,6 +7263,7 @@ EOT;
 
 				case ST_PARENTHESES_OPEN:
 				case ST_BRACKET_OPEN:
+				case ST_CURLY_OPEN:
 					++$levelCounter;
 					if (!isset($levelEntranceCounter[$levelCounter])) {
 						$levelEntranceCounter[$levelCounter] = 0;
@@ -7254,6 +7281,7 @@ EOT;
 
 				case ST_PARENTHESES_CLOSE:
 				case ST_BRACKET_CLOSE:
+				case ST_CURLY_CLOSE:
 					--$levelCounter;
 					$this->appendCode($text);
 					break;
@@ -7542,6 +7570,28 @@ EOT;
                             $blockCountEquals[$blockCounter] = 0;
                         }
                         break;
+                    case T_WHILE:
+                    case T_FOR:
+                    case T_FOREACH:
+                    case T_IF:
+                    case T_ELSEIF:
+                    case T_ELSE:
+                    case T_SWITCH:
+                    case T_TRY:
+                    case T_CATCH:
+                    case T_FINALLY:
+                    case T_FUNCTION:
+                    case T_CLASS:
+                    case ST_CURLY_OPEN:
+                        // Start a new block when entering control structures
+                        $blockCounter++;
+                        $blockCountEquals[$blockCounter] = 0;
+                        break;
+                    case ST_CURLY_CLOSE:
+                        // Start a new block when exiting control structures
+                        $blockCounter++;
+                        $blockCountEquals[$blockCounter] = 0;
+                        break;
                     case ST_EQUAL:
                     case T_PLUS_EQUAL:
                     case T_MINUS_EQUAL:
@@ -7580,18 +7630,43 @@ EOT;
                         }
                         $this->appendCode($text);
                         break;
+                    case T_WHILE:
+                    case T_FOR:
+                    case T_FOREACH:
+                    case T_IF:
+                    case T_ELSEIF:
+                    case T_ELSE:
+                    case T_SWITCH:
+                    case T_TRY:
+                    case T_CATCH:
+                    case T_FINALLY:
+                        // Start a new block when entering control structures
+                        $blockCounter++;
+                        $this->appendCode($text);
+                        break;
                     case T_FUNCTION:
                         ++$contextCounter;
+                        // Start a new block when entering function
+                        $blockCounter++;
+                        $this->appendCode($text);
+                        break;
+                    case T_CLASS:
+                        // Start a new block when entering class
+                        $blockCounter++;
                         $this->appendCode($text);
                         break;
 
                     case ST_CURLY_OPEN:
+                        // Start a new block when entering curly block
+                        $blockCounter++;
                         $this->appendCode($text);
                         $block = $this->walkAndAccumulateCurlyBlock($this->tkns);
                         $aligner = new self();
                         $this->appendCode(
                             str_replace(self::OPEN_TAG, '', $aligner->format(self::OPEN_TAG . $block))
                         );
+                        // Start a new block when exiting curly block
+                        $blockCounter++;
                         break;
 
                     case ST_PARENTHESES_OPEN:
@@ -7815,7 +7890,13 @@ EOT;
 
                     $prevSpace = '';
                     if ($prevText !== null) {
-					   $prevSpace = substr(strrchr($prevText, $this->newLine), 1);
+					   $lastNewlineText = strrchr($prevText, $this->newLine);
+                       if ($lastNewlineText !== false) {
+                           $prevSpace = substr($lastNewlineText, 1);
+                       } elseif (preg_match('/^\s+$/', $prevText)) {
+                           // If prevText contains only whitespace, use it as prevSpace
+                           $prevSpace = $prevText;
+                       }
                     }
 					$skipPadLeft = false;
 					if (rtrim($prevSpace) == $prevSpace) {
@@ -8547,7 +8628,7 @@ EOT;
                             T_DIV_EQUAL, T_IS_EQUAL, T_IS_GREATER_OR_EQUAL, T_IS_IDENTICAL, T_IS_NOT_EQUAL,
                             T_IS_NOT_IDENTICAL, T_IS_SMALLER_OR_EQUAL, T_LOGICAL_AND, T_LOGICAL_OR, T_LOGICAL_XOR, T_MOD_EQUAL,
                             T_MUL_EQUAL, T_OR_EQUAL, T_PLUS_EQUAL, T_POW, T_POW_EQUAL, T_SL, T_SL_EQUAL, T_SPACESHIP, T_SR_EQUAL,
-                            T_XOR_EQUAL, ST_IS_GREATER, ST_IS_SMALLER
+                            T_XOR_EQUAL, ST_IS_GREATER, ST_IS_SMALLER, T_PIPE
                     ])) {
                         $this->appendCode($text);
                         break;
@@ -11301,15 +11382,49 @@ EOT;
 					$this->appendCode($text);
 					$this->printUntil(ST_PARENTHESES_OPEN);
 					$this->printBlock(ST_PARENTHESES_OPEN, ST_PARENTHESES_CLOSE);
-					$this->printAndStopAt(ST_CURLY_OPEN);
-					if ($this->rightTokenIs(ST_CURLY_CLOSE)) {
+					
+					// Look ahead to check if function is empty before deciding how to format
+					$lookAheadPtr = $this->ptr;
+					$isEmptyFunction = false;
+					
+					// Walk forward to find ST_CURLY_OPEN
+					while ($lookAheadPtr < count($this->tkns)) {
+						$lookAheadPtr++;
+						if (!isset($this->tkns[$lookAheadPtr])) break;
+						
+						list($lookId, $lookText) = $this->getToken($this->tkns[$lookAheadPtr]);
+						if ($lookId == ST_CURLY_OPEN) {
+							// Found opening brace, now check if next non-whitespace token is closing brace
+							$nextPtr = $lookAheadPtr;
+							while ($nextPtr < count($this->tkns)) {
+								$nextPtr++;
+								if (!isset($this->tkns[$nextPtr])) break;
+								
+								list($nextId, $nextText) = $this->getToken($this->tkns[$nextPtr]);
+								if ($nextId == T_WHITESPACE) continue; // Skip whitespace
+								
+								if ($nextId == ST_CURLY_CLOSE) {
+									$isEmptyFunction = true;
+								}
+								break;
+							}
+							break;
+						}
+					}
+					
+					if ($isEmptyFunction) {
+						// Format as single line for empty functions
+						$this->printAndStopAt(ST_CURLY_OPEN);
 						$this->rtrimAndAppendCode($this->getSpace() . ST_CURLY_OPEN);
-						$this->printAndStopAt(ST_CURLY_CLOSE);
+						$this->walkUntil(ST_CURLY_CLOSE);
 						$this->rtrimAndAppendCode(ST_CURLY_CLOSE);
 						break;
+					} else {
+						// For non-empty functions, preserve original formatting
+						$this->printAndStopAt(ST_CURLY_OPEN);
+						prev($this->tkns);
+						break;
 					}
-					prev($this->tkns);
-					break;
 				default:
 					$this->appendCode($text);
 				}
@@ -14906,6 +15021,57 @@ EOT;
     // To:
     if ( true ) foo(); foo( $a );
     ';
+        }
+    }
+
+    final class IndentPipeOperator extends AdditionalPass {
+        public function candidate($source, $foundTokens) {
+            if (isset($foundTokens[T_PIPE])) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public function format($source) {
+            $this->tkns = token_get_all($source);
+            $this->code = '';
+            while (list($index, $token) = $this->each($this->tkns)) {
+                list($id, $text) = $this->getToken($token);
+                $this->ptr = $index;
+                switch ($id) {
+                    case T_PIPE:
+                        if ($this->hasLnBefore()) {
+                            $this->appendCode($this->getIndent(+1));
+                        }
+                        $this->appendCode($text);
+                        break;
+                    default:
+                        $this->appendCode($text);
+                }
+            }
+
+            return $this->code;
+        }
+
+        public function getDescription() {
+            return 'Applies indentation to the pipe operator.';
+        }
+
+        public function getExample() {
+            return <<<'EOT'
+<?php
+$a =  "Hello World"
+|> 'strtoupper'
+|> str_shuffle(...);
+?>
+    to
+<?php
+$a =  "Hello World"
+    |> 'strtoupper'
+    |> str_shuffle(...);
+?>
+EOT;
         }
     }
 }

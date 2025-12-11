@@ -9,12 +9,6 @@ export XDG_CONFIG_HOME=~/.config
 if [ -e "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
-# The next line enables shell command completion for gcloud.
-if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
-
 fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
 fpath=(~/.zsh/completion $fpath)
 
@@ -79,6 +73,8 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+
+export PATH="$HOME/.local/bin:$PATH"
 
 ###########################################################
 # zplugの設定                                              #
@@ -219,9 +215,9 @@ if type vim >/dev/null 2>&1; then
     alias vi='vim'
 fi
 
-if type ag >/dev/null 2>&1; then
-    alias grep='ag'
-fi
+# if type ag >/dev/null 2>&1; then
+#     alias grep='ag'
+# fi
 
 alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 alias k='kubectl'
@@ -414,3 +410,9 @@ bindkey -r '^O'
 # export PROTO_HOME="$HOME/.proto"
 # export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
 # . "$HOME/.local/bin/env"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'; fi
