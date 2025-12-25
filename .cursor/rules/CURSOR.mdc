@@ -1,0 +1,141 @@
+# Cursor Rules
+
+This document defines **mandatory rules and constraints** for Cursor when working on the dotfiles project.
+
+---
+
+## Project Overview
+
+- **Project Name**: dotfiles
+- **Purpose**: macOS 開発環境の設定ファイル管理リポジトリ
+- **Tech Stack**: Bash, Zsh, Homebrew, anyenv
+- **Details**: Refer to [README.md](../../README.md)
+
+---
+
+## Output Language
+
+- **Always respond in Japanese.**
+- Proper nouns, API names, and technical terms may remain in English.
+- Write comments in Japanese.
+- **Do not switch to English unless explicitly requested by the user.**
+- Author rules/instructions for AI agents in English to keep wording consistent across rule files.
+
+---
+
+## Strict Prohibitions (Behavior Constraints)
+
+1. **Do not hardcode sensitive information.**
+   - Passwords, API keys, and tokens must be managed via environment variables.
+   - Never commit `.env` files or files containing secrets.
+
+2. **Do not leave debugging code.**
+   - Remove all `echo` or `printf` debug output before committing.
+   - Do not leave commented-out code blocks.
+
+3. **Preserve existing shell compatibility.**
+   - `.bashrc` changes must work with Bash 3.2+ (macOS default).
+   - `.zshrc` changes must work with Zsh 5.0+.
+   - Prefer POSIX-compatible syntax when possible.
+
+4. **Do not modify system files.**
+   - Only edit files within this repository.
+   - Use symlinks to deploy configurations.
+
+---
+
+## Core Principles
+
+1. **Keep Configurations Simple**
+   - Avoid complex shell scripts when simpler alternatives exist.
+   - Document any non-obvious configurations with comments.
+
+2. **Maintain Cross-Shell Compatibility**
+   - Test changes in both Bash and Zsh when applicable.
+   - Use conditional blocks for shell-specific features.
+
+3. **Follow Shell Best Practices**
+   - Use `shellcheck` for linting shell scripts.
+   - Quote variables to prevent word splitting.
+   - Use `set -e` for scripts that should fail on errors.
+
+4. **Document Changes**
+   - Add comments explaining why configurations exist.
+   - Update README.md for significant changes.
+
+---
+
+## Development Support Commands
+
+以下のSlash Commandsで開発効率を向上できます。
+
+### Code Review
+
+```bash
+/review            # 変更内容の詳細レビュー
+/review --security # セキュリティ観点のみ
+```
+
+### Lint
+
+```bash
+/lint              # シェルスクリプトをlint（shellcheck）
+/lint --check      # チェックのみ
+```
+
+### Git Operations
+
+```bash
+/commit            # 変更をコミット
+/pr                # Pull Request作成
+```
+
+### Setup
+
+```bash
+/setup             # 開発環境セットアップ
+/setup --check     # 状態確認のみ
+```
+
+詳細は各コマンドファイル（`.claude/commands/`）を参照してください。
+
+---
+
+## Review Guidelines
+
+### Review Perspectives
+
+1. **Security**
+   - Hardcoded credentials (passwords, API keys, tokens)
+   - Insecure file permissions
+   - Command injection vulnerabilities
+   - Sensitive data exposure
+
+2. **Shell Best Practices**
+   - Proper variable quoting
+   - shellcheck compliance
+   - Error handling
+   - POSIX compatibility
+
+3. **Maintainability**
+   - Clear comments
+   - Consistent style
+   - No dead code
+
+### Severity Levels
+
+- **Critical**: Security vulnerabilities, credential exposure
+- **High**: Scripts that may fail silently, compatibility issues
+- **Medium**: Code quality issues, missing error handling
+- **Low**: Style violations, improvement suggestions
+
+---
+
+## References
+
+For detailed rules and guidelines, refer to:
+
+- **Project Overview / Quick Start**: [README.md](../../README.md)
+- **Claude Code Guidelines**: [CLAUDE.md](../../CLAUDE.md)
+- **Agent Guidelines**: [AGENTS.md](../../AGENTS.md)
+- **Gemini Guidelines**: [GEMINI.md](../../GEMINI.md)

@@ -1,16 +1,20 @@
 #!/bin/bash
+set -e
 
 # anyenvのインストール.
 if [ ! -e ~/.anyenv ]; then
   git clone https://github.com/anyenv/anyenv ~/.anyenv
   mkdir -p ~/.anyenv/plugins
   git clone https://github.com/znz/anyenv-update.git ~/.anyenv/plugins/anyenv-update
-  git clone git://github.com/aereal/anyenv-exec.git ~/.anyenv/plugins/anyenv-exe
+  git clone https://github.com/aereal/anyenv-exec.git ~/.anyenv/plugins/anyenv-exec
   git clone https://github.com/znz/anyenv-git.git ~/.anyenv/plugins/anyenv-git
 fi
 
-echo "export PATH=\"$HOME/.anyenv/bin:\$PATH\"" >>/tmp/anyenv.setting
-echo "eval \"\$(anyenv init -)\"" >>/tmp/anyenv.setting
+# 一時ファイルを初期化して設定を書き込み
+cat > /tmp/anyenv.setting << 'EOF'
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+EOF
 
 # シェルの再読込
 source /tmp/anyenv.setting

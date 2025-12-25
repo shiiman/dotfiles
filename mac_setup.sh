@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Homebrewのインストール.
 if ! type brew >/dev/null 2>&1; then
@@ -26,7 +27,7 @@ fi
 git clone https://github.com/shiiman/dotfiles.git ~/dotfiles
 
 # 設定ファイルフォルダに移動.
-cd ~/dotfiles
+cd ~/dotfiles || { echo "Failed to cd to ~/dotfiles"; exit 1; }
 # ローカルリポジトリにユーザのメールアドレス登録.
 git config user.email hsnonsense5@gmail.com
 

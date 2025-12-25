@@ -1,0 +1,140 @@
+# GEMINI.md
+
+This file provides guidance to Gemini when working with code in this repository.
+
+---
+
+## Project Overview
+
+- **Project Name**: dotfiles
+- **Purpose**: macOS 開発環境の設定ファイル管理リポジトリ
+- **Tech Stack**:
+  - Shell: Bash, Zsh
+  - Package Manager: Homebrew
+  - Version Manager: anyenv (nodenv, rbenv, pyenv)
+  - Terminal: iTerm2
+  - Editor: VSCode, Sublime Text, Vim
+- **Details**: Refer to [README.md](README.md)
+
+---
+
+## Output Language
+
+- **Always respond in Japanese.**
+- Proper nouns, API names, and technical terms may remain in English.
+- Write comments in Japanese.
+- **Do not switch to English unless explicitly requested by the user.**
+- Author rules/instructions for AI agents in English to maintain consistency across rule files.
+
+---
+
+## Strict Prohibitions (Behavior Constraints)
+
+1. **Do not hardcode sensitive information.**
+   - Passwords, API keys, and tokens must be managed via environment variables.
+   - Never commit `.env` files or files containing secrets.
+
+2. **Do not leave debugging code.**
+   - Remove all `echo` or `printf` debug output before committing.
+   - Do not leave commented-out code blocks.
+
+3. **Preserve existing shell compatibility.**
+   - `.bashrc` changes must work with Bash 3.2+ (macOS default).
+   - `.zshrc` changes must work with Zsh 5.0+.
+   - Prefer POSIX-compatible syntax when possible.
+
+4. **Do not modify system files.**
+   - Only edit files within this repository.
+   - Use symlinks to deploy configurations.
+
+---
+
+## Essential Commands
+
+### Dotfiles Setup
+
+```bash
+./dotfile_setup.sh           # Create symlinks for dotfiles to home directory
+```
+
+### macOS Setup
+
+```bash
+./mac_setup.sh               # Run full macOS setup (Homebrew, apps, settings)
+brew bundle                  # Install packages from Brewfile
+brew bundle --file=Brewfile  # Explicit Brewfile path
+```
+
+### Development Environment
+
+```bash
+./anyenv_setup.sh            # Install anyenv and language version managers
+```
+
+### Shell Configuration
+
+```bash
+source ~/.bashrc             # Reload Bash configuration
+source ~/.zshrc              # Reload Zsh configuration
+```
+
+---
+
+## Core Principles
+
+1. **Keep Configurations Simple**
+   - Avoid complex shell scripts when simpler alternatives exist.
+   - Document any non-obvious configurations with comments.
+
+2. **Maintain Cross-Shell Compatibility**
+   - Test changes in both Bash and Zsh when applicable.
+   - Use conditional blocks for shell-specific features.
+
+3. **Follow Shell Best Practices**
+   - Use `shellcheck` for linting shell scripts.
+   - Quote variables to prevent word splitting.
+   - Use `set -e` for scripts that should fail on errors.
+
+4. **Document Changes**
+   - Add comments explaining why configurations exist.
+   - Update README.md for significant changes.
+
+---
+
+## Review Guidelines
+
+### Review Perspectives
+
+1. **Security**
+   - Hardcoded credentials (passwords, API keys, tokens)
+   - Insecure file permissions
+   - Command injection vulnerabilities
+   - Sensitive data exposure in logs
+
+2. **Shell Best Practices**
+   - Proper variable quoting
+   - Use of shellcheck-compliant patterns
+   - Error handling with `set -e` or explicit checks
+   - POSIX compatibility where appropriate
+
+3. **Maintainability**
+   - Clear and descriptive comments
+   - Consistent coding style
+   - No redundant or dead code
+
+### Severity Levels
+
+- **Critical**: Security vulnerabilities, credential exposure
+- **High**: Scripts that may fail silently, compatibility issues
+- **Medium**: Code quality issues, missing error handling
+- **Low**: Style violations, improvement suggestions
+
+---
+
+## References
+
+For detailed rules and guidelines, refer to:
+
+- **Project Overview / Quick Start**: [README.md](README.md)
+- **Claude Code Guidelines**: [CLAUDE.md](CLAUDE.md)
+- **Agent Guidelines**: [AGENTS.md](AGENTS.md)
