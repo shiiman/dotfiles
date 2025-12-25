@@ -1,7 +1,7 @@
 [core]
 excludesfile = ~/.gitignore_global
 quotepath = false
-editor = /opt/homebrew/bin/vim
+editor = vim
 [difftool "sourcetree"]
 cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 path =
@@ -24,7 +24,7 @@ branch = auto
 [http]
 sslVerify = true
 postBuffer = 524288000
-[commit]
-template = ~/.stCommitMsg
 [pull]
 rebase = false
+[init]
+defaultBranch = main

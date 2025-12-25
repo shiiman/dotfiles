@@ -59,6 +59,7 @@ curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.s
 ```
 
 このスクリプトは以下を実行します：
+
 - Homebrew のインストール
 - Brewfile からパッケージをインストール
 - dotfile のシンボリックリンク作成

@@ -9,14 +9,12 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-# mise - 言語バージョン管理 (anyenv/asdfの後継)
+# mise - 言語バージョン管理
 if command -v mise >/dev/null 2>&1; then
     eval "$(mise activate bash)"
 fi
 
-#export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 export PATH="$HOME/.local/bin:$PATH"
 
 ###########################################################
@@ -79,16 +77,7 @@ if type vim >/dev/null 2>&1; then
     alias vi='vim'
 fi
 
-# if type ag >/dev/null 2>&1; then
-#     alias grep='ag'
-# fi
-
 alias k='kubectl'
-
-# # kubesec補完
-# if type kubesec >/dev/null 2>&1; then
-#     source <(kubesec completion bash) >& /dev/null
-# fi
 
 # helm補完
 if type helm >/dev/null 2>&1; then

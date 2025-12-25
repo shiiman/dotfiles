@@ -17,50 +17,12 @@ if command -v mise >/dev/null 2>&1; then
     eval "$(mise activate zsh)"
 fi
 
-#export PATH="/usr/local/opt/bzip2/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
 
 export PATH="$HOME/.local/bin:$PATH"
-
-###########################################################
-# zplugの設定                                              #
-###########################################################
-
-# # pathの設定
-# if [ -z "${SSHHOME+x}" ]; then
-#     export ZPLUG_HOME=~/.zplug
-# else
-#     export ZPLUG_HOME=$SSHHOME/.zplug
-# fi
-
-# if [ ! -e $ZPLUG_HOME ]; then
-#     # curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-#     git clone https://github.com/zplug/zplug $ZPLUG_HOME
-# fi
-
-# source $ZPLUG_HOME/init.zsh
-
-# # プラグインを定義する
-# zplug 'zsh-users/zsh-autosuggestions'
-# zplug 'zsh-users/zsh-completions'
-# zplug 'zsh-users/zsh-syntax-highlighting', defer:2
-# zplug 'zsh-users/zsh-history-substring-search'
-# zplug 'chrissicool/zsh-256color'
-# zplug 'b4b4r07/enhancd', use:init.sh
-# zplug "tcnksm/docker-alias", use:zshrc
-
-# # インストールする
-# if ! zplug check --verbose; then
-#   printf 'Install? [y/N]: '
-#   if read -q; then
-#     echo; zplug install
-#   fi
-# fi
-
-# zplug load --verbose
 
 ###########################################################
 # zinitの設定                                              #
@@ -99,7 +61,6 @@ zinit light 'chrissicool/zsh-256color'
 
 zinit ice wait'1' lucid
 zinit light "zdharma-continuum/fast-syntax-highlighting"
-#zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
 
 ###########################################################
 # itermの設定                                              #
@@ -163,10 +124,6 @@ alias la='ls -a'
 if type vim >/dev/null 2>&1; then
     alias vi='vim'
 fi
-
-# if type ag >/dev/null 2>&1; then
-#     alias grep='ag'
-# fi
 
 alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 alias k='kubectl'
@@ -260,11 +217,6 @@ bindkey "^[[Z" reverse-menu-complete
 bindkey "^p" history-beginning-search-backward
 bindkey "^n" history-beginning-search-forward
 
-# # kubesec補完
-# if type kubesec >/dev/null 2>&1; then
-#     source <(kubesec completion zsh) >& /dev/null
-# fi
-
 # helm補完
 if type helm >/dev/null 2>&1; then
     source <(helm completion zsh) >&/dev/null
@@ -354,11 +306,6 @@ setopt noclobber
 # キーバインド無効
 bindkey -r '^J'
 bindkey -r '^O'
-
-# proto
-# export PROTO_HOME="$HOME/.proto"
-# export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
-# . "$HOME/.local/bin/env"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'; fi

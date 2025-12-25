@@ -1,10 +1,10 @@
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
-#IntelliJ IDEA  Directory-based project format:
+# IntelliJ IDEA
 .idea
 
-#VScode IDEA  Directory-based project format:
+# VSCode
 .vscode
 
 # OSX
@@ -84,3 +84,11 @@ Package Control.ca-certs/
 c2u_tmp/
 ColorPicker/
 Color Highlighter/themes/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
