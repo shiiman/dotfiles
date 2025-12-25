@@ -3,69 +3,18 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/pear/bin:$PATH"
-export PATH="$HOME/.anyenv/bin:$PATH"
 export XDG_CONFIG_HOME=~/.config
 
 if [ -e "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
-fpath=(~/.config/gcloud/gcloud-zsh-completion/src $fpath)
 fpath=(~/.zsh/completion $fpath)
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-if [ -d "$HOME/.anyenv" ]; then
-    eval "$(anyenv init -)"
-fi
-
-if [ -e "$HOME/.anyenv/envs/phpenv" ]; then
-    export PHPENV_ROOT="$HOME/.anyenv/envs/phpenv"
-    export PATH="$PHPENV_ROOT/bin:$PATH"
-    if command -v phpenv 1>/dev/null 2>&1; then
-        eval "$(phpenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/rbenv" ]; then
-    export RBENV_ROOT="$HOME/.anyenv/envs/rbenv"
-    export PATH="$RBENV_ROOT/bin:$PATH"
-    if command -v rbenv 1>/dev/null 2>&1; then
-        eval "$(rbenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/nodenv" ]; then
-    export NODENV_ROOT="$HOME/.anyenv/envs/nodenv"
-    export PATH="$NODENV_ROOT/bin:$PATH"
-    if command -v nodenv 1>/dev/null 2>&1; then
-        eval "$(nodenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/pyenv" ]; then
-    export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/tfenv" ]; then
-    export TFENV_ROOT="$HOME/.anyenv/envs/tfenv"
-    export PATH="$TFENV_ROOT/bin:$PATH"
-    if command -v tfenv 1>/dev/null 2>&1; then
-        eval "$(tfenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/goenv" ]; then
-    export GOENV_ROOT="$HOME/.anyenv/envs/goenv"
-    export PATH="$GOENV_ROOT/bin:$PATH"
-    if command -v goenv 1>/dev/null 2>&1; then
-        eval "$(goenv init -)"
-    fi
-    [ -n "$GOROOT" ] && export PATH="$GOROOT/bin:$PATH"
-    [ -n "$GOPATH" ] && export PATH="$PATH:$GOPATH/bin"
+# mise - 言語バージョン管理 (anyenv/asdfの後継)
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate zsh)"
 fi
 
 #export PATH="/usr/local/opt/bzip2/bin:$PATH"
