@@ -14,7 +14,7 @@ fpath=(~/.zsh/completion $fpath)
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-if [ -d $HOME/.anyenv ]; then
+if [ -d "$HOME/.anyenv" ]; then
     eval "$(anyenv init -)"
 fi
 
@@ -64,8 +64,8 @@ if [ -e "$HOME/.anyenv/envs/goenv" ]; then
     if command -v goenv 1>/dev/null 2>&1; then
         eval "$(goenv init -)"
     fi
-    export PATH="$GOROOT/bin:$PATH"
-    export PATH="$PATH:$GOPATH/bin"
+    [ -n "$GOROOT" ] && export PATH="$GOROOT/bin:$PATH"
+    [ -n "$GOPATH" ] && export PATH="$PATH:$GOPATH/bin"
 fi
 
 #export PATH="/usr/local/opt/bzip2/bin:$PATH"
@@ -419,3 +419,8 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/op
 
 # Added by Antigravity
 export PATH="${HOME}/.antigravity/antigravity/bin:$PATH"
+
+# direnv - プロジェクト固有の環境変数自動設定
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi

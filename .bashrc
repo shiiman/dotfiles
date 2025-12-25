@@ -59,8 +59,8 @@ if [ -e "$HOME/.anyenv/envs/goenv" ]; then
     if command -v goenv 1>/dev/null 2>&1; then
         eval "$(goenv init -)"
     fi
-    export PATH="$GOROOT/bin:$PATH"
-    export PATH="$PATH:$GOPATH/bin"
+    [ -n "$GOROOT" ] && export PATH="$GOROOT/bin:$PATH"
+    [ -n "$GOPATH" ] && export PATH="$PATH:$GOPATH/bin"
 fi
 
 #export PATH="/usr/local/opt/bzip2/bin:$PATH"
@@ -120,9 +120,7 @@ alias la='ls -a'
 
 # cdの後にlsとpwdを実行
 function cdlspwd() {
-    cd "$1"
-    la
-    pwd
+    builtin cd "$1" && la && pwd
 }
 alias cd=cdlspwd
 
@@ -167,3 +165,8 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\] ~]$ "
+
+# direnv - プロジェクト固有の環境変数自動設定
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook bash)"
+fi

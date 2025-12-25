@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # パスを変数化
 packeges_path=~/Library/Application\ Support/Sublime\ Text/Packages

@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # 通常のドットファイルを定義.
 DOT_FILES=(.bashrc .zshrc .gitconfig .gitignore_global .tmux.conf .vimrc)
