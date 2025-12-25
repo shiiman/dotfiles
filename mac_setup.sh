@@ -24,16 +24,20 @@ fi
 if ! type git >/dev/null 2>&1; then
     brew install git
 fi
-git clone https://github.com/shiiman/dotfiles.git ~/dotfiles
+if [ ! -d ~/dotfiles ]; then
+    git clone https://github.com/shiiman/dotfiles.git ~/dotfiles
+else
+    echo "~/dotfiles already exists. Pulling latest changes..."
+    cd ~/dotfiles && git pull
+fi
 
 # 設定ファイルフォルダに移動.
 cd ~/dotfiles || { echo "Failed to cd to ~/dotfiles"; exit 1; }
 # ローカルリポジトリにユーザのメールアドレス登録.
 git config user.email hsnonsense5@gmail.com
 
-# bundleインストール.
-brew tap Homebrew/bundle
-# アプリインストール.
+# アプリインストール（事前にsudo認証をキャッシュ）
+sudo -v
 brew bundle
 
 ##################################################################
@@ -41,34 +45,39 @@ brew bundle
 # dotfileの設定.
 sh ~/dotfiles/dotfile_setup.sh
 
-# デフォルトシェルをzshに変更.
-chsh -s /bin/zsh
+# デフォルトシェルをzshに変更（パスワード入力が必要）
+if [ "$SHELL" != "/bin/zsh" ]; then
+    echo "デフォルトシェルをzshに変更します（パスワードが必要です）"
+    chsh -s /bin/zsh
+fi
 
-# anyenvの設定.
-sh ~/dotfiles/anyenv_setup.sh
+# miseの設定 (言語バージョン管理)
+sh ~/dotfiles/mise_setup.sh
 
 # fzfをインストール.
-#sh /usr/local/opt/fzf/install
-sh /opt/homebrew/opt/fzf/install
-
-# gcloud補完設定.
-# python2系が必要(3系では未対応).
-if [ ! -e ~/.config/gcloud/gcloud-zsh-completion ]; then
-    mkdir -p ~/.config/gcloud
-    git clone https://github.com/littleq0903/gcloud-zsh-completion.git ~/.config/gcloud/gcloud-zsh-completion
+if [ -f /opt/homebrew/opt/fzf/install ]; then
+    /opt/homebrew/opt/fzf/install --all
+elif [ -f /usr/local/opt/fzf/install ]; then
+    /usr/local/opt/fzf/install --all
 fi
 
 # sublime textの設定.
-open -a "Sublime Text"
-sleep 10 # 起動待ち
-sh ~/dotfiles/SublimeText/sublime_setup.sh
+if [ -d "/Applications/Sublime Text.app" ]; then
+    open -a "Sublime Text"
+    sleep 10 # 起動待ち
+    sh ~/dotfiles/SublimeText/sublime_setup.sh
+fi
 
 # finderで隠しファイルの表示.
-defaults write com.apple.finder AppleShowAllFiles TRUE
+defaults write com.apple.finder AppleShowAllFiles -bool true
 killall Finder
 
 ##################################################################
 
 # フォントの設定.
-cp -f ~/dotfiles/Fonts/Ricty*.ttf ~/Library/Fonts/
-fc-cache -fv
+if [ -d ~/dotfiles/Fonts ] && ls ~/dotfiles/Fonts/Ricty*.ttf >/dev/null 2>&1; then
+    cp -f ~/dotfiles/Fonts/Ricty*.ttf ~/Library/Fonts/
+    if command -v fc-cache >/dev/null 2>&1; then
+        fc-cache -fv
+    fi
+fi

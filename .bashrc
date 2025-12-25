@@ -1,5 +1,5 @@
 # pathを設定
-path=("$HOME/bin" "/usr/local/bin" "/opt/homebrew/bin" "$HOME/pear/bin" "$HOME/.anyenv" "${path[@]}")
+export PATH="$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/pear/bin:$PATH"
 export XDG_CONFIG_HOME=~/.config
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -9,58 +9,9 @@ if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/complet
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
-if [ -d "$HOME/.anyenv" ]; then
-    eval "$(anyenv init -)"
-fi
-
-if [ -e "$HOME/.anyenv/envs/phpenv" ]; then
-    export PHPENV_ROOT="$HOME/.anyenv/envs/phpenv"
-    export PATH="$PHPENV_ROOT/bin:$PATH"
-    if command -v phpenv 1>/dev/null 2>&1; then
-        eval "$(phpenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/rbenv" ]; then
-    export RBENV_ROOT="$HOME/.anyenv/envs/rbenv"
-    export PATH="$RBENV_ROOT/bin:$PATH"
-    if command -v rbenv 1>/dev/null 2>&1; then
-        eval "$(rbenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/nodenv" ]; then
-    export NODENV_ROOT="$HOME/.anyenv/envs/nodenv"
-    export PATH="$NODENV_ROOT/bin:$PATH"
-    if command -v nodenv 1>/dev/null 2>&1; then
-        eval "$(nodenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/pyenv" ]; then
-    export PYENV_ROOT="$HOME/.anyenv/envs/pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    if command -v pyenv 1>/dev/null 2>&1; then
-        eval "$(pyenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/tfenv" ]; then
-    export TFENV_ROOT="$HOME/.anyenv/envs/tfenv"
-    export PATH="$TFENV_ROOT/bin:$PATH"
-    if command -v tfenv 1>/dev/null 2>&1; then
-        eval "$(tfenv init -)"
-    fi
-fi
-
-if [ -e "$HOME/.anyenv/envs/goenv" ]; then
-    export GOENV_ROOT="$HOME/.anyenv/envs/goenv"
-    export PATH="$GOENV_ROOT/bin:$PATH"
-    if command -v goenv 1>/dev/null 2>&1; then
-        eval "$(goenv init -)"
-    fi
-    [ -n "$GOROOT" ] && export PATH="$GOROOT/bin:$PATH"
-    [ -n "$GOPATH" ] && export PATH="$PATH:$GOPATH/bin"
+# mise - 言語バージョン管理 (anyenv/asdfの後継)
+if command -v mise >/dev/null 2>&1; then
+    eval "$(mise activate bash)"
 fi
 
 #export PATH="/usr/local/opt/bzip2/bin:$PATH"
