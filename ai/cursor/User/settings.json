@@ -1,0 +1,129 @@
+{
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "[shellscript]": {
+        "editor.defaultColorDecorators": "never",
+        "editor.indentSize": "tabSize",
+        "editor.tabSize": 2,
+        "files.eol": "\n"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.foldingStrategy": "indentation",
+    "editor.fontSize": 12,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.largeFileOptimizations": false,
+    "editor.multiCursorLimit": 100000,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all",
+    "editor.snippetSuggestions": "top",
+    "editor.inlineSuggest.enabled": false,
+    "editor.tabCompletion": "on",
+    "editor.tabSize": 4,
+    "editor.unicodeHighlight.allowedCharacters": {
+        "．": true
+    },
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "go.lintFlags": [
+        "--config=${workspaceFolder}/.golangci.yaml",
+        "--fast"
+    ],
+    "go.lintTool": "golangci-lint",
+    "go.toolsEnvVars": {
+        "GO111MODULE": "on"
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "go.useLanguageServer": true,
+    "markdownlint.config": {
+        "MD029": false,
+        "MD040": false,
+        "default": true
+    },
+    "redhat.telemetry.enabled": false,
+    "search.collapseResults": "alwaysCollapse",
+    "search.showLineNumbers": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "sortJSON.excludedFiles": [
+        "package.json"
+    ],
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.scrollback": 10000,
+    "terraform.codelens.referenceCount": true,
+    "terraform.validation.enableEnhancedValidation": false,
+    "todohighlight.defaultStyle": {},
+    "todohighlight.isEnable": true,
+    "todohighlight.keywords": [
+        {
+            "backgroundColor": "orange",
+            "color": "#ffffff",
+            "overviewRulerColor": "grey",
+            "text": "NOTE:"
+        }
+    ],
+    "trailing-spaces.regexp": "[ \t　]+",
+    "trailing-spaces.trimOnSave": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.colorCustomizations": {
+        "editor.findMatchBackground": "#fa5c3480",
+        "editor.selectionBackground": "#fa5c3480",
+        "tab.activeBackground": "#fa5c3480"
+    },
+    "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "vscode-icons-mac",
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.view.alwaysShowHeaderActions": true,
+    "yaml.format.printWidth": 160,
+    "workbench.activityBar.orientation": "vertical",
+    "git.timeline.showAuthor": false,
+    "git.timeline.showUncommitted": true,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "cursor.general.globalCursorIgnoreList": [
+        "**/.env",
+        "**/credentials.json",
+        "**/credentials.*.json",
+        "**/secret.json",
+        "**/secrets.json",
+        "**/*.key",
+        "**/*.pem",
+        "**/*.pfx",
+        "**/*.p12",
+        "**/*.crt",
+        "**/*.cer",
+        "**/id_rsa",
+        "**/id_dsa",
+        "**/.ssh/id_*",
+        "!.env.example"
+    ],
+    "editor.dropIntoEditor.preferences": [],
+    "terminal.integrated.tabs.enabled": false,
+    "claudeCode.preferredLocation": "sidebar",
+    "claudeCode.selectedModel": "opus",
+    "workbench.settings.applyToAllProfiles": [],
+    "extensions.ignoreRecommendations": true,
+    "cursor.composer.usageSummaryDisplay": "always"
+}

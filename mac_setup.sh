@@ -68,6 +68,9 @@ if [ -d "/Applications/Sublime Text.app" ]; then
     sh ~/dotfiles/SublimeText/sublime_setup.sh
 fi
 
+# AIツール設定（Claude Code, Cursor, Codex）
+sh ~/dotfiles/ai_setup.sh
+
 # finderで隠しファイルの表示.
 defaults write com.apple.finder AppleShowAllFiles -bool true
 killall Finder
