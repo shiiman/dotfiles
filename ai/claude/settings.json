@@ -2,6 +2,9 @@
   "model": "opusplan",
   "alwaysThinkingEnabled": false,
   "outputStyle": "Default",
+  "pluginMarketplaces": [
+    "shiiman/claude-code-plugins"
+  ],
   "enabledPlugins": {
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false
