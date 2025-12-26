@@ -28,8 +28,19 @@ dotfiles/
 ├── mac_setup.sh          # macOS 初期セットアップ
 ├── dotfile_setup.sh      # シンボリックリンク作成
 ├── mise_setup.sh         # mise セットアップ
+├── ai_setup.sh           # AIツール設定セットアップ
 ├── mise/
 │   └── config.toml       # mise グローバル設定
+├── ai/                   # AIツールグローバル設定
+│   ├── claude/           # Claude Code
+│   │   ├── settings.json     # 設定（モデル、権限、フック）
+│   │   ├── CLAUDE.md         # グローバル指示
+│   │   ├── plugins.yml       # マーケットプレイス・プラグイン
+│   │   └── scripts/          # カスタムスクリプト
+│   ├── cursor/           # Cursor
+│   └── codex/            # Codex
+├── .claude/              # Claude Code プロジェクト設定
+├── .cursor/              # Cursor プロジェクト設定
 ├── SublimeText/          # Sublime Text 設定
 └── Fonts/                # フォントファイル
 ```
@@ -66,6 +77,7 @@ curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.s
 - mise のセットアップ（言語バージョン管理）
 - fzf のインストール
 - Sublime Text の設定（インストール済みの場合）
+- AIツール設定（Claude Code, Cursor, Codex）
 - Finder で隠しファイルを表示
 - Ricty フォントのインストール（存在する場合）
 
@@ -115,6 +127,34 @@ brew bundle
 # 現在インストール済みのパッケージを Brewfile に出力
 brew bundle dump --force
 ```
+
+### AIツール設定セットアップ
+
+Claude Code、Cursor、Codex のグローバル設定をセットアップ：
+
+```bash
+sh ~/dotfiles/ai_setup.sh
+```
+
+管理対象：
+
+| ツール | 設定ファイル | 説明 |
+|--------|-------------|------|
+| Claude Code | `~/.claude/settings.json` | モデル、権限、フック設定 |
+| Claude Code | `~/.claude/CLAUDE.md` | グローバル指示（出力言語、ルール等） |
+| Claude Code | `ai/claude/plugins.yml` | マーケットプレイス・プラグインリスト |
+| Claude Code | `ai/claude/scripts/` | カスタムスクリプト（statusline等） |
+| Cursor | `~/.cursor/mcp.json` | MCPサーバー設定 |
+| Cursor | `~/Library/Application Support/Cursor/User/settings.json` | エディタ設定 |
+| Cursor | `~/Library/Application Support/Cursor/User/keybindings.json` | キーバインド |
+| Cursor | `~/Library/Application Support/Cursor/User/snippets/` | スニペット |
+| Cursor | `~/.cursor/extensions/extensions.json` | 拡張機能リスト |
+| Codex | `~/.codex/config.toml` | CLI設定 |
+| Codex | `~/.codex/skills/` | スキル定義 |
+
+Claude Code のプラグインは `plugins.yml` に記載されたリストから自動インストールされます。
+
+※ 既存ファイルは `~/.ai_config_backup/` にバックアップされます
 
 ---
 

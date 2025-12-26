@@ -1,0 +1,16 @@
+# Claude Code マーケットプレイス・プラグイン設定
+# インストール: ./ai_setup.sh
+
+# マーケットプレイス
+# 形式: owner/repo, URL, またはローカルパス
+# 例: yourname/claude-code-plugins
+marketplaces:
+  # - anthropics/claude-code-plugins
+  # - yourname/claude-code-plugins
+
+# プラグイン
+# 形式: plugin-name（公式）または plugin-name@marketplace-name（カスタム）
+plugins:
+  - gopls-lsp
+  - typescript-lsp
+  # - my-tools@yourname-claude-code-plugins

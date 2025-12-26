@@ -1,0 +1,173 @@
+# Codex CLI Configuration
+# 公式ドキュメント準拠: https://github.com/openai/codex/blob/main/docs/config.md
+
+# プロジェクト固有の指示（AGENTS.mdを使用するため空）
+instructions = ""
+
+# =============================================================================
+# Model Settings
+# =============================================================================
+
+# 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
+model = "gpt-5.2-codex"
+
+# モデルプロバイダー（デフォルト: "openai"）
+model_provider = "openai"
+
+# 推論の深さ（デフォルト: "medium"）
+# 値: "minimal", "low", "medium", "high", "xhigh"
+model_reasoning_effort = "medium"
+
+# 推論サマリーの出力（デフォルト: "auto"）
+# 値: "auto", "concise", "detailed", "none"
+model_reasoning_summary = "auto"
+
+# モデルの出力の詳細度（デフォルト: "medium"）
+# 値: "low", "medium", "high"
+model_verbosity = "medium"
+
+# コンテキストウィンドウサイズ（トークン数）
+# model_context_window = 128000
+
+# 推論サマリーを強制有効化（デフォルト: false）
+model_supports_reasoning_summaries = false
+
+# =============================================================================
+# Execution Settings
+# =============================================================================
+
+# 承認ポリシー（デフォルト: "untrusted"）
+# 値:
+#   - "untrusted": すべてのアクションに承認が必要
+#   - "on-failure": 失敗時のみ承認が必要
+#   - "on-request": リクエスト時のみ承認
+#   - "never": 承認なしで実行（危険）
+approval_policy = "on-failure"
+
+# サンドボックスモード（デフォルト: "read-only"）
+# 値:
+#   - "read-only": ファイルの読み取りのみ
+#   - "workspace-write": ワークスペース内への書き込み許可
+#   - "danger-full-access": フルアクセス（危険）
+sandbox_mode = "workspace-write"
+
+# =============================================================================
+# Sandbox Workspace Write Settings
+# =============================================================================
+
+[sandbox_workspace_write]
+# サンドボックス内のネットワークアクセス許可（デフォルト: false）
+network_access = false
+
+# =============================================================================
+# Features (機能フラグ)
+# =============================================================================
+
+[features]
+# Web検索機能（デフォルト: false）- 安定版
+web_search_request = false
+
+# 画像表示ツール（デフォルト: true）- 安定版
+view_image_tool = true
+
+# スキル機能（デフォルト: false）- 実験的
+skills = false
+
+# unified_exec（デフォルト: false）- 実験的
+unified_exec = false
+
+# apply_patch_freeform（デフォルト: false）- ベータ
+apply_patch_freeform = false
+
+# =============================================================================
+# TUI (Terminal User Interface) Settings
+# =============================================================================
+
+[tui]
+# 通知（デフォルト: true）
+notifications = true
+
+# アニメーション（デフォルト: true）
+animations = true
+
+# スクロール反転（デフォルト: false）
+scroll_invert = false
+
+# =============================================================================
+# History Settings
+# =============================================================================
+
+[history]
+# 履歴の永続化（デフォルト: "none"）
+# 値: "none", "save-all"
+persistence = "save-all"
+
+# =============================================================================
+# Display Settings
+# =============================================================================
+
+# 推論イベントを非表示化（デフォルト: false）
+hide_agent_reasoning = false
+
+# 生チェーンオブソートを表示（デフォルト: false）
+show_raw_agent_reasoning = false
+
+# =============================================================================
+# File Opener
+# =============================================================================
+
+# ファイルを開くエディタ（デフォルト: "vscode"）
+# 値: "vscode", "vscode-insiders", "windsurf", "cursor", "none"
+file_opener = "cursor"
+
+# =============================================================================
+# Project Documentation
+# =============================================================================
+
+# AGENTS.mdから読み込む最大バイト数（デフォルト: 32KiB）
+project_doc_max_bytes = 32768
+
+# =============================================================================
+# Authentication Settings
+# =============================================================================
+
+# ログイン方法（デフォルト: 省略）
+# 値: "chatgpt", "api"
+# forced_login_method = "api"
+
+# 認証情報の保存先（デフォルト: "auto"）
+# 値: "file", "keyring", "auto"
+# cli_auth_credentials_store = "auto"
+
+# =============================================================================
+# Profiles (Optional)
+# =============================================================================
+
+# アクティブなプロファイル名
+# profile = "default"
+
+# プロファイル設定（環境ごとの設定切り替え）
+# [profiles.work]
+# model = "gpt-5.1-codex-max"
+# approval_policy = "untrusted"
+
+# =============================================================================
+# MCP Servers
+# =============================================================================
+
+# MCPサーバー設定
+# [mcp_servers.サーバー名]
+# command = "実行コマンド"       # stdio接続用
+# url = "http://..."            # Streamable HTTP接続用
+# args = ["引数1", "引数2"]
+# env = { "KEY" = "VALUE" }
+# enabled = true                 # デフォルト: true
+# startup_timeout_sec = 10       # デフォルト: 10
+# tool_timeout_sec = 60          # デフォルト: 60
+
+[mcp_servers.modular]
+command = "scripts/serena-mcp-wrapper.sh"
+args = []
+enabled = true
+startup_timeout_sec = 10
+tool_timeout_sec = 60

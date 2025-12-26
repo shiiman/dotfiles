@@ -1,0 +1,65 @@
+{
+  "model": "opusplan",
+  "alwaysThinkingEnabled": false,
+  "outputStyle": "Default",
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": false
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Skill(*)"
+    ],
+    "ask": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(rm -r:*)",
+      "Bash(rm -rf:*)",
+      "Edit(.env*)",
+      "Write(.env*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(rm -rf /*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Read(**/.ssh/*)",
+      "Read(**/credentials*)",
+      "Read(*.key)",
+      "Read(*.pem)",
+      "Edit(**/.ssh/*)",
+      "Edit(**/credentials*)",
+      "Write(**/.ssh/*)"
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/dotfiles/ai/claude/scripts/statusline.sh"
+  }
+}
