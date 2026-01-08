@@ -1,27 +1,4 @@
 {
-  "model": "opusplan",
-  "alwaysThinkingEnabled": false,
-  "outputStyle": "Default",
-  "pluginMarketplaces": [
-    "shiiman/claude-code-plugins"
-  ],
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": false
-  },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' >&2; exit 2; fi"
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "Read(*)",
@@ -55,16 +32,6 @@
       "Bash(git branch:*)",
       "Skill(*)"
     ],
-    "ask": [
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(git checkout:*)",
-      "Bash(rm -r:*)",
-      "Bash(rm -rf:*)",
-      "Edit(.env*)",
-      "Write(.env*)"
-    ],
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm -rf /*)",
@@ -77,10 +44,46 @@
       "Edit(**/.ssh/*)",
       "Edit(**/credentials*)",
       "Write(**/.ssh/*)"
+    ],
+    "ask": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(rm -r:*)",
+      "Bash(rm -rf:*)",
+      "Edit(.env*)",
+      "Write(.env*)"
+    ]
+  },
+  "model": "opusplan",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' >&2; exit 2; fi"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
     "type": "command",
     "command": "~/dotfiles/ai/claude/scripts/statusline.sh"
-  }
+  },
+  "enabledPlugins": {
+    "gopls-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": false,
+    "context7@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true,
+    "slack@claude-plugins-official": true
+  },
+  "outputStyle": "Default",
+  "alwaysThinkingEnabled": false,
+  "pluginMarketplaces": [
+    "shiiman/claude-code-plugins"
+  ]
 }
