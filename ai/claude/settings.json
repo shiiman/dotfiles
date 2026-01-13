@@ -78,7 +78,9 @@
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
     "context7@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true
+    "playwright@claude-plugins-official": true,
+    "shiiman-git@shiiman-claude-code-plugins": true,
+    "shiiman-google@shiiman-claude-code-plugins": true
   },
   "outputStyle": "Default",
   "alwaysThinkingEnabled": false,
