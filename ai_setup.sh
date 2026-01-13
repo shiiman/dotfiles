@@ -130,6 +130,14 @@ setup_codex() {
     echo "  ✓ skills/ (スキル定義)"
 }
 
+# Gemini (Antigravity) 設定
+setup_gemini() {
+    echo "Gemini設定..."
+
+    create_symlink "$DOTFILES_DIR/ai/gemini/GEMINI.md" ~/.gemini/GEMINI.md
+    echo "  ✓ GEMINI.md (グローバル指示)"
+}
+
 # メイン処理
 main() {
     echo "=========================================="
@@ -144,6 +152,9 @@ main() {
     echo ""
 
     setup_codex
+    echo ""
+
+    setup_gemini
     echo ""
 
     echo "=========================================="
