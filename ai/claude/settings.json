@@ -78,8 +78,7 @@
     "gopls-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
     "context7@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
-    "slack@claude-plugins-official": true
+    "playwright@claude-plugins-official": true
   },
   "outputStyle": "Default",
   "alwaysThinkingEnabled": false,
