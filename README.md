@@ -130,7 +130,7 @@ brew bundle dump --force
 
 ### AIツール設定セットアップ
 
-Claude Code、Cursor、Codex のグローバル設定をセットアップ：
+Claude Code、Cursor、Codex、Antigravity のグローバル設定をセットアップ：
 
 ```bash
 sh ~/dotfiles/ai_setup.sh
@@ -151,6 +151,8 @@ sh ~/dotfiles/ai_setup.sh
 | Cursor | `~/.cursor/extensions/extensions.json` | 拡張機能リスト |
 | Codex | `~/.codex/config.toml` | CLI設定 |
 | Codex | `~/.codex/skills/` | スキル定義 |
+| Antigravity | `~/.gemini/GEMINI.md` | グローバル指示（出力言語、ルール等） |
+| Antigravity | `~/.antigravity/extensions/extensions.json` | 拡張機能リスト |
 
 Claude Code のプラグインは `plugins.yml` に記載されたリストから自動インストールされます。
 

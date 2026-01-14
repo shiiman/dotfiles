@@ -57,7 +57,7 @@ sandbox_mode = "workspace-write"
 
 [sandbox_workspace_write]
 # サンドボックス内のネットワークアクセス許可（デフォルト: false）
-network_access = false
+network_access = true
 
 # =============================================================================
 # Features (機能フラグ)
@@ -166,8 +166,8 @@ project_doc_max_bytes = 32768
 # tool_timeout_sec = 60          # デフォルト: 60
 
 [mcp_servers.modular]
-command = "scripts/serena-mcp-wrapper.sh"
 args = []
+command = "scripts/serena-mcp-wrapper.sh"
 enabled = true
 startup_timeout_sec = 10
 tool_timeout_sec = 60
