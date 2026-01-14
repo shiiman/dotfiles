@@ -130,12 +130,66 @@ setup_codex() {
     echo "  ✓ skills/ (スキル定義)"
 }
 
-# Gemini (Antigravity) 設定
-setup_gemini() {
-    echo "Gemini設定..."
+# Antigravity 設定
+setup_antigravity() {
+    echo "Antigravity設定..."
 
-    create_symlink "$DOTFILES_DIR/ai/gemini/GEMINI.md" ~/.gemini/GEMINI.md
+    create_symlink "$DOTFILES_DIR/ai/antigravity/GEMINI.md" ~/.gemini/GEMINI.md
     echo "  ✓ GEMINI.md (グローバル指示)"
+
+    create_symlink "$DOTFILES_DIR/ai/antigravity/extensions.json" ~/.antigravity/extensions/extensions.json
+    echo "  ✓ extensions.json (拡張機能リスト)"
+
+    install_antigravity_extensions
+}
+
+# Antigravity 拡張機能インストール
+install_antigravity_extensions() {
+    local ext_file="$DOTFILES_DIR/ai/antigravity/extensions.json"
+    if [[ ! -f "$ext_file" ]]; then
+        echo "  ⚠ extensions.json が見つかりません"
+        return
+    fi
+
+    local antigravity_cmd=""
+    if command -v antigravity &> /dev/null; then
+        antigravity_cmd="antigravity"
+    elif command -v agy &> /dev/null; then
+        antigravity_cmd="agy"
+    else
+        echo "  ⚠ Antigravity のコマンドラインツールが見つかりません"
+        echo "    Antigravity 側で CLI をインストールしてください"
+        return
+    fi
+
+    if ! command -v jq &> /dev/null; then
+        echo "  ⚠ jq コマンドが見つかりません（拡張機能インストールをスキップ）"
+        return
+    fi
+
+    echo "  拡張機能インストール中..."
+
+    local ext_ids
+    ext_ids=$(jq -r '.[].identifier.id' "$ext_file")
+
+    local count=0
+    local total
+    total=$(echo "$ext_ids" | wc -l | tr -d ' ')
+
+    while IFS= read -r ext_id; do
+        if [[ -z "$ext_id" ]]; then
+            continue
+        fi
+        ((count++))
+        printf "    [%d/%d] %s..." "$count" "$total" "$ext_id"
+        if "$antigravity_cmd" --install-extension "$ext_id" > /dev/null 2>&1; then
+            echo " ✓"
+        else
+            echo " (スキップ)"
+        fi
+    done <<< "$ext_ids"
+
+    echo "  ✓ 拡張機能インストール完了"
 }
 
 # メイン処理
@@ -154,7 +208,7 @@ main() {
     setup_codex
     echo ""
 
-    setup_gemini
+    setup_antigravity
     echo ""
 
     echo "=========================================="
