@@ -30,7 +30,16 @@
       "Bash(git show:*)",
       "Bash(git log:*)",
       "Bash(git branch:*)",
-      "Skill(*)"
+      "Skill(*)",
+      "Skill(shiiman-plugin:*)",
+      "Skill(shiiman-claude:*)",
+      "Skill(shiiman-git:*)",
+      "Skill(shiiman-google:*)",
+      "Skill(shiiman-slack:*)",
+      "Skill(shiiman-docker:*)",
+      "Skill(shiiman-go:*)",
+      "Skill(shiiman-terraform:*)",
+      "Skill(shiiman-claude-code-plugins:*)"
     ],
     "deny": [
       "Bash(sudo:*)",
@@ -79,8 +88,14 @@
     "typescript-lsp@claude-plugins-official": false,
     "context7@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
+    "shiiman-plugin@shiiman-claude-code-plugins": true,
+    "shiiman-claude@shiiman-claude-code-plugins": true,
     "shiiman-git@shiiman-claude-code-plugins": true,
-    "shiiman-google@shiiman-claude-code-plugins": true
+    "shiiman-google@shiiman-claude-code-plugins": true,
+    "shiiman-slack@shiiman-claude-code-plugins": true,
+    "shiiman-docker@shiiman-claude-code-plugins": false,
+    "shiiman-go@shiiman-claude-code-plugins": false,
+    "shiiman-terraform@shiiman-claude-code-plugins": false
   },
   "outputStyle": "Default",
   "alwaysThinkingEnabled": false,
