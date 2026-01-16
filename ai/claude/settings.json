@@ -115,5 +115,6 @@
   "alwaysThinkingEnabled": false,
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
-  ]
+  ],
+  "language": "Japanese"
 }
