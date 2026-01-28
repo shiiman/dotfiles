@@ -79,6 +79,9 @@ fi
 
 alias k='kubectl'
 
+# GTR (Git Worktree Runner) - git worktree管理ツール
+alias gwr='git gtr'
+
 # helm補完
 if type helm >/dev/null 2>&1; then
     source <(helm completion bash) >/dev/null 2>&1

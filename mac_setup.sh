@@ -77,6 +77,18 @@ sh ~/dotfiles/ghostty_setup.sh
 # AIツール設定（Claude Code, Cursor, Codex）
 sh ~/dotfiles/ai_setup.sh
 
+# GTR (Git Worktree Runner) のインストール
+if [ ! -d ~/git-worktree-runner ]; then
+    echo "GTR (Git Worktree Runner) をインストール中..."
+    git clone https://github.com/coderabbitai/git-worktree-runner.git ~/git-worktree-runner
+    cd ~/git-worktree-runner && ./install.sh
+    cd ~/dotfiles
+else
+    echo "GTR は既にインストールされています。最新版に更新中..."
+    cd ~/git-worktree-runner && git pull && ./install.sh
+    cd ~/dotfiles
+fi
+
 # finderで隠しファイルの表示.
 defaults write com.apple.finder AppleShowAllFiles -bool true
 killall Finder
