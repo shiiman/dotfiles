@@ -74,6 +74,9 @@
       "Skill(*)",
       "WebFetch(domain:github.com)"
     ],
+    "ask": [
+      "Bash(git push:*)"
+    ],
     "deny": [
       "Bash(apt:*)",
       "Bash(brew install:*)",
@@ -89,7 +92,6 @@
       "Bash(git branch -D:*)",
       "Bash(git clean:*)",
       "Bash(git filter-branch:*)",
-      "Bash(git push:*)",
       "Bash(git rebase:*)",
       "Bash(git reflog:*)",
       "Bash(git reset:*)",
