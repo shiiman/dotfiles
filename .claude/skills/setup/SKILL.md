@@ -1,3 +1,11 @@
+---
+name: setup
+description: dotfilesの初期セットアップを実行する。シンボリックリンク作成、Homebrew、anyenvのセットアップを順番に実行。
+disable-model-invocation: true
+allowed-tools: Read, Bash
+argument-hint: "[--skip-brew|--skip-anyenv|--check]"
+---
+
 # Project Setup
 
 dotfilesの初期セットアップを実行する。新しいマシンでの環境構築に使用。
@@ -78,14 +86,6 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
 /setup --skip-anyenv      # anyenvセットアップをスキップ
 /setup --check            # 現在の状態を確認するのみ
 ```
-
-## Arguments
-
-- `$ARGUMENTS`:
-  - `--help`: ヘルプを表示
-  - `--skip-brew`: Homebrewパッケージインストールをスキップ
-  - `--skip-anyenv`: anyenvセットアップをスキップ
-  - `--check`: 状態確認のみ（実行しない）
 
 ## Setup Steps
 

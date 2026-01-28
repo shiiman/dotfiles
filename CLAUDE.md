@@ -101,9 +101,9 @@ source ~/.zshrc              # Reload Zsh configuration
 
 ---
 
-## Development Support Commands
+## Development Support Skills
 
-以下のSlash Commandsで開発効率を向上できます。
+以下のSkillsで開発効率を向上できます。Slash Command（`/review`など）で呼び出せます。
 
 ### Code Review
 
@@ -149,13 +149,27 @@ Subagentの詳細は `.claude/agents/` を参照してください。
 
 ---
 
-## Agent Skills（自律的能力）
+## Skills
+
+### 自動適用スキル
 
 以下のSkillsがコード編集時に自動的に適用されます。
 
 | Skill | 目的 | 自動適用条件 |
 |-------|------|-------------|
 | `security-review` | セキュリティ脆弱性検出 | すべてのコード変更時 |
+
+### ユーザー呼び出しスキル
+
+以下のSkillsはSlash Commandで呼び出せます。
+
+| Skill | 目的 | 呼び出し方法 |
+|-------|------|-------------|
+| `review` | コードレビュー | `/review` |
+| `lint` | シェルスクリプトのlint実行 | `/lint` |
+| `commit` | 変更のコミット | `/commit` |
+| `pr` | Pull Request作成 | `/pr` |
+| `setup` | dotfilesの初期セットアップ | `/setup` |
 
 Skillsの詳細は `.claude/skills/` を参照してください。
 
