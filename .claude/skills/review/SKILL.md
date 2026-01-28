@@ -1,3 +1,10 @@
+---
+name: review
+description: 変更内容を詳細にレビューし、問題点と改善提案を提示する。セキュリティ、シェルスクリプト品質、互換性を確認。
+allowed-tools: Read, Grep, Glob, Bash
+argument-hint: "[対象] [--staged|--unstaged|--security]"
+---
+
 # Code Review
 
 変更内容を詳細にレビューし、問題点と改善提案を提示する。
@@ -102,16 +109,6 @@
 /review --security           # セキュリティ観点のみ
 /review path/to/script.sh    # 指定ファイルをレビュー
 ```
-
-## Arguments
-
-- `$ARGUMENTS`:
-  - `--help`: ヘルプを表示
-  - (なし): ブランチ全体の変更（デフォルトブランチからの差分）
-  - `--staged`: staged変更のみ
-  - `--unstaged`: unstaged変更のみ
-  - `--security`: セキュリティ観点のみ
-  - ファイルパス: 指定ファイルをレビュー
 
 ## Review Checklist
 

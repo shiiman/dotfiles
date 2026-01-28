@@ -1,3 +1,11 @@
+---
+name: commit
+description: 変更をレビューし、コミットする。シェルスクリプトはshellcheckを実行してからコミット。
+disable-model-invocation: true
+allowed-tools: Read, Grep, Glob, Bash
+argument-hint: "[--skip-review|--amend]"
+---
+
 # Commit
 
 変更をレビューし、コミットする。
@@ -85,13 +93,6 @@ git commit -m '<type>(<scope>): <subject>'
 /commit --skip-review      # レビューをスキップ
 /commit --amend            # 直前のコミットを修正（未プッシュの場合のみ）
 ```
-
-## Arguments
-
-- `$ARGUMENTS`:
-  - `--help`: ヘルプを表示
-  - `--skip-review`: `/review` をスキップ
-  - `--amend`: 直前のコミットを修正（`git commit --amend`）
 
 ## Commit Message Format
 
