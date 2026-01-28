@@ -45,6 +45,9 @@ brew bundle
 # dotfileの設定.
 sh ~/dotfiles/dotfile_setup.sh
 
+# Vimのundo永続化用ディレクトリを作成
+mkdir -p ~/.vim/undo
+
 # デフォルトシェルをzshに変更（パスワード入力が必要）
 if [ "$SHELL" != "/bin/zsh" ]; then
     echo "デフォルトシェルをzshに変更します（パスワードが必要です）"
@@ -67,6 +70,9 @@ if [ -d "/Applications/Sublime Text.app" ]; then
     sleep 10 # 起動待ち
     sh ~/dotfiles/SublimeText/sublime_setup.sh
 fi
+
+# Ghosttyの設定
+sh ~/dotfiles/ghostty_setup.sh
 
 # AIツール設定（Claude Code, Cursor, Codex）
 sh ~/dotfiles/ai_setup.sh

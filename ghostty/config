@@ -1,0 +1,49 @@
+# Ghostty Configuration
+# https://ghostty.org/docs/config
+
+# フォント設定
+font-family = "Ricty Diminished"
+font-size = 12
+font-thicken = true
+
+# Molokai カラースキーム (iTerm2から変換)
+background = #121212
+foreground = #d0d0d0
+cursor-color = #bbbbbb
+selection-background = #b4d5ff
+selection-foreground = #000000
+
+# ANSIパレット
+palette = 0=#121212
+palette = 1=#fa2573
+palette = 2=#97e123
+palette = 3=#dfd460
+palette = 4=#0f7fcf
+palette = 5=#8700ff
+palette = 6=#42a7cf
+palette = 7=#bbbbbb
+palette = 8=#555555
+palette = 9=#f5669c
+palette = 10=#b0e05e
+palette = 11=#fef26c
+palette = 12=#00afff
+palette = 13=#af87ff
+palette = 14=#50cdfe
+palette = 15=#ffffff
+
+# ウィンドウ設定
+window-padding-x = 10
+window-padding-y = 10
+background-opacity = 0.9
+
+# macOS固有設定
+macos-option-as-alt = true
+
+# キーバインド設定
+# Alt + 左右をtmux用に解放
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+
+# Command + 左右で単語移動
+keybind = super+left=text:\x1bb
+keybind = super+right=text:\x1bf
