@@ -36,8 +36,14 @@ window-padding-x = 10
 window-padding-y = 10
 background-opacity = 0.9
 
+# タブ管理設定
+window-save-state = always
+
 # macOS固有設定
 macos-option-as-alt = true
+
+# 長いLLM出力やビルドログ向けにスクロールバックを増やす（例: 256MB）
+scrollback-limit = 268435456
 
 # キーバインド設定
 # Alt + 左右をtmux用に解放
@@ -47,3 +53,10 @@ keybind = alt+right=unbind
 # Command + 左右で単語移動
 keybind = super+left=text:\x1bb
 keybind = super+right=text:\x1bf
+
+# タブ切り替え（Cmd + 数字）
+keybind = super+1=goto_tab:1
+keybind = super+2=goto_tab:2
+keybind = super+3=goto_tab:3
+keybind = super+4=goto_tab:4
+keybind = super+5=goto_tab:5
