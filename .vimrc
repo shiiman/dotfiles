@@ -234,9 +234,6 @@ noremap <Leader>v 0v$h
 "###########################################################
 "# その他の設定                                              #
 "###########################################################
-" viとの互換性解除(矢印キーでABCDが出る問題の改善)
-set nocompatible
-
 " ファイル読み込み時の文字コードの設定
 set encoding=utf-8
 " 文字コードをUFT-8に設定
@@ -245,18 +242,14 @@ set fenc=utf-8
 set fileencoding=utf-8
 " 読み込み時の文字コードの自動判別. 左側が優先される
 set fileencodings=utf-8,euc-jp,cp932
- " 改行コードの自動判別. 左側が優先される
+" 改行コードの自動判別. 左側が優先される
 set fileformats=unix,dos,mac
- " □や○文字が崩れる問題を解決
-set ambiwidth=double
 
 " "0"で始まる数値を、8進数として扱わないようにする
 set nrformats-=octal
 
 " マウスの入力を受け付ける
 set mouse=a
-" Windows でもパスの区切り文字を / にする
-set shellslash
 
 " ヤンクでクリップボードにコピー
 set clipboard=unnamed,unnamedplus
@@ -265,6 +258,18 @@ set clipboard=unnamed,unnamedplus
 set visualbell t_vb=
 "エラーメッセージの表示時にビープを鳴らさない
 set noerrorbells
+
+" undoの永続化（ファイルを閉じてもundo履歴を保持）
+if has('persistent_undo')
+    set undodir=~/.vim/undo
+    set undofile
+endif
+
+" 更新時間を短くする（gitgutter等で効果的）
+set updatetime=300
+
+" signcolumnを常に表示（LSP使用時に便利）
+set signcolumn=yes
 
 " ファイル保存時に余分な半角スペースを削除する
 function! s:remove_dust()

@@ -19,9 +19,6 @@ fi
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
-
 export PATH="$HOME/.local/bin:$PATH"
 
 ###########################################################
@@ -95,6 +92,8 @@ setopt auto_cd
 setopt auto_pushd
 # pushd したとき、ディレクトリがすでにスタックに含まれていればスタックに追加しない
 setopt pushd_ignore_dups
+# コマンドのtypo修正提案
+setopt correct
 
 # cdの後にlsとpwdを実行
 function chpwd() {
@@ -125,7 +124,6 @@ if type vim >/dev/null 2>&1; then
     alias vi='vim'
 fi
 
-alias snowsql=/Applications/SnowSQL.app/Contents/MacOS/snowsql
 alias k='kubectl'
 
 ###########################################################
@@ -256,7 +254,7 @@ zstyle ':vcs_info:*' formats "[%F{blue}%c%u%b%f]"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 
 # プロンプト表示直前にvcs_info呼び出し
-#precmd () { vcs_info }
+precmd () { vcs_info }
 # プロンプト表示
 RPROMPT='${vcs_info_msg_0_}'$RPROMPT
 
@@ -268,7 +266,6 @@ typeset -U path cdpath fpath manpath
 
 # 文字コードをUTF-8に設定
 export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8
 # 日本語ファイル名等8ビットを通す
 setopt print_eight_bit
 

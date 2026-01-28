@@ -71,6 +71,7 @@
       "Bash(wc:*)",
       "Bash(which:*)",
       "Bash(xargs:*)",
+      "Edit(~/dotfiles/.*)",
       "Skill(*)",
       "WebFetch(domain:github.com)"
     ],
@@ -126,7 +127,6 @@
       "Bash(yum:*)",
       "Edit(.env)",
       "Edit(.env.*)",
-      "Edit(**/.gitconfig)",
       "Edit(**/.netrc)",
       "Edit(**/.npmrc)",
       "Edit(**/credentials*)",
