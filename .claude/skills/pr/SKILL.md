@@ -1,3 +1,11 @@
+---
+name: pr
+description: 現在のブランチからPull Requestを作成または更新する。ブランチ名から関連Issueを自動検出。
+disable-model-invocation: true
+allowed-tools: Read, Bash
+argument-hint: "[タイトル] [--base <branch>|--draft]"
+---
+
 # Create Pull Request
 
 現在のブランチからPull Requestを作成または更新する。
@@ -119,14 +127,6 @@
 /pr --draft                 # ドラフトPRを作成
 /pr "タイトル"               # タイトルを指定してPR作成
 ```
-
-## Arguments
-
-- `$ARGUMENTS`: オプション（複数指定可）
-  - `--help`: ヘルプを表示
-  - `--base <branch>`: 宛先ブランチを指定（デフォルト: master）
-  - `--draft`: ドラフトPRとして作成
-  - その他の文字列: PRタイトルとして使用
 
 ## Notes
 

@@ -1,3 +1,10 @@
+---
+name: lint
+description: シェルスクリプトに対してshellcheckを実行し、警告があれば修正提案する。
+allowed-tools: Read, Edit, Bash, Glob, Grep
+argument-hint: "[パス] [--fix|--check]"
+---
+
 # Lint - Run shellcheck on Shell Scripts
 
 シェルスクリプトに対してshellcheckを実行し、警告があれば修正提案する。
@@ -68,14 +75,6 @@
 /lint --fix              # 修正提案を適用
 /lint --check            # チェックのみ（修正しない）
 ```
-
-## Arguments
-
-- `$ARGUMENTS`:
-  - `--help`: ヘルプを表示
-  - ファイル/ディレクトリパス: 指定したパスをlint
-  - `--fix`: 修正提案を適用（確認あり）
-  - `--check`: チェックのみ（修正しない）
 
 ## Common shellcheck Warnings
 
