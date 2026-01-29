@@ -42,6 +42,9 @@ window-save-state = always
 # macOS固有設定
 macos-option-as-alt = true
 
+# 選択範囲を自動でクリップボードにコピー
+copy-on-select = clipboard
+
 # 長いLLM出力やビルドログ向けにスクロールバックを増やす（例: 256MB）
 scrollback-limit = 268435456
 

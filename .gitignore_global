@@ -50,5 +50,10 @@ node_modules/
 
 # Claude/Cursor
 .claude/settings.local.json
+.claude/plans/
 .cursor/mcp.local.json
 .multi-agent-mcp/
+
+# 一時ファイル
+tmp
+temp
