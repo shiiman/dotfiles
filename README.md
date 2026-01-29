@@ -159,6 +159,7 @@ sh ~/dotfiles/ai_setup.sh
 | Claude Code | `~/.claude/CLAUDE.md` | グローバル指示（出力言語、ルール等） |
 | Claude Code | `ai/claude/plugins.yml` | マーケットプレイス・プラグインリスト |
 | Claude Code | `ai/claude/scripts/` | カスタムスクリプト（statusline等） |
+| Claude Code | MCP: `multi-agent-mcp` | マルチエージェント MCP サーバー |
 | Cursor | `~/.cursor/mcp.json` | MCPサーバー設定 |
 | Cursor | `~/Library/Application Support/Cursor/User/settings.json` | エディタ設定 |
 | Cursor | `~/Library/Application Support/Cursor/User/keybindings.json` | キーバインド |
@@ -170,6 +171,8 @@ sh ~/dotfiles/ai_setup.sh
 | Antigravity | `~/.antigravity/extensions/extensions.json` | 拡張機能リスト |
 
 Claude Code のプラグインは `plugins.yml` に記載されたリストから自動インストールされます。
+
+MCP サーバー `multi-agent-mcp` は `uvx` で GitHub から直接インストールされます（リポジトリの clone 不要）。
 
 ※ 既存ファイルは `~/.ai_config_backup/` にバックアップされます
 
