@@ -51,3 +51,4 @@ node_modules/
 # Claude/Cursor
 .claude/settings.local.json
 .cursor/mcp.local.json
+.multi-agent-mcp/
