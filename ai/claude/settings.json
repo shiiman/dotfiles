@@ -109,6 +109,7 @@
     "shiiman-slack@shiiman-claude-code-plugins": true,
     "shiiman-docker@shiiman-claude-code-plugins": false,
     "shiiman-go@shiiman-claude-code-plugins": false,
+    "shiiman-workflow@shiiman-claude-code-plugins": true,
     "shiiman-terraform@shiiman-claude-code-plugins": false
   },
   "outputStyle": "Default",

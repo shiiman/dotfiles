@@ -11,6 +11,9 @@ fi
 mkdir -p ~/.config/mise
 ln -sf ~/dotfiles/mise/config.toml ~/.config/mise/config.toml
 
+# 設定ファイルを信頼
+mise trust ~/dotfiles/mise/config.toml
+
 # miseを有効化
 eval "$(mise activate bash)"
 
