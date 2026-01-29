@@ -71,35 +71,13 @@ setup_claude_mcp() {
 # multi-agent-mcp のセットアップ
 setup_multi_agent_mcp() {
     local mcp_name="multi-agent-mcp"
-    local mcp_base_dir="$HOME/.local/share/mcp"
-    local mcp_dir="$mcp_base_dir/$mcp_name"
-    local mcp_repo="https://github.com/shiiman/multi-agent-mcp.git"
-
-    # リポジトリが存在しない場合は clone
-    if [ ! -d "$mcp_dir" ]; then
-        echo "    $mcp_name をクローン中..."
-        mkdir -p "$mcp_base_dir"
-        if git clone "$mcp_repo" "$mcp_dir"; then
-            echo "    ✓ クローン完了"
-        else
-            echo "    ✗ クローン失敗"
-            return
-        fi
-    fi
-
-    # 依存関係のインストール
-    echo "    依存関係をインストール中..."
-    if (cd "$mcp_dir" && uv sync > /dev/null 2>&1); then
-        echo "    ✓ 依存関係インストール完了"
-    else
-        echo "    ✗ 依存関係インストール失敗"
-        return
-    fi
+    local mcp_repo="git+https://github.com/shiiman/multi-agent-mcp"
 
     # MCP 設定の追加（未設定の場合のみ）
+    # uvx で GitHub から直接インストール（--refresh で毎回最新版を取得）
     if ! claude mcp list 2>/dev/null | grep -q "$mcp_name"; then
-        claude mcp add --transport stdio --scope user "$mcp_name" -- \
-            uv --directory "$mcp_dir" run "$mcp_name"
+        claude mcp add --scope user "$mcp_name" -- \
+            uvx --refresh --from "$mcp_repo" "$mcp_name"
         echo "    ✓ $mcp_name を Claude に追加"
     else
         echo "    ✓ $mcp_name (既に設定済み)"
