@@ -63,3 +63,6 @@ keybind = super+2=goto_tab:2
 keybind = super+3=goto_tab:3
 keybind = super+4=goto_tab:4
 keybind = super+5=goto_tab:5
+
+# SSH先での互換性のためTERMをxterm-256colorに設定
+term = xterm-256color
