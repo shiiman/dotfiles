@@ -53,6 +53,8 @@ node_modules/
 .claude/plans/
 .cursor/mcp.local.json
 .multi-agent-mcp/
+.playwright-mcp/
+
 
 # 一時ファイル
 tmp
