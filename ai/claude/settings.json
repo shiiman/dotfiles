@@ -2,6 +2,7 @@
   "plansDirectory": "./.claude/plans",
   "permissions": {
     "allow": [
+      "mcp__multi-agent-mcp__*",
       "Read(*)",
       "Glob(*)",
       "Grep(*)",
