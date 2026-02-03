@@ -16,7 +16,7 @@ model_provider = "openai"
 
 # 推論の深さ（デフォルト: "medium"）
 # 値: "minimal", "low", "medium", "high", "xhigh"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 # 推論サマリーの出力（デフォルト: "auto"）
 # 値: "auto", "concise", "detailed", "none"
@@ -50,6 +50,7 @@ approval_policy = "on-failure"
 #   - "workspace-write": ワークスペース内への書き込み許可
 #   - "danger-full-access": フルアクセス（危険）
 sandbox_mode = "workspace-write"
+personality = "pragmatic"
 
 # =============================================================================
 # Sandbox Workspace Write Settings
