@@ -99,12 +99,12 @@
     "command": "~/dotfiles/ai/claude/scripts/statusline.sh"
   },
   "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": false,
     "typescript-lsp@claude-plugins-official": false,
     "context7@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
-    "shiiman-plugin@shiiman-claude-code-plugins": true,
-    "shiiman-claude@shiiman-claude-code-plugins": true,
+    "shiiman-plugin@shiiman-claude-code-plugins": false,
+    "shiiman-claude@shiiman-claude-code-plugins": false,
     "shiiman-git@shiiman-claude-code-plugins": true,
     "shiiman-google@shiiman-claude-code-plugins": true,
     "shiiman-slack@shiiman-claude-code-plugins": true,
