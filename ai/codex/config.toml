@@ -16,7 +16,7 @@ model_provider = "openai"
 
 # 推論の深さ（デフォルト: "medium"）
 # 値: "minimal", "low", "medium", "high", "xhigh"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 
 # 推論サマリーの出力（デフォルト: "auto"）
 # 値: "auto", "concise", "detailed", "none"
@@ -49,8 +49,11 @@ approval_policy = "on-failure"
 #   - "read-only": ファイルの読み取りのみ
 #   - "workspace-write": ワークスペース内への書き込み許可
 #   - "danger-full-access": フルアクセス（危険）
-sandbox_mode = "workspace-write"
 personality = "pragmatic"
+sandbox_mode = "workspace-write"
+
+# Web検索機能 disabled/cached/live（デフォルト: disabled）
+web_search = "cached"
 
 # =============================================================================
 # Sandbox Workspace Write Settings
@@ -65,9 +68,6 @@ network_access = true
 # =============================================================================
 
 [features]
-# Web検索機能（デフォルト: false）- 安定版
-web_search_request = false
-
 # 画像表示ツール（デフォルト: true）- 安定版
 view_image_tool = true
 
@@ -166,9 +166,9 @@ project_doc_max_bytes = 32768
 # startup_timeout_sec = 10       # デフォルト: 10
 # tool_timeout_sec = 60          # デフォルト: 60
 
-[mcp_servers.modular]
-args = []
-command = "scripts/serena-mcp-wrapper.sh"
-enabled = true
-startup_timeout_sec = 10
-tool_timeout_sec = 60
+# [mcp_servers.modular]
+# args = []
+# command = "scripts/serena-mcp-wrapper.sh"
+# enabled = true
+# startup_timeout_sec = 10
+# tool_timeout_sec = 60
