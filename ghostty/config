@@ -3,7 +3,7 @@
 
 # フォント設定
 font-family = "Ricty Diminished"
-font-size = 12
+font-size = 11
 font-thicken = true
 
 # Molokai カラースキーム (iTerm2から変換)
