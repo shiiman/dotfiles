@@ -42,7 +42,7 @@ fi
 # コスト表示（0より大きい場合のみ）
 COST_INFO=""
 if [ "$(echo "$COST > 0" | bc -l 2>/dev/null)" = "1" ]; then
-    COST_INFO=" | 💰 \$${COST}"
+    COST_INFO=$(printf ' | 💰 $%.2f' "$COST")
 fi
 
 # 出力
