@@ -16,7 +16,7 @@ model_provider = "openai"
 
 # 推論の深さ（デフォルト: "medium"）
 # 値: "minimal", "low", "medium", "high", "xhigh"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 
 # 推論サマリーの出力（デフォルト: "auto"）
 # 値: "auto", "concise", "detailed", "none"
