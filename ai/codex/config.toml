@@ -9,7 +9,7 @@ instructions = ""
 # =============================================================================
 
 # 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
-model = "gpt-5.2-codex"
+model = "gpt-5.3-codex"
 
 # モデルプロバイダー（デフォルト: "openai"）
 model_provider = "openai"
@@ -172,3 +172,7 @@ project_doc_max_bytes = 32768
 # enabled = true
 # startup_timeout_sec = 10
 # tool_timeout_sec = 60
+
+[mcp_servers.playwright]
+args = ["@playwright/mcp@latest"]
+command = "npx"
