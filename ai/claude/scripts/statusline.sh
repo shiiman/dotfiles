@@ -16,16 +16,16 @@ CURRENT_DIR=$(echo "$input" | jq -r '.workspace.current_dir // ""')
 COST=$(echo "$input" | jq -r '.cost.total_cost_usd // 0')
 
 # ホームディレクトリを~に置換して短縮
-DIR_NAME="${CURRENT_DIR/#$HOME/~}"
+# DIR_NAME="${CURRENT_DIR/#$HOME/~}"
 
 # Gitブランチ取得（現在のディレクトリで）
-GIT_BRANCH=""
-if [ -n "$CURRENT_DIR" ] && [ -d "$CURRENT_DIR" ]; then
-    BRANCH=$(git -C "$CURRENT_DIR" branch --show-current 2>/dev/null)
-    if [ -n "$BRANCH" ]; then
-        GIT_BRANCH=" | 🌿 $BRANCH"
-    fi
-fi
+# GIT_BRANCH=""
+# if [ -n "$CURRENT_DIR" ] && [ -d "$CURRENT_DIR" ]; then
+#     BRANCH=$(git -C "$CURRENT_DIR" branch --show-current 2>/dev/null)
+#     if [ -n "$BRANCH" ]; then
+#         GIT_BRANCH=" | 🌿 $BRANCH"
+#     fi
+# fi
 
 # コンテキスト使用率計算
 CONTEXT_INFO=""
@@ -46,4 +46,5 @@ if [ "$(echo "$COST > 0" | bc -l 2>/dev/null)" = "1" ]; then
 fi
 
 # 出力
-echo "[$MODEL] 📁 ${DIR_NAME}${GIT_BRANCH}${CONTEXT_INFO}${COST_INFO}"
+# echo "[$MODEL] 📁 ${DIR_NAME}${GIT_BRANCH}${CONTEXT_INFO}${COST_INFO}"
+echo "[$MODEL] ${CONTEXT_INFO}${COST_INFO}"
