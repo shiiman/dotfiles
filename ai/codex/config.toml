@@ -1,8 +1,12 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
 # Codex CLI Configuration
 # 公式ドキュメント準拠: https://github.com/openai/codex/blob/main/docs/config.md
 
 # プロジェクト固有の指示（AGENTS.mdを使用するため空）
-instructions = ""
+# instructions = ""
+
+check_for_update_on_startup = true
 
 # =============================================================================
 # Model Settings
@@ -30,7 +34,7 @@ model_verbosity = "medium"
 # model_context_window = 128000
 
 # 推論サマリーを強制有効化（デフォルト: false）
-model_supports_reasoning_summaries = false
+# model_supports_reasoning_summaries = false
 
 # =============================================================================
 # Execution Settings
@@ -42,7 +46,7 @@ model_supports_reasoning_summaries = false
 #   - "on-failure": 失敗時のみ承認が必要
 #   - "on-request": リクエスト時のみ承認
 #   - "never": 承認なしで実行（危険）
-approval_policy = "on-failure"
+approval_policy = "on-request"
 
 # サンドボックスモード（デフォルト: "read-only"）
 # 値:
@@ -53,7 +57,7 @@ personality = "pragmatic"
 sandbox_mode = "workspace-write"
 
 # Web検索機能 disabled/cached/live（デフォルト: disabled）
-web_search = "cached"
+web_search = "live"
 
 # =============================================================================
 # Sandbox Workspace Write Settings
@@ -72,7 +76,7 @@ network_access = true
 view_image_tool = true
 
 # スキル機能（デフォルト: false）- 実験的
-skills = false
+skills = true
 
 # unified_exec（デフォルト: false）- 実験的
 unified_exec = false
@@ -176,3 +180,7 @@ project_doc_max_bytes = 32768
 [mcp_servers.playwright]
 args = ["@playwright/mcp@latest"]
 command = "npx"
+
+[mcp_servers.multi-agent-mcp]
+args = ["--reinstall", "--from", "/Users/a12665/Documents/personal/multi-agent-mcp", "multi-agent-mcp"]
+command = "uvx"
