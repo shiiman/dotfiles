@@ -182,5 +182,5 @@ args = ["@playwright/mcp@latest"]
 command = "npx"
 
 [mcp_servers.multi-agent-mcp]
-args = ["--reinstall", "--from", "/Users/a12665/Documents/personal/multi-agent-mcp", "multi-agent-mcp"]
-command = "uvx"
+args = ["--directory", "/Users/a12665/Documents/personal/multi-agent-mcp", "run", "multi-agent-mcp"]
+command = "uv"
