@@ -43,7 +43,7 @@ brew bundle
 ##################################################################
 
 # dotfileの設定.
-sh ~/dotfiles/dotfile_setup.sh
+bash ~/dotfiles/dotfile_setup.sh
 
 # Vimのundo永続化用ディレクトリを作成
 mkdir -p ~/.vim/undo
@@ -55,7 +55,7 @@ if [ "$SHELL" != "/bin/zsh" ]; then
 fi
 
 # miseの設定 (言語バージョン管理)
-sh ~/dotfiles/mise_setup.sh
+bash ~/dotfiles/mise_setup.sh
 
 # fzfをインストール.
 if [ -f /opt/homebrew/opt/fzf/install ]; then
@@ -68,25 +68,23 @@ fi
 if [ -d "/Applications/Sublime Text.app" ]; then
     open -a "Sublime Text"
     sleep 10 # 起動待ち
-    sh ~/dotfiles/SublimeText/sublime_setup.sh
+    bash ~/dotfiles/SublimeText/sublime_setup.sh
 fi
 
 # Ghosttyの設定
-sh ~/dotfiles/ghostty_setup.sh
+bash ~/dotfiles/ghostty_setup.sh
 
 # AIツール設定（Claude Code, Cursor, Codex）
-sh ~/dotfiles/ai_setup.sh
+bash ~/dotfiles/ai_setup.sh
 
 # GTR (Git Worktree Runner) のインストール
 if [ ! -d ~/git-worktree-runner ]; then
     echo "GTR (Git Worktree Runner) をインストール中..."
     git clone https://github.com/coderabbitai/git-worktree-runner.git ~/git-worktree-runner
-    cd ~/git-worktree-runner && ./install.sh
-    cd ~/dotfiles
+    (cd ~/git-worktree-runner && ./install.sh)
 else
     echo "GTR は既にインストールされています。最新版に更新中..."
-    cd ~/git-worktree-runner && git pull && ./install.sh
-    cd ~/dotfiles
+    (cd ~/git-worktree-runner && git pull && ./install.sh)
 fi
 
 # finderで隠しファイルの表示.

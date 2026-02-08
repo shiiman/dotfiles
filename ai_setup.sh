@@ -52,13 +52,13 @@ setup_claude_mcp() {
     echo "  MCP サーバー設定..."
 
     # claude コマンドの確認
-    if ! command -v claude &> /dev/null; then
+    if ! command -v claude >/dev/null 2>&1; then
         echo "    ⚠ claude コマンドが見つかりません（MCP設定をスキップ）"
         return
     fi
 
     # uv コマンドの確認（mise_setup.sh でインストール済みの前提）
-    if ! command -v uv &> /dev/null; then
+    if ! command -v uv >/dev/null 2>&1; then
         echo "    ⚠ uv コマンドが見つかりません"
         echo "      先に ./mise_setup.sh を実行してください"
         return
@@ -124,14 +124,14 @@ install_cursor_extensions() {
     fi
 
     # cursor コマンドの確認
-    if ! command -v cursor &> /dev/null; then
+    if ! command -v cursor >/dev/null 2>&1; then
         echo "  ⚠ cursor コマンドが見つかりません"
         echo "    Cursor > Command Palette > 'Install cursor command' を実行してください"
         return
     fi
 
     # jq コマンドの確認
-    if ! command -v jq &> /dev/null; then
+    if ! command -v jq >/dev/null 2>&1; then
         echo "  ⚠ jq コマンドが見つかりません（拡張機能インストールをスキップ）"
         return
     fi
@@ -146,7 +146,10 @@ install_cursor_extensions() {
     local total
     total=$(echo "$ext_ids" | wc -l | tr -d ' ')
 
-    for ext_id in $ext_ids; do
+    while IFS= read -r ext_id; do
+        if [[ -z "$ext_id" ]]; then
+            continue
+        fi
         ((count++))
         printf "    [%d/%d] %s..." "$count" "$total" "$ext_id"
         if cursor --install-extension "$ext_id" > /dev/null 2>&1; then
@@ -154,7 +157,7 @@ install_cursor_extensions() {
         else
             echo " (スキップ)"
         fi
-    done
+    done <<< "$ext_ids"
 
     echo "  ✓ 拡張機能インストール完了"
 }
@@ -192,9 +195,9 @@ install_antigravity_extensions() {
     fi
 
     local antigravity_cmd=""
-    if command -v antigravity &> /dev/null; then
+    if command -v antigravity >/dev/null 2>&1; then
         antigravity_cmd="antigravity"
-    elif command -v agy &> /dev/null; then
+    elif command -v agy >/dev/null 2>&1; then
         antigravity_cmd="agy"
     else
         echo "  ⚠ Antigravity のコマンドラインツールが見つかりません"
@@ -202,7 +205,7 @@ install_antigravity_extensions() {
         return
     fi
 
-    if ! command -v jq &> /dev/null; then
+    if ! command -v jq >/dev/null 2>&1; then
         echo "  ⚠ jq コマンドが見つかりません（拡張機能インストールをスキップ）"
         return
     fi

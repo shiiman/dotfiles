@@ -8,7 +8,7 @@ This document defines **mandatory rules and constraints** for Cursor when workin
 
 - **Project Name**: dotfiles
 - **Purpose**: macOS 開発環境の設定ファイル管理リポジトリ
-- **Tech Stack**: Bash, Zsh, Homebrew, anyenv
+- **Tech Stack**: Bash, Zsh, Homebrew, mise
 - **Details**: Refer to [README.md](../../README.md)
 
 ---
@@ -97,7 +97,7 @@ This document defines **mandatory rules and constraints** for Cursor when workin
 /setup --check     # 状態確認のみ
 ```
 
-詳細は各コマンドファイル（`.claude/commands/`）を参照してください。
+詳細は各コマンドファイル（`.claude/skills/`）を参照してください。
 
 ---
 

@@ -22,18 +22,6 @@ if [ -z "$SESSION_ID" ] && [ -n "$CURRENT_DIR" ]; then
     SESSION_ID="$CURRENT_DIR"
 fi
 
-# ホームディレクトリを~に置換して短縮
-# DIR_NAME="${CURRENT_DIR/#$HOME/~}"
-
-# Gitブランチ取得（現在のディレクトリで）
-# GIT_BRANCH=""
-# if [ -n "$CURRENT_DIR" ] && [ -d "$CURRENT_DIR" ]; then
-#     BRANCH=$(git -C "$CURRENT_DIR" branch --show-current 2>/dev/null)
-#     if [ -n "$BRANCH" ]; then
-#         GIT_BRANCH=" | 🌿 $BRANCH"
-#     fi
-# fi
-
 # コンテキスト使用率計算
 CONTEXT_INFO=""
 CONTEXT_SIZE=$(echo "$input" | jq -r '.context_window.context_window_size // 0')
@@ -80,8 +68,8 @@ if [ -n "$SESSION_ID" ]; then
         ELAPSED_INFO=$(printf ' | ⏱ %dh%02dm' "$HOURS" "$MINUTES")
     elif [ "$ELAPSED_SECONDS" -ge 60 ]; then
         MINUTES=$((ELAPSED_SECONDS / 60))
-        SECONDS=$((ELAPSED_SECONDS % 60))
-        ELAPSED_INFO=$(printf ' | ⏱ %dm%02ds' "$MINUTES" "$SECONDS")
+        SECS=$((ELAPSED_SECONDS % 60))
+        ELAPSED_INFO=$(printf ' | ⏱ %dm%02ds' "$MINUTES" "$SECS")
     else
         ELAPSED_INFO=$(printf ' | ⏱ %ds' "$ELAPSED_SECONDS")
     fi
@@ -94,5 +82,4 @@ if [ "$(echo "$COST > 0" | bc -l 2>/dev/null)" = "1" ]; then
 fi
 
 # 出力
-# echo "[$MODEL] 📁 ${DIR_NAME}${GIT_BRANCH}${CONTEXT_INFO}${COST_INFO}"
 echo "[$MODEL]${ELAPSED_INFO}${CONTEXT_INFO}${COST_INFO}"
