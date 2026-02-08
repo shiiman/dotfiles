@@ -3,7 +3,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/pear/bin:$PATH"
-export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME="$HOME/.config"
 
 if [ -e "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -75,7 +75,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #  lsの設定                                                #
 ###########################################################
 # lsコマンド時、自動で色がつく
-export CLICOLOR=true
+export CLICOLOR=1
 # 色の設定
 export LSCOLORS='exfxcxdxbxegedabagacad'
 # 補完時の色の設定
@@ -105,7 +105,7 @@ function chpwd() {
 #  aliasの設定                                             #
 ###########################################################
 # historyに日付を表示
-alias history='fc -lt '%F %T' 1'
+alias history='fc -lt "%F %T" 1'
 # grepでヒットした文字列強調
 alias grep="grep --color"
 

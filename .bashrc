@@ -1,6 +1,6 @@
 # pathを設定
 export PATH="$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/pear/bin:$PATH"
-export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'; fi
@@ -40,7 +40,7 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 #  lsの設定                                                #
 ###########################################################
 # lsコマンド時、自動で色がつく
-export CLICOLOR=true
+export CLICOLOR=1
 # 色の設定
 export LSCOLORS='exfxcxdxbxegedabagacad'
 # 補完時の色の設定
@@ -69,7 +69,7 @@ alias la='ls -a'
 
 # cdの後にlsとpwdを実行
 function cdlspwd() {
-    builtin cd "$1" && la && pwd
+    builtin cd "${1:-$HOME}" && la && pwd
 }
 alias cd=cdlspwd
 
@@ -84,7 +84,7 @@ alias gwr='git gtr'
 
 # helm補完
 if type helm >/dev/null 2>&1; then
-    source <(helm completion bash) >/dev/null 2>&1
+    eval "$(helm completion bash)" >/dev/null 2>&1
 fi
 
 ###########################################################
@@ -116,9 +116,6 @@ shopt -s dirspell
 ###########################################################
 # 文字コードをUTF-8に設定
 export LANG=ja_JP.UTF-8
-
-# 区切り文字の設定
-export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\] ~]$ "
