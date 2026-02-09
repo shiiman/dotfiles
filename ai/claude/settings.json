@@ -1,5 +1,7 @@
 {
-  "plansDirectory": "./.claude/plans",
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
       "mcp__multi-agent-mcp__*",
@@ -106,21 +108,19 @@
     "playwright@claude-plugins-official": true,
     "shiiman-plugin@shiiman-claude-code-plugins": false,
     "shiiman-claude@shiiman-claude-code-plugins": false,
-    "shiiman-git@shiiman-claude-code-plugins": true,
     "shiiman-google@shiiman-claude-code-plugins": true,
     "shiiman-slack@shiiman-claude-code-plugins": true,
     "shiiman-docker@shiiman-claude-code-plugins": false,
     "shiiman-go@shiiman-claude-code-plugins": false,
     "shiiman-workflow@shiiman-claude-code-plugins": true,
-    "shiiman-terraform@shiiman-claude-code-plugins": false
+    "shiiman-terraform@shiiman-claude-code-plugins": false,
+    "shiiman-git@shiiman-claude-code-plugins": true
   },
   "outputStyle": "Default",
+  "language": "Japanese",
   "alwaysThinkingEnabled": false,
+  "plansDirectory": "./.claude/plans",
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
-  ],
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": 1
-  },
-  "language": "Japanese"
+  ]
 }
