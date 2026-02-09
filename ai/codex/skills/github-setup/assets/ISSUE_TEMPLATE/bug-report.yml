@@ -1,0 +1,47 @@
+name: バグ報告
+description: バグや予期しない動作を報告する
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 概要
+      description: バグの内容を明確に記述してください
+      placeholder: |
+        何が起きましたか？
+        期待していた動作は何でしたか？
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: バグを再現するための手順
+      placeholder: |
+        1. 「...」に移動
+        2. 「...」をクリック
+        3. エラーが発生
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      description: ご利用の環境の詳細
+      placeholder: |
+        - OS: [例: macOS 14.0]
+        - Node.js: [例: 20.10.0]
+        - ブラウザ: [例: Chrome 120]
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 補足情報
+      description: その他の情報、ログ、スクリーンショットなど
+    validations:
+      required: false
