@@ -132,51 +132,6 @@ file_opener = "cursor"
 # AGENTS.mdから読み込む最大バイト数（デフォルト: 32KiB）
 project_doc_max_bytes = 32768
 
-# =============================================================================
-# Authentication Settings
-# =============================================================================
-
-# ログイン方法（デフォルト: 省略）
-# 値: "chatgpt", "api"
-# forced_login_method = "api"
-
-# 認証情報の保存先（デフォルト: "auto"）
-# 値: "file", "keyring", "auto"
-# cli_auth_credentials_store = "auto"
-
-# =============================================================================
-# Profiles (Optional)
-# =============================================================================
-
-# アクティブなプロファイル名
-# profile = "default"
-
-# プロファイル設定（環境ごとの設定切り替え）
-# [profiles.work]
-# model = "gpt-5.1-codex-max"
-# approval_policy = "untrusted"
-
-# =============================================================================
-# MCP Servers
-# =============================================================================
-
-# MCPサーバー設定
-# [mcp_servers.サーバー名]
-# command = "実行コマンド"       # stdio接続用
-# url = "http://..."            # Streamable HTTP接続用
-# args = ["引数1", "引数2"]
-# env = { "KEY" = "VALUE" }
-# enabled = true                 # デフォルト: true
-# startup_timeout_sec = 10       # デフォルト: 10
-# tool_timeout_sec = 60          # デフォルト: 60
-
-# [mcp_servers.modular]
-# args = []
-# command = "scripts/serena-mcp-wrapper.sh"
-# enabled = true
-# startup_timeout_sec = 10
-# tool_timeout_sec = 60
-
 [mcp_servers.playwright]
 args = ["@playwright/mcp@latest"]
 command = "npx"
