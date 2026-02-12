@@ -136,6 +136,10 @@ project_doc_max_bytes = 32768
 args = ["@playwright/mcp@latest"]
 command = "npx"
 
+[mcp_servers.context7]
+args = ["--yes", "@upstash/context7-mcp@latest"]
+command = "npx"
+
 [mcp_servers.multi-agent-mcp]
 args = ["--from", "git+https://github.com/shiiman/multi-agent-mcp", "multi-agent-mcp"]
 command = "uvx"
