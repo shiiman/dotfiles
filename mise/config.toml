@@ -3,7 +3,7 @@
 
 [tools]
 go = "1.25.5"
-node = "22.12.0"
+node = "25.6.1"
 python = "3.13.10"
 terraform = "1.12.2"
 terragrunt = "0.62.1"
