@@ -171,6 +171,13 @@ setup_codex() {
 
     create_symlink "$DOTFILES_DIR/ai/codex/skills" ~/.codex/skills
     echo "  ✓ skills/ (スキル定義)"
+
+    if [ -f "$DOTFILES_DIR/ai/codex/agent/fast_worker.toml" ]; then
+        create_symlink "$DOTFILES_DIR/ai/codex/agent/fast_worker.toml" ~/.codex/agents/fast_worker.toml
+        echo "  ✓ agents/fast_worker.toml"
+    else
+        echo "  ⚠ ai/codex/agent/fast_worker.toml が見つかりません（スキップ）"
+    fi
 }
 
 # Antigravity 設定

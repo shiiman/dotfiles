@@ -91,9 +91,15 @@ if slug is empty: slug = "no-git-task"
 
 3. Create branch only in `git` mode:
 ```bash
-git fetch origin main
-git checkout main
-git pull origin main
+DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || true)"
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "gh で default branch を取得できません。gh 認証/リポジトリ設定を確認してください。" >&2
+  exit 1
+fi
+
+git fetch origin "$DEFAULT_BRANCH"
+git checkout "$DEFAULT_BRANCH"
+git pull origin "$DEFAULT_BRANCH"
 git checkout -b feature/{slug}
 git push -u origin feature/{slug}
 ```
@@ -188,8 +194,14 @@ git mode:
 ```bash
 git checkout feature/{slug}
 git pull origin feature/{slug}
-git diff main...feature/{slug} --stat
-git log main..feature/{slug} --oneline
+DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || true)"
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "gh で default branch を取得できません。gh 認証/リポジトリ設定を確認してください。" >&2
+  exit 1
+fi
+
+git diff "$DEFAULT_BRANCH"...feature/{slug} --stat
+git log "$DEFAULT_BRANCH"..feature/{slug} --oneline
 ```
 
 no-git mode:
@@ -290,6 +302,7 @@ If `no-git` mode:
 ## Failure/Recovery
 - Missing `caller_agent_id`: stop and recreate/fetch correct owner/admin IDs.
 - MCP/tmux not available: report blocker and request install/repair before retry.
+- `gh` default branch resolution fails: stop and ask user to fix `gh` auth/repository context.
 - Git detection failed and user decision is not captured: stop and ask user to choose no-git continue or stop.
 - In no-git mode, never pass `branch_name` to `send_task`.
 - Admin reports partial failure: send targeted fix request and re-enter Phase 2-4.

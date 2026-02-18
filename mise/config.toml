@@ -14,3 +14,4 @@ uv = "0.9.18"
 experimental = false
 # ツールがない場合に自動インストール
 auto_install = true
+go_set_goroot = false

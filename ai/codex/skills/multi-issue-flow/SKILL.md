@@ -54,11 +54,17 @@ Issue body template:
 - 全Task完了
 - テスト通過
 ```
-2. Create branch from main using issue number:
+2. Create branch from default branch using issue number:
 ```bash
-git fetch origin main
-git checkout main
-git pull origin main
+DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || true)"
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "gh で default branch を取得できません。gh 認証/リポジトリ設定を確認してください。" >&2
+  exit 1
+fi
+
+git fetch origin "$DEFAULT_BRANCH"
+git checkout "$DEFAULT_BRANCH"
+git pull origin "$DEFAULT_BRANCH"
 git checkout -b feature/{issue_number}
 git push -u origin feature/{issue_number}
 ```
@@ -120,8 +126,14 @@ git pull origin feature/{issue_number}
 ```
 2. Show change summary:
 ```bash
-git diff main...feature/{issue_number} --stat
-git log main..feature/{issue_number} --oneline
+DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || true)"
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "gh で default branch を取得できません。gh 認証/リポジトリ設定を確認してください。" >&2
+  exit 1
+fi
+
+git diff "$DEFAULT_BRANCH"...feature/{issue_number} --stat
+git log "$DEFAULT_BRANCH"..feature/{issue_number} --oneline
 ```
 3. Ask for user decision via `request_user_input` (or direct question if unavailable):
 - Approve
