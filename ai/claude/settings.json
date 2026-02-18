@@ -122,5 +122,6 @@
   "plansDirectory": "./.claude/plans",
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
-  ]
+  ],
+  "skipDangerousModePermissionPrompt": true
 }

@@ -84,6 +84,16 @@ unified_exec = false
 # apply_patch_freeform（デフォルト: false）- ベータ
 apply_patch_freeform = false
 
+# multi_agent（デフォルト: false）- 実験的
+multi_agent = true
+
+[agents]
+max_threads = 6
+
+[agents.fast_worker]
+config_file = "~/.codex/agents/fast_worker.toml"
+description = "Fast scoped implementation agent."
+
 # =============================================================================
 # TUI (Terminal User Interface) Settings
 # =============================================================================

@@ -12,10 +12,16 @@ description: 現在のブランチから PR を作成し関連 Issue を参照�
 ### 1. 変更内容の確認
 
 ```bash
+DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || true)"
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "gh で default branch を取得できません。gh 認証/リポジトリ設定を確認してください。" >&2
+  exit 1
+fi
+
 git status
 git diff --staged
 git diff
-git log main..HEAD --oneline
+git log "$DEFAULT_BRANCH"..HEAD --oneline
 ```
 
 ### 2. 関連 Issue の特定

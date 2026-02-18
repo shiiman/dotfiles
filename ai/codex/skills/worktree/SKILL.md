@@ -115,7 +115,7 @@ git gtr list --porcelain
 
 | ブランチ | パス |
 |----------|------|
-| main | /path/to/main |
+| <default-branch> | /path/to/default-branch |
 | feature/A | /path/to/feature-A |
 | feature/B | /path/to/feature-B |
 ```

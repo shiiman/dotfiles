@@ -37,10 +37,16 @@ gh issue view {issue番号} --json title,labels
 ### 4. ブランチ作成
 
 ```bash
-# main ブランチから最新を取得
-git fetch origin main
-git checkout main
-git pull origin main
+# デフォルトブランチから最新を取得
+DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || true)"
+if [ -z "$DEFAULT_BRANCH" ]; then
+  echo "gh で default branch を取得できません。gh 認証/リポジトリ設定を確認してください。" >&2
+  exit 1
+fi
+
+git fetch origin "$DEFAULT_BRANCH"
+git checkout "$DEFAULT_BRANCH"
+git pull origin "$DEFAULT_BRANCH"
 
 # 新しいブランチを作成
 git checkout -b feature/{issue番号}
@@ -58,8 +64,8 @@ git checkout -b feature/{issue番号}
 
 ## 重要な注意事項
 
-- ✅ main ブランチから派生
+- ✅ デフォルトブランチから派生
 - ✅ Issue 番号をブランチ名に含める
 - ✅ Issue タイプに応じたプレフィックス
 - ❌ 既存ブランチを上書きしない
-- ❌ main ブランチ以外から派生しない（明示的な指示がない限り）
+- ❌ デフォルトブランチ以外から派生しない（明示的な指示がない限り）
