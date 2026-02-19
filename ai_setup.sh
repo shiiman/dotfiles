@@ -166,6 +166,9 @@ install_cursor_extensions() {
 setup_codex() {
     echo "Codex設定..."
 
+    create_symlink "$DOTFILES_DIR/ai/codex/AGENTS.md" ~/.codex/AGENTS.md
+    echo "  ✓ AGENTS.md (グローバル指示)"
+
     create_symlink "$DOTFILES_DIR/ai/codex/config.toml" ~/.codex/config.toml
     echo "  ✓ config.toml"
 

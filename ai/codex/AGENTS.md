@@ -1,6 +1,6 @@
-# Global GEMINI.md
+# Global AGENTS.md
 
-This file applies to all Gemini (Antigravity) sessions.
+This file applies to all Codex CLI sessions.
 
 ---
 
