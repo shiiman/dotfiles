@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -u
 
 # miseの初期化確認
 if ! command -v mise >/dev/null 2>&1; then

@@ -1,9 +1,9 @@
 ---
 name: setup
-description: dotfilesの初期セットアップを実行する。シンボリックリンク作成、Homebrew、anyenvのセットアップを順番に実行。
+description: dotfilesの初期セットアップを実行する。シンボリックリンク作成、Homebrew、miseのセットアップを順番に実行。
 disable-model-invocation: true
 allowed-tools: Read, Bash
-argument-hint: "[--skip-brew|--skip-anyenv|--check]"
+argument-hint: "[--skip-brew|--skip-mise|--check]"
 ---
 
 # Project Setup
@@ -19,7 +19,7 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
 
 概要:
   dotfilesの初期セットアップを実行する。
-  シンボリックリンク作成、Homebrew、anyenvのセットアップを順番に実行。
+  シンボリックリンク作成、Homebrew、miseのセットアップを順番に実行。
 
 使用方法:
   /setup [オプション]
@@ -27,7 +27,7 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
 オプション:
   --help         このヘルプを表示
   --skip-brew    Homebrew関連をスキップ
-  --skip-anyenv  anyenvセットアップをスキップ
+  --skip-mise    miseセットアップをスキップ
   --check        現在の状態を確認するのみ
 
 例:
@@ -47,8 +47,8 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
    # Homebrewのインストール状態を確認
    which brew 2>/dev/null || echo "Homebrew未インストール"
 
-   # anyenvのインストール状態を確認
-   which anyenv 2>/dev/null || echo "anyenv未インストール"
+   # miseのインストール状態を確認
+   which mise 2>/dev/null || echo "mise未インストール"
    ```
 
 2. **インストールステップの実行**:
@@ -61,8 +61,8 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
    # Step 2: Homebrew パッケージインストール（--skip-brew でスキップ可）
    brew bundle --file=Brewfile
 
-   # Step 3: anyenv セットアップ（--skip-anyenv でスキップ可）
-   ./anyenv_setup.sh
+   # Step 3: mise セットアップ（--skip-mise でスキップ可）
+   ./mise_setup.sh
 
    # Step 4: macOS 設定（オプション、確認後に実行）
    ./mac_setup.sh
@@ -71,7 +71,7 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
 3. **エラーハンドリング**:
    - 各ステップでエラーが発生した場合、エラー内容を報告し、続行するか確認
    - `--skip-brew` オプションがある場合、Step 2をスキップ
-   - `--skip-anyenv` オプションがある場合、Step 3をスキップ
+   - `--skip-mise` オプションがある場合、Step 3をスキップ
 
 4. **結果報告**:
    - 成功したステップ一覧
@@ -83,7 +83,7 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
 ```bash
 /setup                    # 全ステップを実行
 /setup --skip-brew        # Homebrew関連をスキップ
-/setup --skip-anyenv      # anyenvセットアップをスキップ
+/setup --skip-mise        # miseセットアップをスキップ
 /setup --check            # 現在の状態を確認するのみ
 ```
 
@@ -93,7 +93,7 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
 |------|---------|------|
 | 1 | `./dotfile_setup.sh` | シンボリックリンク作成 |
 | 2 | `brew bundle` | Homebrewパッケージインストール |
-| 3 | `./anyenv_setup.sh` | anyenvセットアップ |
+| 3 | `./mise_setup.sh` | miseセットアップ |
 | 4 | `./mac_setup.sh` | macOS設定（オプション） |
 
 ## Post-Setup
@@ -115,8 +115,8 @@ dotfilesの初期セットアップを実行する。新しいマシンでの環
    # Homebrewパッケージの確認
    brew list
 
-   # anyenvの確認
-   anyenv versions
+   # miseの確認
+   mise list
    ```
 
 ## Notes

@@ -10,7 +10,7 @@ terragrunt = "0.62.1"
 uv = "0.9.18"
 
 [settings]
-# 実験的機能を有効化
+# 実験的機能を無効化
 experimental = false
 # ツールがない場合に自動インストール
 auto_install = true

@@ -1,6 +1,7 @@
 #!/bin/bash
 # Ghosttyセットアップスクリプト
 set -e
+set -u
 
 DOTFILES_DIR=~/dotfiles
 GHOSTTY_CONFIG_DIR=~/.config/ghostty

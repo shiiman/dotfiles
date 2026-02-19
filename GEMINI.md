@@ -11,9 +11,9 @@ This file provides guidance to Gemini when working with code in this repository.
 - **Tech Stack**:
   - Shell: Bash, Zsh
   - Package Manager: Homebrew
-  - Version Manager: anyenv (nodenv, rbenv, pyenv)
-  - Terminal: iTerm2
-  - Editor: VSCode, Sublime Text, Vim
+  - Version Manager: mise
+  - Terminal: iTerm2, Ghostty
+  - Editor: VSCode, Cursor, Sublime Text, Vim
 - **Details**: Refer to [README.md](README.md)
 
 ---
@@ -68,7 +68,7 @@ brew bundle --file=Brewfile  # Explicit Brewfile path
 ### Development Environment
 
 ```bash
-./anyenv_setup.sh            # Install anyenv and language version managers
+./mise_setup.sh              # Install mise and language runtimes
 ```
 
 ### Shell Configuration
