@@ -90,9 +90,9 @@ multi_agent = true
 [agents]
 max_threads = 6
 
-[agents.worker]
-config_file = "~/.codex/agents/worker.toml"
-description = "Worker agent."
+[agents.default_worker]
+config_file = "~/.codex/agents/default_worker.toml"
+description = "Default worker agent."
 
 [agents.fast_worker]
 config_file = "~/.codex/agents/fast_worker.toml"
