@@ -42,7 +42,7 @@ dotfiles/
 │   │   └── scripts/          # カスタムスクリプト
 │   ├── cursor/           # Cursor
 │   ├── codex/            # Codex
-│   │   └── agent/        # Codexエージェント設定
+│   │   └── agents/       # Codexエージェント設定
 │   └── antigravity/      # Antigravity
 │       └── GEMINI.md     # Antigravityグローバル指示
 ├── iterm/                # iTerm2 設定ファイル
