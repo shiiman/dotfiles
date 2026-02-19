@@ -50,12 +50,16 @@ node_modules/
 
 # Claude/Cursor
 .claude/settings.local.json
-.claude/plans/
+.claude/memory/
 .cursor/mcp.local.json
 .multi-agent-mcp/
 .playwright-mcp/
 
 
+# Go
+dist/
+*.test
+
 # 一時ファイル
-tmp
-temp
+tmp/
+temp/

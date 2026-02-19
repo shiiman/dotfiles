@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -u
 
 DOTFILES_DIR=~/dotfiles
 
@@ -93,7 +94,7 @@ setup_cursor() {
     echo "  ✓ mcp.json"
 
     # エディタ設定
-    local cursor_user_dir=~/Library/Application\ Support/Cursor/User
+    local cursor_user_dir="$HOME/Library/Application Support/Cursor/User"
     if [ -d "$cursor_user_dir" ] || [ -L "$cursor_user_dir" ]; then
         create_symlink "$DOTFILES_DIR/ai/cursor/User/settings.json" "$cursor_user_dir/settings.json"
         echo "  ✓ User/settings.json (エディタ設定)"
@@ -150,7 +151,7 @@ install_cursor_extensions() {
         if [[ -z "$ext_id" ]]; then
             continue
         fi
-        ((count++))
+        count=$((count + 1))
         printf "    [%d/%d] %s..." "$count" "$total" "$ext_id"
         if cursor --install-extension "$ext_id" > /dev/null 2>&1; then
             echo " ✓"
@@ -233,7 +234,7 @@ install_antigravity_extensions() {
         if [[ -z "$ext_id" ]]; then
             continue
         fi
-        ((count++))
+        count=$((count + 1))
         printf "    [%d/%d] %s..." "$count" "$total" "$ext_id"
         if "$antigravity_cmd" --install-extension "$ext_id" > /dev/null 2>&1; then
             echo " ✓"

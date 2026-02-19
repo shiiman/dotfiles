@@ -1,9 +1,6 @@
 # dotfiles リポジトリ固有の除外設定
 # ※ 一般的な除外設定は .gitignore_global で管理
 
-# Claude Code ローカル設定
-.claude/settings.local.json
-
 # Sublime Text キャッシュ
 SublimeText/Installed Packages/PyV8/
 SublimeText/Packages/User/Package Control.cache/

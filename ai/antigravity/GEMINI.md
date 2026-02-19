@@ -63,3 +63,28 @@ This file applies to all Gemini (Antigravity) sessions.
 ## Review Guidelines
 
 Check for: Security (OWASP Top 10), Code quality, Performance (N+1, leaks).
+
+---
+
+## Testing Discipline
+
+- NEVER leave failing tests - fix them before moving to the next task.
+- Run the project's test suite after code modifications that could affect behavior.
+- If tests cannot be fixed within reasonable effort, revert the change and explain why.
+- Do not mark tasks as "completed" (TodoWrite) while tests are failing.
+
+---
+
+## Code Modification Safety
+
+- Before modifying architecture-level code, READ the existing implementation first.
+- Do NOT remove or rewrite code you don't understand - ask first.
+- When reporting task completion, VERIFY the result is actually working (don't just check command exit code).
+
+---
+
+## Session Scoping
+
+- One session = one focused deliverable with clear success criteria.
+- Complete current TodoWrite items fully (including tests) before starting new ones.
+- If scope expands beyond initial request, confirm with user before proceeding.

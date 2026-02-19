@@ -37,50 +37,18 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 [ -f /opt/homebrew/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash ] && source /opt/homebrew/opt/git-flow/etc/bash_completion.d/git-flow-completion.bash
 
 ###########################################################
-#  lsの設定                                                #
-###########################################################
-# lsコマンド時、自動で色がつく
-export CLICOLOR=1
-# 色の設定
-export LSCOLORS='exfxcxdxbxegedabagacad'
-# 補完時の色の設定
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-
-###########################################################
 #  aliasの設定                                             #
 ###########################################################
 # history にコマンド実行時刻を記録する
 HISTTIMEFORMAT='%Y-%m-%d '
 
-# grepでヒットした文字列強調
-alias grep="grep --color"
-
-alias cp='cp -i'
-alias rm='rm -i'
-alias mkdir='mkdir -p'
-alias mv='mv -i -v'
-
 alias ..='cd ../'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-
-alias ll='ls -l'
-alias la='ls -a'
 
 # cdの後にlsとpwdを実行
 function cdlspwd() {
     builtin cd "${1:-$HOME}" && la && pwd
 }
 alias cd=cdlspwd
-
-if type vim >/dev/null 2>&1; then
-    alias vi='vim'
-fi
-
-alias k='kubectl'
-
-# GTR (Git Worktree Runner) - git worktree管理ツール
-alias gwr='git gtr'
 
 # helm補完
 if type helm >/dev/null 2>&1; then
@@ -92,8 +60,6 @@ fi
 ###########################################################
 # ヒストリを保存するファイル指定
 HISTFILE=~/.bash_history
-# メモリに保存されるヒストリの件数
-HISTSIZE=10000
 # 保存されるヒストリの件数
 HISTFILESIZE=10000
 # 重複・空白開始コマンドを除外
@@ -114,11 +80,15 @@ shopt -s dirspell
 ###########################################################
 #  その他の設定                                             #
 ###########################################################
-# 文字コードをUTF-8に設定
-export LANG=ja_JP.UTF-8
-
 # プロンプト設定
 PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\] ~]$ "
+
+# PATH の重複排除
+PATH=$(printf '%s' "$PATH" | awk -v RS=: '!seen[$0]++ {if (NR>1) printf ":"; printf $0}')
+export PATH
+
+# 共通設定の読み込み
+[ -f ~/.shellrc_common ] && source ~/.shellrc_common
 
 # direnv - プロジェクト固有の環境変数自動設定
 if command -v direnv >/dev/null 2>&1; then
