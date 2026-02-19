@@ -42,7 +42,12 @@ This file applies to all Claude Code sessions.
 ## Commit Guidelines
 
 - NEVER use `--no-verify` when committing.
-- Write commit messages in Japanese, concise and descriptive in one line.
+- Use [Conventional Commits](https://www.conventionalcommits.org/) format.
+  - Format: `<type>(<scope>): <description>`
+  - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
+  - Scope is optional but recommended.
+  - Description should be concise and written in Japanese.
+  - Example: `feat(shell): zshrcにfzf統合を追加`, `fix(brew): Brewfileのパッケージ重複を修正`
 - Do not commit without user's explicit request.
 
 ---
