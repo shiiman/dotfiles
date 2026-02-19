@@ -119,17 +119,15 @@ set sidescroll=1
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 
-" Insertモードのときカーソルの形状を変更
+" カーソル形状設定（Neovim 0.2以降はguicursorを使用）
 if has('nvim')
-  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+  set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 elseif empty($TMUX)
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-"  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 else
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-"  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 endif
 
 
@@ -164,7 +162,10 @@ set smartcase
 " 検索時に最後まで行ったら最初に戻る
 set wrapscan
 " vimgrep時にquickfix-windowで一覧表示
-autocmd QuickFixCmdPost *grep* cwindow
+augroup MyQuickFix
+  autocmd!
+  autocmd QuickFixCmdPost *grep* cwindow
+augroup END
 " 無視するディレクトリ
 let Grep_Skip_Dirs = '.svn .git'
 " バイナルファイルを無視
@@ -278,4 +279,7 @@ function! s:remove_dust()
     call setpos(".", cursor)
     unlet cursor
 endfunction
-autocmd BufWritePre * call <SID>remove_dust()
+augroup MyBufWrite
+  autocmd!
+  autocmd BufWritePre * call <SID>remove_dust()
+augroup END
