@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -u
 
 # Homebrewのインストール.
 if ! type brew >/dev/null 2>&1; then
@@ -49,9 +50,14 @@ bash ~/dotfiles/dotfile_setup.sh
 mkdir -p ~/.vim/undo
 
 # デフォルトシェルをzshに変更（パスワード入力が必要）
-if [ "$SHELL" != "/bin/zsh" ]; then
+# Homebrew版zshを優先し、/etc/shellsに含まれるか確認してからデフォルトシェルを変更
+ZSH_PATH=$(command -v zsh)
+if ! grep -qF "$ZSH_PATH" /etc/shells; then
+    echo "$ZSH_PATH" | sudo tee -a /etc/shells
+fi
+if [ "$SHELL" != "$ZSH_PATH" ]; then
     echo "デフォルトシェルをzshに変更します（パスワードが必要です）"
-    chsh -s /bin/zsh
+    chsh -s "$ZSH_PATH"
 fi
 
 # miseの設定 (言語バージョン管理)

@@ -1,7 +1,6 @@
-# pathを設定
+# pathを設定（/opt/homebrew/bin, /opt/homebrew/sbin は brew shellenv で設定）
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/pear/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -26,15 +25,12 @@ export PATH="$HOME/.local/bin:$PATH"
 ###########################################################
 
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" &&
-        print -P "%F{33} %F{34}Installation successful.%f%b" ||
-        print -P "%F{160} The clone has failed.%f%b"
+# zinit のパス（新旧両方に対応）
+if [[ -f "$HOME/.local/share/zinit/zinit.git/zinit.zsh" ]]; then
+    source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+elif [[ -f "$HOME/.zinit/bin/zinit.zsh" ]]; then
+    source "$HOME/.zinit/bin/zinit.zsh"
 fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 if typeset -p _comps >/dev/null 2>&1; then
     _comps[zinit]=_zinit
@@ -43,10 +39,11 @@ fi
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zdharma-continuum/zinit-annex-as-monitor \
     zdharma-continuum/zinit-annex-bin-gem-node \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
+# 非推奨の可能性があるためコメントアウト
+# zinit light-mode zdharma-continuum/zinit-annex-as-monitor
 
 ### End of Zinit's installer chunk
 
@@ -74,13 +71,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 ###########################################################
 #  lsの設定                                                #
 ###########################################################
-# lsコマンド時、自動で色がつく
-export CLICOLOR=1
-# 色の設定
-export LSCOLORS='exfxcxdxbxegedabagacad'
-# 補完時の色の設定
-export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-# ZLS_COLORS設定
+# ZLS_COLORS設定（CLICOLOR, LSCOLORS, LS_COLORS は .shellrc_common で設定）
 export ZLS_COLORS=$LS_COLORS
 
 ###########################################################
@@ -95,9 +86,11 @@ setopt pushd_ignore_dups
 # コマンドのtypo修正提案
 setopt correct
 
-# cdの後にlsとpwdを実行
+# ディレクトリ移動時の表示（ファイル数が多い場合は省略）
 function chpwd() {
-    ls -a
+    if [[ $(ls -1 | wc -l) -lt 50 ]]; then
+        ls -a
+    fi
     pwd
 }
 
@@ -106,28 +99,6 @@ function chpwd() {
 ###########################################################
 # historyに日付を表示
 alias history='fc -lt "%F %T" 1'
-# grepでヒットした文字列強調
-alias grep="grep --color"
-
-alias cp='cp -i'
-alias rm='rm -i'
-alias mkdir='mkdir -p'
-alias mv='mv -i -v'
-
-alias ...='cd ../..'
-alias ....='cd ../../..'
-
-alias ll='ls -l'
-alias la='ls -a'
-
-if type vim >/dev/null 2>&1; then
-    alias vi='vim'
-fi
-
-alias k='kubectl'
-
-# GTR (Git Worktree Runner) - git worktree管理ツール
-alias gwr='git gtr'
 
 ###########################################################
 #  グロブの設定                                             #
@@ -150,8 +121,6 @@ setopt numeric_glob_sort
 ###########################################################
 # ヒストリを保存するファイル指定
 HISTFILE=~/.zsh_history
-# メモリに保存されるヒストリの件数
-HISTSIZE=10000
 # 保存されるヒストリの件数
 SAVEHIST=10000
 
@@ -176,7 +145,7 @@ setopt share_history
 ###########################################################
 # 補完機能を有効にする
 autoload -Uz compinit compdef
-compinit
+compinit -C
 
 # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_param_slash
@@ -257,7 +226,8 @@ zstyle ':vcs_info:*' formats "[%F{blue}%c%u%b%f]"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 
 # プロンプト表示直前にvcs_info呼び出し
-precmd () { vcs_info }
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd vcs_info
 # プロンプト表示
 RPROMPT='${vcs_info_msg_0_}'$RPROMPT
 
@@ -267,8 +237,7 @@ RPROMPT='${vcs_info_msg_0_}'$RPROMPT
 # 各変数の重複を自動削除
 typeset -U path cdpath fpath manpath
 
-# 文字コードをUTF-8に設定
-export LANG=ja_JP.UTF-8
+# 文字コードをUTF-8に設定（LANG は .shellrc_common で設定）
 # 日本語ファイル名等8ビットを通す
 setopt print_eight_bit
 
@@ -314,7 +283,10 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/home
 if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Added by Antigravity
-export PATH="${HOME}/.antigravity/antigravity/bin:$PATH"
+[[ -d "${HOME}/.antigravity/antigravity/bin" ]] && export PATH="${HOME}/.antigravity/antigravity/bin:$PATH"
+
+# 共通設定の読み込み
+[ -f ~/.shellrc_common ] && source ~/.shellrc_common
 
 # direnv - プロジェクト固有の環境変数自動設定
 if command -v direnv >/dev/null 2>&1; then

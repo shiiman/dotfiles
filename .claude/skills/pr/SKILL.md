@@ -26,7 +26,7 @@ argument-hint: "[タイトル] [--base <branch>|--draft]"
 
 オプション:
   --help           このヘルプを表示
-  --base <branch>  宛先ブランチを指定（デフォルト: master）
+  --base <branch>  宛先ブランチを指定（デフォルト: リポジトリのデフォルトブランチ）
   --draft          ドラフトPRとして作成
 
 例:
@@ -38,7 +38,7 @@ argument-hint: "[タイトル] [--base <branch>|--draft]"
 ## Instructions
 
 1. **引数の解析**:
-   - `--base <branch>`: 宛先ブランチを指定（デフォルト: master）
+   - `--base <branch>`: 宛先ブランチを指定（デフォルト: リポジトリのデフォルトブランチを `gh repo view --json defaultBranchRef -q '.defaultBranchRef.name'` で動的取得）
    - `--draft`: ドラフトPRとして作成
    - その他の文字列: PRタイトルとして使用
 
@@ -53,7 +53,7 @@ argument-hint: "[タイトル] [--base <branch>|--draft]"
 3. **デフォルトブランチ取得**:
 
    ```bash
-   DEFAULT_BRANCH=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+   DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef -q '.defaultBranchRef.name' 2>/dev/null || echo "master")
    ```
 
 4. **ブランチ状態確認**:
@@ -110,9 +110,9 @@ argument-hint: "[タイトル] [--base <branch>|--draft]"
 9. **PR作成**:
 
    ```bash
-   gh pr create --title "タイトル" --body "本文" --base master
+   gh pr create --title "タイトル" --body "本文" --base ${DEFAULT_BRANCH}
    # または --draft オプション付き
-   gh pr create --title "タイトル" --body "本文" --base master --draft
+   gh pr create --title "タイトル" --body "本文" --base ${DEFAULT_BRANCH} --draft
    ```
 
 10. **結果報告**:

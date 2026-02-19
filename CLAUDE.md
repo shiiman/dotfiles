@@ -71,6 +71,18 @@ brew bundle --file=Brewfile  # Explicit Brewfile path
 ./mise_setup.sh             # Install mise and language runtimes
 ```
 
+### AI Tools Setup
+
+```bash
+./ai_setup.sh              # AI tools configuration symlinks (Claude, Cursor, Codex, Antigravity)
+```
+
+### Terminal Setup
+
+```bash
+./ghostty_setup.sh         # Create symlinks for Ghostty terminal configuration
+```
+
 ### Shell Configuration
 
 ```bash

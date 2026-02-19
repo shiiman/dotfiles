@@ -39,10 +39,13 @@ dotfiles/
 │   ├── claude/           # Claude Code
 │   │   ├── settings.json     # 設定（モデル、権限、フック）
 │   │   ├── CLAUDE.md         # グローバル指示
-│   │   ├── plugins.yml       # マーケットプレイス・プラグイン
 │   │   └── scripts/          # カスタムスクリプト
 │   ├── cursor/           # Cursor
-│   └── codex/            # Codex
+│   ├── codex/            # Codex
+│   │   └── agent/        # Codexエージェント設定
+│   └── antigravity/      # Antigravity
+│       └── GEMINI.md     # Antigravityグローバル指示
+├── iterm/                # iTerm2 設定ファイル
 ├── .claude/              # Claude Code プロジェクト設定
 ├── .cursor/              # Cursor プロジェクト設定
 ├── SublimeText/          # Sublime Text 設定
@@ -85,6 +88,10 @@ curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.s
 - AIツール設定（Claude Code, Cursor, Codex）
 - Finder で隠しファイルを表示
 - Ricty フォントのインストール（存在する場合）
+
+### GTR (Git Worktree Runner)
+
+`mac_setup.sh` 実行時に自動インストールされます。git worktree を効率的に管理するツールです。
 
 ---
 
@@ -157,7 +164,6 @@ sh ~/dotfiles/ai_setup.sh
 |--------|-------------|------|
 | Claude Code | `~/.claude/settings.json` | モデル、権限、フック設定 |
 | Claude Code | `~/.claude/CLAUDE.md` | グローバル指示（出力言語、ルール等） |
-| Claude Code | `ai/claude/plugins.yml` | マーケットプレイス・プラグインリスト |
 | Claude Code | `ai/claude/scripts/` | カスタムスクリプト（statusline等） |
 | Claude Code | MCP: `multi-agent-mcp` | マルチエージェント MCP サーバー |
 | Cursor | `~/.cursor/mcp.json` | MCPサーバー設定 |
@@ -169,8 +175,6 @@ sh ~/dotfiles/ai_setup.sh
 | Codex | `~/.codex/skills/` | スキル定義 |
 | Antigravity | `~/.gemini/GEMINI.md` | グローバル指示（出力言語、ルール等） |
 | Antigravity | `~/.antigravity/extensions/extensions.json` | 拡張機能リスト |
-
-Claude Code のプラグインは `plugins.yml` に記載されたリストから自動インストールされます。
 
 MCP サーバー `multi-agent-mcp` は `uvx` で GitHub から直接インストールされます（リポジトリの clone 不要）。
 
