@@ -292,3 +292,6 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/op
 if command -v direnv >/dev/null 2>&1; then
     eval "$(direnv hook zsh)"
 fi
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH

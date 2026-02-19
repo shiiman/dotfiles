@@ -106,6 +106,7 @@
     "typescript-lsp@claude-plugins-official": false,
     "context7@claude-plugins-official": true,
     "playwright@claude-plugins-official": true,
+    "shiiman-common@shiiman-claude-code-plugins": true,
     "shiiman-claude@shiiman-claude-code-plugins": true,
     "shiiman-git@shiiman-claude-code-plugins": true,
     "shiiman-github@shiiman-claude-code-plugins": true,

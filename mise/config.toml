@@ -2,12 +2,12 @@
 # https://mise.jdx.dev/configuration.html
 
 [tools]
-go = "1.25.5"
+go = "1.26.0"
 node = "25.6.1"
-python = "3.13.10"
-terraform = "1.12.2"
-terragrunt = "0.62.1"
-uv = "0.9.18"
+python = "3.14.3"
+terraform = "1.14.5"
+terragrunt = "0.99.3"
+uv = "0.10.4"
 
 [settings]
 # 実験的機能を無効化

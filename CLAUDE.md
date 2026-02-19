@@ -115,35 +115,13 @@ source ~/.zshrc              # Reload Zsh configuration
 
 ## Development Support Skills
 
-以下のSkillsで開発効率を向上できます。Slash Command（`/review`など）で呼び出せます。
-
-### Code Review
-
-```bash
-/review            # 変更内容の詳細レビュー
-/review --staged   # staged変更のみ
-/review --security # セキュリティ観点のみ
-```
+以下のSkillsで開発効率を向上できます。Slash Commandで呼び出せます。
 
 ### Lint
 
 ```bash
 /lint              # シェルスクリプトをlint（shellcheck）
 /lint --check      # チェックのみ（修正しない）
-```
-
-### Git Operations
-
-```bash
-/commit            # 変更をコミット
-/pr                # Pull Request作成
-```
-
-### Setup
-
-```bash
-/setup             # 開発環境セットアップ
-/setup --check     # 現在の状態を確認
 ```
 
 ---
@@ -154,7 +132,6 @@ source ~/.zshrc              # Reload Zsh configuration
 
 | Subagent | 目的 |
 |----------|------|
-| `code-reviewer` | コード品質・セキュリティレビュー |
 | `lint-executor` | Lint実行・自動修正 |
 
 Subagentの詳細は `.claude/agents/` を参照してください。
@@ -163,25 +140,11 @@ Subagentの詳細は `.claude/agents/` を参照してください。
 
 ## Skills
 
-### 自動適用スキル
-
-以下のSkillsがコード編集時に自動的に適用されます。
-
-| Skill | 目的 | 自動適用条件 |
-|-------|------|-------------|
-| `security-review` | セキュリティ脆弱性検出 | すべてのコード変更時 |
-
-### ユーザー呼び出しスキル
-
 以下のSkillsはSlash Commandで呼び出せます。
 
 | Skill | 目的 | 呼び出し方法 |
-|-------|------|-------------|
-| `review` | コードレビュー | `/review` |
+| --- | --- | --- |
 | `lint` | シェルスクリプトのlint実行 | `/lint` |
-| `commit` | 変更のコミット | `/commit` |
-| `pr` | Pull Request作成 | `/pr` |
-| `setup` | dotfilesの初期セットアップ | `/setup` |
 
 Skillsの詳細は `.claude/skills/` を参照してください。
 

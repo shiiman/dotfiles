@@ -176,11 +176,23 @@ setup_codex() {
     create_symlink "$DOTFILES_DIR/ai/codex/skills" ~/.codex/skills
     echo "  ✓ skills/ (スキル定義)"
 
-    if [ -f "$DOTFILES_DIR/ai/codex/agent/fast_worker.toml" ]; then
-        create_symlink "$DOTFILES_DIR/ai/codex/agent/fast_worker.toml" ~/.codex/agents/fast_worker.toml
-        echo "  ✓ agents/fast_worker.toml"
+    # agent/ 配下の全 .toml ファイルをシンボリックリンク
+    local agent_dir="$DOTFILES_DIR/ai/codex/agent"
+    if [ -d "$agent_dir" ]; then
+        local agent_count=0
+        for toml_file in "$agent_dir"/*.toml; do
+            [ -f "$toml_file" ] || continue
+            local filename
+            filename=$(basename "$toml_file")
+            create_symlink "$toml_file" ~/.codex/agents/"$filename"
+            echo "  ✓ agents/$filename"
+            agent_count=$((agent_count + 1))
+        done
+        if [ "$agent_count" -eq 0 ]; then
+            echo "  ⚠ ai/codex/agent/ に .toml ファイルがありません"
+        fi
     else
-        echo "  ⚠ ai/codex/agent/fast_worker.toml が見つかりません（スキップ）"
+        echo "  ⚠ ai/codex/agent/ ディレクトリが見つかりません（スキップ）"
     fi
 }
 
