@@ -54,10 +54,6 @@ go list -m -u all
 ### 3. 更新実行
 
 ```bash
-# バックアップ作成
-cp go.mod go.mod.backup
-cp go.sum go.sum.backup
-
 # 特定モジュールの更新
 go get -u github.com/xxx/yyy@latest
 

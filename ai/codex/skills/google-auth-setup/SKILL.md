@@ -36,7 +36,7 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 1. [Google Cloud Console](https://console.cloud.google.com/) にアクセス
 2. 上部の「プロジェクトを選択」→「新しいプロジェクト」
-3. プロジェクト名を入力（例: `claude-code-plugins`）して「作成」
+3. プロジェクト名を入力（例: `codex-plugins`）して「作成」
 
 ### 2. API を有効化
 
@@ -58,7 +58,7 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 （「Google Auth Platform が設定されていません」と表示されたら「開始」をクリック）
 
 1. **アプリ情報**
-   - アプリ名: 任意（例: `Claude Code Plugins`）
+   - アプリ名: 任意（例: `Codex Plugins`）
    - ユーザーサポートメール: 自分のメールアドレス
    - 「次へ」
 
@@ -85,7 +85,7 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 1. 「+ クライアントを作成」をクリック
 2. アプリケーションの種類: **デスクトップアプリ**
-3. 名前: 任意（例: `Claude Code`）
+3. 名前: 任意（例: `Codex`）
 4. 「作成」
 5. **作成直後に JSON をダウンロード**（後からダウンロードできない場合あり）
 
