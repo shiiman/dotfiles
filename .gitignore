@@ -9,3 +9,6 @@ SublimeText/Packages/User/Package Control.user-ca-bundle
 
 # バックアップファイル
 *.orig
+
+# Node.js (Prettier)
+node_modules/

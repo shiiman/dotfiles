@@ -90,6 +90,16 @@ source ~/.bashrc             # Reload Bash configuration
 source ~/.zshrc              # Reload Zsh configuration
 ```
 
+### Markdown Formatting
+
+```bash
+npm run format              # Format all .md files with Prettier
+npm run format:check        # Check formatting only (no write)
+```
+
+- Config: `.prettierrc` (`proseWrap: "preserve"` to keep Japanese line breaks intact)
+- After creating or editing `.md` files, run `npm run format` before committing
+
 ---
 
 ## Core Principles
@@ -130,8 +140,8 @@ source ~/.zshrc              # Reload Zsh configuration
 
 以下のSubagentが開発を支援します。
 
-| Subagent | 目的 |
-|----------|------|
+| Subagent        | 目的               |
+| --------------- | ------------------ |
 | `lint-executor` | Lint実行・自動修正 |
 
 Subagentの詳細は `.claude/agents/` を参照してください。
@@ -142,9 +152,9 @@ Subagentの詳細は `.claude/agents/` を参照してください。
 
 以下のSkillsはSlash Commandで呼び出せます。
 
-| Skill | 目的 | 呼び出し方法 |
-| --- | --- | --- |
-| `lint` | シェルスクリプトのlint実行 | `/lint` |
+| Skill  | 目的                       | 呼び出し方法 |
+| ------ | -------------------------- | ------------ |
+| `lint` | シェルスクリプトのlint実行 | `/lint`      |
 
 Skillsの詳細は `.claude/skills/` を参照してください。
 
