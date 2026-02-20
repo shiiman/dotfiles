@@ -83,10 +83,10 @@ Issue/PR なしで計画書からタスクを実行し、コミットメッセ�
 
 ### ステップ 0: 計画書の読み込み
 
-`.claude/plans/` ディレクトリから最新の計画ファイルを読み込みます。
+`.codex/plans/` ディレクトリから最新の計画ファイルを読み込みます。
 
 ```bash
-ls -t ~/.claude/plans/*.md | head -1
+ls -t ~/.codex/plans/*.md | head -1
 ```
 
 **計画書が見つからない場合**:
@@ -109,7 +109,7 @@ ls -t ~/.claude/plans/*.md | head -1
 
 1. ユーザーに実装したい内容を確認
 2. 計画書をマークダウンで作成し、ユーザーに確認を求める
-3. 計画書を `.claude/plans/` に保存
+3. 計画書を `.codex/plans/` に保存
 4. ユーザーが計画を承認したら、自動的に workflow-single の実行フェーズに進む
 
 ## モード 3: 直接実行モード（タスク説明あり）
@@ -215,7 +215,7 @@ git diff
 
 **コミットメッセージ形式**:
 
-1. まず `.claude/settings.json` の `git.commitMessage` 設定を確認
+1. まず `config.toml` の `git.commitMessage` 設定を確認
 2. 設定がある場合はその形式に従う
 3. 設定がない場合は Conventional Commits（日本語）を使用
 

@@ -60,14 +60,6 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1
 - no-git モードでも `session_id` として slug を使用
 - slug を生成できない場合は `no-git-task` を使用
 
-## 環境変数
-
-モデルプロファイルは環境変数で設定（`.env` または `export`）:
-
-```bash
-MCP_MODEL_PROFILE_ACTIVE=performance  # standard または performance
-```
-
 ## 実行フロー
 
 ```text

@@ -5,7 +5,7 @@ description: MCP サーバーの設定管理を案内する。「MCP 管理」�
 
 # Codex MCP Manage
 
-Codex の `config.toml` における MCP サーバー設定の管理を支援します。
+Codex CLI の `codex mcp` コマンドを使用して MCP サーバー設定を管理します。
 
 ## Help
 
@@ -15,7 +15,7 @@ Codex の `config.toml` における MCP サーバー設定の管理を支援し
 /codex-mcp - MCP サーバー管理
 
 概要:
-  Codex の config.toml における MCP サーバー設定の管理を案内する。
+  Codex CLI の `codex mcp` コマンドで MCP サーバー設定を管理する。
   引数があれば優先し、なければ発話内容から操作を判定。
 
 使用方法:
@@ -36,37 +36,6 @@ Codex の `config.toml` における MCP サーバー設定の管理を支援し
   /codex-mcp remove       # MCP サーバーを削除
 ```
 
-## 設定ファイル
-
-Codex の MCP 設定は `~/.codex/config.toml` の `[mcp_servers]` セクションで管理します。
-
-### 設定例
-
-```toml
-# ~/.codex/config.toml
-
-[mcp_servers.github]
-type = "stdio"
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-github"]
-
-[mcp_servers.github.env]
-GITHUB_PERSONAL_ACCESS_TOKEN = "<your-token>"
-
-[mcp_servers.filesystem]
-type = "stdio"
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/dir"]
-
-[mcp_servers.postgres]
-type = "stdio"
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-postgres"]
-
-[mcp_servers.postgres.env]
-DATABASE_URL = "postgresql://user:pass@localhost/db"
-```
-
 ## 実行手順
 
 ### 1. 操作種別の決定
@@ -81,32 +50,45 @@ DATABASE_URL = "postgresql://user:pass@localhost/db"
 
 #### list
 
-1. `~/.codex/config.toml` を読み込む
-2. `[mcp_servers]` セクションの内容を整形して表示
+```bash
+codex mcp list
+```
+
+JSON 形式で確認したい場合:
+
+```bash
+codex mcp list --json
+```
 
 #### install
 
 1. ユーザーに以下を確認:
    - サーバー名（例: github, filesystem, puppeteer）
+   - コマンドと引数
    - 必要な環境変数
-2. `~/.codex/config.toml` に `[mcp_servers.<name>]` セクションを追加
-3. 必要な環境変数がある場合は `[mcp_servers.<name>.env]` も追加
+
+2. `codex mcp add` コマンドで追加:
+
+```bash
+# stdio サーバーの追加例
+codex mcp add <name> -- <command> [args...]
+
+# 環境変数付きの例
+codex mcp add github --env GITHUB_PERSONAL_ACCESS_TOKEN=<token> -- npx -y @modelcontextprotocol/server-github
+
+# HTTP サーバーの追加例
+codex mcp add <name> --url <url>
+```
 
 #### remove
 
-1. `~/.codex/config.toml` の `[mcp_servers]` セクションを表示
+1. `codex mcp list` で現在のサーバー一覧を表示
 2. ユーザーに削除対象のサーバー名を確認
-3. 該当する `[mcp_servers.<name>]` セクションを削除
+3. `codex mcp remove` で削除:
 
-## 人気の MCP サーバー
-
-| 名前       | 説明                 | 必要な環境変数               |
-| ---------- | -------------------- | ---------------------------- |
-| github     | GitHub API 操作      | GITHUB_PERSONAL_ACCESS_TOKEN |
-| filesystem | ファイルシステム操作 | なし                         |
-| puppeteer  | ブラウザ自動化       | なし                         |
-| postgres   | PostgreSQL 操作      | DATABASE_URL                 |
-| sqlite     | SQLite 操作          | なし                         |
+```bash
+codex mcp remove <name>
+```
 
 ## 出力フォーマット
 
@@ -119,7 +101,6 @@ DATABASE_URL = "postgresql://user:pass@localhost/db"
 
 ### 結果
 
-- 対象ファイル: ~/.codex/config.toml
 - ステータス: 成功 / 失敗
 - 補足: 必要なら環境変数の案内
 ```

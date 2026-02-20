@@ -36,14 +36,6 @@ description: マルチエージェントで Issue から PR まで並列実行�
 - Codex の multi_agent 機能が利用可能（**必須**）
 - tmux がインストール済み（**必須**）
 
-## 環境変数
-
-モデルプロファイルは環境変数で設定（`.env` または `export`）:
-
-```bash
-MCP_MODEL_PROFILE_ACTIVE=performance  # standard または performance
-```
-
 ## 実行フロー
 
 ```
