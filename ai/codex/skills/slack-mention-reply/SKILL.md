@@ -43,7 +43,7 @@ Slack でメンションに対してスレッド返信します。
 ### 2. トークン状態の確認
 
 ```bash
-python ~/.codex/skills/slack-shared/scripts/slack_config.py token-show
+python ~/.codex/lib/slack/scripts/slack_config.py token-show
 ```
 
 User Token が設定済みかを確認。未設定の場合は先に `token-set` を実行する。

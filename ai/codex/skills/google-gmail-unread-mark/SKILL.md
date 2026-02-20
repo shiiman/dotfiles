@@ -29,30 +29,30 @@ Gmail の未読メッセージを既読化します（単体/一括）。
 ### 特定メッセージを既読化
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_gmail.py mark-read --ids <message-id>
+python ~/.codex/lib/google/scripts/google_gmail.py mark-read --ids <message-id>
 ```
 
 ### 複数メッセージを一括で既読化
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_gmail.py mark-read --ids <id1>,<id2>,<id3>
+python ~/.codex/lib/google/scripts/google_gmail.py mark-read --ids <id1> <id2> <id3>
 ```
 
 ### 未読メッセージを一括で既読化
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_gmail.py mark-read --all
+python ~/.codex/lib/google/scripts/google_gmail.py mark-read --all
 ```
 
 ### プロファイル指定
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_gmail.py mark-read --profile <profile-name> --all
+python ~/.codex/lib/google/scripts/google_gmail.py --profile <profile-name> mark-read --all
 ```
 
 ## オプション
 
-- `--ids <id1,id2,...>`: 既読化するメッセージIDのリスト
+- `--ids <id1> <id2> ...`: 既読化するメッセージIDのリスト（スペース区切り）
 - `--all`: 全ての未読メッセージを既読化
 
 ## 関連操作

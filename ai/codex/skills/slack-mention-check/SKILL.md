@@ -43,7 +43,7 @@ Slack で自分へのメンションを確認します。
 
 ```bash
 # Pythonスクリプトでメンション取得
-python ~/.codex/skills/slack-shared/scripts/slack_message.py mentions \
+python ~/.codex/lib/slack/scripts/slack_message.py --format table mentions \
   --max 20
 ```
 

@@ -29,7 +29,7 @@ Google Forms フォームの新規作成・質問追加を行います。
 ### 新規作成
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_forms.py create \
+python ~/.codex/lib/google/scripts/google_forms.py create \
   --name "フォーム名" \
   --description "フォームの説明"
 ```
@@ -42,7 +42,7 @@ python ~/.codex/skills/google-shared/scripts/google_forms.py create \
 ### 質問追加
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_forms.py add-question \
+python ~/.codex/lib/google/scripts/google_forms.py add-question \
   --form-id "フォームID" \
   --question "質問文" \
   --type RADIO \

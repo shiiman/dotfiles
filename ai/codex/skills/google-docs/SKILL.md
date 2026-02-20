@@ -29,7 +29,7 @@ Google Docs ドキュメントの新規作成・テキスト追加を行いま�
 ### 新規作成
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_docs.py create \
+python ~/.codex/lib/google/scripts/google_docs.py create \
   --name "ドキュメント名" \
   --folder-id "フォルダID" \
   --content "初期テキスト"
@@ -44,7 +44,7 @@ python ~/.codex/skills/google-shared/scripts/google_docs.py create \
 ### テキスト追加
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_docs.py update \
+python ~/.codex/lib/google/scripts/google_docs.py update \
   --doc-id "ドキュメントID" \
   --content "追加テキスト" \
   --append

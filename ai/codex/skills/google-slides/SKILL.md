@@ -29,7 +29,7 @@ Google Slides プレゼンテーションの新規作成・スライド追加を
 ### 新規作成
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_slides.py create \
+python ~/.codex/lib/google/scripts/google_slides.py create \
   --name "プレゼンテーション名" \
   --folder-id "フォルダID"
 ```
@@ -42,7 +42,7 @@ python ~/.codex/skills/google-shared/scripts/google_slides.py create \
 ### スライド追加
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_slides.py add-slide \
+python ~/.codex/lib/google/scripts/google_slides.py add-slide \
   --presentation-id "プレゼンテーションID" \
   --title "スライドタイトル" \
   --body "スライド本文" \

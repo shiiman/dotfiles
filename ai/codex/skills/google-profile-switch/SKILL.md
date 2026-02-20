@@ -29,20 +29,20 @@ description: 保存済みの Google 認証プロファイルを切り替える�
 ### プロファイル一覧を表示
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_auth.py profiles
+python ~/.codex/lib/google/scripts/google_auth.py profiles
 ```
 
 ### プロファイルを切り替え
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_auth.py switch <profile-name>
+python ~/.codex/lib/google/scripts/google_auth.py switch <profile-name>
 ```
 
 例:
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_auth.py switch work
-python ~/.codex/skills/google-shared/scripts/google_auth.py switch personal
+python ~/.codex/lib/google/scripts/google_auth.py switch work
+python ~/.codex/lib/google/scripts/google_auth.py switch personal
 ```
 
 ## 保存場所

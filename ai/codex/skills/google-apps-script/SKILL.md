@@ -29,7 +29,7 @@ Google Apps Script プロジェクトの新規作成・コード更新を行い�
 ### 新規作成
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_apps_script.py create \
+python ~/.codex/lib/google/scripts/google_apps_script.py create \
   --name "スクリプト名" \
   --parent-id "親ドキュメントID"
 ```
@@ -42,7 +42,7 @@ python ~/.codex/skills/google-shared/scripts/google_apps_script.py create \
 ### コード更新
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_apps_script.py update \
+python ~/.codex/lib/google/scripts/google_apps_script.py update \
   --script-id "スクリプトID" \
   --filename "Code.gs" \
   --code "function myFunction() { ... }"
