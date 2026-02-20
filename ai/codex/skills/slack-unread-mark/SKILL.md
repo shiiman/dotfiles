@@ -45,7 +45,7 @@ Slack チャンネルを既読にします（一括既読化）。
 Pythonスクリプトを実行:
 
 ```bash
-python ~/.codex/skills/slack-shared/scripts/slack_message.py mark-read \
+python ~/.codex/lib/slack/scripts/slack_message.py mark-read \
   --channel C01234567
 ```
 

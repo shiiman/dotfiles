@@ -1,8 +1,3 @@
----
-name: google-shared
-description: Google API スクリプトとライブラリの共有リソース
----
-
 # google-shared
 
 Google スキル群が共有するスクリプトとライブラリ。

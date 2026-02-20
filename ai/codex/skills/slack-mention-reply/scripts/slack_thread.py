@@ -8,7 +8,7 @@ import os
 import sys
 import argparse
 # lib/ ディレクトリをパスに追加
-lib_dir = os.path.expanduser("~/.codex/skills/slack-shared/lib")
+lib_dir = os.path.expanduser("~/.codex/lib/slack/lib")
 sys.path.insert(0, lib_dir)
 
 from slack_utils import (

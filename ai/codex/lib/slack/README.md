@@ -1,8 +1,3 @@
----
-name: slack-shared
-description: Slack API スクリプトとライブラリの共有リソース
----
-
 # slack-shared
 
 Slack スキル群が共有するスクリプトとライブラリ。

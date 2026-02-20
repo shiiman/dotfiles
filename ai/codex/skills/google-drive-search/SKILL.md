@@ -33,13 +33,13 @@ Google Drive を検索します。
 ### アクティブプロファイルで検索
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_drive.py search --query "name contains '<検索キーワード>'"
+python ~/.codex/lib/google/scripts/google_drive.py search --query "name contains '<検索キーワード>'"
 ```
 
 ### プロファイル指定で検索
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_drive.py search --profile <profile-name> --query "name contains '<検索キーワード>'"
+python ~/.codex/lib/google/scripts/google_drive.py --profile <profile-name> search --query "name contains '<検索キーワード>'"
 ```
 
 ## 検索クエリ例

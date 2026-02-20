@@ -36,7 +36,7 @@ Slack 操作で使用するデフォルトユーザーID を設定・管理し�
 まず現在の設定を確認：
 
 ```bash
-python ~/.codex/skills/slack-shared/scripts/slack_config.py show
+python ~/.codex/lib/slack/scripts/slack_config.py show
 ```
 
 ### 2. ユーザーID の設定
@@ -44,7 +44,7 @@ python ~/.codex/skills/slack-shared/scripts/slack_config.py show
 ユーザーが指定したユーザーID を設定：
 
 ```bash
-python ~/.codex/skills/slack-shared/scripts/slack_config.py set-user --user-id U01234567
+python ~/.codex/lib/slack/scripts/slack_config.py set-user --user-id U01234567
 ```
 
 **ユーザーID の確認方法**:
@@ -57,7 +57,7 @@ python ~/.codex/skills/slack-shared/scripts/slack_config.py set-user --user-id U
 設定をクリアしたい場合：
 
 ```bash
-python ~/.codex/skills/slack-shared/scripts/slack_config.py clear
+python ~/.codex/lib/slack/scripts/slack_config.py clear
 ```
 
 ## 設定ファイル

@@ -176,6 +176,10 @@ setup_codex() {
     create_symlink "$DOTFILES_DIR/ai/codex/skills" ~/.codex/skills
     echo "  ✓ skills/ (スキル定義)"
 
+    # 共有ライブラリ
+    create_symlink "$DOTFILES_DIR/ai/codex/lib" ~/.codex/lib
+    echo "  ✓ lib/ (共有ライブラリ)"
+
     # agents ディレクトリを丸ごとリンク（新規 .toml 追加も自動反映）
     local agent_dir="$DOTFILES_DIR/ai/codex/agents"
     if [ -d "$agent_dir" ]; then

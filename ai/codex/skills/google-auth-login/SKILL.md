@@ -29,14 +29,14 @@ Google OAuth 認証を実行してトークンを取得・保存します。
 ### 基本的な認証（デフォルトプロファイル）
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_auth.py login
+python ~/.codex/lib/google/scripts/google_auth.py login
 ```
 
 ### プロファイルを指定して認証
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_auth.py login --profile work
-python ~/.codex/skills/google-shared/scripts/google_auth.py login --profile personal
+python ~/.codex/lib/google/scripts/google_auth.py login --profile work
+python ~/.codex/lib/google/scripts/google_auth.py login --profile personal
 ```
 
 ## 前提条件

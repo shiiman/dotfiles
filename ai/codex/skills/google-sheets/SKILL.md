@@ -29,7 +29,7 @@ Google Sheets スプレッドシートの新規作成・セル更新を行いま
 ### 新規作成
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_sheets.py create \
+python ~/.codex/lib/google/scripts/google_sheets.py create \
   --name "スプレッドシート名" \
   --folder-id "フォルダID"
 ```
@@ -42,7 +42,7 @@ python ~/.codex/skills/google-shared/scripts/google_sheets.py create \
 ### セル更新
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_sheets.py update \
+python ~/.codex/lib/google/scripts/google_sheets.py update \
   --sheet-id "シートID" \
   --range "A1:B2" \
   --values '[["値1","値2"],["値3","値4"]]'
@@ -57,7 +57,7 @@ python ~/.codex/skills/google-shared/scripts/google_sheets.py update \
 ### 行追加
 
 ```bash
-python ~/.codex/skills/google-shared/scripts/google_sheets.py append \
+python ~/.codex/lib/google/scripts/google_sheets.py append \
   --sheet-id "シートID" \
   --range "A1" \
   --values '[["値1","値2"]]'
