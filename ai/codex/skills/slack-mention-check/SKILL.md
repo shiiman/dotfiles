@@ -1,0 +1,84 @@
+---
+name: slack-mention-check
+description: Slack で自分へのメンションを確認する。「メンション確認」「Slackメンション」「自分へのメンション」「@mention を見せて」などで起動。Pythonスクリプト `slack_message.py mentions` を使用。
+---
+
+# Mention Checker
+
+Slack で自分へのメンションを確認します。
+
+## Help
+
+ユーザーが `--help` を指定した場合、以下を表示して終了:
+
+```text
+/slack-mention-check - Mention Checker
+
+概要:
+  Slack で自分へのメンションを確認します。
+
+使用方法:
+  /slack-mention-check [オプション]
+
+オプション:
+  --help  このヘルプを表示
+```
+
+## トリガー
+
+- 「メンション確認」
+- 「Slackメンション」
+- 「自分へのメンション」
+- 「@mention を見せて」
+- 「メンション一覧」
+
+## 動作
+
+1. Pythonスクリプト `slack_message.py mentions` を実行
+2. 自分へのメンションを検索
+3. メンション一覧を整理して表示
+4. 返信するか確認する（/slack-mention-reply で返信できます）
+
+## 実装
+
+```bash
+# Pythonスクリプトでメンション取得
+python ~/.codex/lib/slack/scripts/slack_message.py --format table mentions \
+  --max 20
+```
+
+## 出力例
+
+```
+# あなたへのメンション（直近20件）
+
+メンション数: 5
+
+channel         user        text                                    permalink
+general         山田太郎    @you レビューお願いします               https://...
+project-alpha   佐藤花子    @you 資料確認しました                   https://...
+dev-team        田中一郎    @you バグ修正完了です                   https://...
+random          木村さん    @you 明日の予定どうですか？             https://...
+marketing       鈴木次郎    @you 新しい企画について相談したいです   https://...
+```
+
+## 機能
+
+- **検索**: Slack Search APIで `<@USER_ID>` を検索
+- **最大件数**: デフォルト20件、`--max` で変更可能
+- **パーマリンク**: 各メンションへの直接リンクを表示
+- **チャンネル名**: メンションがあったチャンネルを表示
+
+## トークン設定
+
+`/slack-user-setup` でトークンを設定してください。
+
+## 必要なスコープ
+
+- `search:read` - メッセージ検索
+- `users:read` - 自分のユーザーID取得
+
+## 注意事項
+
+- Slack Search APIは検索履歴の制限があります（フリープランでは直近10,000メッセージ）
+- パーマリンクをクリックすると、該当メッセージに直接ジャンプできます

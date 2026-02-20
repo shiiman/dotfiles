@@ -4,16 +4,16 @@ macOS 開発環境の設定ファイル管理リポジトリ
 
 ## 管理対象ファイル
 
-| ファイル | 説明 |
-|---------|------|
-| `.bashrc` | Bash設定 |
-| `.zshrc` | Zsh設定 |
-| `.gitconfig` | Git設定 |
-| `.gitignore_global` | グローバルgitignore |
-| `.tmux.conf` | tmux設定 |
-| `.vimrc` | Vim設定 |
-| `mise/config.toml` | mise グローバル設定 |
-| `ghostty/config` | Ghosttyターミナル設定 |
+| ファイル            | 説明                  |
+| ------------------- | --------------------- |
+| `.bashrc`           | Bash設定              |
+| `.zshrc`            | Zsh設定               |
+| `.gitconfig`        | Git設定               |
+| `.gitignore_global` | グローバルgitignore   |
+| `.tmux.conf`        | tmux設定              |
+| `.vimrc`            | Vim設定               |
+| `mise/config.toml`  | mise グローバル設定   |
+| `ghostty/config`    | Ghosttyターミナル設定 |
 
 ## ディレクトリ構成
 
@@ -42,7 +42,7 @@ dotfiles/
 │   │   └── scripts/          # カスタムスクリプト
 │   ├── cursor/           # Cursor
 │   ├── codex/            # Codex
-│   │   └── agent/        # Codexエージェント設定
+│   │   └── agents/       # Codexエージェント設定
 │   └── antigravity/      # Antigravity
 │       └── GEMINI.md     # Antigravityグローバル指示
 ├── iterm/                # iTerm2 設定ファイル
@@ -160,21 +160,21 @@ sh ~/dotfiles/ai_setup.sh
 
 管理対象：
 
-| ツール | 設定ファイル | 説明 |
-|--------|-------------|------|
-| Claude Code | `~/.claude/settings.json` | モデル、権限、フック設定 |
-| Claude Code | `~/.claude/CLAUDE.md` | グローバル指示（出力言語、ルール等） |
-| Claude Code | `ai/claude/scripts/` | カスタムスクリプト（statusline等） |
-| Claude Code | MCP: `multi-agent-mcp` | マルチエージェント MCP サーバー |
-| Cursor | `~/.cursor/mcp.json` | MCPサーバー設定 |
-| Cursor | `~/Library/Application Support/Cursor/User/settings.json` | エディタ設定 |
-| Cursor | `~/Library/Application Support/Cursor/User/keybindings.json` | キーバインド |
-| Cursor | `~/Library/Application Support/Cursor/User/snippets/` | スニペット |
-| Cursor | `~/.cursor/extensions/extensions.json` | 拡張機能リスト |
-| Codex | `~/.codex/config.toml` | CLI設定 |
-| Codex | `~/.codex/skills/` | スキル定義 |
-| Antigravity | `~/.gemini/GEMINI.md` | グローバル指示（出力言語、ルール等） |
-| Antigravity | `~/.antigravity/extensions/extensions.json` | 拡張機能リスト |
+| ツール      | 設定ファイル                                                 | 説明                                 |
+| ----------- | ------------------------------------------------------------ | ------------------------------------ |
+| Claude Code | `~/.claude/settings.json`                                    | モデル、権限、フック設定             |
+| Claude Code | `~/.claude/CLAUDE.md`                                        | グローバル指示（出力言語、ルール等） |
+| Claude Code | `ai/claude/scripts/`                                         | カスタムスクリプト（statusline等）   |
+| Claude Code | MCP: `multi-agent-mcp`                                       | マルチエージェント MCP サーバー      |
+| Cursor      | `~/.cursor/mcp.json`                                         | MCPサーバー設定                      |
+| Cursor      | `~/Library/Application Support/Cursor/User/settings.json`    | エディタ設定                         |
+| Cursor      | `~/Library/Application Support/Cursor/User/keybindings.json` | キーバインド                         |
+| Cursor      | `~/Library/Application Support/Cursor/User/snippets/`        | スニペット                           |
+| Cursor      | `~/.cursor/extensions/extensions.json`                       | 拡張機能リスト                       |
+| Codex       | `~/.codex/config.toml`                                       | CLI設定                              |
+| Codex       | `~/.codex/skills/`                                           | スキル定義                           |
+| Antigravity | `~/.gemini/GEMINI.md`                                        | グローバル指示（出力言語、ルール等） |
+| Antigravity | `~/.antigravity/extensions/extensions.json`                  | 拡張機能リスト                       |
 
 MCP サーバー `multi-agent-mcp` は `uvx` で GitHub から直接インストールされます（リポジトリの clone 不要）。
 
