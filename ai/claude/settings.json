@@ -6,6 +6,7 @@
   "permissions": {
     "allow": [
       "mcp__multi-agent-mcp__*",
+      "mcp__notebooklm-mcp__*",
       "Read(*)",
       "Glob(*)",
       "Grep(*)",
@@ -44,11 +45,13 @@
       "Skill(*)",
       "Skill(shiiman-claude:*)",
       "Skill(shiiman-git:*)",
+      "Skill(shiiman-github:*)",
+      "Skill(shiiman-common:*)",
+      "Skill(shiiman-workflow:*)",
       "Skill(shiiman-google:*)",
-      "Skill(shiiman-slack:*)",
       "Skill(shiiman-go:*)",
       "Skill(shiiman-terraform:*)",
-      "Skill(shiiman-workflow:*)",
+      "Skill(shiiman-slack:*)",
       "Skill(shiiman-claude-code-plugins:*)"
     ],
     "deny": [

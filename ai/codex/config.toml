@@ -157,3 +157,7 @@ command = "npx"
 [mcp_servers.multi-agent-mcp]
 args = ["--from", "git+https://github.com/shiiman/multi-agent-mcp", "multi-agent-mcp"]
 command = "uvx"
+
+[mcp_servers.notebooklm-mcp]
+args = ["--from", "git+https://github.com/shiiman/notebooklm-mcp", "notebooklm-mcp"]
+command = "uvx"

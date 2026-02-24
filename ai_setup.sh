@@ -67,12 +67,29 @@ setup_claude_mcp() {
 
     # multi-agent-mcp のセットアップ
     setup_multi_agent_mcp
+    setup_notebooklm_mcp
 }
 
 # multi-agent-mcp のセットアップ
 setup_multi_agent_mcp() {
     local mcp_name="multi-agent-mcp"
     local mcp_repo="git+https://github.com/shiiman/multi-agent-mcp"
+
+    # MCP 設定の追加（未設定の場合のみ）
+    # uvx で GitHub から直接インストール（--refresh で毎回最新版を取得）
+    if ! claude mcp list 2>/dev/null | grep -q "$mcp_name"; then
+        claude mcp add --scope user "$mcp_name" -- \
+            uvx --refresh --from "$mcp_repo" "$mcp_name"
+        echo "    ✓ $mcp_name を Claude に追加"
+    else
+        echo "    ✓ $mcp_name (既に設定済み)"
+    fi
+}
+
+# notebooklm-mcp のセットアップ
+setup_notebooklm_mcp() {
+    local mcp_name="notebooklm-mcp"
+    local mcp_repo="git+https://github.com/shiiman/notebooklm-mcp"
 
     # MCP 設定の追加（未設定の場合のみ）
     # uvx で GitHub から直接インストール（--refresh で毎回最新版を取得）
