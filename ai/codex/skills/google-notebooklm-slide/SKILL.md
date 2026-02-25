@@ -89,7 +89,7 @@ mcp__notebooklm-mcp__note_create(
 
 `~/.codex/skills/google-notebooklm-slide/assets/prompts/` 配下のテンプレートファイルを読み込み、一覧を提示する。
 
-**テンプレート一覧（グループ 1）:**
+**テンプレート一覧:**
 
 | ID           | 名前                       | 説明                                         | 推奨 deck_format | 推奨 deck_length |
 | ------------ | -------------------------- | -------------------------------------------- | ---------------- | ---------------- |
@@ -97,20 +97,12 @@ mcp__notebooklm-mcp__note_create(
 | `comparison` | 比較・対比                 | 複数の対象を並べて特徴・メリデメを比較       | detailed_deck    | default          |
 | `timeline`   | タイムライン・ロードマップ | 時系列の流れやマイルストーンをスライドで表現 | presenter_slides | default          |
 | `report`     | 報告・レポート             | 調査結果やステータスを報告するスライド       | detailed_deck    | default          |
+| `pitch`      | ピッチ・提案               | 企画提案やビジネスプレゼン向けスライド       | presenter_slides | short            |
+| `training`   | 研修・教育                 | トレーニングや学習用のスライド               | detailed_deck    | default          |
+| `analysis`   | 分析・考察                 | データ分析や深堀り考察をまとめるスライド     | detailed_deck    | default          |
+| `guide`      | ガイド・手順書             | ステップバイステップの手順を説明するスライド | presenter_slides | default          |
 
-**テンプレート一覧（グループ 2）:**
-
-| ID         | 名前           | 説明                                         | 推奨 deck_format | 推奨 deck_length |
-| ---------- | -------------- | -------------------------------------------- | ---------------- | ---------------- |
-| `pitch`    | ピッチ・提案   | 企画提案やビジネスプレゼン向けスライド       | presenter_slides | short            |
-| `training` | 研修・教育     | トレーニングや学習用のスライド               | detailed_deck    | default          |
-| `analysis` | 分析・考察     | データ分析や深堀り考察をまとめるスライド     | detailed_deck    | default          |
-| `guide`    | ガイド・手順書 | ステップバイステップの手順を説明するスライド | presenter_slides | default          |
-
-テンプレート選択は 2 段階で行う。
-
-1 回目: summary, comparison, timeline, report から選択
-2 回目（1 回目で「他のテンプレートを見る」を選んだ場合）: pitch, training, analysis, guide から選択
+全テンプレートから 1 つを選択する。
 
 選択されたテンプレートの `.md` ファイルを読み込み:
 

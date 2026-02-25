@@ -89,7 +89,7 @@ mcp__notebooklm-mcp__note_create(
 
 `~/.codex/skills/google-notebooklm-infographic/assets/prompts/` 配下のテンプレートファイルを読み込み、一覧を提示する。
 
-**テンプレート一覧（グループ 1）:**
+**テンプレート一覧:**
 
 | ID           | 名前                   | 説明                                   | 推奨 orientation | 推奨 detail_level |
 | ------------ | ---------------------- | -------------------------------------- | ---------------- | ----------------- |
@@ -97,20 +97,12 @@ mcp__notebooklm-mcp__note_create(
 | `comparison` | 比較・対比             | 複数の対象を並べて特徴・メリデメを比較 | landscape        | detailed          |
 | `timeline`   | タイムライン・プロセス | 時系列の流れやステップを順序立てて図解 | landscape        | standard          |
 | `statistics` | 統計・データ           | 数値データやトレンドをビジュアル化     | portrait         | detailed          |
+| `list`       | リスト・ランキング     | 項目を順位や重要度順に整理して一覧化   | portrait         | standard          |
+| `flowchart`  | フローチャート         | 意思決定やプロセスの分岐を視覚化       | landscape        | detailed          |
+| `hierarchy`  | 階層・構造             | 組織図・分類・ピラミッド等の階層を図解 | portrait         | standard          |
+| `geographic` | 地理・マップ           | 地域ごとのデータや位置関係を地図で表現 | landscape        | detailed          |
 
-**テンプレート一覧（グループ 2）:**
-
-| ID           | 名前               | 説明                                   | 推奨 orientation | 推奨 detail_level |
-| ------------ | ------------------ | -------------------------------------- | ---------------- | ----------------- |
-| `list`       | リスト・ランキング | 項目を順位や重要度順に整理して一覧化   | portrait         | standard          |
-| `flowchart`  | フローチャート     | 意思決定やプロセスの分岐を視覚化       | landscape        | detailed          |
-| `hierarchy`  | 階層・構造         | 組織図・分類・ピラミッド等の階層を図解 | portrait         | standard          |
-| `geographic` | 地理・マップ       | 地域ごとのデータや位置関係を地図で表現 | landscape        | detailed          |
-
-テンプレート選択は 2 段階で行う。
-
-1 回目: summary, comparison, timeline, statistics から選択
-2 回目（1 回目で「他のテンプレートを見る」を選んだ場合）: list, flowchart, hierarchy, geographic から選択
+全テンプレートから 1 つを選択する。
 
 選択されたテンプレートの `.md` ファイルを読み込み:
 
