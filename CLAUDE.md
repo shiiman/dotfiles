@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   - Shell: Bash, Zsh
   - Package Manager: Homebrew
   - Version Manager: mise
-  - Terminal: iTerm2, Ghostty
+  - Terminal: cmux, Ghostty, iTerm2
   - Editor: VSCode, Cursor, Sublime Text, Vim
 - **Details**: Refer to [README.md](README.md)
 
@@ -80,7 +80,7 @@ brew bundle --file=Brewfile  # Explicit Brewfile path
 ### Terminal Setup
 
 ```bash
-./ghostty_setup.sh         # Create symlinks for Ghostty terminal configuration
+./terminal_setup.sh        # Create symlinks for cmux/Ghostty terminal configuration
 ```
 
 ### Shell Configuration

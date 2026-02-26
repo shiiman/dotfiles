@@ -1,4 +1,5 @@
-# Ghostty Configuration
+# ターミナル設定（cmux / Ghostty 共用）
+# cmux は libghostty ベースのため、同じ設定ファイルを使用
 # https://ghostty.org/docs/config
 
 # フォント設定
@@ -66,3 +67,18 @@ keybind = super+5=goto_tab:5
 
 # SSH先での互換性のためTERMをxterm-256colorに設定
 term = xterm-256color
+
+# =============================================
+# cmux / スプリットペイン設定
+# ※ libghostty 1.2.0以降のバグで未反映（upstream修正待ち）
+#   https://github.com/ghostty-org/ghostty/discussions/8732
+# =============================================
+
+# 非アクティブなペインの透過度（0.0=完全透明 〜 1.0=不透明）
+unfocused-split-opacity = 0.5
+
+# 非アクティブなペインの背景色（透過時に見える下地の色）
+unfocused-split-fill = #1a1a1a
+
+# ペイン間の境界線の色
+split-divider-color = #97e123

@@ -4,16 +4,16 @@ macOS 開発環境の設定ファイル管理リポジトリ
 
 ## 管理対象ファイル
 
-| ファイル            | 説明                  |
-| ------------------- | --------------------- |
-| `.bashrc`           | Bash設定              |
-| `.zshrc`            | Zsh設定               |
-| `.gitconfig`        | Git設定               |
-| `.gitignore_global` | グローバルgitignore   |
-| `.tmux.conf`        | tmux設定              |
-| `.vimrc`            | Vim設定               |
-| `mise/config.toml`  | mise グローバル設定   |
-| `ghostty/config`    | Ghosttyターミナル設定 |
+| ファイル            | 説明                                 |
+| ------------------- | ------------------------------------ |
+| `.bashrc`           | Bash設定                             |
+| `.zshrc`            | Zsh設定                              |
+| `.gitconfig`        | Git設定                              |
+| `.gitignore_global` | グローバルgitignore                  |
+| `.tmux.conf`        | tmux設定                             |
+| `.vimrc`            | Vim設定                              |
+| `mise/config.toml`  | mise グローバル設定                  |
+| `ghostty/config`    | ターミナル設定（cmux / Ghostty共用） |
 
 ## ディレクトリ構成
 
@@ -29,12 +29,12 @@ dotfiles/
 ├── mac_setup.sh          # macOS 初期セットアップ
 ├── dotfile_setup.sh      # シンボリックリンク作成
 ├── mise_setup.sh         # mise セットアップ
-├── ghostty_setup.sh      # Ghostty セットアップ
+├── terminal_setup.sh     # ターミナルセットアップ（cmux / Ghostty）
 ├── ai_setup.sh           # AIツール設定セットアップ
 ├── mise/
 │   └── config.toml       # mise グローバル設定
 ├── ghostty/
-│   └── config            # Ghosttyターミナル設定
+│   └── config            # ターミナル設定（cmux / Ghostty共用）
 ├── ai/                   # AIツールグローバル設定
 │   ├── claude/           # Claude Code
 │   │   ├── settings.json     # 設定（モデル、権限、フック）
@@ -84,7 +84,7 @@ curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.s
 - mise のセットアップ（言語バージョン管理）
 - fzf のインストール
 - Sublime Text の設定（インストール済みの場合）
-- Ghostty の設定（インストール済みの場合）
+- ターミナル設定（cmux / Ghostty、インストール済みの場合）
 - AIツール設定（Claude Code, Cursor, Codex）
 - Finder で隠しファイルを表示
 - Ricty フォントのインストール（存在する場合）
@@ -130,15 +130,15 @@ mise ls-remote node     # 利用可能なバージョン
 mise use node@20 --path  # .mise.toml に書き込み
 ```
 
-### Ghostty セットアップ
+### ターミナルセットアップ
 
-Ghosttyターミナルの設定をセットアップ：
+cmux / Ghostty ターミナルの設定をセットアップ：
 
 ```bash
-sh ~/dotfiles/ghostty_setup.sh
+sh ~/dotfiles/terminal_setup.sh
 ```
 
-設定ファイルは `~/.config/ghostty/config` にシンボリックリンクされます。
+設定ファイルは `~/.config/ghostty/config` にシンボリックリンクされます（cmux と Ghostty は同じ設定ファイルを共有）。
 
 ### Homebrew パッケージ管理
 

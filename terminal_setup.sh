@@ -1,11 +1,11 @@
 #!/bin/bash
-# Ghosttyセットアップスクリプト
+# ターミナル設定セットアップスクリプト（cmux / Ghostty 共用）
 set -e
 set -u
 
 DOTFILES_DIR=~/dotfiles
 GHOSTTY_CONFIG_DIR=~/.config/ghostty
-BACKUP_DIR=~/.ghostty_backup/$(date +%Y%m%d_%H%M%S)
+BACKUP_DIR=~/.terminal_backup/$(date +%Y%m%d_%H%M%S)
 
 # バックアップしてからシンボリックリンクを作成
 create_symlink() {
@@ -32,16 +32,27 @@ create_symlink() {
 
 # メイン処理
 main() {
-    echo "Ghostty設定セットアップ..."
+    echo "ターミナル設定セットアップ..."
 
-    # Ghosttyがインストールされているか確認
-    if [ ! -d "/Applications/Ghostty.app" ]; then
-        echo "  ⚠ Ghosttyがインストールされていません（スキップ）"
+    # cmuxまたはGhosttyがインストールされているか確認
+    local terminal_found=false
+    if [ -d "/Applications/cmux.app" ]; then
+        echo "  検出: cmux"
+        terminal_found=true
+    fi
+    if [ -d "/Applications/Ghostty.app" ]; then
+        echo "  検出: Ghostty"
+        terminal_found=true
+    fi
+
+    if [ "$terminal_found" = false ]; then
+        echo "  ⚠ cmux/Ghosttyがインストールされていません（スキップ）"
         return
     fi
 
+    # cmuxとGhosttyは同じ設定パスを使用（~/.config/ghostty/config）
     create_symlink "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_CONFIG_DIR/config"
-    echo "  ✓ config"
+    echo "  ✓ config -> ~/.config/ghostty/config"
 
     # バックアップがある場合は表示
     if [ -d "$BACKUP_DIR" ]; then
@@ -49,7 +60,7 @@ main() {
         echo "バックアップ先: $BACKUP_DIR"
     fi
 
-    echo "Ghostty設定セットアップ完了"
+    echo "ターミナル設定セットアップ完了"
 }
 
 main "$@"

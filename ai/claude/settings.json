@@ -98,6 +98,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CMUX_CLI=/Applications/cmux.app/Contents/Resources/bin/cmux; [ -x \"$CMUX_CLI\" ] && \"$CMUX_CLI\" notify --title 'Claude Code' --body 'タスクが完了しました' 2>/dev/null || true"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {

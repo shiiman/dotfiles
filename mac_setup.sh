@@ -77,8 +77,8 @@ if [ -d "/Applications/Sublime Text.app" ]; then
     bash ~/dotfiles/SublimeText/sublime_setup.sh
 fi
 
-# Ghosttyの設定
-bash ~/dotfiles/ghostty_setup.sh
+# ターミナル設定（cmux / Ghostty共用）
+bash ~/dotfiles/terminal_setup.sh
 
 # AIツール設定（Claude Code, Cursor, Codex）
 bash ~/dotfiles/ai_setup.sh
