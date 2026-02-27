@@ -161,3 +161,7 @@ command = "uvx"
 [mcp_servers.notebooklm-mcp]
 args = ["--from", "git+https://github.com/shiiman/notebooklm-mcp", "notebooklm-mcp"]
 command = "uvx"
+
+[mcp_servers.google-genmedia-mcp]
+args = ["--from", "git+https://github.com/shiiman/google-genmedia-mcp", "google-genmedia-mcp"]
+command = "uvx"

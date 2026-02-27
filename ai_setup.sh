@@ -102,6 +102,22 @@ setup_notebooklm_mcp() {
     fi
 }
 
+# google-genmedia-mcp のセットアップ
+setup_google_genmedia_mcp() {
+    local mcp_name="google-genmedia-mcp"
+    local mcp_repo="git+https://github.com/shiiman/google-genmedia-mcp"
+
+    # MCP 設定の追加（未設定の場合のみ）
+    # uvx で GitHub から直接インストール（--refresh で毎回最新版を取得）
+    if ! claude mcp list 2>/dev/null | grep -q "$mcp_name"; then
+        claude mcp add --scope user "$mcp_name" -- \
+            uvx --refresh --from "$mcp_repo" "$mcp_name"
+        echo "    ✓ $mcp_name を Claude に追加"
+    else
+        echo "    ✓ $mcp_name (既に設定済み)"
+    fi
+}
+
 # Cursor 設定
 setup_cursor() {
     echo "Cursor設定..."
