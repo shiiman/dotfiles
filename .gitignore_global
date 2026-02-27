@@ -55,7 +55,7 @@ node_modules/
 .cursor/mcp.local.json
 .multi-agent-mcp/
 .playwright-mcp/
-
+.google-genmedia-mcp/
 
 # Go
 dist/
