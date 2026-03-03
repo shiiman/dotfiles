@@ -56,6 +56,7 @@ node_modules/
 .multi-agent-mcp/
 .playwright-mcp/
 .google-genmedia-mcp/
+.notebooklm-mcp/
 
 # Go
 dist/
