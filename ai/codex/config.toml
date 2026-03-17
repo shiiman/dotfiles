@@ -13,7 +13,7 @@ check_for_update_on_startup = true
 # =============================================================================
 
 # 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
-model = "gpt-5.3-codex"
+model = "gpt-5.4"
 
 # モデルプロバイダー（デフォルト: "openai"）
 model_provider = "openai"
@@ -58,6 +58,7 @@ sandbox_mode = "workspace-write"
 
 # Web検索機能 disabled/cached/live（デフォルト: disabled）
 web_search = "live"
+service_tier = "fast"
 
 # =============================================================================
 # Sandbox Workspace Write Settings
