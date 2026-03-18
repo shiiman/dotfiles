@@ -166,3 +166,6 @@ command = "uvx"
 [mcp_servers.google-genmedia-mcp]
 args = ["--from", "git+https://github.com/shiiman/google-genmedia-mcp", "google-genmedia-mcp"]
 command = "uvx"
+
+[projects."/Users/a12665"]
+trust_level = "trusted"
