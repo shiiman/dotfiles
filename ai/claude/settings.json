@@ -3,7 +3,6 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
   },
-  "teammateMode": "tmux",
   "permissions": {
     "allow": [
       "mcp__multi-agent-mcp__*",
@@ -137,6 +136,7 @@
   "alwaysThinkingEnabled": false,
   "plansDirectory": "./.claude/plans",
   "skipDangerousModePermissionPrompt": true,
+  "teammateMode": "tmux",
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
   ]

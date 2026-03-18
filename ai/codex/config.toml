@@ -13,7 +13,7 @@ check_for_update_on_startup = true
 # =============================================================================
 
 # 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
-model = "gpt-5.4"
+model = "gpt-5.3-codex"
 
 # モデルプロバイダー（デフォルト: "openai"）
 model_provider = "openai"

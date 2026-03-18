@@ -11,6 +11,13 @@ fpath=(~/.zsh/completion $fpath)
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+# direnv - プロジェクト固有の環境変数自動設定
+# mise activate より先に direnv export を実行し、MISE_DATA_DIR 等を反映させる
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv export zsh 2>/dev/null)"
+    eval "$(direnv hook zsh)"
+fi
+
 # mise - 言語バージョン管理 (anyenv/asdfの後継)
 if command -v mise >/dev/null 2>&1; then
     eval "$(mise activate zsh)"
@@ -288,10 +295,6 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/op
 # 共通設定の読み込み
 [ -f ~/.shellrc_common ] && source ~/.shellrc_common
 
-# direnv - プロジェクト固有の環境変数自動設定
-if command -v direnv >/dev/null 2>&1; then
-    eval "$(direnv hook zsh)"
-fi
 
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
