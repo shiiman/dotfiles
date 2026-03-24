@@ -81,5 +81,21 @@ if [ "$(echo "$COST > 0" | bc -l 2>/dev/null)" = "1" ]; then
     COST_INFO=$(printf ' | 💰 $%.2f' "$COST")
 fi
 
+# レート制限表示（Claude.ai サブスクリプション利用時のみ）
+RATE_INFO=""
+FIVE_HOUR_PCT=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+SEVEN_DAY_PCT=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
+if [ -n "$FIVE_HOUR_PCT" ] || [ -n "$SEVEN_DAY_PCT" ]; then
+    RATE_PARTS=""
+    if [ -n "$FIVE_HOUR_PCT" ]; then
+        RATE_PARTS=$(printf '5h:%s%%' "${FIVE_HOUR_PCT%.*}")
+    fi
+    if [ -n "$SEVEN_DAY_PCT" ]; then
+        [ -n "$RATE_PARTS" ] && RATE_PARTS="$RATE_PARTS "
+        RATE_PARTS="${RATE_PARTS}$(printf '7d:%s%%' "${SEVEN_DAY_PCT%.*}")"
+    fi
+    RATE_INFO=" | 🔥 ${RATE_PARTS}"
+fi
+
 # 出力
-echo "[$MODEL]${ELAPSED_INFO}${CONTEXT_INFO}${COST_INFO}"
+echo "[$MODEL]${ELAPSED_INFO}${CONTEXT_INFO}${COST_INFO}${RATE_INFO}"
