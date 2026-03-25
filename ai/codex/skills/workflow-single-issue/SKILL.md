@@ -16,18 +16,20 @@ Issue 作成から PR 作成まで自動実行するシングルエージェン�
 
 概要:
   Issue 作成から PR 作成まで自動実行する。
-  Issue 作成 → ブランチ作成 → 実装 → コミット → PR 作成。
+  Issue 作成 → worktree/ブランチ作成 → 実装 → コミット → PR 作成。
 
 使用方法:
   workflow-single-issue [タスク説明] [オプション]
 
 オプション:
-  --plan  計画書を新規作成してから実行
-  --help  このヘルプを表示
+  --plan    計画書を新規作成してから実行
+  --branch  worktree の代わりにブランチを作成
+  --help    このヘルプを表示
 
 例:
-  workflow-single-issue                        # 既存計画書から実行
+  workflow-single-issue                        # 既存計画書から実行（worktree）
   workflow-single-issue --plan                 # 計画書を作成してから実行
+  workflow-single-issue --branch               # ブランチ作成モードで実行
   workflow-single-issue "ログイン機能を追加"    # タスク説明から直接実行
 ```
 
@@ -38,7 +40,7 @@ Issue 作成から PR 作成まで自動実行するシングルエージェン�
 引数なしで実行。既存の承認済み計画書から直接実行。
 
 ```
-[既存計画書] → Issue作成 → ブランチ作成 → 実装 → ... → PR作成
+[既存計画書] → Issue作成 → worktree/ブランチ作成 → 実装 → ... → PR作成
 ```
 
 ### モード 2: 計画書作成モード（--plan）
@@ -54,13 +56,13 @@ Issue 作成から PR 作成まで自動実行するシングルエージェン�
 計画書を作らず、タスク説明から直接実行。簡単なタスク向け。
 
 ```
-[タスク説明] → Issue作成 → ブランチ作成 → 実装 → ... → PR作成
+[タスク説明] → Issue作成 → worktree/ブランチ作成 → 実装 → ... → PR作成
 ```
 
 ## 実行フロー
 
 ```
-Issue作成 → ブランチ作成 → 実装 → 自己レビュー → [確認] → Issue更新 → コミット → プッシュ → PR作成
+Issue作成 → worktree/ブランチ作成 → 実装 → 自己レビュー → [確認] → Issue更新 → コミット → プッシュ → PR作成
 ```
 
 ## モード判定
@@ -150,7 +152,13 @@ github-issue-create スキルのワークフローに従って実行する。`--
 - {達成すべき条件2}
 ```
 
-### ステップ 2: ブランチ作成
+### ステップ 2: worktree / ブランチ作成
+
+**デフォルト（`--branch` なし）**:
+
+github-worktree-create スキルのワークフローに従って、Issue 番号から worktree を作成する。
+
+**`--branch` 指定時**:
 
 github-branch-create スキルのワークフローに従って、Issue 番号からブランチを作成する。
 
@@ -264,14 +272,20 @@ Closes #{issue番号}
 ### 作成された Issue
 - #{issue番号}: {タイトル}
 
-### 作成されたブランチ
+### 作成されたブランチ / worktree
 - {ブランチ名}
+- パス: {worktree のパス}（worktree モード時のみ）
 
 ### 作成された PR
 - PR #{pr番号}: {タイトル}
 - URL: {pr_url}
 
 PR がマージされると Issue #{issue番号} は自動的にクローズされます。
+
+### worktree クリーンアップ（worktree モード時のみ）
+
+PR マージ後、不要になった worktree を削除してください:
+`/git-worktree` で gtr rm または gtr clean を実行
 ```
 
 ## 重要な注意事項

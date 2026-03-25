@@ -1,6 +1,6 @@
 ---
 name: github-issue-create
-description: GitHub Issue を作成する。タスクは Issue 本文内でチェックボックスに分割。「Issue 作成」「Issue を作って」「タスクを Issue に」「Issue 追加」「チケット作成」「Issue を切る」「タスクを分割して Issue」などで起動。--branch でブランチも自動作成。
+description: GitHub Issue を作成する。タスクは Issue 本文内でチェックボックスに分割。「Issue 作成」「Issue を作って」「タスクを Issue に」「Issue 追加」「チケット作成」「Issue を切る」「タスクを分割して Issue」などで起動。--branch でブランチ、--worktree で worktree も自動作成。
 ---
 
 # Create Issue
@@ -17,19 +17,21 @@ GitHub Issue を作成します。タスクは Issue 本文内でチェックボ
 概要:
   GitHub Issue を作成します。
   タスクは Issue 本文内でチェックボックスに分割します。
-  --branch で Issue 作成後にブランチも自動作成。
+  --branch で Issue 作成後にブランチ、--worktree で worktree も自動作成。
 
 使用方法:
   /github-issue-create [オプション]
 
 オプション:
   --branch      Issue 作成後にブランチを自動作成
+  --worktree    Issue 作成後に worktree を自動作成（gtr 使用）
   --no-confirm  ユーザー確認をスキップして即座に Issue を作成
   --help        このヘルプを表示
 
 例:
   /github-issue-create              # Issue を作成
   /github-issue-create --branch     # Issue 作成後にブランチも作成
+  /github-issue-create --worktree   # Issue 作成後に worktree も作成
   /github-issue-create --no-confirm # 確認なしで Issue を作成
 ```
 
@@ -119,17 +121,22 @@ Issue を作成しました:
 - URL: {issue_url}
 ```
 
-### 6. ブランチ作成の提案
+### 6. ブランチもしくは worktree 作成の提案
 
 **`--branch` 指定時**:
 
 作成した Issue の番号で `github-branch-create` スキルのワークフローに従いブランチを自動作成する。
 
-**`--branch` なし**:
+**`--worktree` 指定時**:
 
-ユーザーに「ブランチを作成しますか？」と確認:
+作成した Issue の番号で `github-worktree-create` スキルのワークフローに従い worktree を自動作成する。
 
-- はい → 作成した Issue の番号で `github-branch-create` スキルのワークフローに従いブランチを作成
+**`--branch` / `--worktree` なし**:
+
+ユーザーに「ブランチまたは worktree を作成しますか？」と確認:
+
+- ブランチ → 作成した Issue の番号で `github-branch-create` スキルのワークフローに従いブランチを作成
+- worktree → 作成した Issue の番号で `github-worktree-create` スキルのワークフローに従い worktree を作成
 - いいえ → スキップ
 
 ## Issue タイトルの形式
@@ -155,3 +162,4 @@ Issue を作成しました:
 - ✅ 完了条件を明確にする
 - ✅ 具体的なアクションを記述
 - ❌ 曖昧なタスク記述
+- ❌ `--branch` と `--worktree` の同時指定不可（同時指定時はエラーを表示して終了）

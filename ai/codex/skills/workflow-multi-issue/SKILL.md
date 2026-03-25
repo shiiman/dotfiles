@@ -16,18 +16,20 @@ description: マルチエージェントで Issue から PR まで並列実行�
 
 概要:
   マルチエージェントで Issue 作成から PR 作成まで並列実行する。
-  Issue 作成 → 初期化 → Admin/Worker 並列実行 → コミット → PR 作成。
+  Issue 作成 → worktree/ブランチ作成 → 初期化 → Admin/Worker 並列実行 → コミット → PR 作成。
 
 使用方法:
   /workflow-multi-issue [タスク説明] [オプション]
 
 オプション:
-  --plan  計画書を新規作成してから実行
-  --help  このヘルプを表示
+  --plan    計画書を新規作成してから実行
+  --branch  worktree の代わりにブランチを作成
+  --help    このヘルプを表示
 
 例:
-  /workflow-multi-issue                        # 既存計画書から実行
+  /workflow-multi-issue                        # 既存計画書から実行（worktree）
   /workflow-multi-issue --plan                 # 計画書を作成してから実行
+  /workflow-multi-issue --branch               # ブランチ作成モードで実行
   /workflow-multi-issue "認証機能を並列実装"    # タスク説明から直接実行
 ```
 
@@ -39,7 +41,7 @@ description: マルチエージェントで Issue から PR まで並列実行�
 ## 実行フロー
 
 ```
-Phase 1: Owner  → Issue 作成 → ブランチ作成 → 初期化 → Admin 起動 → 計画書送信
+Phase 1: Owner  → Issue 作成 → worktree/ブランチ作成 → 初期化 → Admin 起動 → 計画書送信
 Phase 2-4: Admin/Worker が自律実行（自動制御）
 Phase 5: Owner  → 結果確認 → ユーザー承認 → クリーンアップ → コミット → PR 作成
 ```
@@ -78,7 +80,13 @@ Phase 5: Owner  → 結果確認 → ユーザー承認 → クリーンアッ�
 - テストが通過していること
 ```
 
-### ステップ 2: ベースブランチ作成
+### ステップ 2: worktree / ベースブランチ作成
+
+**デフォルト（`--branch` なし）**:
+
+`github-worktree-create` スキルのワークフローに従い、作成した Issue の番号で worktree を作成する。
+
+**`--branch` 指定時**:
 
 `github-branch-create` スキルのワークフローに従い、作成した Issue の番号でブランチを作成する。
 
@@ -297,9 +305,18 @@ Closes #{issue番号}
 ### 作成された Issue
 - #{issue番号}: {タイトル}
 
+### 作成されたブランチ / worktree
+- {ブランチ名}
+- パス: {worktree のパス}（worktree モード時のみ）
+
 ### 作成された PR
 - PR #{pr番号}: {タイトル}
 - URL: {pr_url}
 
 PR がマージされると Issue #{issue番号} は自動的にクローズされます。
+
+### worktree クリーンアップ（worktree モード時のみ）
+
+PR マージ後、不要になった worktree を削除してください:
+`/git-worktree` で gtr rm または gtr clean を実行
 ```

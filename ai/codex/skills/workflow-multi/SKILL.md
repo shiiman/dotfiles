@@ -16,19 +16,21 @@ description: マルチエージェントで Issue/PR なしに並列実行する
 
 概要:
   マルチエージェントで Issue/PR なしに並列実行する。
-  ブランチ作成 → 初期化 → Admin/Worker 並列実行 → コミットメッセージ出力。
+  worktree/ブランチ作成 → 初期化 → Admin/Worker 並列実行 → コミットメッセージ出力。
 
 使用方法:
   /workflow-multi [タスク説明] [オプション]
 
 オプション:
   --plan    計画書を新規作成してから実行
+  --branch  worktree の代わりにブランチを作成
   --no-git  git を使わず no-git モードで実行
   --help    このヘルプを表示
 
 例:
-  /workflow-multi                        # 既存計画書から実行
+  /workflow-multi                        # 既存計画書から実行（worktree）
   /workflow-multi --plan                 # 計画書を作成してから実行
+  /workflow-multi --branch               # ブランチ作成モードで実行
   /workflow-multi "API リファクタリング"  # タスク説明から直接実行
   /workflow-multi --no-git               # git なしモードで実行
 ```
@@ -64,7 +66,7 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1
 
 ```text
 git モード:
-Phase 1: Owner → ブランチ作成 → 初期化 → Admin 起動 → 計画書送信
+Phase 1: Owner → worktree/ブランチ作成 → 初期化 → Admin 起動 → 計画書送信
 Phase 2-4: Admin/Worker が自律実行（自動制御）
 Phase 5: Owner → 結果確認 → 承認/修正依頼 → クリーンアップ → コミットメッセージ出力
 
@@ -104,7 +106,13 @@ slug = {task_slug}
 if slug が空なら slug = "no-git-task"
 ```
 
-### ステップ 3: git モード時のみブランチ作成
+### ステップ 3: git モード時のみ worktree / ブランチ作成
+
+**デフォルト（`--branch` なし）**:
+
+`github-worktree-create` スキルのワークフローに従い worktree を作成する。
+
+**`--branch` 指定時**:
 
 `github-branch-create` スキルのワークフローに従いブランチを作成する。
 
@@ -314,6 +322,10 @@ git モード:
 ```text
 ## 実装完了
 
+### 作成されたブランチ / worktree
+- {ブランチ名}
+- パス: {worktree のパス}（worktree モード時のみ）
+
 ### 推奨コミットメッセージ
 {Conventional Commits 形式}
 
@@ -324,6 +336,11 @@ git モード:
 git push -u origin feature/{slug}
 
 必要に応じて gh pr create
+
+### worktree クリーンアップ（worktree モード時のみ）
+
+PR マージ後、不要になった worktree を削除してください:
+`/git-worktree` で gtr rm または gtr clean を実行
 ```
 
 no-git モード:
