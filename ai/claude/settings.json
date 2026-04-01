@@ -129,7 +129,16 @@
     "shiiman-terraform@shiiman-claude-code-plugins": true,
     "shiiman-workflow@shiiman-claude-code-plugins": true,
     "shiiman-google@shiiman-claude-code-plugins": true,
-    "shiiman-slack@shiiman-claude-code-plugins": true
+    "shiiman-slack@shiiman-claude-code-plugins": true,
+    "codex@openai-codex": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
   },
   "outputStyle": "Default",
   "language": "Japanese",

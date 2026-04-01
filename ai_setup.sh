@@ -44,8 +44,84 @@ setup_claude() {
     create_symlink "$DOTFILES_DIR/ai/claude/CLAUDE.md" ~/.claude/CLAUDE.md
     echo "  ✓ CLAUDE.md (グローバル指示)"
 
+    # プラグイン設定
+    setup_claude_plugins
+
     # MCP サーバー設定
     setup_claude_mcp
+}
+
+# Claude Code プラグイン設定
+setup_claude_plugins() {
+    echo "  プラグイン設定..."
+
+    # claude コマンドの確認
+    if ! command -v claude >/dev/null 2>&1; then
+        echo "    ⚠ claude コマンドが見つかりません（プラグイン設定をスキップ）"
+        return
+    fi
+
+    setup_shiiman_claude_code_plugins
+    setup_codex_plugin_cc
+}
+
+# shiiman-claude-code-plugins のセットアップ
+setup_shiiman_claude_code_plugins() {
+    local marketplace="shiiman-claude-code-plugins"
+    local marketplace_repo="shiiman/claude-code-plugins"
+    local plugins=(
+        "shiiman-common"
+        "shiiman-claude"
+        "shiiman-git"
+        "shiiman-github"
+        "shiiman-go"
+        "shiiman-terraform"
+        "shiiman-workflow"
+        "shiiman-google"
+        "shiiman-slack"
+    )
+
+    # マーケットプレイスの追加（未設定の場合のみ）
+    if ! claude plugin marketplace list 2>/dev/null | grep -q "$marketplace"; then
+        claude plugin marketplace add "$marketplace_repo"
+        echo "    ✓ $marketplace マーケットプレイスを追加"
+    else
+        echo "    ✓ $marketplace (マーケットプレイス設定済み)"
+    fi
+
+    # 各プラグインのインストール（未インストールの場合のみ）
+    for plugin_name in "${plugins[@]}"; do
+        local plugin="${plugin_name}@${marketplace}"
+        if ! claude plugin list 2>/dev/null | grep -q "$plugin"; then
+            claude plugin install --scope user "$plugin"
+            echo "    ✓ $plugin をインストール"
+        else
+            echo "    ✓ $plugin (インストール済み)"
+        fi
+    done
+}
+
+# codex-plugin-cc のセットアップ
+setup_codex_plugin_cc() {
+    local marketplace="openai-codex"
+    local plugin="codex@openai-codex"
+    local marketplace_repo="openai/codex-plugin-cc"
+
+    # マーケットプレイスの追加（未設定の場合のみ）
+    if ! claude plugin marketplace list 2>/dev/null | grep -q "$marketplace"; then
+        claude plugin marketplace add "$marketplace_repo"
+        echo "    ✓ $marketplace マーケットプレイスを追加"
+    else
+        echo "    ✓ $marketplace (マーケットプレイス設定済み)"
+    fi
+
+    # プラグインのインストール（未インストールの場合のみ）
+    if ! claude plugin list 2>/dev/null | grep -q "$plugin"; then
+        claude plugin install --scope user "$plugin"
+        echo "    ✓ $plugin をインストール"
+    else
+        echo "    ✓ $plugin (インストール済み)"
+    fi
 }
 
 # Claude MCP サーバー設定
