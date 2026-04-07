@@ -148,10 +148,5 @@
         "key": "cmd+r cmd+j",
         "command": "-editor.unfoldAll",
         "when": "editorTextFocus && foldingEnabled"
-    },
-    {
-        "key": "alt+cmd+s",
-        "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
-        "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
     }
 ]

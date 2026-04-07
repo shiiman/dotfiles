@@ -119,6 +119,8 @@ if slug が空なら slug = "no-git-task"
 no-git モードではこのステップをスキップする。
 ユーザーがベースブランチを明示した場合は、そちらを優先する。
 
+> **Note**: `github-worktree-create` は worktree 作成後に `mise trust` を自動実行するため、追加の対応は不要。
+
 ### ステップ 4: Owner エージェント作成
 
 Codex の multi_agent 機能を使用して Owner エージェントを作成する。
