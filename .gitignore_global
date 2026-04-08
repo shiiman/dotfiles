@@ -65,3 +65,5 @@ dist/
 # 一時ファイル
 tmp/
 temp/
+
+.superset/
