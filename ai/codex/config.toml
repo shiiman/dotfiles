@@ -170,6 +170,9 @@ command = "uvx"
 [projects."/Users/a12665"]
 trust_level = "trusted"
 
+[projects."/Users/a12665/Documents/sre/ai-app"]
+trust_level = "trusted"
+
 [plugins."github@openai-curated"]
 enabled = true
 
