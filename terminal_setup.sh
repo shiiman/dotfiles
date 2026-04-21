@@ -40,7 +40,7 @@ main() {
     if [ -d "/Applications/cmux.app" ]; then
         echo "  検出: cmux"
         terminal_found=true
-        create_symlink "$DOTFILES_DIR/cmux/settings.json" "$CMUX_CONFIG_DIR/settings.json"
+        create_symlink "$DOTFILES_DIR/terminal/cmux/settings.json" "$CMUX_CONFIG_DIR/settings.json"
         echo "  ✓ cmux/settings.json -> ~/.config/cmux/settings.json"
     fi
     if [ -d "/Applications/Ghostty.app" ]; then
@@ -54,7 +54,7 @@ main() {
     fi
 
     # cmuxとGhosttyは同じ設定パスを使用（~/.config/ghostty/config）
-    create_symlink "$DOTFILES_DIR/ghostty/config" "$GHOSTTY_CONFIG_DIR/config"
+    create_symlink "$DOTFILES_DIR/terminal/ghostty/config" "$GHOSTTY_CONFIG_DIR/config"
     echo "  ✓ config -> ~/.config/ghostty/config"
 
     # バックアップがある場合は表示

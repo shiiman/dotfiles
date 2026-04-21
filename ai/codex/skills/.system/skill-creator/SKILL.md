@@ -47,7 +47,7 @@ Think of Codex as exploring a path: a narrow bridge with cliffs needs specific g
 
 ### Protect Validation Integrity
 
-You may use subagents during iteration to validate whether a skill works on realistic tasks or whether a suspected problem is real. This is most useful when you want an independent pass on the skill's behavior, outputs, or failure modes after a revision. Only do this when it is possible to start new subagents.
+You may use subagents during iteration to validate whether a skill works on realistic tasks or whether a suspected problem is real. This is most useful when you want an independent pass on the skill's behavior, outputs, or failure modes after a revision.  Only do this when it is possible to start new subagents.
 
 When using subagents for validation, treat that as an evaluation surface. The goal is to learn whether the skill generalizes, not whether another agent can reconstruct the answer from leaked context.
 
@@ -253,6 +253,7 @@ For example, when building an image-editor skill, relevant questions include:
 - "Can you give some examples of how this skill would be used?"
 - "I can imagine users asking for things like 'Remove the red-eye from this image' or 'Rotate this image'. Are there other ways you imagine this skill being used?"
 - "What would a user say that should trigger this skill?"
+- "Where should I create this skill? If you do not have a preference, I will place it in `$CODEX_HOME/skills` (or `~/.codex/skills` when `CODEX_HOME` is unset) so Codex can discover it automatically."
 
 To avoid overwhelming users, avoid asking too many questions in a single message. Start with the most important questions and follow up as needed for better effectiveness.
 
@@ -288,6 +289,8 @@ At this point, it is time to actually create the skill.
 
 Skip this step only if the skill being developed already exists. In this case, continue to the next step.
 
+Before running `init_skill.py`, ask where the user wants the skill created. If they do not specify a location, default to `$CODEX_HOME/skills`; when `CODEX_HOME` is unset, fall back to `~/.codex/skills` so the skill is auto-discovered.
+
 When creating a new skill from scratch, always run the `init_skill.py` script. The script conveniently generates a new template skill directory that automatically includes everything a skill requires, making the skill creation process much more efficient and reliable.
 
 Usage:
@@ -299,9 +302,9 @@ scripts/init_skill.py <skill-name> --path <output-directory> [--resources script
 Examples:
 
 ```bash
-scripts/init_skill.py my-skill --path skills/public
-scripts/init_skill.py my-skill --path skills/public --resources scripts,references
-scripts/init_skill.py my-skill --path skills/public --resources scripts --examples
+scripts/init_skill.py my-skill --path "${CODEX_HOME:-$HOME/.codex}/skills"
+scripts/init_skill.py my-skill --path "${CODEX_HOME:-$HOME/.codex}/skills" --resources scripts,references
+scripts/init_skill.py my-skill --path ~/work/skills --resources scripts --examples
 ```
 
 The script:
@@ -383,33 +386,31 @@ User testing often this happens right after using the skill, with fresh context 
 ## Forward-testing
 
 To forward-test, launch subagents as a way to stress test the skill with minimal context.
-Subagents should _not_ know that they are being asked to test the skill. They should be treated as
-an agent asked to perform a task by the user. Prompts to subagents should look like:
-`Use $skill-x at /path/to/skill-x to solve problem y`
+Subagents should *not* know that they are being asked to test the skill.  They should be treated as
+an agent asked to perform a task by the user.  Prompts to subagents should look like:
+  `Use $skill-x at /path/to/skill-x to solve problem y`
 Not:
-`Review the skill at /path/to/skill-x; pretend a user asks you to...`
+  `Review the skill at /path/to/skill-x; pretend a user asks you to...`
 
 Decision rule for forward-testing:
+  - Err on the side of forward-testing
+  - Ask for approval if you think there's a risk that forward-testing would:
+    * take a long time,
+    * require additional approvals from the user, or
+    * modify live production systems
 
-- Err on the side of forward-testing
-- Ask for approval if you think there's a risk that forward-testing would:
-  - take a long time,
-  - require additional approvals from the user, or
-  - modify live production systems
-
-In these cases, show the user your proposed prompt and request (1) a yes/no decision, and
-(2) any suggested modifictions.
+  In these cases, show the user your proposed prompt and request (1) a yes/no decision, and
+  (2) any suggested modifictions.
 
 Considerations when forward-testing:
-
-- use fresh threads for independent passes
-- pass the skill, and a request in a similar way the user would.
-- pass raw artifacts, not your conclusions
-- avoid showing expected answers or intended fixes
-- rebuild context from source artifacts after each iteration
-- review the subagent's output and reasoning and emitted artifacts
-- avoid leaving artifacts the agent can find on disk between iterations;
-  clean up subagents' artifacts to avoid additional contamination.
+   - use fresh threads for independent passes
+   - pass the skill, and a request in a similar way the user would.
+   - pass raw artifacts, not your conclusions
+   - avoid showing expected answers or intended fixes
+   - rebuild context from source artifacts after each iteration
+   - review the subagent's output and reasoning and emitted artifacts
+   - avoid leaving artifacts the agent can find on disk between iterations;
+     clean up subagents' artifacts to avoid additional contamination.
 
 If forward-testing only succeeds when subagents see leaked context, tighten the skill or the
 forward-testing setup before trusting the result.

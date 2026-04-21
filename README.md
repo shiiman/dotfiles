@@ -4,17 +4,17 @@ macOS 開発環境の設定ファイル管理リポジトリ
 
 ## 管理対象ファイル
 
-| ファイル             | 説明                                 |
-| -------------------- | ------------------------------------ |
-| `.bashrc`            | Bash設定                             |
-| `.zshrc`             | Zsh設定                              |
-| `.gitconfig`         | Git設定                              |
-| `.gitignore_global`  | グローバルgitignore                  |
-| `.tmux.conf`         | tmux設定                             |
-| `.vimrc`             | Vim設定                              |
-| `mise/config.toml`   | mise グローバル設定                  |
-| `ghostty/config`     | ターミナル設定（cmux / Ghostty共用） |
-| `cmux/settings.json` | cmux 設定                            |
+| ファイル                       | 説明                                 |
+| ------------------------------ | ------------------------------------ |
+| `.bashrc`                      | Bash設定                             |
+| `.zshrc`                       | Zsh設定                              |
+| `.gitconfig`                   | Git設定                              |
+| `.gitignore_global`            | グローバルgitignore                  |
+| `.tmux.conf`                   | tmux設定                             |
+| `.vimrc`                       | Vim設定                              |
+| `mise/config.toml`             | mise グローバル設定                  |
+| `terminal/ghostty/config`      | ターミナル設定（cmux / Ghostty共用） |
+| `terminal/cmux/settings.json`  | cmux 設定                            |
 
 ## ディレクトリ構成
 
@@ -34,10 +34,12 @@ dotfiles/
 ├── ai_setup.sh           # AIツール設定セットアップ
 ├── mise/
 │   └── config.toml       # mise グローバル設定
-├── ghostty/
-│   └── config            # ターミナル設定（cmux / Ghostty共用）
-├── cmux/
-│   └── settings.json     # cmux 設定（~/.config/cmux/settings.json）
+├── terminal/
+│   ├── ghostty/
+│   │   └── config        # ターミナル設定（cmux / Ghostty共用）
+│   ├── cmux/
+│   │   └── settings.json # cmux 設定（~/.config/cmux/settings.json）
+│   └── iterm/            # iTerm2 設定ファイル
 ├── ai/                   # AIツールグローバル設定
 │   ├── claude/           # Claude Code
 │   │   ├── settings.json     # 設定（モデル、権限、フック）
@@ -48,7 +50,6 @@ dotfiles/
 │   │   └── agents/       # Codexエージェント設定
 │   └── antigravity/      # Antigravity
 │       └── GEMINI.md     # Antigravityグローバル指示
-├── iterm/                # iTerm2 設定ファイル
 ├── .claude/              # Claude Code プロジェクト設定
 ├── .cursor/              # Cursor プロジェクト設定
 ├── SublimeText/          # Sublime Text 設定
