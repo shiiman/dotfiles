@@ -4,16 +4,17 @@ macOS 開発環境の設定ファイル管理リポジトリ
 
 ## 管理対象ファイル
 
-| ファイル            | 説明                                 |
-| ------------------- | ------------------------------------ |
-| `.bashrc`           | Bash設定                             |
-| `.zshrc`            | Zsh設定                              |
-| `.gitconfig`        | Git設定                              |
-| `.gitignore_global` | グローバルgitignore                  |
-| `.tmux.conf`        | tmux設定                             |
-| `.vimrc`            | Vim設定                              |
-| `mise/config.toml`  | mise グローバル設定                  |
-| `ghostty/config`    | ターミナル設定（cmux / Ghostty共用） |
+| ファイル             | 説明                                 |
+| -------------------- | ------------------------------------ |
+| `.bashrc`            | Bash設定                             |
+| `.zshrc`             | Zsh設定                              |
+| `.gitconfig`         | Git設定                              |
+| `.gitignore_global`  | グローバルgitignore                  |
+| `.tmux.conf`         | tmux設定                             |
+| `.vimrc`             | Vim設定                              |
+| `mise/config.toml`   | mise グローバル設定                  |
+| `ghostty/config`     | ターミナル設定（cmux / Ghostty共用） |
+| `cmux/settings.json` | cmux 設定                            |
 
 ## ディレクトリ構成
 
@@ -35,6 +36,8 @@ dotfiles/
 │   └── config.toml       # mise グローバル設定
 ├── ghostty/
 │   └── config            # ターミナル設定（cmux / Ghostty共用）
+├── cmux/
+│   └── settings.json     # cmux 設定（~/.config/cmux/settings.json）
 ├── ai/                   # AIツールグローバル設定
 │   ├── claude/           # Claude Code
 │   │   ├── settings.json     # 設定（モデル、権限、フック）
@@ -138,7 +141,10 @@ cmux / Ghostty ターミナルの設定をセットアップ：
 sh ~/dotfiles/terminal_setup.sh
 ```
 
-設定ファイルは `~/.config/ghostty/config` にシンボリックリンクされます（cmux と Ghostty は同じ設定ファイルを共有）。
+以下の設定ファイルがシンボリックリンクされます：
+
+- Ghostty: `~/.config/ghostty/config`（cmux と共用）
+- cmux: `~/.config/cmux/settings.json`
 
 ### Homebrew パッケージ管理
 

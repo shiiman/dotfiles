@@ -196,9 +196,9 @@
   "alwaysThinkingEnabled": false,
   "plansDirectory": "./.claude/plans",
   "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
   "teammateMode": "tmux",
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
-  ],
-  "skipAutoPermissionPrompt": true
+  ]
 }

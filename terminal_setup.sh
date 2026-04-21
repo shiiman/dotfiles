@@ -5,6 +5,7 @@ set -u
 
 DOTFILES_DIR=~/dotfiles
 GHOSTTY_CONFIG_DIR=~/.config/ghostty
+CMUX_CONFIG_DIR=~/.config/cmux
 BACKUP_DIR=~/.terminal_backup/$(date +%Y%m%d_%H%M%S)
 
 # バックアップしてからシンボリックリンクを作成
@@ -39,6 +40,8 @@ main() {
     if [ -d "/Applications/cmux.app" ]; then
         echo "  検出: cmux"
         terminal_found=true
+        create_symlink "$DOTFILES_DIR/cmux/settings.json" "$CMUX_CONFIG_DIR/settings.json"
+        echo "  ✓ cmux/settings.json -> ~/.config/cmux/settings.json"
     fi
     if [ -d "/Applications/Ghostty.app" ]; then
         echo "  検出: Ghostty"
