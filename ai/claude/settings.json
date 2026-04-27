@@ -85,9 +85,10 @@
       "Bash(claude config:*)",
       "Edit(.env*)",
       "Write(.env*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
-  "model": "opusplan",
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -96,68 +97,6 @@
           {
             "type": "command",
             "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' >&2; exit 2; fi"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CMUX_CLI=/Applications/cmux.app/Contents/Resources/bin/cmux; [ -x \"$CMUX_CLI\" ] && \"$CMUX_CLI\" notify --title 'Claude Code' --body 'タスクが完了しました' 2>/dev/null || true"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true"
-          }
-        ]
-      }
-    ],
-    "PostToolUseFailure": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true"
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true"
           }
         ]
       }
@@ -194,11 +133,12 @@
   "outputStyle": "Default",
   "language": "Japanese",
   "alwaysThinkingEnabled": false,
+  "effortLevel": "xhigh",
   "plansDirectory": "./.claude/plans",
   "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
   "teammateMode": "tmux",
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
-  ]
+  ],
+  "skipAutoPermissionPrompt": true
 }

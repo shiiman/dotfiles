@@ -13,7 +13,7 @@ check_for_update_on_startup = true
 # =============================================================================
 
 # 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
-model = "gpt-5.3-codex"
+model = "gpt-5.5"
 
 # モデルプロバイダー（デフォルト: "openai"）
 model_provider = "openai"
@@ -171,6 +171,12 @@ command = "uvx"
 trust_level = "trusted"
 
 [projects."/Users/a12665/Documents/sre/ai-app"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/project/mimi/mimi-server"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/sre/spindle"]
 trust_level = "trusted"
 
 [plugins."github@openai-curated"]
