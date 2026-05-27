@@ -125,5 +125,6 @@
     "claudeCode.selectedModel": "opus",
     "workbench.settings.applyToAllProfiles": [],
     "extensions.ignoreRecommendations": true,
-    "cursor.composer.usageSummaryDisplay": "always"
+    "cursor.composer.usageSummaryDisplay": "always",
+    "window.autoDetectColorScheme": false
 }

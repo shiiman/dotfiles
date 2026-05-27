@@ -179,11 +179,51 @@ trust_level = "trusted"
 [projects."/Users/a12665/Documents/sre/spindle"]
 trust_level = "trusted"
 
+[projects."/Users/a12665/Documents/sre/ai-dept-terraform"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/sre/rosetta-backend"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/personal/bucketlist-commit"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/sre/ai-report"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/sre/ai-usage"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/personal/notebooklm-mcp"]
+trust_level = "trusted"
+
 [plugins."github@openai-curated"]
 enabled = true
 
 [plugins."google-drive@openai-curated"]
 enabled = true
 
+[plugins."superpowers@superpowers-marketplace"]
+enabled = true
+
 [notice.model_migrations]
 "gpt-5.3-codex" = "gpt-5.4"
+
+[hooks.state]
+
+[hooks.state."/Users/a12665/.codex/hooks.json:session_start:0:0"]
+enabled = false
+trusted_hash = "sha256:eda016b31d7d5041af1c6f40b329b5b0f278699f77ee341853580af4eda924e6"
+
+[hooks.state."/Users/a12665/.codex/hooks.json:stop:0:0"]
+enabled = false
+trusted_hash = "sha256:5474ee80f10a57499c06352010f8ce91397f532e43e02443ab422f3cd43cc48a"
+
+[hooks.state."/Users/a12665/.codex/hooks.json:user_prompt_submit:0:0"]
+enabled = false
+trusted_hash = "sha256:fd9e458b9d5b40bfcd259a89e1e238dab29ad360efbe3e05b354585d160df73e"
+
+[marketplaces.superpowers-marketplace]
+last_updated = "2026-05-27T01:05:47Z"
+source_type = "git"
+source = "https://github.com/obra/superpowers-marketplace.git"

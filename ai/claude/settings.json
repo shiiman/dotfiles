@@ -1,8 +1,147 @@
 {
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
+  "alwaysThinkingEnabled": false,
+  "effortLevel": "xhigh",
+  "enabledPlugins": {
+    "codex@openai-codex": true,
+    "context7@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": false,
+    "playwright@claude-plugins-official": true,
+    "shiiman-claude@shiiman-claude-code-plugins": true,
+    "shiiman-common@shiiman-claude-code-plugins": true,
+    "shiiman-git@shiiman-claude-code-plugins": true,
+    "shiiman-github@shiiman-claude-code-plugins": true,
+    "shiiman-go@shiiman-claude-code-plugins": true,
+    "shiiman-google@shiiman-claude-code-plugins": true,
+    "shiiman-slack@shiiman-claude-code-plugins": true,
+    "shiiman-terraform@shiiman-claude-code-plugins": true,
+    "shiiman-workflow@shiiman-claude-code-plugins": true,
+    "superpowers@superpowers-marketplace": true,
+    "typescript-lsp@claude-plugins-official": false
   },
+  "env": {
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "repo": "openai/codex-plugin-cc",
+        "source": "github"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "repo": "obra/superpowers-marketplace",
+        "source": "github"
+      }
+    }
+  },
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' \u003e\u00262; exit 2; fi",
+            "type": "command"
+          }
+        ],
+        "matcher": "Bash"
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "'/Users/a12665/.ai-usage/bin/ai-usage' collect --source claude",
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "command": "'/Users/a12665/.ai-usage/bin/ai-usage' collect --source claude",
+            "type": "command"
+          }
+        ],
+        "id": "ai-usage-collector"
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "[ -n \"$SUPERSET_HOME_DIR\" ] \u0026\u0026 [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] \u0026\u0026 SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "language": "Japanese",
+  "model": "opus[1m]",
+  "outputStyle": "Default",
   "permissions": {
     "allow": [
       "mcp__multi-agent-mcp__*",
@@ -68,6 +207,20 @@
       "Skill(shiiman-slack:*)",
       "Skill(shiiman-claude-code-plugins:*)"
     ],
+    "ask": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(rm -r:*)",
+      "Bash(rm -rf:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh repo create:*)",
+      "Bash(claude config:*)",
+      "Edit(.env*)",
+      "Write(.env*)"
+    ],
+    "defaultMode": "auto",
     "deny": [
       "Bash(sudo:*)",
       "Bash(rm -rf /*)",
@@ -85,73 +238,17 @@
       "Edit(**/.ssh/*)",
       "Edit(**/credentials*)",
       "Write(**/.ssh/*)"
-    ],
-    "ask": [
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(git checkout:*)",
-      "Bash(rm -r:*)",
-      "Bash(rm -rf:*)",
-      "Bash(gh pr merge:*)",
-      "Bash(gh repo create:*)",
-      "Bash(claude config:*)",
-      "Edit(.env*)",
-      "Write(.env*)"
-    ],
-    "defaultMode": "auto"
-  },
-  "model": "opus[1m]",
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' >&2; exit 2; fi"
-          }
-        ]
-      }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "~/dotfiles/ai/claude/scripts/statusline.sh"
-  },
-  "enabledPlugins": {
-    "gopls-lsp@claude-plugins-official": false,
-    "typescript-lsp@claude-plugins-official": false,
-    "context7@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true,
-    "shiiman-common@shiiman-claude-code-plugins": true,
-    "shiiman-claude@shiiman-claude-code-plugins": true,
-    "shiiman-git@shiiman-claude-code-plugins": true,
-    "shiiman-github@shiiman-claude-code-plugins": true,
-    "shiiman-go@shiiman-claude-code-plugins": true,
-    "shiiman-terraform@shiiman-claude-code-plugins": true,
-    "shiiman-workflow@shiiman-claude-code-plugins": true,
-    "shiiman-google@shiiman-claude-code-plugins": true,
-    "shiiman-slack@shiiman-claude-code-plugins": true,
-    "codex@openai-codex": true
-  },
-  "extraKnownMarketplaces": {
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    }
-  },
-  "outputStyle": "Default",
-  "language": "Japanese",
-  "alwaysThinkingEnabled": false,
-  "effortLevel": "xhigh",
   "plansDirectory": "./.claude/plans",
-  "skipDangerousModePermissionPrompt": true,
-  "teammateMode": "tmux",
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
   ],
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "skipDangerousModePermissionPrompt": true,
+  "statusLine": {
+    "command": "~/dotfiles/ai/claude/scripts/statusline.sh",
+    "type": "command"
+  },
+  "teammateMode": "tmux"
 }

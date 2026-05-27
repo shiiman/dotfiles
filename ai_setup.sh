@@ -63,6 +63,7 @@ setup_claude_plugins() {
 
     setup_shiiman_claude_code_plugins
     setup_codex_plugin_cc
+    setup_superpowers
 }
 
 # shiiman-claude-code-plugins のセットアップ
@@ -106,6 +107,29 @@ setup_codex_plugin_cc() {
     local marketplace="openai-codex"
     local plugin="codex@openai-codex"
     local marketplace_repo="openai/codex-plugin-cc"
+
+    # マーケットプレイスの追加（未設定の場合のみ）
+    if ! claude plugin marketplace list 2>/dev/null | grep -q "$marketplace"; then
+        claude plugin marketplace add "$marketplace_repo"
+        echo "    ✓ $marketplace マーケットプレイスを追加"
+    else
+        echo "    ✓ $marketplace (マーケットプレイス設定済み)"
+    fi
+
+    # プラグインのインストール（未インストールの場合のみ）
+    if ! claude plugin list 2>/dev/null | grep -q "$plugin"; then
+        claude plugin install --scope user "$plugin"
+        echo "    ✓ $plugin をインストール"
+    else
+        echo "    ✓ $plugin (インストール済み)"
+    fi
+}
+
+# superpowers のセットアップ
+setup_superpowers() {
+    local marketplace="superpowers-marketplace"
+    local plugin="superpowers@superpowers-marketplace"
+    local marketplace_repo="obra/superpowers-marketplace"
 
     # マーケットプレイスの追加（未設定の場合のみ）
     if ! claude plugin marketplace list 2>/dev/null | grep -q "$marketplace"; then
@@ -296,6 +320,45 @@ setup_codex() {
         echo "  ✓ agents/ (agents定義)"
     else
         echo "  ⚠ ai/codex/agents/ ディレクトリが見つかりません（スキップ）"
+    fi
+
+    # プラグイン設定
+    setup_codex_plugins
+}
+
+# Codex プラグイン設定
+setup_codex_plugins() {
+    echo "  プラグイン設定..."
+
+    # codex コマンドの確認
+    if ! command -v codex >/dev/null 2>&1; then
+        echo "    ⚠ codex コマンドが見つかりません（プラグイン設定をスキップ）"
+        return
+    fi
+
+    setup_codex_superpowers
+}
+
+# Codex superpowers のセットアップ
+setup_codex_superpowers() {
+    local marketplace="superpowers-marketplace"
+    local plugin="superpowers@superpowers-marketplace"
+    local marketplace_repo="obra/superpowers-marketplace"
+
+    # マーケットプレイスの追加（未設定の場合のみ）
+    if ! codex plugin marketplace list 2>/dev/null | grep -q "$marketplace"; then
+        codex plugin marketplace add "$marketplace_repo"
+        echo "    ✓ $marketplace マーケットプレイスを追加"
+    else
+        echo "    ✓ $marketplace (マーケットプレイス設定済み)"
+    fi
+
+    # プラグインのインストール（未インストールの場合のみ）
+    if ! codex plugin list 2>/dev/null | grep -F "$plugin" | grep -q "installed"; then
+        codex plugin add "$plugin"
+        echo "    ✓ $plugin をインストール"
+    else
+        echo "    ✓ $plugin (インストール済み)"
     fi
 }
 
