@@ -19,15 +19,18 @@ description: 既存変更から Issue → ブランチ → コミット・プッ
   Issue → ブランチ/worktree → コミット → プッシュ提示 → PR を自動作成する。
 
 使用方法:
-  workflow-issue-branch-pr-create [オプション]
+  workflow-issue-branch-pr-create
+  workflow-issue-branch-pr-create --help
 
 オプション:
-  --worktree  ブランチの代わりに worktree を作成（既存変更は手動で移動が必要）
-  --help      このヘルプを表示
+  --help  このヘルプを表示
 
 例:
-  workflow-issue-branch-pr-create              # 既存変更から Issue・PR を作成（ブランチ）
-  workflow-issue-branch-pr-create --worktree   # worktree 作成モードで実行
+  workflow-issue-branch-pr-create         # 既存変更から Issue・PR を作成（既定はブランチ）
+  workflow-issue-branch-pr-create --help  # ヘルプを表示
+
+指定の伝え方（フラグの代わり）:
+  - 「worktree で」  → ブランチではなく worktree を作成（既存変更は stash 経由で移動）
 ```
 
 ## フロー概要
@@ -97,11 +100,13 @@ github-issue-create スキルのワークフローに従って実行する。変
 
 **デフォルトブランチ上の場合のみ実行**。feature ブランチ上ならスキップ。
 
-**デフォルト（`--worktree` なし）**:
+既定はブランチ。発話に「worktree で」等があれば worktree を作成する。
+
+**ブランチ（既定）**:
 
 github-branch-create スキルのワークフローに従って、Issue 番号からブランチを作成する。
 
-**`--worktree` 指定時**:
+**worktree（「worktree で」と指示された場合）**:
 
 ⚠️ worktree は別ディレクトリに作成されるため、既存の未コミット変更の移動が必要です。
 以下の手順で変更を移動する:
@@ -126,7 +131,7 @@ git stash pop
 
 - `git stash pop` がコンフリクトした場合、手動でコンフリクトを解消する
 - 元の変更は `git stash list` で確認可能（`git stash pop` 失敗時は stash は残る）
-- 復旧が困難な場合は `git stash pop --abort` 後、元ディレクトリに戻り `git stash pop` で変更を復元し、`--worktree` なしでやり直す
+- 復旧が困難な場合は `git stash pop --abort` 後、元ディレクトリに戻り `git stash pop` で変更を復元し、worktree なし（ブランチ）でやり直す
 
 ### ステップ 4: コミット
 
@@ -169,7 +174,7 @@ github-pr-create スキルのワークフローに従って実行する。`--no-
 
 PR がマージされると Issue #{issue番号} は自動的にクローズされます。
 
-### worktree クリーンアップ（--worktree モード時のみ）
+### worktree クリーンアップ（worktree モード時のみ）
 
 PR マージ後、不要になった worktree を削除してください:
 `/git-worktree` で gtr rm または gtr clean を実行

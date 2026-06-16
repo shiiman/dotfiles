@@ -1,6 +1,6 @@
 ---
 name: google-notebooklm-slide
-description: NotebookLM でスライドデッキを作成する。「NotebookLM スライド」「スライドデッキ作成」「ノートブック スライド」「NotebookLM プレゼン」「NotebookLM でプレゼン」「プレゼン資料作成」「NotebookLM デッキ」などで起動。
+description: NotebookLM でスライドデッキを作成する。「NotebookLM スライド」「NotebookLM スライドデッキ」「NotebookLM プレゼン」「NotebookLM デッキ」などで起動。
 ---
 
 # NotebookLM Slide Deck
