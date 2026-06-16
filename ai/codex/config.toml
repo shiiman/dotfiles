@@ -58,7 +58,7 @@ sandbox_mode = "workspace-write"
 
 # Web検索機能 disabled/cached/live（デフォルト: disabled）
 web_search = "live"
-service_tier = "fast"
+service_tier = "priority"
 
 # =============================================================================
 # Sandbox Workspace Write Settings
@@ -113,6 +113,9 @@ animations = true
 # スクロール反転（デフォルト: false）
 scroll_invert = false
 
+[tui.model_availability_nux]
+"gpt-5.5" = 1
+
 # =============================================================================
 # History Settings
 # =============================================================================
@@ -148,24 +151,27 @@ file_opener = "cursor"
 project_doc_max_bytes = 32768
 
 [mcp_servers.playwright]
-args = ["@playwright/mcp@latest"]
 command = "npx"
+args = ["@playwright/mcp@latest"]
 
 [mcp_servers.context7]
-args = ["--yes", "@upstash/context7-mcp@latest"]
 command = "npx"
+args = ["--yes", "@upstash/context7-mcp@latest"]
 
 [mcp_servers.multi-agent-mcp]
-args = ["--from", "git+https://github.com/shiiman/multi-agent-mcp", "multi-agent-mcp"]
 command = "uvx"
+args = ["--from", "git+https://github.com/shiiman/multi-agent-mcp", "multi-agent-mcp"]
 
 [mcp_servers.notebooklm-mcp]
-args = ["--from", "git+https://github.com/shiiman/notebooklm-mcp", "notebooklm-mcp"]
 command = "uvx"
+args = ["--from", "git+https://github.com/shiiman/notebooklm-mcp", "notebooklm-mcp"]
 
 [mcp_servers.google-genmedia-mcp]
-args = ["--from", "git+https://github.com/shiiman/google-genmedia-mcp", "google-genmedia-mcp"]
 command = "uvx"
+args = ["--from", "git+https://github.com/shiiman/google-genmedia-mcp", "google-genmedia-mcp"]
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
 
 [projects."/Users/a12665"]
 trust_level = "trusted"
@@ -197,6 +203,12 @@ trust_level = "trusted"
 [projects."/Users/a12665/Documents/personal/notebooklm-mcp"]
 trust_level = "trusted"
 
+[projects."/Users/a12665/dotfiles"]
+trust_level = "trusted"
+
+[projects."/private/tmp"]
+trust_level = "trusted"
+
 [plugins."github@openai-curated"]
 enabled = true
 
@@ -213,17 +225,24 @@ enabled = true
 
 [hooks.state."/Users/a12665/.codex/hooks.json:session_start:0:0"]
 enabled = false
-trusted_hash = "sha256:eda016b31d7d5041af1c6f40b329b5b0f278699f77ee341853580af4eda924e6"
+trusted_hash = "sha256:ab9b85d74b7932fa84795904e89c7e1af84042c98631b30e79e0b0662bab0c63"
 
 [hooks.state."/Users/a12665/.codex/hooks.json:stop:0:0"]
 enabled = false
-trusted_hash = "sha256:5474ee80f10a57499c06352010f8ce91397f532e43e02443ab422f3cd43cc48a"
+trusted_hash = "sha256:41efe3ccef9cab6ebb4eeb23357377be7a23222c9b63f630b983949380b5574a"
 
 [hooks.state."/Users/a12665/.codex/hooks.json:user_prompt_submit:0:0"]
 enabled = false
-trusted_hash = "sha256:fd9e458b9d5b40bfcd259a89e1e238dab29ad360efbe3e05b354585d160df73e"
+trusted_hash = "sha256:4f0bdc785c1ba3ee02681f9899771e9105f796a1d514a57fef8452020ee027e3"
+
+[hooks.state."/Users/a12665/.codex/hooks.json:stop:1:0"]
+trusted_hash = "sha256:d12d73e56e6766029d2626f897b094402f77b2764d0f08ecebfa5927b770da17"
+
+[hooks.state."superpowers@superpowers-marketplace:hooks/hooks.json:session_start:0:0"]
+trusted_hash = "sha256:62acbaff2b2f55f41971e21a164990aaa53c96919baa0a5eae2eb5db73b9e6e6"
 
 [marketplaces.superpowers-marketplace]
-last_updated = "2026-05-27T01:05:47Z"
+last_updated = "2026-06-15T11:54:20Z"
+last_revision = "7d3b7c4c7bcc5b804ebb156471e6064960d7bec9"
 source_type = "git"
 source = "https://github.com/obra/superpowers-marketplace.git"
