@@ -12,3 +12,6 @@ SublimeText/Packages/User/Package Control.user-ca-bundle
 
 # Node.js (Prettier)
 node_modules/
+
+# Codex システムスキル（codex CLI が自動配置・更新するため追跡しない）
+ai/codex/skills/.system/
