@@ -102,7 +102,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "sonnet",
   "hooks": {
     "PermissionRequest": [
       {
@@ -151,11 +151,10 @@
       {
         "hooks": [
           {
-            "command": "\"$HOME/.ai-usage/bin/ai-usage\" collect --source claude",
-            "type": "command"
+            "type": "command",
+            "command": "\"$HOME/.ai-usage/bin/ai-usage\" collect --source claude"
           }
-        ],
-        "id": "ai-usage-collector"
+        ]
       },
       {
         "hooks": [
@@ -190,14 +189,14 @@
     "shiiman-go@shiiman-claude-code-plugins": true,
     "shiiman-google@shiiman-claude-code-plugins": true,
     "shiiman-terraform@shiiman-claude-code-plugins": true,
-    "superpowers@superpowers-marketplace": true,
     "swift-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,
     "shiiman-workflow@shiiman-claude-code-plugins": true,
     "shiiman-common@shiiman-claude-code-plugins": true,
     "shiiman-github@shiiman-claude-code-plugins": true,
     "shiiman-slack@shiiman-claude-code-plugins": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "superpowers@superpowers-marketplace": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
