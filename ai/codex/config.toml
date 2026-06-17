@@ -245,7 +245,7 @@ trusted_hash = "sha256:d12d73e56e6766029d2626f897b094402f77b2764d0f08ecebfa5927b
 trusted_hash = "sha256:62acbaff2b2f55f41971e21a164990aaa53c96919baa0a5eae2eb5db73b9e6e6"
 
 [marketplaces.superpowers-marketplace]
-last_updated = "2026-06-16T21:13:03Z"
-last_revision = "5fa24030e1a490467088122c2f2b4019eaebe3c8"
+last_updated = "2026-06-17T07:45:29Z"
+last_revision = "d661d7386cef12402614809562aa73833988de13"
 source_type = "git"
 source = "https://github.com/obra/superpowers-marketplace.git"

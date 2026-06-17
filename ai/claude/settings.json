@@ -137,6 +137,16 @@
         ]
       }
     ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/dotfiles/ai/claude/scripts/plugin-update.sh &"
+          }
+        ]
+      }
+    ],
     "SessionEnd": [
       {
         "hooks": [
