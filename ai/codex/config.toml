@@ -57,8 +57,8 @@ personality = "pragmatic"
 sandbox_mode = "workspace-write"
 
 # Web検索機能 disabled/cached/live（デフォルト: disabled）
-web_search = "live"
 service_tier = "priority"
+web_search = "live"
 
 # =============================================================================
 # Sandbox Workspace Write Settings
@@ -82,11 +82,15 @@ skills = true
 # unified_exec（デフォルト: false）- 実験的
 unified_exec = false
 
-# apply_patch_freeform（デフォルト: false）- ベータ
-apply_patch_freeform = false
-
-# multi_agent（デフォルト: false）- 実験的
-multi_agent = true
+auto_review = true
+chronicle = false
+enable_mcp_apps = true
+memories = true
+multi_agent_v2 = true
+secret_auth_storage = true
+subagents = true
+web_search = true
+workflows = true
 
 [agents]
 max_threads = 6
@@ -151,24 +155,30 @@ file_opener = "cursor"
 project_doc_max_bytes = 32768
 
 [mcp_servers.playwright]
-command = "npx"
 args = ["@playwright/mcp@latest"]
+command = "npx"
+
+[mcp_servers.playwright.tools.browser_evaluate]
+approval_mode = "approve"
+
+[mcp_servers.playwright.tools.browser_run_code_unsafe]
+approval_mode = "approve"
 
 [mcp_servers.context7]
-command = "npx"
 args = ["--yes", "@upstash/context7-mcp@latest"]
+command = "npx"
 
 [mcp_servers.multi-agent-mcp]
-command = "uvx"
 args = ["--from", "git+https://github.com/shiiman/multi-agent-mcp", "multi-agent-mcp"]
+command = "uvx"
 
 [mcp_servers.notebooklm-mcp]
-command = "uvx"
 args = ["--from", "git+https://github.com/shiiman/notebooklm-mcp", "notebooklm-mcp"]
+command = "uvx"
 
 [mcp_servers.google-genmedia-mcp]
-command = "uvx"
 args = ["--from", "git+https://github.com/shiiman/google-genmedia-mcp", "google-genmedia-mcp"]
+command = "uvx"
 
 [mcp_servers.notion]
 url = "https://mcp.notion.com/mcp"
@@ -212,6 +222,15 @@ trust_level = "trusted"
 [projects."/Users/a12665/Documents/project/nishiki/nishiki-server"]
 trust_level = "trusted"
 
+[projects."/Users/a12665/Documents/personal/blog"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/personal/sites"]
+trust_level = "trusted"
+
+[projects."/Users/a12665/Documents/project/katana/katana_oceansniper_server"]
+trust_level = "trusted"
+
 [plugins."github@openai-curated"]
 enabled = true
 
@@ -231,7 +250,7 @@ enabled = false
 trusted_hash = "sha256:ab9b85d74b7932fa84795904e89c7e1af84042c98631b30e79e0b0662bab0c63"
 
 [hooks.state."/Users/a12665/.codex/hooks.json:stop:0:0"]
-enabled = false
+enabled = true
 trusted_hash = "sha256:41efe3ccef9cab6ebb4eeb23357377be7a23222c9b63f630b983949380b5574a"
 
 [hooks.state."/Users/a12665/.codex/hooks.json:user_prompt_submit:0:0"]
@@ -245,7 +264,7 @@ trusted_hash = "sha256:d12d73e56e6766029d2626f897b094402f77b2764d0f08ecebfa5927b
 trusted_hash = "sha256:62acbaff2b2f55f41971e21a164990aaa53c96919baa0a5eae2eb5db73b9e6e6"
 
 [marketplaces.superpowers-marketplace]
-last_updated = "2026-06-17T07:45:29Z"
-last_revision = "d661d7386cef12402614809562aa73833988de13"
-source_type = "git"
+last_revision = "6d4bfbc48a3b83723267957731b3a6583ac229e3"
+last_updated = "2026-06-20T11:27:24Z"
 source = "https://github.com/obra/superpowers-marketplace.git"
+source_type = "git"
