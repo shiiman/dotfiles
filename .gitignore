@@ -1,11 +1,25 @@
 # dotfiles リポジトリ固有の除外設定
+#
 # ※ 一般的な除外設定は .gitignore_global で管理
+#   ただし .gitignore_global は「このリポジトリが配布するファイル」であり、
+#   dotfile_setup.sh 実行前の clone 直後は無効。誤コミットを防ぐため、
+#   ローカル固有ファイルはこのファイルにも明記する。
 
-# Sublime Text キャッシュ
-SublimeText/Installed Packages/PyV8/
-SublimeText/Packages/User/Package Control.cache/
-SublimeText/Packages/User/Package Control.ca-certs/
-SublimeText/Packages/User/Package Control.user-ca-bundle
+# ローカル設定（雛形は同名の .example を参照。ホーム配下に置くが誤配置対策）
+.gitconfig.local
+.shellrc_local
+
+# AI ツールのローカル生成物（作業計画書・セッション状態など）
+.claude/settings.local.json
+.claude/plans/
+.claude/tmp/
+.claude/memory/
+.cursor/mcp.local.json
+.multi-agent-mcp/
+.playwright-mcp/
+.google-genmedia-mcp/
+.notebooklm-mcp/
+.superset/
 
 # バックアップファイル
 *.orig
@@ -15,3 +29,15 @@ node_modules/
 
 # Codex システムスキル（codex CLI が自動配置・更新するため追跡しない）
 ai/codex/skills/.system/
+
+# エディタの拡張機能管理ファイル
+# Cursor / Antigravity が拡張の追加・削除時に書き換える内部管理ファイルで、
+# インストール先の絶対パス・UUID・タイムスタンプを含むため追跡しない。
+# 追跡対象は extensions.txt（ID リスト）。
+ai/cursor/extensions.json
+ai/antigravity/extensions.json
+
+# Codex CLI 設定の実ファイル
+# codex CLI が [projects]（絶対パス・作業中プロジェクト名）/ [hooks.state] /
+# [marketplaces] を自動追記するため追跡しない。追跡対象は config.toml.template のみ。
+ai/codex/config.toml

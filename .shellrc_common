@@ -44,3 +44,10 @@ fi
 
 # GTR (Git Worktree Runner) - git worktree管理ツール
 alias gwr='git gtr'
+
+###########################################################
+#  環境固有設定の読み込み                                    #
+###########################################################
+# 業務プロジェクトID・社内固有の環境変数など、リポジトリに含めない設定は
+# 追跡対象外の ~/.shellrc_local に置く（雛形: .shellrc_local.example）
+[ -f ~/.shellrc_local ] && source ~/.shellrc_local

@@ -1,3 +1,22 @@
+# Codex CLI 設定テンプレート
+#
+# このファイルが追跡対象。実ファイルは ~/.codex/config.toml で、
+# ai_setup.sh が「実ファイルが無ければこのテンプレートからコピー」する。
+#
+# なぜ実ファイルを追跡しないか:
+#   Codex CLI は起動時・操作時に以下のセクションを自動で追記・更新する。
+#   これらはマシン固有の絶対パスや作業中プロジェクト名を含むため、
+#   追跡すると公開リポジトリへ流出し、作業ツリーも常に dirty になる。
+#     [projects."<絶対パス>"]        trust_level
+#     [hooks.state."<絶対パス>:..."] enabled / trusted_hash
+#     [marketplaces.<name>]          last_revision / last_updated
+#     [notice.model_migrations]
+#     [tui.model_availability_nux]
+#
+# 設定を変更して dotfiles に反映したいとき:
+#   ~/.codex/config.toml を編集したうえで、意図した変更のみこのファイルへ転記する。
+#   （上記の自動生成セクションは転記しない）
+
 #:schema https://developers.openai.com/codex/config-schema.json
 
 # Codex CLI Configuration
@@ -13,14 +32,14 @@ check_for_update_on_startup = true
 # =============================================================================
 
 # 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
-model = "gpt-5.5"
+model = "gpt-5.6-terra"
 
 # モデルプロバイダー（デフォルト: "openai"）
 model_provider = "openai"
 
 # 推論の深さ（デフォルト: "medium"）
 # 値: "minimal", "low", "medium", "high", "xhigh"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 
 # 推論サマリーの出力（デフォルト: "auto"）
 # 値: "auto", "concise", "detailed", "none"
@@ -86,7 +105,7 @@ auto_review = true
 chronicle = false
 enable_mcp_apps = true
 memories = true
-multi_agent_v2 = true
+#multi_agent_v2 = true
 secret_auth_storage = true
 subagents = true
 web_search = true
@@ -116,13 +135,6 @@ animations = true
 
 # スクロール反転（デフォルト: false）
 scroll_invert = false
-
-[tui.model_availability_nux]
-"gpt-5.5" = 2
-
-# =============================================================================
-# History Settings
-# =============================================================================
 
 [history]
 # 履歴の永続化（デフォルト: "none"）
@@ -183,54 +195,6 @@ command = "uvx"
 [mcp_servers.notion]
 url = "https://mcp.notion.com/mcp"
 
-[projects."/Users/a12665"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/sre/ai-app"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/project/mimi/mimi-server"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/sre/spindle"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/sre/ai-dept-terraform"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/sre/rosetta-backend"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/personal/bucketlist-commit"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/sre/ai-report"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/sre/ai-usage"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/personal/notebooklm-mcp"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/dotfiles"]
-trust_level = "trusted"
-
-[projects."/private/tmp"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/project/nishiki/nishiki-server"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/personal/blog"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/personal/sites"]
-trust_level = "trusted"
-
-[projects."/Users/a12665/Documents/project/katana/katana_oceansniper_server"]
-trust_level = "trusted"
-
 [plugins."github@openai-curated"]
 enabled = true
 
@@ -239,32 +203,3 @@ enabled = true
 
 [plugins."superpowers@superpowers-marketplace"]
 enabled = true
-
-[notice.model_migrations]
-"gpt-5.3-codex" = "gpt-5.4"
-
-[hooks.state]
-
-[hooks.state."/Users/a12665/.codex/hooks.json:session_start:0:0"]
-enabled = false
-trusted_hash = "sha256:ab9b85d74b7932fa84795904e89c7e1af84042c98631b30e79e0b0662bab0c63"
-
-[hooks.state."/Users/a12665/.codex/hooks.json:stop:0:0"]
-enabled = true
-trusted_hash = "sha256:41efe3ccef9cab6ebb4eeb23357377be7a23222c9b63f630b983949380b5574a"
-
-[hooks.state."/Users/a12665/.codex/hooks.json:user_prompt_submit:0:0"]
-enabled = false
-trusted_hash = "sha256:4f0bdc785c1ba3ee02681f9899771e9105f796a1d514a57fef8452020ee027e3"
-
-[hooks.state."/Users/a12665/.codex/hooks.json:stop:1:0"]
-trusted_hash = "sha256:d12d73e56e6766029d2626f897b094402f77b2764d0f08ecebfa5927b770da17"
-
-[hooks.state."superpowers@superpowers-marketplace:hooks/hooks.json:session_start:0:0"]
-trusted_hash = "sha256:62acbaff2b2f55f41971e21a164990aaa53c96919baa0a5eae2eb5db73b9e6e6"
-
-[marketplaces.superpowers-marketplace]
-last_revision = "6d4bfbc48a3b83723267957731b3a6583ac229e3"
-last_updated = "2026-06-20T11:27:24Z"
-source = "https://github.com/obra/superpowers-marketplace.git"
-source_type = "git"
