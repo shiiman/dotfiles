@@ -1,5 +1,25 @@
 # dotfiles リポジトリ固有の除外設定
+#
 # ※ 一般的な除外設定は .gitignore_global で管理
+#   ただし .gitignore_global は「このリポジトリが配布するファイル」であり、
+#   dotfile_setup.sh 実行前の clone 直後は無効。誤コミットを防ぐため、
+#   ローカル固有ファイルはこのファイルにも明記する。
+
+# ローカル設定（雛形は同名の .example を参照。ホーム配下に置くが誤配置対策）
+.gitconfig.local
+.shellrc_local
+
+# AI ツールのローカル生成物（作業計画書・セッション状態など）
+.claude/settings.local.json
+.claude/plans/
+.claude/tmp/
+.claude/memory/
+.cursor/mcp.local.json
+.multi-agent-mcp/
+.playwright-mcp/
+.google-genmedia-mcp/
+.notebooklm-mcp/
+.superset/
 
 # Sublime Text キャッシュ
 SublimeText/Installed Packages/PyV8/

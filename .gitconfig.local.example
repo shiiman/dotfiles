@@ -1,0 +1,25 @@
+# git ユーザー情報（雛形）
+#
+# このファイルは ~/.gitconfig.local の雛形。
+# dotfile_setup.sh が ~/.gitconfig.local を存在しない場合のみ作成する
+# （既に ~/.gitconfig に user.name / user.email があれば、その値を引き継ぐ）。
+#
+# ~/.gitconfig.local はリポジトリの追跡対象外。
+# 公開リポジトリにメールアドレスを載せないため、ここで管理する。
+
+[user]
+	name = Your Name
+	email = you@example.com
+
+# --- 業務用と個人用でコミット identity を分けたい場合 ---
+#
+# 上の [user] を既定（個人用）にしたまま、業務ディレクトリ配下だけ
+# 別の identity を使う例。末尾のスラッシュはディレクトリ配下全体を意味する。
+#
+# [includeIf "gitdir:~/Documents/work/"]
+# 	path = ~/.gitconfig.work
+#
+# ~/.gitconfig.work には業務用の [user] のみを書く:
+# 	[user]
+# 		name = Your Name
+# 		email = you@company.example.com

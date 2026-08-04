@@ -1,0 +1,18 @@
+###########################################################
+#  環境固有シェル設定（雛形）                                #
+###########################################################
+# このファイルは ~/.shellrc_local の雛形。
+# dotfile_setup.sh が ~/.shellrc_local を存在しない場合のみコピーする。
+#
+# ~/.shellrc_local はリポジトリの追跡対象外。
+# 業務プロジェクトID・組織固有のエンドポイント・マシン固有のPATHなど、
+# 公開リポジトリに含めたくない設定はすべてここに書く。
+#
+# .shellrc_common の末尾から bash/zsh 共通で読み込まれる。
+
+# 例: Google Cloud / Vertex AI
+# export GOOGLE_CLOUD_PROJECT="your-project-id"
+# export GOOGLE_CLOUD_LOCATION="global"
+
+# 例: マシン固有のPATH追加
+# export PATH="$HOME/some/local/tool/bin:$PATH"

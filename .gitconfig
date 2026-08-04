@@ -3,10 +3,6 @@
 	quotepath = false
 	editor = vim
 
-[user]
-	name = shiiman
-	email = hsnonsense5@gmail.com
-
 [init]
 	defaultBranch = main
 
@@ -62,5 +58,11 @@
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
+
+# ユーザー情報(user.name / user.email)とマシン固有設定は
+# 追跡対象外の ~/.gitconfig.local で管理する（雛形: .gitconfig.local.example）
+# 存在しない場合、gitはこのincludeを無視する
+[include]
+	path = ~/.gitconfig.local

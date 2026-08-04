@@ -4,6 +4,18 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/pear/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
+###########################################################
+# 共通設定の読み込み (bash/zsh 共用)                        #
+###########################################################
+# LANG / LS_COLORS / alias を定義する。
+# 後続の ZLS_COLORS と補完の list-colors が LS_COLORS を参照するため、
+# 必ず参照箇所より前で読み込む。
+if [ -f ~/.shellrc_common ]; then
+    source ~/.shellrc_common
+else
+    print -u2 "警告: ~/.shellrc_common が見つかりません。~/dotfiles/dotfile_setup.sh を実行してください。"
+fi
+
 if [ -e "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
@@ -292,13 +304,5 @@ if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/op
 # Added by Antigravity
 [[ -d "${HOME}/.antigravity/antigravity/bin" ]] && export PATH="${HOME}/.antigravity/antigravity/bin:$PATH"
 
-# 共通設定の読み込み
-[ -f ~/.shellrc_common ] && source ~/.shellrc_common
-
-
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
-
-# Gemini Vertex AI
-export GOOGLE_CLOUD_PROJECT="szp-ai"
-export GOOGLE_CLOUD_LOCATION="global"

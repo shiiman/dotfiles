@@ -2,10 +2,22 @@
 export PATH="$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/pear/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
+###########################################################
+# 共通設定の読み込み (bash/zsh 共用)                        #
+###########################################################
+# LANG / LS_COLORS / alias を定義する。
+# bash は関数定義の読み込み時に alias を展開するため、
+# alias を参照する関数より前で読み込む必要がある。
+if [ -f ~/.shellrc_common ]; then
+    source ~/.shellrc_common
+else
+    echo "警告: ~/.shellrc_common が見つかりません。~/dotfiles/dotfile_setup.sh を実行してください。" >&2
+fi
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/opt/homebrew/share/google-cloud-sdk/path.bash.inc' ]; then source '/opt/homebrew/share/google-cloud-sdk/path.bash.inc'; fi
 # The next line enables shell command completion for gcloud.
-if [ -f '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc' ]; then source '/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.bash.inc' ]; then source '/opt/homebrew/share/google-cloud-sdk/completion.bash.inc'; fi
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
@@ -45,8 +57,10 @@ HISTTIMEFORMAT='%Y-%m-%d '
 alias ..='cd ../'
 
 # cdの後にlsとpwdを実行
+# alias(la)ではなく実コマンドを直接使う:
+# bashは関数定義の読み込み時にaliasを展開するため、alias依存は読み込み順に壊れやすい
 function cdlspwd() {
-    builtin cd "${1:-$HOME}" && la && pwd
+    builtin cd "${1:-$HOME}" && ls -a && pwd
 }
 alias cd=cdlspwd
 
@@ -86,9 +100,6 @@ PS1="[\[\e[0;32m\]\u\[\e[0m\]@\[\e[0;36m\]\h\[\e[0m\] ~]$ "
 # PATH の重複排除
 PATH=$(printf '%s' "$PATH" | awk -v RS=: '!seen[$0]++ {if (NR>1) printf ":"; printf $0}')
 export PATH
-
-# 共通設定の読み込み
-[ -f ~/.shellrc_common ] && source ~/.shellrc_common
 
 # direnv - プロジェクト固有の環境変数自動設定
 if command -v direnv >/dev/null 2>&1; then

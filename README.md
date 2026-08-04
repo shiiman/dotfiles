@@ -52,8 +52,7 @@ dotfiles/
 │       └── GEMINI.md     # Antigravityグローバル指示
 ├── .claude/              # Claude Code プロジェクト設定
 ├── .cursor/              # Cursor プロジェクト設定
-├── SublimeText/          # Sublime Text 設定
-└── Fonts/                # フォントファイル
+└── SublimeText/          # Sublime Text 設定
 ```
 
 ---
@@ -91,7 +90,7 @@ curl -fsSL https://raw.githubusercontent.com/shiiman/dotfiles/master/mac_setup.s
 - ターミナル設定（cmux / Ghostty、インストール済みの場合）
 - AIツール設定（Claude Code, Cursor, Codex）
 - Finder で隠しファイルを表示
-- Ricty フォントのインストール（存在する場合）
+- ターミナル用フォント（Ricty Diminished）のインストール（Brewfile 経由）
 
 ### GTR (Git Worktree Runner)
 

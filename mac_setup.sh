@@ -34,8 +34,9 @@ fi
 
 # 設定ファイルフォルダに移動.
 cd ~/dotfiles || { echo "Failed to cd to ~/dotfiles"; exit 1; }
-# ローカルリポジトリにユーザのメールアドレス登録.
-git config user.email hsnonsense5@gmail.com
+
+# git のユーザー情報は dotfile_setup.sh が ~/.gitconfig.local に用意する
+# （公開リポジトリにメールアドレスを含めないため）
 
 # アプリインストール（事前にsudo認証をキャッシュ）
 sudo -v
@@ -97,12 +98,5 @@ fi
 defaults write com.apple.finder AppleShowAllFiles -bool true
 killall Finder
 
-##################################################################
-
-# フォントの設定.
-if [ -d ~/dotfiles/Fonts ] && ls ~/dotfiles/Fonts/Ricty*.ttf >/dev/null 2>&1; then
-    cp -f ~/dotfiles/Fonts/Ricty*.ttf ~/Library/Fonts/
-    if command -v fc-cache >/dev/null 2>&1; then
-        fc-cache -fv
-    fi
-fi
+# ターミナル用フォント（Ricty Diminished）は Brewfile の
+# cask "font-ricty-diminished" でインストールされる

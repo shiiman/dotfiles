@@ -58,6 +58,8 @@ cask "cursor-cli"
 cask "docker-desktop"
 cask "dropbox"
 cask "firefox"
+# ターミナル用フォント（terminal/ghostty/config の font-family と対応）
+cask "font-ricty-diminished"
 cask "gcloud-cli"
 cask "ghostty"
 cask "iterm2"
