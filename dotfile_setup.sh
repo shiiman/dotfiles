@@ -3,7 +3,14 @@
 set -e
 set -u
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/symlink.sh
+source "$SCRIPT_DIR/lib/symlink.sh"
+
 DOTFILES_DIR="$HOME/dotfiles"
+
+# 既存の実ファイルはここへ退避してから置き換える
+SYMLINK_BACKUP_DIR="$HOME/.dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
 
 # 通常のドットファイルを定義.
 DOT_FILES=(.bashrc .zshrc .shellrc_common .gitconfig .gitignore_global .tmux.conf .vimrc)
@@ -52,15 +59,12 @@ setup_symlinks() {
     local file
 
     for file in "${DOT_FILES[@]}"; do
-        # リンク元が無い場合は壊れたリンクを作らずに警告する
-        if [ ! -e "$DOTFILES_DIR/$file" ]; then
-            echo "  ⚠ $file がリポジトリに存在しないためスキップ" >&2
+        # create_symlink はリンク元が無い場合に警告して 1 を返す
+        if create_symlink "$DOTFILES_DIR/$file" "$HOME/$file"; then
+            echo "  ✓ $file -> ~/$file"
+        else
             missing=$((missing + 1))
-            continue
         fi
-
-        ln -sfn "$DOTFILES_DIR/$file" "$HOME/$file"
-        echo "  ✓ $file -> ~/$file"
     done
 
     if [ "$missing" -gt 0 ]; then
@@ -82,6 +86,8 @@ main() {
     echo ""
     echo "シンボリックリンクの作成..."
     setup_symlinks
+
+    print_symlink_backup_location
 
     echo ""
     echo "dotfile setup completed!"

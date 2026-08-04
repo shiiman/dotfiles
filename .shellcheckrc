@@ -1,0 +1,3 @@
+# source した外部ファイル（lib/symlink.sh 等）も解析対象にする
+# これがないと SC1091（追跡不可）と SC2034（未使用に見える変数）が誤検出される
+external-sources=true

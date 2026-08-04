@@ -2,37 +2,14 @@
 set -e
 set -u
 
-DOTFILES_DIR=~/dotfiles
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/symlink.sh
+source "$SCRIPT_DIR/lib/symlink.sh"
 
-# バックアップディレクトリ（日時付き）
-BACKUP_DIR=~/.ai_config_backup/$(date +%Y%m%d_%H%M%S)
+DOTFILES_DIR="$HOME/dotfiles"
 
-# 既存ファイルをバックアップしてからシンボリックリンクを作成
-create_symlink() {
-    local src=$1
-    local dest=$2
-    local dest_dir
-    dest_dir=$(dirname "$dest")
-
-    # 親ディレクトリ作成
-    mkdir -p "$dest_dir"
-
-    # 既存のファイル/リンクを処理
-    if [ -L "$dest" ]; then
-        # シンボリックリンクの場合は削除のみ
-        unlink "$dest"
-    elif [ -e "$dest" ]; then
-        # 実ファイルの場合はバックアップしてから削除
-        mkdir -p "$BACKUP_DIR"
-        local backup_path="$BACKUP_DIR/$(basename "$dest")"
-        echo "  バックアップ: $dest -> $backup_path"
-        cp -r "$dest" "$backup_path"
-        rm -rf "$dest"
-    fi
-
-    # シンボリックリンク作成
-    ln -sf "$src" "$dest"
-}
+# 既存の実ファイルはここへ退避してから置き換える
+SYMLINK_BACKUP_DIR="$HOME/.ai_config_backup/$(date +%Y%m%d_%H%M%S)"
 
 # Claude Code グローバル設定
 setup_claude() {
@@ -241,59 +218,131 @@ setup_cursor() {
         echo "  ⚠ Cursorがインストールされていないため、エディタ設定はスキップ"
     fi
 
-    # 拡張機能リスト
-    create_symlink "$DOTFILES_DIR/ai/cursor/extensions.json" ~/.cursor/extensions/extensions.json
-    echo "  ✓ extensions.json (拡張機能リスト)"
+    # 拡張機能（extensions.json は Cursor 自身が書き換えるため管理しない）
+    restore_extensions_json ~/.cursor/extensions/extensions.json
 
-    # 拡張機能インストール
-    install_cursor_extensions
+    if command -v cursor >/dev/null 2>&1; then
+        install_extensions_from_list cursor "$DOTFILES_DIR/ai/cursor/extensions.txt"
+    else
+        echo "  ⚠ cursor コマンドが見つかりません（拡張機能インストールをスキップ）"
+        echo "    Cursor > Command Palette > 'Install cursor command' を実行してください"
+    fi
 }
 
-# Cursor 拡張機能インストール
-install_cursor_extensions() {
-    local ext_file="$DOTFILES_DIR/ai/cursor/extensions.json"
-    if [ ! -f "$ext_file" ]; then
-        echo "  ⚠ extensions.json が見つかりません"
+# 旧方式（extensions.json を dotfiles から symlink）を解除する
+#
+# extensions.json はエディタが拡張の追加・削除時に書き換える内部管理ファイルで、
+# インストール先の絶対パスやタイムスタンプを含む。symlink にするとそれらが
+# リポジトリへ流入するため、追跡は extensions.txt（ID リスト）に切り替えた。
+restore_extensions_json() {
+    local dest="$1"
+    local target=""
+
+    if [ ! -L "$dest" ]; then
         return
     fi
 
-    # cursor コマンドの確認
-    if ! command -v cursor >/dev/null 2>&1; then
-        echo "  ⚠ cursor コマンドが見つかりません"
-        echo "    Cursor > Command Palette > 'Install cursor command' を実行してください"
-        return
+    target="$(readlink "$dest")"
+    unlink "$dest"
+    if [ -f "$target" ]; then
+        # 現在の内容を実ファイルとして残し、エディタの管理下に戻す
+        cp "$target" "$dest"
     fi
+    echo "  ✓ extensions.json の symlink を解除（エディタ管理に戻した）"
+}
 
-    # jq コマンドの確認
-    if ! command -v jq >/dev/null 2>&1; then
-        echo "  ⚠ jq コマンドが見つかりません（拡張機能インストールをスキップ）"
-        return
-    fi
-
-    echo "  拡張機能インストール中..."
-
-    # extensions.jsonから拡張機能IDを抽出してインストール
-    local ext_ids
-    ext_ids=$(jq -r '.[].identifier.id' "$ext_file")
-
+# 拡張機能を ID リスト（1行1ID）からインストールする
+# $1: エディタの CLI コマンド, $2: ID リストのパス
+install_extensions_from_list() {
+    local cmd="$1"
+    local ext_file="$2"
     local count=0
-    local total
-    total=$(echo "$ext_ids" | wc -l | tr -d ' ')
+    local total=0
+    local ext_id
+
+    if [ ! -f "$ext_file" ]; then
+        echo "  ⚠ $(basename "$ext_file") が見つかりません（拡張機能インストールをスキップ）"
+        return
+    fi
+
+    total="$(grep -cve '^[[:space:]]*$' "$ext_file" || true)"
+    echo "  拡張機能インストール中... ($total 件)"
 
     while IFS= read -r ext_id; do
-        if [[ -z "$ext_id" ]]; then
-            continue
-        fi
+        # 空行とコメント行を読み飛ばす
+        case "$ext_id" in
+            "" | \#*) continue ;;
+        esac
         count=$((count + 1))
         printf "    [%d/%d] %s..." "$count" "$total" "$ext_id"
-        if cursor --install-extension "$ext_id" > /dev/null 2>&1; then
+        if "$cmd" --install-extension "$ext_id" >/dev/null 2>&1; then
             echo " ✓"
         else
             echo " (スキップ)"
         fi
-    done <<< "$ext_ids"
+    done <"$ext_file"
 
     echo "  ✓ 拡張機能インストール完了"
+}
+
+# VSCode 設定
+#
+# 拡張機能は Brewfile の vscode "..." で管理する（extensions.json は
+# 絶対パスやタイムスタンプを含む自動生成ファイルなので追跡しない）。
+setup_vscode() {
+    echo "VSCode設定..."
+
+    local vscode_user_dir="$HOME/Library/Application Support/Code/User"
+
+    if [ ! -d "$vscode_user_dir" ] && [ ! -L "$vscode_user_dir" ]; then
+        echo "  ⚠ VSCodeがインストールされていないためスキップ"
+        return
+    fi
+
+    create_symlink "$DOTFILES_DIR/ai/vscode/User/settings.json" "$vscode_user_dir/settings.json"
+    echo "  ✓ User/settings.json (エディタ設定)"
+
+    create_symlink "$DOTFILES_DIR/ai/vscode/User/keybindings.json" "$vscode_user_dir/keybindings.json"
+    echo "  ✓ User/keybindings.json (キーバインド)"
+}
+
+# Codex の config.toml をテンプレートから用意する
+#
+# Codex CLI 自身が起動時・操作時に以下を自動追記・更新するため、symlink にすると
+# マシン固有の絶対パスや社内プロジェクト名がリポジトリへ流入し、作業ツリーも常に dirty になる。
+#   [projects."<絶対パス>"] / [hooks.state."<絶対パス>:..."] / [marketplaces.*] など
+# そのため追跡するのは config.toml.template のみとし、実ファイルはコピーで用意する。
+setup_codex_config() {
+    local template="$DOTFILES_DIR/ai/codex/config.toml.template"
+    local dest="$HOME/.codex/config.toml"
+    local link_target=""
+
+    if [ ! -f "$template" ]; then
+        echo "  ⚠ ai/codex/config.toml.template が見つかりません（スキップ）"
+        return
+    fi
+
+    mkdir -p "$(dirname "$dest")"
+
+    if [ -L "$dest" ]; then
+        # 旧方式（dotfiles への symlink）からの移行。
+        # リンク先の内容をコピーして trust 設定などを失わせない。
+        link_target=$(readlink "$dest")
+        unlink "$dest"
+        if [ -f "$link_target" ]; then
+            cp "$link_target" "$dest"
+            echo "  ✓ config.toml (symlink を実ファイル化し既存設定を引き継ぎ)"
+        else
+            cp "$template" "$dest"
+            echo "  ✓ config.toml (テンプレートから作成)"
+        fi
+    elif [ -f "$dest" ]; then
+        echo "  - config.toml (既存のため変更しない)"
+        echo "    ※ 設定変更を dotfiles に反映する場合は config.toml.template を更新"
+    else
+        cp "$template" "$dest"
+        echo "  ✓ config.toml (テンプレートから作成)"
+    fi
 }
 
 # Codex 設定
@@ -303,8 +352,7 @@ setup_codex() {
     create_symlink "$DOTFILES_DIR/ai/codex/AGENTS.md" ~/.codex/AGENTS.md
     echo "  ✓ AGENTS.md (グローバル指示)"
 
-    create_symlink "$DOTFILES_DIR/ai/codex/config.toml" ~/.codex/config.toml
-    echo "  ✓ config.toml"
+    setup_codex_config
 
     create_symlink "$DOTFILES_DIR/ai/codex/skills" ~/.codex/skills
     echo "  ✓ skills/ (スキル定義)"
@@ -369,19 +417,8 @@ setup_antigravity() {
     create_symlink "$DOTFILES_DIR/ai/antigravity/GEMINI.md" ~/.gemini/GEMINI.md
     echo "  ✓ GEMINI.md (グローバル指示)"
 
-    create_symlink "$DOTFILES_DIR/ai/antigravity/extensions.json" ~/.antigravity/extensions/extensions.json
-    echo "  ✓ extensions.json (拡張機能リスト)"
-
-    install_antigravity_extensions
-}
-
-# Antigravity 拡張機能インストール
-install_antigravity_extensions() {
-    local ext_file="$DOTFILES_DIR/ai/antigravity/extensions.json"
-    if [[ ! -f "$ext_file" ]]; then
-        echo "  ⚠ extensions.json が見つかりません"
-        return
-    fi
+    # 拡張機能（extensions.json は Antigravity 自身が書き換えるため管理しない）
+    restore_extensions_json ~/.antigravity/extensions/extensions.json
 
     local antigravity_cmd=""
     if command -v antigravity >/dev/null 2>&1; then
@@ -394,34 +431,7 @@ install_antigravity_extensions() {
         return
     fi
 
-    if ! command -v jq >/dev/null 2>&1; then
-        echo "  ⚠ jq コマンドが見つかりません（拡張機能インストールをスキップ）"
-        return
-    fi
-
-    echo "  拡張機能インストール中..."
-
-    local ext_ids
-    ext_ids=$(jq -r '.[].identifier.id' "$ext_file")
-
-    local count=0
-    local total
-    total=$(echo "$ext_ids" | wc -l | tr -d ' ')
-
-    while IFS= read -r ext_id; do
-        if [[ -z "$ext_id" ]]; then
-            continue
-        fi
-        count=$((count + 1))
-        printf "    [%d/%d] %s..." "$count" "$total" "$ext_id"
-        if "$antigravity_cmd" --install-extension "$ext_id" > /dev/null 2>&1; then
-            echo " ✓"
-        else
-            echo " (スキップ)"
-        fi
-    done <<< "$ext_ids"
-
-    echo "  ✓ 拡張機能インストール完了"
+    install_extensions_from_list "$antigravity_cmd" "$DOTFILES_DIR/ai/antigravity/extensions.txt"
 }
 
 # メイン処理
@@ -437,6 +447,9 @@ main() {
     setup_cursor
     echo ""
 
+    setup_vscode
+    echo ""
+
     setup_codex
     echo ""
 
@@ -447,11 +460,7 @@ main() {
     echo "完了"
     echo "=========================================="
 
-    # バックアップがある場合は表示
-    if [ -d "$BACKUP_DIR" ]; then
-        echo ""
-        echo "バックアップ先: $BACKUP_DIR"
-    fi
+    print_symlink_backup_location
 }
 
 main "$@"

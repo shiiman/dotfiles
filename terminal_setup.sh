@@ -3,33 +3,16 @@
 set -e
 set -u
 
-DOTFILES_DIR=~/dotfiles
-GHOSTTY_CONFIG_DIR=~/.config/ghostty
-CMUX_CONFIG_DIR=~/.config/cmux
-BACKUP_DIR=~/.terminal_backup/$(date +%Y%m%d_%H%M%S)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/symlink.sh
+source "$SCRIPT_DIR/lib/symlink.sh"
 
-# バックアップしてからシンボリックリンクを作成
-create_symlink() {
-    local src=$1
-    local dest=$2
-    local dest_dir
-    dest_dir=$(dirname "$dest")
+DOTFILES_DIR="$HOME/dotfiles"
+GHOSTTY_CONFIG_DIR="$HOME/.config/ghostty"
+CMUX_CONFIG_DIR="$HOME/.config/cmux"
 
-    # 親ディレクトリ作成
-    mkdir -p "$dest_dir"
-
-    # 既存のファイル/リンクを処理
-    if [ -L "$dest" ]; then
-        unlink "$dest"
-    elif [ -e "$dest" ]; then
-        mkdir -p "$BACKUP_DIR"
-        cp -r "$dest" "$BACKUP_DIR/"
-        echo "  バックアップ: $dest -> $BACKUP_DIR/"
-        rm -rf "$dest"
-    fi
-
-    ln -sf "$src" "$dest"
-}
+# 既存の実ファイルはここへ退避してから置き換える
+SYMLINK_BACKUP_DIR="$HOME/.terminal_backup/$(date +%Y%m%d_%H%M%S)"
 
 # メイン処理
 main() {
@@ -57,11 +40,7 @@ main() {
     create_symlink "$DOTFILES_DIR/terminal/ghostty/config" "$GHOSTTY_CONFIG_DIR/config"
     echo "  ✓ config -> ~/.config/ghostty/config"
 
-    # バックアップがある場合は表示
-    if [ -d "$BACKUP_DIR" ]; then
-        echo ""
-        echo "バックアップ先: $BACKUP_DIR"
-    fi
+    print_symlink_backup_location
 
     echo "ターミナル設定セットアップ完了"
 }

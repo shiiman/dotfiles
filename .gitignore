@@ -21,12 +21,6 @@
 .notebooklm-mcp/
 .superset/
 
-# Sublime Text キャッシュ
-SublimeText/Installed Packages/PyV8/
-SublimeText/Packages/User/Package Control.cache/
-SublimeText/Packages/User/Package Control.ca-certs/
-SublimeText/Packages/User/Package Control.user-ca-bundle
-
 # バックアップファイル
 *.orig
 
@@ -35,3 +29,15 @@ node_modules/
 
 # Codex システムスキル（codex CLI が自動配置・更新するため追跡しない）
 ai/codex/skills/.system/
+
+# エディタの拡張機能管理ファイル
+# Cursor / Antigravity が拡張の追加・削除時に書き換える内部管理ファイルで、
+# インストール先の絶対パス・UUID・タイムスタンプを含むため追跡しない。
+# 追跡対象は extensions.txt（ID リスト）。
+ai/cursor/extensions.json
+ai/antigravity/extensions.json
+
+# Codex CLI 設定の実ファイル
+# codex CLI が [projects]（絶対パス・作業中プロジェクト名）/ [hooks.state] /
+# [marketplaces] を自動追記するため追跡しない。追跡対象は config.toml.template のみ。
+ai/codex/config.toml

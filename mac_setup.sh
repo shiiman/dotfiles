@@ -28,7 +28,7 @@ fi
 if [ ! -d ~/dotfiles ]; then
     git clone https://github.com/shiiman/dotfiles.git ~/dotfiles
 else
-    echo "~/dotfiles already exists. Pulling latest changes..."
+    echo "$HOME/dotfiles already exists. Pulling latest changes..."
     cd ~/dotfiles && git pull
 fi
 
@@ -69,13 +69,6 @@ if [ -f /opt/homebrew/opt/fzf/install ]; then
     /opt/homebrew/opt/fzf/install --all
 elif [ -f /usr/local/opt/fzf/install ]; then
     /usr/local/opt/fzf/install --all
-fi
-
-# sublime textの設定.
-if [ -d "/Applications/Sublime Text.app" ]; then
-    open -a "Sublime Text"
-    sleep 10 # 起動待ち
-    bash ~/dotfiles/SublimeText/sublime_setup.sh
 fi
 
 # ターミナル設定（cmux / Ghostty共用）

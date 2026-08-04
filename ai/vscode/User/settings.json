@@ -1,0 +1,169 @@
+{
+    // ========================
+    // エディタ設定
+    // ========================
+    // エディタの基本設定
+    "editor.fontSize": 12,
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll": "explicit"
+    },
+    // インデントと折り込み設定
+    "editor.foldingStrategy": "indentation",
+    // レンダリング設定
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all",
+    // インテリセンス・サジェスト設定
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+    "editor.inlineSuggest.enabled": true,
+    "editor.suggest.showWords": false,
+    "editor.suggest.showSnippets": true,
+    "editor.suggestSelection": "first",
+    "editor.snippetSuggestions": "top",
+    "editor.tabCompletion": "on",
+    // Unicode設定
+    "editor.unicodeHighlight.allowedCharacters": {
+        "．": true
+    },
+    // ========================
+    // 言語別の設定
+    // ========================
+    "[dockerfile]": {
+        "editor.defaultFormatter": "ms-azuretools.vscode-containers"
+    },
+    "[shellscript]": {
+        "editor.defaultColorDecorators": "never",
+        "editor.indentSize": "tabSize",
+        "editor.tabSize": 2,
+        "files.eol": "\n"
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    // ========================
+    // ファイル・エクスプローラー設定
+    // ========================
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    // ========================
+    // ファイル設定
+    // ========================
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    // ========================
+    // GitHub Copilot設定
+    // ========================
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "proto": true
+    },
+    "github.copilot.nextEditSuggestions.enabled": false,
+    // ========================
+    // 開発言語別設定
+    // ========================
+    // Go設定
+    "go.alternateTools": {
+        "go": "~/tools/.tools/bin/go"
+    },
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        "--config=${workspaceFolder}/.golangci.yaml",
+        "--fast"
+    ],
+    "go.toolsEnvVars": {
+        "GO111MODULE": "on"
+    },
+    "go.useLanguageServer": true,
+    // ========================
+    // Linter・フォーマッター設定
+    // ========================
+    "markdownlint.config": {
+        "MD029": false,
+        "MD040": false,
+        "default": true
+    },
+    // ========================
+    // 検索設定
+    // ========================
+    "search.collapseResults": "alwaysCollapse",
+    "search.showLineNumbers": true,
+    // ========================
+    // セキュリティ設定
+    // ========================
+    "security.workspace.trust.untrustedFiles": "open",
+    // ========================
+    // ターミナル設定
+    // ========================
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "terminal.integrated.scrollback": 10000,
+    // ========================
+    // ワークベンチ・UI設定
+    // ========================
+    // テーマ・アイコン設定
+    "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "vscode-icons-mac",
+    "workbench.colorCustomizations": {
+        "editor.findMatchBackground": "#fa5c3480",
+        "editor.selectionBackground": "#fa5c3480",
+        "tab.activeBackground": "#fa5c3480"
+    },
+    // ワークベンチUI設定
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.view.alwaysShowHeaderActions": true,
+    // Chat MCP Discovery設定
+    "chat.mcp.discovery.enabled": {
+        "claude-desktop": true,
+        "windsurf": true,
+        "cursor-global": true,
+        "cursor-workspace": true
+    },
+    // Sort JSON設定
+    "sortJSON.excludedFiles": [
+        "package.json"
+    ],
+    // Terraform設定
+    "terraform.codelens.referenceCount": true,
+    "terraform.validation.enableEnhancedValidation": false,
+    // TODO Highlight設定
+    "todohighlight.isEnable": true,
+    "todohighlight.keywords": [
+        {
+            "backgroundColor": "orange",
+            "color": "#ffffff",
+            "overviewRulerColor": "grey",
+            "text": "NOTE:"
+        }
+    ],
+    // Trailing Spaces設定
+    "trailing-spaces.regexp": "[ \t　]+",
+    "trailing-spaces.trimOnSave": true,
+    // VSIcons設定
+    "vsicons.dontShowNewVersionMessage": true,
+    // その他の設定
+    "redhat.telemetry.enabled": false,
+    // YAML設定
+    "yaml.format.printWidth": 160,
+    "terminal.integrated.tabs.enabled": false,
+    "claudeCode.preferredLocation": "sidebar",
+    "claudeCode.selectedModel": "default",
+    "terminal.integrated.suggest.enabled": false,
+    "protobuf.autoDetection.prompted": true,
+    "chat.viewSessions.enabled": false,
+    "chat.agent.maxRequests": 100,
+    "go.toolsManagement.autoUpdate": true,
+    "docker.extension.enableComposeLanguageServer": false,
+    "geminicodeassist.project": "infra-common-1372",
+    "workbench.secondarySideBar.showLabels": false
+}

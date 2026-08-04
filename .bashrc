@@ -1,5 +1,5 @@
 # pathを設定
-export PATH="$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$HOME/pear/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ###########################################################

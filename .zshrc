@@ -1,7 +1,6 @@
 # pathを設定（/opt/homebrew/bin, /opt/homebrew/sbin は brew shellenv で設定）
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/pear/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ###########################################################
@@ -289,7 +288,8 @@ setopt check_jobs
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # リダイレクトによる上書き禁止 「>!」で上書きできる
-setopt noclobber
+# 誤爆より利便性を優先して無効化している
+# setopt noclobber
 
 # キーバインド無効
 bindkey -r '^J'
