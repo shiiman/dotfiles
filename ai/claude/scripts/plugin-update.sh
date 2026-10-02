@@ -1,24 +1,31 @@
 #!/bin/bash
-# Claude Code プラグイン自動更新スクリプト
-# SessionStart フックから呼び出され、有効なプラグインを全て更新する
+# 明示的に実行した場合のみ、有効なプラグインを順番に更新する。
+set -eu
 
-SETTINGS="$HOME/.claude/settings.json"
-
-if ! command -v jq &>/dev/null; then
-    exit 0
-fi
+SETTINGS="${CLAUDE_SETTINGS_FILE:-$HOME/.claude/settings.json}"
+for required_command in jq claude; do
+    if ! command -v "$required_command" >/dev/null 2>&1; then
+        echo "必要なコマンドが見つかりません: $required_command" >&2
+        exit 1
+    fi
+done
 
 if [ ! -f "$SETTINGS" ]; then
-    exit 0
+    echo 'Claude の設定ファイルが見つかりません。' >&2
+    exit 1
 fi
 
-# enabledPlugins から true のものを全て取得
-PLUGINS=$(jq -r '.enabledPlugins | to_entries[] | select(.value == true) | .key' "$SETTINGS" 2>/dev/null)
-
+PLUGINS=$(jq -er '.enabledPlugins // {} | to_entries | map(select(.value == true) | .key) | join("\n")' "$SETTINGS")
 if [ -z "$PLUGINS" ]; then
+    echo '更新対象のプラグインはありません。'
     exit 0
 fi
 
+failed=0
 while IFS= read -r plugin; do
-    claude plugin update "$plugin" 2>/dev/null || true
+    if ! claude plugin update "$plugin"; then
+        echo "プラグインの更新に失敗しました: $plugin" >&2
+        failed=1
+    fi
 done <<< "$PLUGINS"
+exit "$failed"

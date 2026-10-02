@@ -8,7 +8,7 @@
 | `ai/cursor/User/keybindings.json` | `~/Library/Application Support/Cursor/User/keybindings.json` |
 | `ai/cursor/User/snippets/`        | `~/Library/Application Support/Cursor/User/snippets`         |
 | `ai/cursor/mcp.json`              | `~/.cursor/mcp.json`                                         |
-| `ai/cursor/extensions.json`       | `~/.cursor/extensions/extensions.json`                       |
+| `ai/cursor/extensions.txt`        | Cursor CLI で拡張 ID をインストール                          |
 
 ### Available Slash Commands
 

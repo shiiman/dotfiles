@@ -1,6 +1,7 @@
 {
   "alwaysThinkingEnabled": false,
-  "effortLevel": "xhigh",
+  "autoCompactEnabled": true,
+  "effortLevel": "medium",
   "enabledPlugins": {
     "codex@openai-codex": true,
     "context7@claude-plugins-official": true,
@@ -17,7 +18,7 @@
     "shiiman-slack@shiiman-claude-code-plugins": true,
     "shiiman-terraform@shiiman-claude-code-plugins": true,
     "shiiman-workflow@shiiman-claude-code-plugins": true,
-    "superpowers@claude-plugins-official": true,
+    "slack@claude-plugins-official": false,
     "superpowers@superpowers-marketplace": true,
     "swift-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false
@@ -78,7 +79,7 @@
       {
         "hooks": [
           {
-            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE 'curl.*\\s*\\|\\s*sh|wget.*\\s*\\|\\s*sh|curl.*\\s*\\|\\s*bash|wget.*\\s*\\|\\s*bash'; then echo '⛔ リモートスクリプト実行は禁止されています' >&2; exit 2; fi",
+            "command": "bash \"$HOME/dotfiles/ai/claude/scripts/check-remote-script.sh\"",
             "type": "command"
           }
         ],
@@ -99,14 +100,6 @@
       {
         "hooks": [
           {
-            "command": "~/dotfiles/ai/claude/scripts/plugin-update.sh &",
-            "type": "command"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
             "command": "[ -n \"$SUPERSET_HOME_DIR\" ] && [ -x \"$SUPERSET_HOME_DIR/hooks/notify.sh\" ] && SUPERSET_AGENT_ID=claude \"$SUPERSET_HOME_DIR/hooks/notify.sh\" || true",
             "type": "command"
           }
@@ -114,15 +107,6 @@
       }
     ],
     "Stop": [
-      {
-        "hooks": [
-          {
-            "command": "[ -x \"$HOME/.ai-usage/bin/ai-usage\" ] && \"$HOME/.ai-usage/bin/ai-usage\" collect --source claude || true",
-            "type": "command"
-          }
-        ],
-        "id": "ai-usage-collector"
-      },
       {
         "hooks": [
           {
@@ -144,6 +128,15 @@
     ]
   },
   "language": "Japanese",
+  "model": "sonnet",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "outputStyle": "Default",
   "permissions": {
     "allow": [
@@ -248,12 +241,12 @@
   "pluginMarketplaces": [
     "shiiman/claude-code-plugins"
   ],
+  "promptSuggestionEnabled": false,
   "skipAutoPermissionPrompt": true,
   "skipDangerousModePermissionPrompt": true,
   "statusLine": {
     "command": "~/dotfiles/ai/claude/scripts/statusline.sh",
     "type": "command"
   },
-  "teammateMode": "tmux",
-  "model": "opus[1m]"
+  "teammateMode": "tmux"
 }

@@ -31,7 +31,7 @@ check_for_update_on_startup = true
 # Model Settings
 # =============================================================================
 
-# 使用するモデル（デフォルト: "gpt-5.1-codex-max"）
+# 使用するモデル（利用可能なモデルに合わせて指定）
 model = "gpt-5.6-terra"
 
 # モデルプロバイダー（デフォルト: "openai"）
@@ -59,13 +59,10 @@ model_verbosity = "medium"
 # Execution Settings
 # =============================================================================
 
-# 承認ポリシー（デフォルト: "untrusted"）
-# 値:
-#   - "untrusted": すべてのアクションに承認が必要
-#   - "on-failure": 失敗時のみ承認が必要
-#   - "on-request": リクエスト時のみ承認
-#   - "never": 承認なしで実行（危険）
+# 承認ポリシー: on-request（必要時に承認）/ never（承認を求めない）
 approval_policy = "on-request"
+# 旧 auto_review フラグの意図を維持し、対象の承認を自動レビューする
+approvals_reviewer = "auto_review"
 
 # サンドボックスモード（デフォルト: "read-only"）
 # 値:
@@ -75,71 +72,9 @@ approval_policy = "on-request"
 personality = "pragmatic"
 sandbox_mode = "workspace-write"
 
-# Web検索機能 disabled/cached/live（デフォルト: disabled）
+# Web検索機能: disabled / cached / live
 service_tier = "priority"
 web_search = "live"
-
-# =============================================================================
-# Sandbox Workspace Write Settings
-# =============================================================================
-
-[sandbox_workspace_write]
-# サンドボックス内のネットワークアクセス許可（デフォルト: false）
-network_access = true
-
-# =============================================================================
-# Features (機能フラグ)
-# =============================================================================
-
-[features]
-# 画像表示ツール（デフォルト: true）- 安定版
-view_image_tool = true
-
-# スキル機能（デフォルト: false）- 実験的
-skills = true
-
-# unified_exec（デフォルト: false）- 実験的
-unified_exec = false
-
-auto_review = true
-chronicle = false
-enable_mcp_apps = true
-memories = true
-#multi_agent_v2 = true
-secret_auth_storage = true
-subagents = true
-web_search = true
-workflows = true
-
-[agents]
-max_threads = 6
-
-[agents.default_worker]
-config_file = "~/.codex/agents/default_worker.toml"
-description = "Default worker agent."
-
-[agents.fast_worker]
-config_file = "~/.codex/agents/fast_worker.toml"
-description = "Fast scoped implementation agent."
-
-# =============================================================================
-# TUI (Terminal User Interface) Settings
-# =============================================================================
-
-[tui]
-# 通知（デフォルト: true）
-notifications = true
-
-# アニメーション（デフォルト: true）
-animations = true
-
-# スクロール反転（デフォルト: false）
-scroll_invert = false
-
-[history]
-# 履歴の永続化（デフォルト: "none"）
-# 値: "none", "save-all"
-persistence = "save-all"
 
 # =============================================================================
 # Display Settings
@@ -165,6 +100,55 @@ file_opener = "cursor"
 
 # AGENTS.mdから読み込む最大バイト数（デフォルト: 32KiB）
 project_doc_max_bytes = 32768
+
+# =============================================================================
+# Sandbox Workspace Write Settings
+# =============================================================================
+
+[sandbox_workspace_write]
+# サンドボックス内のネットワークアクセス許可（デフォルト: false）
+network_access = true
+
+# =============================================================================
+# Features (機能フラグ)
+# =============================================================================
+
+[features]
+# 安定機能。既存の実行方式の選択は維持する。
+view_image = true
+unified_exec = false
+multi_agent = true
+chronicle = false
+enable_mcp_apps = true
+memories = true
+secret_auth_storage = true
+
+[agents]
+max_concurrent_threads_per_session = 6
+
+[agents.default_worker]
+config_file = "~/.codex/agents/default_worker.toml"
+description = "Default worker agent."
+
+[agents.fast_worker]
+config_file = "~/.codex/agents/fast_worker.toml"
+description = "Fast scoped implementation agent."
+
+# =============================================================================
+# TUI (Terminal User Interface) Settings
+# =============================================================================
+
+[tui]
+# 通知（デフォルト: true）
+notifications = true
+
+# アニメーション（デフォルト: true）
+animations = true
+
+[history]
+# 履歴の永続化
+# 値: "none", "save-all"
+persistence = "save-all"
 
 [mcp_servers.playwright]
 args = ["@playwright/mcp@latest"]

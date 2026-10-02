@@ -69,7 +69,7 @@ dotfiles/
 │   │   ├── cursor.md          # Cursor 固有
 │   │   └── build.sh           # 生成スクリプト
 │   ├── claude/
-│   │   ├── settings.json      # モデル、権限、フック
+│   │   ├── settings.json.template # モデル、権限、フックの雛形
 │   │   ├── CLAUDE.md          # グローバル指示
 │   │   └── scripts/           # statusline・プラグイン更新
 │   ├── cursor/
@@ -213,7 +213,7 @@ bash ~/dotfiles/ai_setup.sh
 
 | ツール      | 配置先                                                       | 方式    | 説明                     |
 | ----------- | ------------------------------------------------------------ | ------- | ------------------------ |
-| Claude Code | `~/.claude/settings.json`                                    | symlink | モデル、権限、フック設定 |
+| Claude Code | `~/.claude/settings.json`                                    | コピー  | モデル、権限、フック設定 |
 | Claude Code | `~/.claude/CLAUDE.md`                                        | symlink | グローバル指示           |
 | Claude Code | `ai/claude/scripts/`                                         | -       | statusline等のスクリプト |
 | Claude Code | MCP: `multi-agent-mcp` / `notebooklm-mcp`                    | -       | MCP サーバー             |
@@ -328,3 +328,12 @@ git add .
 git commit -m "update dotfiles"
 git push
 ```
+
+### AI 設定の更新とローカル設定
+
+- Claude の共有設定は `ai/claude/settings.json.template` を編集します。`ai_setup.sh` は初回にコピーし、旧 symlink は内容を保持した実ファイルへ移行します。既存の実ファイルは上書きしません。テンプレートを変更しても既存の実設定には自動反映されないため、必要な変更だけを実設定へ反映してください。
+- `ai/claude/settings.json` は旧 symlink の移行元としてローカルに残せますが、Git の追跡対象外です。個人用フックなどは `~/.claude/settings.json` で管理してください。
+- プラグイン更新は `bash ai/claude/scripts/plugin-update.sh` を明示的に実行します。失敗内容を表示し、1件でも失敗すると非ゼロで終了します。Superpowers の導入元は `superpowers-marketplace` に統一しています。
+- VSCode の Google Cloud プロジェクト選択は各端末で設定します。移行時に退避した `ai/vscode/User/settings.local.json` は追跡対象外で、自動では読み込まれません。必要な値は追跡しないワークスペース設定などに反映してください。
+- Go の実行ファイルは mise を含む PATH から解決します。`golangci-lint` v1 の `--fast` は維持しています。v2 へ移行する場合は Cursor と VSCode の `go.lintFlags` を `--fast-only` へ変更してください。
+- 回帰テストは `python3 -m unittest discover -s tests` で実行します（Python 3.11 以降、jq が必要）。模擬フック入力と一時ディレクトリを使い、外部サービスや実際のホーム設定は変更しません。

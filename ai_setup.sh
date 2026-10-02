@@ -15,8 +15,7 @@ SYMLINK_BACKUP_DIR="$HOME/.ai_config_backup/$(date +%Y%m%d_%H%M%S)"
 setup_claude() {
     echo "Claude Code設定..."
 
-    create_symlink "$DOTFILES_DIR/ai/claude/settings.json" ~/.claude/settings.json
-    echo "  ✓ settings.json"
+    setup_claude_config
 
     create_symlink "$DOTFILES_DIR/ai/claude/CLAUDE.md" ~/.claude/CLAUDE.md
     echo "  ✓ CLAUDE.md (グローバル指示)"
@@ -26,6 +25,34 @@ setup_claude() {
 
     # MCP サーバー設定
     setup_claude_mcp
+}
+
+# Claude の実設定を保持しつつ、旧 symlink を実ファイルへ移行する。
+# コピー完了前にリンクを外さない。相対リンクも通常のファイル読み取りで解決する。
+setup_claude_config() {
+    local dest="${1:-$HOME/.claude/settings.json}"
+    local template="$SCRIPT_DIR/ai/claude/settings.json.template"
+    local temporary
+
+    mkdir -p "$(dirname "$dest")"
+    if [ -f "$dest" ] && [ ! -L "$dest" ]; then
+        echo "  - settings.json (既存の実設定を保持)"
+        return
+    fi
+
+    temporary=$(mktemp "${dest}.XXXXXX")
+    if [ -f "$dest" ]; then
+        if ! cp -p "$dest" "$temporary"; then
+            unlink "$temporary"
+            return 1
+        fi
+    elif ! cp "$template" "$temporary"; then
+        unlink "$temporary"
+        return 1
+    fi
+    chmod 600 "$temporary"
+    mv -f "$temporary" "$dest"
+    echo "  ✓ settings.json (ローカル実ファイル)"
 }
 
 # Claude Code プラグイン設定
@@ -463,4 +490,6 @@ main() {
     print_symlink_backup_location
 }
 
-main "$@"
+if [ "${BASH_SOURCE[0]}" = "$0" ]; then
+    main "$@"
+fi

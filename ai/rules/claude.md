@@ -42,10 +42,12 @@ Skillsの詳細は `.claude/skills/` を参照してください。
 
 ## Claude Code Global Configuration
 
-グローバル設定は `ai/claude/` から `~/.claude/` へ symlink される。
+Global instructions are symlinked from `ai/claude/`. Runtime settings are local files copied from the tracked template on first setup; existing settings are preserved.
 
-| ファイル                  | 配置先                    | 内容                       |
-| ------------------------- | ------------------------- | -------------------------- |
-| `ai/claude/settings.json` | `~/.claude/settings.json` | モデル・権限・フック       |
-| `ai/claude/CLAUDE.md`     | `~/.claude/CLAUDE.md`     | 全プロジェクト共通の指示   |
-| `ai/claude/scripts/`      | -                         | statusline・プラグイン更新 |
+| ファイル                           | 配置先                    | 内容                       |
+| ---------------------------------- | ------------------------- | -------------------------- |
+| `ai/claude/settings.json.template` | `~/.claude/settings.json` | モデル・権限・フック       |
+| `ai/claude/CLAUDE.md`              | `~/.claude/CLAUDE.md`     | 全プロジェクト共通の指示   |
+| `ai/claude/scripts/`               | -                         | statusline・プラグイン更新 |
+
+Track only `settings.json.template`. Keep machine-specific integrations in the local runtime settings. Run `bash ai/claude/scripts/plugin-update.sh` explicitly to update plugins; session startup does not update them.

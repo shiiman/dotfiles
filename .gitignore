@@ -41,3 +41,10 @@ ai/antigravity/extensions.json
 # codex CLI が [projects]（絶対パス・作業中プロジェクト名）/ [hooks.state] /
 # [marketplaces] を自動追記するため追跡しない。追跡対象は config.toml.template のみ。
 ai/codex/config.toml
+
+# Claude の実設定はローカル保持し、テンプレートのみ追跡する
+ai/claude/settings.json
+# エディタのローカル設定の退避
+ai/vscode/User/settings.local.json
+# Python 回帰テストのキャッシュ
+__pycache__/

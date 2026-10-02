@@ -5,11 +5,11 @@ description: Codex 設定の表示・更新を統合管理する。「Codex 設�
 
 # Codex Settings Manage
 
-Codex の設定ファイル（TOML 形式）の表示と更新を一つのスキルで管理します。
+View or update Codex configuration while preserving unrelated settings.
 
 ## Help
 
-ユーザー入力に `--help` が含まれる場合、以下を表示して終了:
+If the user input includes `--help`, display the following and stop:
 
 ```text
 /codex-settings - Codex 設定管理
@@ -34,98 +34,101 @@ Codex の設定ファイル（TOML 形式）の表示と更新を一つのスキ
   /codex-settings update       # config.toml を更新
 ```
 
-## 設定ファイル
+## Configuration Targets
 
-Codex の設定は `~/.codex/config.toml` で管理します。
+- The active user configuration is `$CODEX_HOME/config.toml`, defaulting to
+  `~/.codex/config.toml` when `CODEX_HOME` is unset.
+- In this dotfiles repository, `ai/codex/config.toml.template` is the tracked
+  source. `ai_setup.sh` deploys a copy as the active configuration. Check the
+  setup script before relying on its overwrite behavior.
+- Updating the active configuration and preserving a change in the repository
+  are separate operations. Follow the user's requested scope and report which
+  files changed. Do not silently update both or replace the active file with a
+  symlink.
+- When reflecting an active setting into the tracked template, copy only the
+  intended portable setting. Exclude secrets, personal identifiers, absolute
+  machine paths, and runtime-managed sections such as `projects`, `hooks.state`,
+  marketplace revision/timestamp metadata, `notice.model_migrations`, and
+  `tui.model_availability_nux`.
 
-### 設定ファイルの構造
+## Workflow
 
-```toml
-# ~/.codex/config.toml
+Prefer an explicit `view` or `update` argument; otherwise infer the operation
+from the user's request.
 
-# モデル設定
-model = "o4-mini"
-# model = "o3"
-# model = "gpt-4.1"
+### View
 
-# 承認モード: "suggest" | "auto-edit" | "full-auto"
-approval_mode = "suggest"
+Read the target configuration and summarize settings by section. Mask secrets
+before displaying them, including credentials in environment tables and URLs.
+Avoid printing the entire unredacted file into tool output.
 
-# サンドボックス: "docker-only" | "local-only" | "remote-only" | "flexible"
-sandbox = "flexible"
+### Update
 
-# MCP サーバー設定
-[mcp_servers.github]
-type = "stdio"
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-github"]
+1. Inspect the existing file and preserve unrelated settings and the current
+   model. Set or change `model` only when the user explicitly specifies it; when
+   creating a file, omit `model` to use Codex's default unless instructed otherwise.
+2. Check the installed Codex version and validate requested keys and values
+   against its configuration schema or matching official documentation. Prefer
+   local evidence; if it is insufficient, consult official OpenAI documentation.
+   TOML parsing proves syntax and table placement, not support by Codex.
+3. Use `approval_policy` and `sandbox_mode`, not the obsolete `approval_mode`
+   and `sandbox` keys. Do not translate old values mechanically when their
+   intended permissions are unclear. Apply the user's intended permissions and
+   respect any environment-enforced restrictions.
+4. Merge the requested changes. Place top-level keys before the first TOML table
+   header; blank lines and comments do not end a table. Preserve existing model,
+   MCP, profile, and runtime-managed settings unless the requested change concerns
+   them. Do not unconditionally overwrite the whole configuration.
+5. Parse the resulting TOML and confirm changed keys are in the intended tables.
+   Check supported keys and enum values against the schema or documentation from
+   step 2. Report any validation limitations without claiming runtime verification
+   from parsing alone.
+6. Report the target, changes, and validation results in Japanese.
 
-[mcp_servers.github.env]
-GITHUB_PERSONAL_ACCESS_TOKEN = "<your-token>"
-```
+## Creating a Missing Configuration
 
-## 実行手順
-
-### 1. 操作種別の決定
-
-- 引数が指定されていれば引数を優先
-- 引数がない場合は発話内容から以下を判定:
-  - 表示系: view
-  - 更新系: update
-
-### 2. 操作の実行
-
-#### view
-
-1. `~/.codex/config.toml` を読み込む
-2. 設定内容をセクション別に整形表示
-
-#### update
-
-1. `~/.codex/config.toml` の存在確認（なければ作成フローへ）
-2. 変更内容を確認（model / approval_mode / sandbox / mcp_servers / その他）
-3. 既存設定を保持したマージ更新を実施
-4. 更新結果を報告
-
-## ファイル未存在時の作成
-
-- `~/.codex` ディレクトリがない場合は `mkdir -p ~/.codex`
-- テンプレートから新規作成可能
-
-### config.toml 基本テンプレート
+Create the parent directory if needed. Use the repository template when the user
+requests the dotfiles configuration; otherwise the minimal example below is a
+starting point. Do not introduce unrelated settings or fix a model version.
 
 ```toml
 # Codex 設定ファイル
 
-# モデル設定
-model = "o4-mini"
-
-# 承認モード: "suggest" | "auto-edit" | "full-auto"
-approval_mode = "suggest"
-
-# サンドボックス: "docker-only" | "local-only" | "remote-only" | "flexible"
-sandbox = "flexible"
+# トップレベル設定は最初のテーブル見出しより前に配置する
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
 ```
 
-## 出力フォーマット
+For a file that also has section settings, keep the same placement:
+
+```toml
+# 承認とサンドボックス
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+# 履歴設定
+[history]
+persistence = "save-all"
+```
+
+For MCP credentials, use the supported environment-variable mechanism for the
+installed version (for example, an HTTP server's `bearer_token_env_var` or a stdio
+server's `env_vars`). Never put token values in TOML examples or the tracked
+template. Preserve existing MCP definitions unless the user requests a change.
+
+## Output Example
 
 ```markdown
 ## Codex Settings 管理
 
 ### 実行モード
 
-- view / update
+- update
 
 ### 結果
 
 - 対象ファイル: ~/.codex/config.toml
-- 変更点: 箇条書きで要約
-- ステータス: 成功 / 失敗
+- 変更点: 承認ポリシーを on-request に更新
+- 検証: TOML 構文・キーの配置と対応バージョンのスキーマを確認
+- ステータス: 成功
 ```
-
-## 重要な注意事項
-
-- 既存設定を保持したマージ更新を行う
-- 機密情報は表示時にマスクする
-- ファイルがなければテンプレートで作成できる
-- 設定ファイル全体を無条件上書きしない

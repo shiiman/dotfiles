@@ -72,9 +72,6 @@
     // 開発言語別設定
     // ========================
     // Go設定
-    "go.alternateTools": {
-        "go": "~/tools/.tools/bin/go"
-    },
     "go.lintTool": "golangci-lint",
     "go.lintFlags": [
         "--config=${workspaceFolder}/.golangci.yaml",
@@ -164,6 +161,5 @@
     "chat.agent.maxRequests": 100,
     "go.toolsManagement.autoUpdate": true,
     "docker.extension.enableComposeLanguageServer": false,
-    "geminicodeassist.project": "infra-common-1372",
     "workbench.secondarySideBar.showLabels": false
 }

@@ -134,5 +134,7 @@
         "**/.gitea/workflows/*.yaml",
         "**/.forgejo/workflows/*.yml",
         "**/.forgejo/workflows/*.yaml"
-    ]
+    ],
+    "cursor.composer.queueMessageDefaultBehavior": "steer",
+    "claudeCode.hideOnboarding": true
 }
