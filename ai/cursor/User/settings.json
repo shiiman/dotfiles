@@ -86,6 +86,7 @@
     "workbench.view.alwaysShowHeaderActions": true,
     "yaml.format.printWidth": 160,
     "workbench.activityBar.orientation": "vertical",
+    "git.path": "/opt/homebrew/bin/git",
     "git.timeline.showAuthor": false,
     "git.timeline.showUncommitted": true,
     "[dockercompose]": {
