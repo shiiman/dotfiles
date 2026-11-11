@@ -15,4 +15,6 @@ uv = "0.13.7"
 experimental = false
 # ツールがない場合に自動インストール
 auto_install = true
+# プロジェクト固定の未インストール版は自動で入れない(eMudhra ルートを含む古い Node.js を防ぐ)
+not_found_auto_install = false
 go_set_goroot = false
