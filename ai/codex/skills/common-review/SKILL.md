@@ -193,21 +193,15 @@ echo "${TS}|${DATE}|${REPO_NAME}|${BRANCH}|${REPO_ROOT}"
 📄 レビュー結果を保存しました: {REPO_ROOT}/.codex/tmp/{TS}-review.md
 ```
 
-### 4. ユーザー確認
+### 4. Determine whether fixes are requested
 
-ユーザーに次の選択肢を提示:
+For a review-only request, report the findings and finish without editing source files or asking the user to choose a next action.
 
-- **修正する** — すべての指摘を修正
-- **一部修正** — 修正する指摘を選択
-- **そのまま** — 修正せず終了
+If the request includes fixing findings, or this review is part of an authorized implementation task, inspect and fix actionable issues within scope without a second confirmation. Do not blindly apply every suggestion: verify correctness, preserve unrelated work, and ask only about material scope changes or unapproved high-impact actions.
 
-### 5. 修正適用
+### 5. Validate fixes
 
-ユーザーが「修正する」または「一部修正」を選択した場合:
-
-1. 対象ファイルを読み込み
-2. 指摘箇所を修正
-3. 修正結果をユーザーに報告
+Run checks appropriate to the actual fixes and report changes, validation, and remaining findings. Review or fix authorization does not by itself authorize commits, push, PR creation, or posting comments to external services.
 
 ## 重要な注意事項
 
@@ -215,4 +209,4 @@ echo "${TS}|${DATE}|${REPO_NAME}|${BRANCH}|${REPO_ROOT}"
 - diff が空の場合は早期終了する
 - 統合レポートは `.codex/tmp/{TS}-review.md` にも保存する
 - diff なしでレビューを実行しない
-- ユーザー確認なしに修正を適用しない
+- Apply fixes only when the request or parent implementation task authorizes them; do not require repeated confirmation.

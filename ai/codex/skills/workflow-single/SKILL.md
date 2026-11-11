@@ -1,6 +1,6 @@
 ---
 name: workflow-single
-description: シングルエージェントで計画書/タスクを順次実装する開発フロー。「シングルフロー」「workflow-single」「1 人で実装」「順次実装」「シングルで実装して」「一人で開発」などで起動。Issue/PR まで作るかは発話・引数から判断し、曖昧なら確認する。
+description: Implement a requested task with a single agent, including only authorized commit, Issue, push, and PR steps. Use for workflow-single and explicit single-agent development requests. Default to implementation and validation without optional approval questions.
 ---
 
 # Single Flow
@@ -31,14 +31,15 @@ workflow-single - シングルエージェント開発フロー
 例:
   workflow-single                          # 既存計画書から実装（あれば）
   workflow-single "ログイン機能を追加"      # タスク説明から実装
-  workflow-single "認証を実装して PR まで"  # Issue/PR 連携ありで実装
+  workflow-single "認証を実装して PR まで"  # 実装・コミット・push・PR 作成
   workflow-single --help                   # ヘルプを表示
 
 指定の伝え方（フラグの代わり）:
   - 「計画を立ててから」  → 計画書を作成してから実装
   - 「ブランチで」        → worktree ではなくブランチを作成
-  - 「Issue / PR まで」   → Issue 作成・PR 作成まで実施
-  - 「コミットだけ」      → Issue/PR を作らずコミットメッセージ出力で終了
+  - 「PR まで」           → コミット・通常の push・PR 作成まで実施
+  - 「Issue と PR まで」   → Issue 作成も含めて実施
+  - 「コミットだけ」      → 検証後にコミットし、push・Issue・PR は作成しない
 ```
 
 ## 前提条件
@@ -50,26 +51,23 @@ workflow-single - シングルエージェント開発フロー
 
 ユーザーにフラグを入力させない。以下を順に決定する。**発話・タスク説明に明示があればそれを最優先**し、明示がなければ自動判断、それでも曖昧な項目だけ後述の手順で確認する。
 
-| 項目              | 既定       | 判断ルール                                                                                                      |
-| ----------------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
-| git / no-git      | 自動       | `git rev-parse --is-inside-work-tree` 成功なら git。失敗なら no-git（ブランチ作成を省略）                       |
-| worktree / branch | worktree   | 「ブランチで」「worktree なし」等の発話があれば branch                                                          |
-| 計画書の扱い      | 後述の判定 | 「計画を立てて」「plan で」→ 計画書作成。タスク説明あり → 直接。なし → 既存計画書を探索                         |
-| Issue/PR 連携     | **要確認** | 「Issue」「PR」「プルリク」等あり → 連携あり。「コミットだけ」「Issue 不要」等 → 連携なし。どちらも無ければ確認 |
+| 項目              | 既定       | 判断ルール                                                                                |
+| ----------------- | ---------- | ----------------------------------------------------------------------------------------- |
+| git / no-git      | 自動       | `git rev-parse --is-inside-work-tree` 成功なら git。失敗なら no-git（ブランチ作成を省略） |
+| worktree / branch | worktree   | 「ブランチで」「worktree なし」等の発話があれば branch                                    |
+| 計画書の扱い      | 後述の判定 | 「計画を立てて」「plan で」→ 計画書作成。タスク説明あり → 直接。なし → 既存計画書を探索   |
 
-### Issue/PR 連携の確認
+### Authorized completion scope
 
-発話・タスク説明から判断できない場合のみ、1 回だけ確認する。
+Determine each action independently from the current request and existing authorization:
 
-```text
-question: "どこまで実施しますか？"
-options:
-  - 軽量（コミットメッセージ出力のみ）: Issue/PR を作らず、変更とコミットメッセージの提示で終了
-  - Issue/PR まで作成: Issue 作成 → 実装 → コミット → PR 作成まで実施
-```
+- Implementation-only request: implement, review, and validate; finish without asking whether to commit or create an Issue/PR.
+- Commit-only request: perform checks and commit the intended changes; do not push or create an Issue/PR.
+- PR creation request: complete the required implementation, validation, intended commits, and normal feature-branch push before creating the PR. Do not create a separate Issue unless requested or required by an authorized workflow.
+- Issue creation request: create only the requested Issue and any explicitly requested follow-up actions. Link a verified existing Issue when appropriate.
+- Explicit restrictions such as "do not push" take precedence. Report a concrete blocker rather than silently expanding scope.
 
-- **軽量** を選択 → 「実行フロー（共通）」のみ実施し、最後にコミットメッセージを出力（コミット・PR はしない）
-- **Issue/PR まで作成** を選択 → 「実行フロー（共通）」に Issue/PR 連携ステップを追加
+Do not require `--no-confirm`, plan approval, or a second completion approval for already authorized actions. The later "Issue/PR" finishing section applies only to the individually authorized actions; skip unrequested steps. Recheck authorization for material scope changes, destructive operations, or other high-impact actions.
 
 ### git の状態判定
 
@@ -82,7 +80,7 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1
 
 ### 計画書の扱いの判定
 
-1. 「計画を立ててから」等の依頼がある → **計画書作成**: 計画書をマークダウンで作成・承認してから実装フェーズへ。計画書は `.codex/plans/` に保存する
+1. 「計画を立ててから」等の依頼がある → **Plan**: write the requested plan to `.codex/plans/`. If implementation is also requested, proceed after explaining it; wait only when the user explicitly requests plan approval or a material decision remains unresolved
 2. タスク説明がある → **直接実行**: タスク説明をそのまま実装の指針にする（計画書を作らない）
 3. タスク説明なし → **既存計画書**: 最新の計画書を読み込む
 
@@ -95,13 +93,13 @@ ls -t ~/.codex/plans/*.md 2>/dev/null | head -1
 ## 実行フロー（共通）
 
 ```text
-[Issue/PR 連携あり] Issue 作成 →
-ブランチ/worktree 作成 → 実装 → セキュリティチェック＆自己レビュー → ユーザー確認 →
-[連携あり] コミット → プッシュ案内 → PR 作成 → 完了報告
+[Issue 作成が許可済みの場合のみ] Issue 作成 →
+ブランチ/worktree 作成 → 実装 → セキュリティチェック＆自己レビュー →
+[許可済みの操作のみ] コミット → push → PR 作成 → 完了報告
 [連携なし] コミットメッセージ出力で終了
 ```
 
-### ステップ A: Issue 作成（Issue/PR 連携ありのときのみ）
+### Step A: Create an Issue only when authorized
 
 `github-issue-create` スキルのワークフローに従い、`--no-confirm` オプションで Issue を作成する。タスク内容を 50 文字以内のタイトルにし、本文は「## 概要 / ## タスク（チェックボックス）/ ## 完了条件」で構成する。ラベルは内容に応じて `enhancement` / `bug` / `documentation` / `improvement` を付与。
 
@@ -113,7 +111,7 @@ git モードのみ実施（no-git モードはスキップ）。
 
 - worktree（既定）: `github-worktree-create` スキルのワークフローに従う
 - ブランチ: `github-branch-create` スキルのワークフローに従う
-- Issue/PR 連携ありの場合は Issue 番号を引数に渡す
+- Pass an Issue number only when a verified related Issue exists; otherwise use a task-derived branch name.
 
 ユーザーがベースブランチを明示した場合はそちらを優先する。
 
@@ -124,7 +122,7 @@ git モードのみ実施（no-git モードはスキップ）。
 1. 必要なファイルを特定
 2. コード変更を実施
 3. 動作確認（可能な場合）
-4. Issue/PR 連携ありの場合、サブタスク完了時に Issue のチェックボックスを更新
+4. Update checkboxes only on an authorized, verified Issue, and only for tasks actually completed
 
 ### ステップ 3: セキュリティチェック＆自己レビュー
 
@@ -136,43 +134,22 @@ git diff
 - 機密ファイルを検出したら警告: `.env*`（環境変数）、`*.pem` / `*.key`（秘密鍵）、`credentials.json`（認証情報）、`node_modules/` / `vendor/`（依存）
 - 自己レビュー観点: コード品質・命名規則 / セキュリティ（OWASP Top 10）/ パフォーマンス（N+1・メモリリーク）
 
-### ステップ 4: ユーザー確認（必須）
+### Step 4: Validate and continue within authorization
 
-変更内容を提示して確認を取る。
-
-```text
-## 変更内容の確認
-
-{git diff --stat}
-
-### 変更ファイル一覧
-{変更ファイル}
-
-### 自己レビュー結果
-{サマリー}
-
-### コミットメッセージ（案）
-{Conventional Commits 形式}
-
-この内容で進めてよろしいですか？
-```
+Summarize the verified changes and checks in a progress update, then continue with the authorized completion actions. Do not pause merely to approve the diff or commit message. If a concrete risk or unresolved scope decision requires confirmation, prepare the reviewable result and ask only about that decision.
 
 ## 仕上げ
 
-### Issue/PR 連携あり
+### Authorized completion actions
 
-ユーザー確認後、以下を実施する。
+Execute only the following actions covered by the authorized completion scope; no repeated approval is needed.
 
-1. Issue の残りチェックボックスを全て完了に更新
+1. Update only verified completed checkboxes on an authorized Issue; never mark unfinished tasks complete.
 2. コミット: `git-add-commit` スキルのワークフローに従い、`--no-confirm` オプションでコミットする
-3. プッシュ案内（自動実行しない）:
+3. If push or PR creation is authorized, verify the remote, destination branch, and outgoing commits, then execute `git push -u origin {branch}` for the intended feature branch. Do not force-push, push directly to the default branch, or include unrelated work.
 
-   ```bash
-   git push -u origin {ブランチ名}
-   ```
-
-4. PR 作成: `github-pr-create` スキルのワークフローに従い、`--no-confirm` オプションで PR を作成する。本文は「## 概要 / ## 変更内容 / ## 関連 Issue（`Closes #{issue番号}`）/ ## テスト計画」で構成
-5. 完了報告:
+4. PR 作成: `github-pr-create` スキルのワークフローに従い、`--no-confirm` オプションで PR を作成する。Use a Japanese summary, changes, and validation results. Include `Closes #N` only for a verified related Issue; omit the Issue section otherwise
+5. Report only actions actually completed; omit Issue or PR placeholders for actions not performed:
 
    ```text
    ## 開発フロー完了
@@ -195,7 +172,7 @@ git diff
 
 ### Issue/PR 連携なし（軽量）
 
-**コミット・プッシュ・PR 作成は行わない。** 推奨コミットメッセージを出力して終了する。
+For implementation-only requests, report changes and validation without committing, pushing, or creating an Issue/PR. For an explicit commit-only request, validate and commit the intended changes, then report the commit. Do not ask an optional follow-up question.
 
 ```text
 ## 実装完了
@@ -208,19 +185,18 @@ git diff
 {git diff --stat}
 
 ### 推奨コミットメッセージ
-{Conventional Commits 形式（`config.toml` の git.commitMessage 設定があればそれに従う）}
+{Conventional Commits message following repository and global instructions}
 
-### 次のステップ
-git push -u origin {ブランチ名}
-必要に応じて PR 作成: gh pr create
+### 検証結果
+{実行したチェック・結果・残課題}
 ```
 
 ## 重要な注意事項
 
 - ✅ ユーザーにフラグを入力させない（git・worktree/branch・計画書・Issue/PR を自動判断、曖昧なら確認）
 - ✅ 計画書作成は「計画を立ててから」と依頼されたときのみ実施
-- ✅ コミット前に必ずユーザー確認を行う
+- Continue authorized completion steps without a second confirmation.
 - ✅ 機密ファイルを警告・除外する
-- ✅ コミットメッセージは `config.toml` の設定に従う（なければ Conventional Commits）
+- Follow repository commit conventions and global instructions; do not invent unsupported configuration keys.
 - ❌ デフォルトブランチで直接作業・コミットしない
-- ❌ Issue/PR 連携なしのときは自動でコミット・プッシュ・PR を作らない
+- Execute each external or Git completion action only within its independently authorized scope.

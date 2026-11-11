@@ -36,8 +36,12 @@ description: 現在のブランチから PR を作成または更新する。「
   「develop 向けに PR を作成」      # develop ブランチ向けに PR 作成
 
 内部呼び出し用:
-  --no-confirm  PR 内容確認をスキップして即座に作成（workflow から渡される）
+  --no-confirm  Compatibility flag for already authorized workflow calls
 ```
+
+## Authorization
+
+Use the global authorization policy and the current request to determine scope. An explicit request for this skill's action is sufficient authorization; do not ask again just to approve generated wording or require `--no-confirm`. The flag remains compatible with authorized workflow callers, but never grants permission by itself. Preserve security checks and ask only for missing authorization, a material scope change, or a concrete risk outside the approved scope.
 
 ## 起動時の自動判断
 
@@ -62,11 +66,12 @@ git fetch origin
 git log "origin/${CURRENT_BRANCH}..HEAD" --oneline 2>/dev/null
 ```
 
-**ブランチ状態の検証**:
+**Check branch state**:
 
-- ✅ 未コミットの変更がない
-- ✅ プッシュされていないコミットがない
-- ❌ いずれかがある場合は警告して処理を終了
+- Inspect uncommitted changes and outgoing commits; do not terminate merely because the feature branch has not been pushed yet.
+- A request to create a PR includes the normal push needed to publish its intended feature-branch commits. Verify the remote, destination, and outgoing diff before pushing; never force-push or push directly to the default branch under this authorization.
+- If intended changes still need a commit, a request to create a PR from those changes authorizes the necessary commit after checks. Use `git-add-commit` for only the requested paths or hunks; leave unrelated edits and staged content untouched.
+- Ask only if the intended scope cannot be determined safely, or publishing would include unapproved content. Respect an explicit instruction not to commit or push; report the resulting blocker instead of claiming PR completion.
 
 ### 2. 既存 PR の自動検出
 
@@ -90,21 +95,11 @@ git diff "origin/${DEFAULT_BRANCH}...HEAD" --stat
 
 - ブランチ名（`feature/5` → #5）
 - コミットメッセージ
-- ユーザーへの確認
+- If no related Issue can be established, omit the link; ask only if linking is required and the target is ambiguous.
 
 ### 5. 破壊的変更の検出
 
-以下のパターンを検出した場合、PR タイトルに `!` を付与して警告:
-
-- コミットメッセージに `BREAKING CHANGE:` または `!:` が含まれる
-- 公開 API の削除・シグネチャ変更
-
-```
-⚠️ 破壊的変更が検出されました:
-- コミット: feat!: 認証方式を変更
-
-PR タイトルに破壊的変更を明示しますか？
-```
+Inspect the commits and public API changes for breaking behavior. If a breaking change is verified, mark it in the Conventional Commits title and describe the impact without asking a separate question about the title punctuation. Creating a PR does not authorize deploying or merging the change.
 
 ### 6. PR 内容の作成
 
@@ -118,9 +113,7 @@ PR タイトルに破壊的変更を明示しますか？
 | refactor | リファクタリング | `refactor: スキル構造を整理`         |
 | chore    | その他の変更     | `chore: 依存関係を更新`              |
 
-**`--no-confirm` なしの場合**: PR 内容をユーザーに提示して確認を取る。
-
-**`--no-confirm` 指定時**: ユーザー確認をスキップして即座に PR を作成する。
+Prepare a Japanese title and body from the verified diff, repository template, and actual validation results. If PR creation or update is authorized, proceed without requesting approval of the wording. `--no-confirm` is optional and does not expand authorization.
 
 ### 7. PR 作成・更新
 
@@ -181,7 +174,7 @@ PR を{作成|更新}しました:
 
 - ✅ 既存 PR がある場合は自動的に更新モードになる
 - ✅ Conventional Commits 形式のタイトル
-- ✅ 関連 Issue を `Closes #N` で参照
+- Reference a verified related Issue with `Closes #N`; omit the section if none exists.
 - ✅ PR タイトルと本文は日本語
-- ✅ 未コミット・未プッシュの変更がある場合は警告して終了
-- ❌ Issue の自動クローズを忘れない
+- Complete authorized commits and normal feature-branch push before creating the PR; preserve unrelated work.
+- Do not invent an Issue or claim checks passed when they were not performed.

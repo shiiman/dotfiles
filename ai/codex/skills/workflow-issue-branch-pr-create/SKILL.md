@@ -1,11 +1,11 @@
 ---
 name: workflow-issue-branch-pr-create
-description: 既存変更から Issue → ブランチ → コミット・プッシュ（コマンド提示）→ PR を作成する Backward フロー。「変更から Issue と PR」「既存変更を PR に」「diff から Issue」「変更を Issue 化」「Backward フロー」などで起動。
+description: Create an Issue, feature branch, scoped commit, normal push, and PR from existing changes when the full workflow is requested. Use for workflow-issue-branch-pr-create and explicit Issue-to-PR requests. Preserve user edits and honor restrictions without repeated approval prompts.
 ---
 
 # Issue Branch PR Create（Backward フロー）
 
-既存の変更内容から Issue → ブランチ → コミット → プッシュ提示 → PR を作成する Backward フロー。
+既存の変更内容から Issue → ブランチ → コミット → push → PR を作成する Backward フロー。
 
 ## Help
 
@@ -16,7 +16,7 @@ description: 既存変更から Issue → ブランチ → コミット・プッ
 
 概要:
   ワーキングツリーの変更やコミット済み未プッシュの変更から
-  Issue → ブランチ/worktree → コミット → プッシュ提示 → PR を自動作成する。
+  Issue → ブランチ/worktree → コミット → push → PR を自動作成する。
 
 使用方法:
   workflow-issue-branch-pr-create
@@ -36,17 +36,17 @@ description: 既存変更から Issue → ブランチ → コミット・プッ
 ## フロー概要
 
 ```
-既存変更 → 確認 → Issue 作成 → ブランチ/worktree 作成 → コミット → プッシュ提示 → PR 作成
+既存変更 → 確認 → Issue 作成 → ブランチ/worktree 作成 → コミット → push → PR 作成
 ```
 
 ## 状態分岐テーブル
 
 | ブランチ | 変更状態           | Issue      | Branch   | Commit   | Push | PR   |
 | -------- | ------------------ | ---------- | -------- | -------- | ---- | ---- |
-| default  | 未コミットあり     | 実行       | 実行     | 実行     | 提示 | 実行 |
-| default  | コミット済み未push | 実行       | 実行     | スキップ | 提示 | 実行 |
-| feature  | 未コミットあり     | 実行       | スキップ | 実行     | 提示 | 実行 |
-| feature  | コミット済み未push | 実行       | スキップ | スキップ | 提示 | 実行 |
+| default  | 未コミットあり     | 実行       | 実行     | 実行     | 実行 | 実行 |
+| default  | コミット済み未push | 実行       | 実行     | スキップ | 実行 | 実行 |
+| feature  | 未コミットあり     | 実行       | スキップ | 実行     | 実行 | 実行 |
+| feature  | コミット済み未push | 実行       | スキップ | スキップ | 実行 | 実行 |
 | any      | 変更なし           | エラー終了 | -        | -        | -    | -    |
 
 ## 実行フロー
@@ -139,19 +139,11 @@ git stash pop
 
 git-add-commit スキルのワークフローに従って実行する。`--no-confirm` オプション付き。
 
-### ステップ 5: プッシュコマンド提示
+### Step 5: Push the authorized feature branch
 
-**重要**: プッシュは自動実行しない。コマンドを表示するのみ。
+An explicit request for this full Issue-to-PR workflow authorizes its Issue, branch, commit, normal push, and PR steps. Verify the remote, intended feature branch, and outgoing commits before pushing with `git push -u origin {branch}`. Never force-push, push to the default branch, or include unrelated changes under this authorization.
 
-```
-## プッシュコマンド
-
-以下のコマンドでリモートにプッシュしてください:
-
-\`\`\`bash
-git push -u origin {branch}
-\`\`\`
-```
+If the user explicitly prohibits push, respect that restriction and report that PR creation is blocked by unpublished commits. Do not claim that a PR was created or continue as if the push succeeded. Existing authorization is sufficient; `--no-confirm` is optional and never grants authorization itself.
 
 ### ステップ 6: PR 作成
 
@@ -182,10 +174,10 @@ PR マージ後、不要になった worktree を削除してください:
 
 ## 重要な注意事項
 
-- プッシュは自動実行せず、コマンドを提示するのみ
+- Complete the normal feature-branch push required by an authorized PR workflow; preserve explicit restrictions.
 - 変更がない場合はエラー終了する
 - デフォルトブランチ上の場合のみブランチを作成する
 - 未コミット変更がある場合のみコミットを実行する
 - Issue 作成・コミット・PR 作成は各スキルのワークフローに従って実行する
 - 変更がないまま Issue や PR を作成しない
-- プッシュを自動実行しない
+- Ask only for missing authorization or material scope and risk changes, not repeated approval of authorized steps.
