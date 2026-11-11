@@ -1,6 +1,6 @@
 ---
 name: workflow-issue-branch-pr-create
-description: Create an Issue, feature branch, scoped commit, normal push, and PR from existing changes when the full workflow is requested. Use for workflow-issue-branch-pr-create and explicit Issue-to-PR requests. Preserve user edits and honor restrictions without repeated approval prompts.
+description: 既存変更から Issue → ブランチ → コミット → 通常の push → PR を作成する Backward フロー。「変更から Issue と PR」「既存変更を PR に」「Backward フロー」などで起動。無関係な作業と明示的な制約を保護し、許可済みの操作は再確認しない。
 ---
 
 # Issue Branch PR Create（Backward フロー）
@@ -139,11 +139,11 @@ git stash pop
 
 git-add-commit スキルのワークフローに従って実行する。`--no-confirm` オプション付き。
 
-### Step 5: Push the authorized feature branch
+### ステップ 5: 許可された feature branch の push
 
-An explicit request for this full Issue-to-PR workflow authorizes its Issue, branch, commit, normal push, and PR steps. Verify the remote, intended feature branch, and outgoing commits before pushing with `git push -u origin {branch}`. Never force-push, push to the default branch, or include unrelated changes under this authorization.
+この Issue から PR までのフロー全体の明示的な依頼には、Issue・branch・コミット・通常の push・PR 作成を含む。remote・対象 feature branch・送信対象のコミットを確認して `git push -u origin {branch}` を実行する。この許可だけで force-push、デフォルトブランチへの push、無関係な変更の送信は行わない。
 
-If the user explicitly prohibits push, respect that restriction and report that PR creation is blocked by unpublished commits. Do not claim that a PR was created or continue as if the push succeeded. Existing authorization is sufficient; `--no-confirm` is optional and never grants authorization itself.
+「push しない」と明示されている場合はそれを守り、未公開コミットのため PR 作成を完了できないことを報告する。push できたものとして続行したり PR 作成済みと主張したりしない。既存の許可で十分であり、`--no-confirm` は任意の互換オプションで、指定自体が許可を与えるものではない。
 
 ### ステップ 6: PR 作成
 
@@ -174,10 +174,10 @@ PR マージ後、不要になった worktree を削除してください:
 
 ## 重要な注意事項
 
-- Complete the normal feature-branch push required by an authorized PR workflow; preserve explicit restrictions.
+- 許可された PR フローに必要な通常の feature branch push を完了し、明示的な制約を優先する。
 - 変更がない場合はエラー終了する
 - デフォルトブランチ上の場合のみブランチを作成する
 - 未コミット変更がある場合のみコミットを実行する
 - Issue 作成・コミット・PR 作成は各スキルのワークフローに従って実行する
 - 変更がないまま Issue や PR を作成しない
-- Ask only for missing authorization or material scope and risk changes, not repeated approval of authorized steps.
+- 許可不足、重要な範囲変更やリスクがある場合だけ確認し、許可済みの手順を再承認しない。

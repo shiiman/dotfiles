@@ -1,6 +1,6 @@
 ---
 name: workflow-multi
-description: Implement a requested task with multiple agents, including only authorized commit, Issue, push, and PR steps. Use for workflow-multi and explicit parallel multi-agent development requests. Default to implementation and validation without optional approval questions.
+description: マルチエージェントで並列実装する開発フロー。「workflow-multi」「マルチフロー」「並列で実装」などで起動。依頼された範囲の実装・検証と、許可済みのコミット・Issue・push・PR 作成を重複確認せず行う。
 ---
 
 # Multi Flow
@@ -66,17 +66,17 @@ workflow-multi - マルチエージェント開発フロー
 | worktree / branch | worktree   | 「ブランチで」「worktree なし」等の発話があれば branch                                    |
 | 計画書の扱い      | 後述の判定 | 「計画を立てて」「plan で」→ 計画書作成。タスク説明あり → 直接。なし → 既存計画書を探索   |
 
-### Authorized completion scope
+### 許可された完了範囲
 
-Determine each action independently from the current request and existing authorization:
+現在の依頼と既存の許可から、操作ごとに実行範囲を判断する。
 
-- Implementation-only request: implement, review, and validate; finish without asking whether to commit or create an Issue/PR.
-- Commit-only request: perform checks and commit the intended changes; do not push or create an Issue/PR.
-- PR creation request: complete the required implementation, validation, intended commits, and normal feature-branch push before creating the PR. Do not create a separate Issue unless requested or required by an authorized workflow.
-- Issue creation request: create only the requested Issue and any explicitly requested follow-up actions. Link a verified existing Issue when appropriate.
-- Explicit restrictions such as "do not push" take precedence. Report a concrete blocker rather than silently expanding scope.
+- 実装だけの依頼: 実装・レビュー・検証を行い、コミットや Issue・PR を作るかの追加質問はせず終了する。
+- コミットだけの依頼: チェック後に対象変更をコミットする。push や Issue・PR 作成は行わない。
+- PR 作成の依頼: 必要な実装・検証・対象変更のコミット・通常の feature branch push を完了して PR を作成する。Issue は依頼されているか、許可済みのワークフローで必要な場合だけ作成する。
+- Issue 作成の依頼: 依頼された Issue と明示された後続操作だけを行う。必要に応じて確認済みの既存 Issue を参照する。
+- 「push しない」などの明示的な制約を優先する。範囲を黙って広げず、具体的な阻害要因を報告する。
 
-Do not require `--no-confirm`, plan approval, or a second completion approval for already authorized actions. The later "Issue/PR" finishing section applies only to the individually authorized actions; skip unrequested steps. Recheck authorization for material scope changes, destructive operations, or other high-impact actions.
+許可済みの操作に `--no-confirm`、計画承認、完了時の再承認を要求しない。後続の仕上げ手順も個別に許可された操作だけを実行し、依頼されていない手順は省略する。重要な範囲変更、破壊的操作、高影響操作が発生する場合は許可を再確認する。
 
 ### git の状態判定
 
@@ -89,18 +89,18 @@ git rev-parse --is-inside-work-tree >/dev/null 2>&1
 
 ### 計画書の扱いの判定
 
-1. 「計画を立ててから」等の依頼がある → **Plan**: write the requested plan to `.codex/plans/`. If implementation is also requested, proceed after explaining it; wait only when the user explicitly requests plan approval or a material decision remains unresolved
+1. 「計画を立ててから」等の依頼がある → **計画作成**: `.codex/plans/` に計画を保存する。実装も依頼されていれば説明後に続行し、計画承認を明示的に求められた場合や重要な未解決の判断がある場合だけ待機する
 2. タスク説明がある → **直接実行**: タスク説明をそのまま実装の指針にする
 3. タスク説明なし → **既存計画書**: 最新の計画書を読み込む（`ls -t ~/.codex/plans/*.md | head -1`）。見つからなければタスク説明を促して終了
 
 ### session_id / slug ルール
 
-- When a verified related Issue exists, use its number as `session_id`.
-- Otherwise derive `session_id` from a concise English task slug, whether or not PR creation is requested.
+- 確認済みの関連 Issue がある場合は、その番号を `session_id` に使う。
+- なければ PR 作成の有無によらず、タスクに基づく簡潔な英語 slug を `session_id` に使う。
 
 ## Phase 1: セットアップ + Admin 起動
 
-### Step A: Create an Issue only when authorized
+### ステップ A: 許可されている場合だけ Issue を作成
 
 `github-issue-create` スキルのワークフローに従い、`--no-confirm` オプションで Issue を作成する。本文は「## 概要 / ## タスク一覧（チェックボックス）/ ## 完了条件」で構成。作成された Issue 番号を `session_id` と後続に使う。
 
@@ -110,7 +110,7 @@ git モードのみ実施（no-git はスキップ）。
 
 - worktree（既定）: `github-worktree-create` スキルのワークフローに従う
 - ブランチ: `github-branch-create` スキルのワークフローに従う
-- Pass an Issue number only when a verified related Issue exists; otherwise use a task-derived branch name.
+- 確認済みの関連 Issue がある場合だけ Issue 番号を渡し、なければタスクに基づくブランチ名を使う。
 
 > **Note**: `github-worktree-create` は worktree 作成後に `mise trust` を自動実行するため、追加の対応は不要。
 
@@ -168,7 +168,7 @@ send_task(
 
 ### ステップ 7: Admin の完了を待機
 
-Monitor completion with the available agent status or wait tools and proceed to Phase 5 when work completes. Do not require the user to ask for a status check before continuing.
+利用可能なエージェントの状態確認・待機ツールで完了を監視し、完了したら Phase 5 へ進む。続行のためにユーザーから状態確認を依頼されるのを待たない。
 
 ```text
 get_dashboard_summary(caller_agent_id="{owner_id}")
@@ -179,7 +179,7 @@ read_messages(agent_id="{owner_id}", caller_agent_id="{owner_id}")
 
 **自動制御。Owner は待機のみ。**
 
-## Phase 5: Verify results and continue
+## Phase 5: 結果を検証して続行
 
 ### ステップ 1: 完了報告と変更内容を表示
 
@@ -197,15 +197,15 @@ git diff --cached
 
 no-git モード: Admin の最終報告（実装サマリー・変更ファイル・テスト結果・残課題）を表示。
 
-### Step 2: Verify results and authorization
+### ステップ 2: 結果と許可の確認
 
-Inspect the actual diff and validation results, and resolve actionable findings within the task. Continue automatically when implementation and subsequent actions are already authorized. Ask only about material unresolved decisions or unapproved impact. Do not wait for a generic "OK".
+実際の差分と検証結果を確認し、範囲内の対応すべき指摘を修正する。実装と後続操作が許可済みなら自動で続行する。重要な未解決の判断や未許可の影響についてだけ質問し、形式的な「OK」を待たない。
 
-Before cleanup, inspect what the cleanup tool removes. Clean up only agents and temporary resources owned by this task; preserve worktrees, changes, and other useful user work. If the tool cannot guarantee that scope, leave the resources intact and report them.
+クリーンアップツールが削除する対象を確認する。今回のタスクが所有するエージェントと一時リソースだけを片付け、worktree・変更・有用なユーザーの作業は保持する。ツールで範囲を保証できなければ削除せず報告する。
 
-### After verification
+### 検証後の処理
 
-1. Notify Admin that verification is complete and authorized follow-up can proceed:
+1. Admin に検証完了と許可済みの後続操作への移行を通知する。
 
    ```text
    send_message(
@@ -233,17 +233,17 @@ Before cleanup, inspect what the cleanup tool removes. Clean up only agents and 
 
 ## 仕上げ
 
-### Authorized completion actions
+### 許可された仕上げ操作
 
-1. Update only verified completed checkboxes on an authorized Issue; never mark unfinished tasks complete.
+1. 更新が許可された Issue のうち、実際に完了したタスクだけをチェックする。未完了タスクを完了にしない。
 2. コミット: `git-add-commit` スキルのワークフローに従い、`--no-confirm` オプションでコミットする
-3. When push or PR creation is authorized, verify the remote, destination, and outgoing commits, then execute a normal push for the actual feature branch. Never force-push, push to the default branch, or publish unrelated work under this authorization.
-4. PR 作成: `github-pr-create` スキルのワークフローに従い、`--no-confirm` オプションで PR を作成する。Use a Japanese summary, parallel task results, and validation results. Include `Closes #N` only for a verified related Issue; omit the Issue section otherwise
-5. Report actual changes, checks, and completed actions. Include Issue or PR numbers/URLs only when they exist; never claim an unperformed action completed.
+3. push または PR 作成が許可されていれば、remote・送信先・対象コミットを確認して実際の feature branch を通常の push で公開する。この許可だけで force-push、デフォルトブランチへの push、無関係な作業の公開は行わない。
+4. PR 作成: `github-pr-create` スキルのワークフローに従い、`--no-confirm` オプションで PR を作成する。日本語で概要・並列タスクの結果・検証結果を記載する。`Closes #N` は確認済みの関連 Issue がある場合だけ含め、なければ Issue 欄を省略する。
+5. 実際の変更・チェック・完了した操作を報告する。Issue・PR の番号と URL は存在する場合だけ含め、未実行の操作を完了と主張しない。
 
 ### Issue/PR 連携なし（軽量）
 
-For implementation-only requests, report changes and validation without committing, pushing, or creating an Issue/PR. For an explicit commit-only request, validate and commit the intended changes, then report the commit. Do not ask an optional follow-up question.
+実装だけの依頼では、変更と検証結果を報告して終了し、コミット・push・Issue・PR 作成は行わない。コミットだけの明示的な依頼では、検証して対象変更をコミットし、結果を報告する。任意の後続操作を追加で質問しない。
 
 ```text
 ## 実装完了
@@ -252,7 +252,7 @@ For implementation-only requests, report changes and validation without committi
 - {ブランチ名} / パス: {worktree のパス}（worktree モード時のみ）
 
 ### 推奨コミットメッセージ
-{Conventional Commits message following repository and global instructions}
+{リポジトリとグローバル指示に従う Conventional Commits メッセージ}
 
 ### 検証結果
 {実行したチェック・結果・残課題}
@@ -266,6 +266,6 @@ PR マージ後、`/git-worktree` で gtr rm または gtr clean を実行して
 - ✅ ユーザーにフラグを入力させない（git・worktree/branch・計画書・Issue/PR を自動判断、曖昧なら確認）
 - ✅ 全ツールに `caller_agent_id` を渡す
 - ✅ no-git モードでは `enable_git=false` と `branch_name` 省略を徹底
-- Verify cleanup scope and preserve useful work; do not add a generic completion approval gate.
-- Follow repository commit conventions and global instructions; do not invent unsupported configuration keys.
-- Execute each external or Git completion action only within its independently authorized scope.
+- クリーンアップの範囲と作業の保護を確認し、形式的な完了承認は追加しない。
+- コミットの規約はリポジトリとグローバル指示に従い、未対応の設定キーを仮定しない。
+- 外部操作や Git の仕上げ操作は、それぞれ許可された範囲内だけで実行する。

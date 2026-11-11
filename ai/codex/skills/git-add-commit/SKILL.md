@@ -23,12 +23,12 @@ description: 変更をステージング・コミットする。「コミット�
 
 オプション:
   --help        このヘルプを表示
-  --no-confirm  Compatibility flag for already authorized workflow calls
+  --no-confirm  許可済みワークフローからの呼び出し用の互換オプション
 ```
 
-## Authorization
+## 許可と確認の方針
 
-Use the global authorization policy and the current request to determine scope. An explicit request for this skill's action is sufficient authorization; do not ask again just to approve generated wording or require `--no-confirm`. The flag remains compatible with authorized workflow callers, but never grants permission by itself. Preserve security checks and ask only for missing authorization, a material scope change, or a concrete risk outside the approved scope.
+グローバルの許可方針と現在の依頼から実行範囲を判断する。このスキルの操作を明示的に依頼されていれば、それを許可として扱い、生成した文面の承認や `--no-confirm` の指定を改めて求めない。このオプションは許可済みの呼び出しとの互換用であり、指定自体が許可を与えるものではない。セキュリティチェックは維持し、許可不足、重要な範囲変更、許可範囲外の具体的なリスクがある場合だけ確認する。
 
 ## ワークフロー
 
@@ -72,12 +72,12 @@ git diff --staged
 | `.vscode/`       | VS Code   |
 | `*.swp`, `*.swo` | Vim       |
 
-**Handling detected files**:
+**検出時の対応**:
 
-- Do not stage secrets, unrelated user edits, or unintended generated files. Inspect actual content without exposing secrets; filenames alone do not establish whether a file contains credentials.
-- Stage only authorized paths or hunks. Preserve the user's index and working tree; do not automatically reset pre-existing staged changes.
-- Add clear task-generated artifacts to `.gitignore` when appropriate within the task. For ambiguous IDE or vendor files, follow repository conventions and leave unrelated files untouched. Report exclusions without requesting approval for every ignore pattern.
-- If sensitive content is part of the intended commit, block that content and resolve it safely before continuing.
+- 秘密情報、無関係なユーザーの変更、意図しない生成物はステージしない。秘密情報を出力せずに内容を確認し、ファイル名だけで認証情報の有無を判断しない。
+- 許可されたパスや hunk だけをステージする。ユーザーの index と作業ツリーを保護し、既存のステージ済み変更を自動で reset しない。
+- タスクで生成した明らかな成果物は、必要に応じて `.gitignore` に追加する。IDE 設定や vendor の扱いが曖昧な場合はリポジトリの慣例に従い、無関係なファイルは変更しない。除外内容は報告し、パターンごとの承認は求めない。
+- コミット予定の内容に秘密情報が含まれる場合は、その内容のコミットを止め、安全に解消してから続行する。
 
 ### 3. コミットメッセージ生成
 
@@ -94,9 +94,9 @@ git diff --staged
 | テスト追加・修正         | `test:`        |
 | ビルド・依存関係         | `chore:`       |
 
-### 4. Check authorization
+### 4. コミット許可の確認
 
-If committing these changes is already requested, proceed after validation without another approval prompt. Otherwise prepare the intended diff and message before requesting commit authorization. `--no-confirm` does not bypass security checks or authorize unrelated changes.
+対象変更のコミットが依頼済みなら、検証後に再確認せず進める。許可がない場合は、対象の差分とコミットメッセージを用意してから許可を求める。`--no-confirm` でもセキュリティチェックは省略せず、無関係な変更のコミットは許可されない。
 
 ### 5. ステージング
 
@@ -106,21 +106,21 @@ git add {対象ファイル}
 
 ### 6. コミット
 
-Inspect the exact commit content before committing. The simple command below is appropriate only when the index contains exclusively authorized changes. If unrelated changes are already staged, use an isolated index or another scoped commit method that preserves the user's staged and unstaged work; never silently include or reset unrelated changes.
+コミット直前に実際の対象内容を確認する。下記のコマンドは、index に許可された変更だけが含まれる場合に使う。無関係な変更が既にステージされている場合は、一時 index など対象を限定できる方法を使い、ユーザーのステージ済み・未ステージの作業を保持する。無関係な変更を黙って含めたり reset したりしない。
 
 ```bash
 git commit -m "{コミットメッセージ}"
 ```
 
-### 7. Push when authorized
+### 7. 許可されている場合の push
 
-A commit-only request does not authorize push. If push or PR creation is explicitly requested, verify the remote, branch, and outgoing commits, then execute the required normal push. For a new feature branch, use `git push -u origin {branch_name}`. Do not force-push, push to the default branch, publish unrelated work, or bypass repository checks without the necessary authorization. Otherwise report the commit result without asking an optional follow-up question.
+コミットだけの依頼では push しない。push または PR 作成が明示的に依頼されている場合は、remote・branch・送信対象のコミットを確認し、必要な通常の push を実行する。新規 feature branch では `git push -u origin {branch_name}` を使う。必要な許可なしに force-push、デフォルトブランチへの push、無関係な作業の公開、リポジトリのチェック回避は行わない。push の依頼がなければ、追加の選択を質問せずコミット結果を報告して終了する。
 
 ## 重要な注意事項
 
-- Reuse existing commit authorization; do not require a second confirmation.
+- 既存のコミット許可を再利用し、同じ内容の承認を取り直さない。
 - ✅ 機密ファイルを検出した場合はコミットをブロック（`--no-confirm` でも実行）
 - ✅ Conventional Commits 形式を使用
-- Never commit changes outside the authorized scope.
-- Push only when authorized directly or required by an explicit PR creation request.
+- 許可された範囲外の変更をコミットしない。
+- push の依頼、または明示的な PR 作成依頼に必要な場合だけ push する。
 - ❌ デフォルトブランチへの直接コミットは避ける（警告を出す）

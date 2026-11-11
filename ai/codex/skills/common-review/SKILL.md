@@ -193,15 +193,15 @@ echo "${TS}|${DATE}|${REPO_NAME}|${BRANCH}|${REPO_ROOT}"
 📄 レビュー結果を保存しました: {REPO_ROOT}/.codex/tmp/{TS}-review.md
 ```
 
-### 4. Determine whether fixes are requested
+### 4. 修正が依頼されているかの判断
 
-For a review-only request, report the findings and finish without editing source files or asking the user to choose a next action.
+レビューだけの依頼では、ソースを編集せず指摘を報告して終了する。次の対応を選択する質問はしない。
 
-If the request includes fixing findings, or this review is part of an authorized implementation task, inspect and fix actionable issues within scope without a second confirmation. Do not blindly apply every suggestion: verify correctness, preserve unrelated work, and ask only about material scope changes or unapproved high-impact actions.
+指摘の修正も依頼されている場合、または許可済みの実装タスク内のレビューである場合は、範囲内の修正を追加確認せず進める。提案を機械的に適用せず、正しさを調べて無関係な作業を保護する。重要な範囲変更や未許可の高影響操作についてだけ確認する。
 
-### 5. Validate fixes
+### 5. 修正の検証
 
-Run checks appropriate to the actual fixes and report changes, validation, and remaining findings. Review or fix authorization does not by itself authorize commits, push, PR creation, or posting comments to external services.
+実際の修正に応じたチェックを実行し、変更・検証・残る指摘を報告する。レビューや修正の許可だけでは、コミット・push・PR 作成・外部サービスへのコメント投稿は許可されない。
 
 ## 重要な注意事項
 
@@ -209,4 +209,4 @@ Run checks appropriate to the actual fixes and report changes, validation, and r
 - diff が空の場合は早期終了する
 - 統合レポートは `.codex/tmp/{TS}-review.md` にも保存する
 - diff なしでレビューを実行しない
-- Apply fixes only when the request or parent implementation task authorizes them; do not require repeated confirmation.
+- 依頼または親の実装タスクで許可されている場合だけ修正し、重複確認は求めない。

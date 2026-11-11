@@ -36,12 +36,12 @@ description: 現在のブランチから PR を作成または更新する。「
   「develop 向けに PR を作成」      # develop ブランチ向けに PR 作成
 
 内部呼び出し用:
-  --no-confirm  Compatibility flag for already authorized workflow calls
+  --no-confirm  許可済みワークフローからの呼び出し用の互換オプション
 ```
 
-## Authorization
+## 許可と確認の方針
 
-Use the global authorization policy and the current request to determine scope. An explicit request for this skill's action is sufficient authorization; do not ask again just to approve generated wording or require `--no-confirm`. The flag remains compatible with authorized workflow callers, but never grants permission by itself. Preserve security checks and ask only for missing authorization, a material scope change, or a concrete risk outside the approved scope.
+グローバルの許可方針と現在の依頼から実行範囲を判断する。このスキルの操作を明示的に依頼されていれば、それを許可として扱い、生成した文面の承認や `--no-confirm` の指定を改めて求めない。このオプションは許可済みの呼び出しとの互換用であり、指定自体が許可を与えるものではない。セキュリティチェックは維持し、許可不足、重要な範囲変更、許可範囲外の具体的なリスクがある場合だけ確認する。
 
 ## 起動時の自動判断
 
@@ -66,12 +66,12 @@ git fetch origin
 git log "origin/${CURRENT_BRANCH}..HEAD" --oneline 2>/dev/null
 ```
 
-**Check branch state**:
+**ブランチ状態の検証**:
 
-- Inspect uncommitted changes and outgoing commits; do not terminate merely because the feature branch has not been pushed yet.
-- A request to create a PR includes the normal push needed to publish its intended feature-branch commits. Verify the remote, destination, and outgoing diff before pushing; never force-push or push directly to the default branch under this authorization.
-- If intended changes still need a commit, a request to create a PR from those changes authorizes the necessary commit after checks. Use `git-add-commit` for only the requested paths or hunks; leave unrelated edits and staged content untouched.
-- Ask only if the intended scope cannot be determined safely, or publishing would include unapproved content. Respect an explicit instruction not to commit or push; report the resulting blocker instead of claiming PR completion.
+- 未コミットの変更と未 push のコミットを確認する。feature branch が未 push という理由だけで終了しない。
+- PR 作成の依頼には、対象の feature branch のコミットを公開するために必要な通常の push を含む。remote・送信先・送信する差分を確認し、この許可だけで force-push やデフォルトブランチへの push は行わない。
+- 対象変更のコミットが必要なら、その変更からの PR 作成依頼には検証後の必要なコミットも含む。`git-add-commit` を使い、対象パスや hunk だけをコミットして無関係な編集・ステージ済みの内容を保護する。
+- 対象範囲を安全に判断できない場合や、許可されていない内容を公開してしまう場合だけ確認する。「コミットしない」「push しない」などの制約を優先し、実行できない場合は阻害要因を報告して PR 完了を主張しない。
 
 ### 2. 既存 PR の自動検出
 
@@ -95,11 +95,11 @@ git diff "origin/${DEFAULT_BRANCH}...HEAD" --stat
 
 - ブランチ名（`feature/5` → #5）
 - コミットメッセージ
-- If no related Issue can be established, omit the link; ask only if linking is required and the target is ambiguous.
+- 関連 Issue を特定できなければリンクを省略する。リンクが必須で対象が曖昧な場合だけ確認する。
 
 ### 5. 破壊的変更の検出
 
-Inspect the commits and public API changes for breaking behavior. If a breaking change is verified, mark it in the Conventional Commits title and describe the impact without asking a separate question about the title punctuation. Creating a PR does not authorize deploying or merging the change.
+コミットと公開 API の変更から破壊的変更の有無を確認する。確認できた場合は Conventional Commits のタイトルに明示し、影響を説明する。タイトルに記号を付けるかの追加確認はしない。PR 作成の許可はデプロイやマージの許可を含まない。
 
 ### 6. PR 内容の作成
 
@@ -113,7 +113,7 @@ Inspect the commits and public API changes for breaking behavior. If a breaking 
 | refactor | リファクタリング | `refactor: スキル構造を整理`         |
 | chore    | その他の変更     | `chore: 依存関係を更新`              |
 
-Prepare a Japanese title and body from the verified diff, repository template, and actual validation results. If PR creation or update is authorized, proceed without requesting approval of the wording. `--no-confirm` is optional and does not expand authorization.
+検証した差分、リポジトリのテンプレート、実際の検証結果から日本語のタイトルと本文を作成する。PR 作成・更新が許可済みなら、文面の再承認を求めず進める。`--no-confirm` は任意であり、許可範囲を広げない。
 
 ### 7. PR 作成・更新
 
@@ -174,7 +174,7 @@ PR を{作成|更新}しました:
 
 - ✅ 既存 PR がある場合は自動的に更新モードになる
 - ✅ Conventional Commits 形式のタイトル
-- Reference a verified related Issue with `Closes #N`; omit the section if none exists.
+- 確認済みの関連 Issue がある場合は `Closes #N` で参照し、なければ該当セクションを省略する。
 - ✅ PR タイトルと本文は日本語
-- Complete authorized commits and normal feature-branch push before creating the PR; preserve unrelated work.
-- Do not invent an Issue or claim checks passed when they were not performed.
+- PR 作成前に、許可されたコミットと通常の feature branch push を完了し、無関係な作業を保護する。
+- 存在しない Issue を記載したり、未実行のチェックが成功したと主張したりしない。

@@ -36,18 +36,18 @@ GitHub Issue を作成します。タスクは Issue 本文内でチェックボ
   「Issue を作って worktree も用意して」    # Issue 作成後に worktree も作成
 
 内部呼び出し用:
-  --no-confirm  Compatibility flag for already authorized workflow calls
+  --no-confirm  許可済みワークフローからの呼び出し用の互換オプション
 ```
 
-## Authorization
+## 許可と確認の方針
 
-Use the global authorization policy and the current request to determine scope. An explicit request for this skill's action is sufficient authorization; do not ask again just to approve generated wording or require `--no-confirm`. The flag remains compatible with authorized workflow callers, but never grants permission by itself. Preserve security checks and ask only for missing authorization, a material scope change, or a concrete risk outside the approved scope.
+グローバルの許可方針と現在の依頼から実行範囲を判断する。このスキルの操作を明示的に依頼されていれば、それを許可として扱い、生成した文面の承認や `--no-confirm` の指定を改めて求めない。このオプションは許可済みの呼び出しとの互換用であり、指定自体が許可を与えるものではない。セキュリティチェックは維持し、許可不足、重要な範囲変更、許可範囲外の具体的なリスクがある場合だけ確認する。
 
 ## ワークフロー
 
 ### 1. タスクの確認
 
-Use the task description and conversation first. Ask for the task summary only if the intended Issue cannot be determined from available context.
+タスク説明と会話の情報を優先する。既存の情報から作成対象の Issue を判断できない場合だけ概要を質問する。
 
 ### 2. タスクの分割
 
@@ -57,13 +57,13 @@ Use the task description and conversation first. Ask for the task summary only i
 - 依存関係がある場合は順番に並べる
 - テストやドキュメント更新も個別タスクとして記載
 
-### 3. Prepare Issue content
+### 3. Issue 内容の準備
 
-Prepare the title, labels, task checkboxes, and completion criteria from the request. An explicit Issue creation request authorizes publishing this content without a second wording approval. Ask only for missing material information or unapproved scope; `--no-confirm` alone is not authorization.
+依頼からタイトル・ラベル・タスクのチェックボックス・完了条件を用意する。明示的な Issue 作成依頼があれば文面を再承認せず作成する。重要な情報不足や未許可の範囲についてだけ確認する。`--no-confirm` 自体は許可を与えない。
 
 ### 4. Issue 作成
 
-Once creation is authorized and the content is validated, create the Issue with `gh issue create`.
+作成が許可され、内容を検証できたら `gh issue create` で Issue を作成する。
 
 **コマンドテンプレート**:
 
@@ -113,9 +113,9 @@ Issue を作成しました:
 
 作成した Issue の番号で `github-worktree-create` スキルのワークフローに従い worktree を自動作成する。
 
-**When no follow-up creation is requested**:
+**後続の作成が依頼されていない場合**:
 
-Finish after reporting the Issue URL. Do not ask whether to create a branch or worktree. When an authorized parent workflow requires one, follow that workflow without an additional question.
+Issue の URL を報告して終了する。branch や worktree を作るかは質問しない。許可済みの親ワークフローで必要な場合は、その指定に従い追加確認せず進める。
 
 ## Issue タイトルの形式
 

@@ -1,7 +1,7 @@
 # Global Instructions
 
 - Use Japanese for responses, plans, artifacts, code comments, and error messages. Keep technical terms and identifiers in their original form.
-- Write AI instruction files in English.
+- Write AI instruction files in English, except skill definitions: preserve Japanese descriptions and instructions in skills, as requested by the user.
 - Keep changes minimal and within the requested scope; follow project conventions. Explain scope and risks before substantial changes.
 - Read relevant code before editing. Investigate behavior and impact using available code, documentation, tools, and task context before asking the user. Resolve routine implementation choices independently; ask only when missing information materially affects scope, correctness, security, external impact, or reversibility. Preserve user edits and unrelated changes; never revert them to fix a failure.
 - Check security and performance risks relevant to the changes.
