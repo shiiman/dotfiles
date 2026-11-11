@@ -15,10 +15,39 @@ else
     print -u2 "警告: ~/.shellrc_common が見つかりません。~/dotfiles/dotfile_setup.sh を実行してください。"
 fi
 
+# brew shellenv は起動のたびに約1.5秒かかるため、同じ出力を直接設定する。
+# (出力が変わった場合は `brew shellenv` と見比べて更新する)
 if [ -e "/opt/homebrew/bin/brew" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+    export HOMEBREW_REPOSITORY="/opt/homebrew"
+    fpath[1,0]="/opt/homebrew/share/zsh/site-functions"
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
+    [ -z "${MANPATH-}" ] || { export MANPATH="${MANPATH%"${MANPATH##*[!:]}"}"; export MANPATH=":${MANPATH#"${MANPATH%%[!:]*}"}"; }
+    export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
 fi
 fpath=(~/.zsh/completion $fpath)
+
+# コマンドの出力をキャッシュして source する(起動時のプロセス起動を減らす)。
+# コマンド実体のパス(Homebrew では Cellar のバージョン入り)が変わったときだけ再生成する。
+# 使い方: _cached_source <キャッシュ名> <コマンド> [引数...]
+_cached_source() {
+    local name=$1; shift
+    local bin=${commands[$1]}
+    [[ -n $bin ]] || return 0
+    local real=${bin:A}
+    local cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/$name.zsh
+    local first=
+    [[ -s $cache ]] && read -r first < $cache
+    if [[ $first != "# $real" ]]; then
+        mkdir -p ${cache:h} || return 0
+        if "$@" >| $cache.tmp 2>/dev/null; then
+            { print -r -- "# $real"; cat $cache.tmp } >| $cache
+        fi
+        rm -f $cache.tmp
+    fi
+    [[ -s $cache ]] && source $cache
+}
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
@@ -26,12 +55,12 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # mise activate より先に direnv export を実行し、MISE_DATA_DIR 等を反映させる
 if command -v direnv >/dev/null 2>&1; then
     eval "$(direnv export zsh 2>/dev/null)"
-    eval "$(direnv hook zsh)"
+    _cached_source direnv-hook direnv hook zsh
 fi
 
 # mise - 言語バージョン管理 (anyenv/asdfの後継)
 if command -v mise >/dev/null 2>&1; then
-    eval "$(mise activate zsh)"
+    _cached_source mise-activate mise activate zsh
 fi
 
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
@@ -106,7 +135,12 @@ setopt correct
 
 # ディレクトリ移動時の表示（ファイル数が多い場合は省略）
 function chpwd() {
-    if [[ $(ls -1 | wc -l) -lt 50 ]]; then
+    # 非表示ファイルを除いた件数を、外部コマンドなしで数える(ls | wc の起動を避ける)
+    # 呼び出し元のシェル設定(bare_glob_qual 等)に依存しないよう、必要なオプションを明示する
+    setopt local_options no_glob_dots null_glob
+    local -a entries
+    entries=(*)
+    if (( $#entries < 50 )); then
         ls -a
     fi
     pwd
@@ -207,7 +241,7 @@ bindkey "^n" history-beginning-search-forward
 
 # helm補完
 if type helm >/dev/null 2>&1; then
-    source <(helm completion zsh) >&/dev/null
+    _cached_source helm-completion helm completion zsh >&/dev/null
 fi
 
 ###########################################################
@@ -231,23 +265,68 @@ fi
 ###########################################################
 #  gitの設定                                               #
 ###########################################################
-# vcs_infoロード
-autoload -Uz vcs_info
 # PROMPT変数内で変数参照する
 setopt prompt_subst
 
-# vcsの表示
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{green}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "[%F{blue}%c%u%b%f]"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
+# プロンプトの git 表示。vcs_info は check-for-changes で git を7回起動し、
+# プロンプトのたびに1秒以上かかるため、git を1回だけ呼ぶ自前の関数に置き換えた。
+# 表示: [ブランチ名] / ステージ済みは緑の !、未ステージは赤の +(untracked は見ない)
+# rebase / merge 等の途中は [ブランチ名|状態]。状態は .git 内のファイルから判定する(git 起動なし)。
+_prompt_git_action() {
+    REPLY=
+    local d=$PWD gd= l
+    while [[ -n $d ]]; do
+        if [[ -d $d/.git ]]; then
+            gd=$d/.git; break
+        elif [[ -f $d/.git ]]; then
+            read -r l < $d/.git
+            gd=${l#gitdir: }
+            [[ $gd == /* ]] || gd=$d/$gd
+            break
+        fi
+        d=${d%/*}
+    done
+    [[ -n $gd ]] || return 0
+    if [[ -d $gd/rebase-merge || -d $gd/rebase-apply ]]; then REPLY=rebase
+    elif [[ -f $gd/MERGE_HEAD ]]; then REPLY=merge
+    elif [[ -f $gd/CHERRY_PICK_HEAD ]]; then REPLY=cherry-pick
+    elif [[ -f $gd/REVERT_HEAD ]]; then REPLY=revert
+    elif [[ -f $gd/BISECT_LOG ]]; then REPLY=bisect
+    fi
+}
 
-# プロンプト表示直前にvcs_info呼び出し
+_prompt_git_info() {
+    _git_prompt_info=
+    local out line oid= branch= staged= unstaged= xy
+    out=$(GIT_OPTIONAL_LOCKS=0 command git status -b --porcelain=v2 -uno 2>/dev/null) || return 0
+    for line in "${(@f)out}"; do
+        case $line in
+            '# branch.oid '*)  oid=${line#'# branch.oid '} ;;
+            '# branch.head '*) branch=${line#'# branch.head '} ;;
+            'u '*) unstaged=1 ;;
+            [12]' '*)
+                xy=${line[3,4]}
+                [[ ${xy[1]} != . ]] && staged=1
+                [[ ${xy[2]} != . ]] && unstaged=1
+                ;;
+        esac
+    done
+    [[ -n $branch ]] || return 0
+    [[ $branch == '(detached)' ]] && branch=${oid[1,7]}
+    branch=${branch//\%/%%}
+    _prompt_git_action
+    if [[ -n $REPLY ]]; then
+        _git_prompt_info="[${branch}|${REPLY}]"
+    else
+        _git_prompt_info="[%F{blue}${staged:+%F{green\}!}${unstaged:+%F{red\}+}${branch}%f]"
+    fi
+}
+
+# プロンプト表示直前に git 情報を更新
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd vcs_info
+add-zsh-hook precmd _prompt_git_info
 # プロンプト表示
-RPROMPT='${vcs_info_msg_0_}'$RPROMPT
+RPROMPT='${_git_prompt_info}'$RPROMPT
 
 ###########################################################
 #  その他の設定                                             #
