@@ -3,12 +3,12 @@
 
 [tools]
 go = "1.26.11"
-node = "26.13.0"
+node = "26.13.1"
 pnpm = "10.34.9"
 python = "3.14.10"
 terraform = "1.14.9"
 terragrunt = "0.99.5"
-uv = "0.13.7"
+uv = "0.13.8"
 
 [settings]
 # 実験的機能を無効化
