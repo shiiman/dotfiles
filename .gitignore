@@ -30,6 +30,10 @@ node_modules/
 # Codex システムスキル（codex CLI が自動配置・更新するため追跡しない）
 ai/codex/skills/.system/
 
+# 外部スキル本体と、切り替えコマンドが生成するローカルリンク
+ai/yomiyasu/skills/
+ai/codex/skills/yomiyasu
+
 # エディタの拡張機能管理ファイル
 # Cursor / Antigravity が拡張の追加・削除時に書き換える内部管理ファイルで、
 # インストール先の絶対パス・UUID・タイムスタンプを含むため追跡しない。
