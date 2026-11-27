@@ -227,7 +227,6 @@ npm run format:check         # Check formatting only (no write)
 
 ```bash
 /lint              # シェルスクリプトをlint（shellcheck）
-/codex-sync        # claude-code-plugins の PR を codex に取り込む
 ```
 
 ---
