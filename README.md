@@ -227,7 +227,6 @@ bash ~/dotfiles/ai_setup.sh
 | Codex       | `~/.codex/config.toml`                                       | コピー  | CLI設定（雛形から生成）  |
 | Codex       | `~/.codex/AGENTS.md`                                         | symlink | グローバル指示           |
 | Codex       | `~/.codex/skills/`                                           | symlink | スキル定義               |
-| Codex       | `~/.codex/lib/`                                              | symlink | 共有ライブラリ           |
 | Codex       | `~/.codex/agents/`                                           | symlink | agents定義               |
 | Antigravity | `~/.gemini/GEMINI.md`                                        | symlink | グローバル指示           |
 | Antigravity | `ai/antigravity/extensions.txt`                              | -       | 拡張機能IDリスト         |

@@ -2,13 +2,12 @@
 
 グローバル設定は `ai/codex/` から `~/.codex/` へ配置される。
 
-| 対象                            | 配置先                 | 方式                      |
-| ------------------------------- | ---------------------- | ------------------------- |
-| `ai/codex/AGENTS.md`            | `~/.codex/AGENTS.md`   | symlink                   |
-| `ai/codex/skills/`              | `~/.codex/skills`      | symlink                   |
-| `ai/codex/lib/`                 | `~/.codex/lib`         | symlink（共有ライブラリ） |
-| `ai/codex/agents/`              | `~/.codex/agents`      | symlink                   |
-| `ai/codex/config.toml.template` | `~/.codex/config.toml` | **コピー**                |
+| 対象                            | 配置先                 | 方式       |
+| ------------------------------- | ---------------------- | ---------- |
+| `ai/codex/AGENTS.md`            | `~/.codex/AGENTS.md`   | symlink    |
+| `ai/codex/skills/`              | `~/.codex/skills`      | symlink    |
+| `ai/codex/agents/`              | `~/.codex/agents`      | symlink    |
+| `ai/codex/config.toml.template` | `~/.codex/config.toml` | **コピー** |
 
 ### config.toml はテンプレート方式
 

@@ -16,5 +16,4 @@
 
 ```bash
 /lint              # シェルスクリプトをlint（shellcheck）
-/codex-sync        # claude-code-plugins の PR を codex に取り込む
 ```
