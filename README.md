@@ -216,8 +216,7 @@ bash ~/dotfiles/ai_setup.sh
 | Claude Code | `~/.claude/settings.json`                                    | コピー  | モデル、権限、フック設定 |
 | Claude Code | `~/.claude/CLAUDE.md`                                        | symlink | グローバル指示           |
 | Claude Code | `ai/claude/scripts/`                                         | -       | statusline等のスクリプト |
-| Claude Code | MCP: `multi-agent-mcp` / `notebooklm-mcp`                    | -       | MCP サーバー             |
-| Cursor      | `~/.cursor/mcp.json`                                         | symlink | MCPサーバー設定          |
+| Claude Code | MCP: `notebooklm-mcp` / `google-genmedia-mcp`                | -       | MCP サーバー             |
 | Cursor      | `~/Library/Application Support/Cursor/User/settings.json`    | symlink | エディタ設定             |
 | Cursor      | `~/Library/Application Support/Cursor/User/keybindings.json` | symlink | キーバインド             |
 | Cursor      | `~/Library/Application Support/Cursor/User/snippets/`        | symlink | スニペット               |

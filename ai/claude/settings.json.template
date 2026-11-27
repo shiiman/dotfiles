@@ -7,25 +7,14 @@
     "context7@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": false,
     "nextjs@sumzap-claude-code-plugins": false,
-    "notion@claude-plugins-official": false,
     "playwright@claude-plugins-official": true,
-    "shiiman-claude@shiiman-claude-code-plugins": true,
-    "shiiman-common@shiiman-claude-code-plugins": true,
-    "shiiman-git@shiiman-claude-code-plugins": true,
-    "shiiman-github@shiiman-claude-code-plugins": true,
-    "shiiman-go@shiiman-claude-code-plugins": true,
     "shiiman-google@shiiman-claude-code-plugins": true,
-    "shiiman-slack@shiiman-claude-code-plugins": true,
-    "shiiman-terraform@shiiman-claude-code-plugins": true,
-    "shiiman-workflow@shiiman-claude-code-plugins": true,
-    "slack@claude-plugins-official": false,
     "superpowers@superpowers-marketplace": true,
     "swift-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false
   },
   "env": {
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -140,7 +129,6 @@
   "outputStyle": "Default",
   "permissions": {
     "allow": [
-      "mcp__multi-agent-mcp__*",
       "mcp__notebooklm-mcp__*",
       "mcp__google-genmedia-mcp__*",
       "Read(*)",
@@ -197,14 +185,9 @@
       "Skill(*)",
       "Skill(shiiman-claude:*)",
       "Skill(shiiman-git:*)",
-      "Skill(shiiman-github:*)",
-      "Skill(shiiman-common:*)",
-      "Skill(shiiman-workflow:*)",
       "Skill(shiiman-google:*)",
       "Skill(shiiman-go:*)",
-      "Skill(shiiman-terraform:*)",
-      "Skill(shiiman-slack:*)",
-      "Skill(shiiman-claude-code-plugins:*)"
+      "Skill(shiiman-terraform:*)"
     ],
     "ask": [
       "Bash(git push:*)",

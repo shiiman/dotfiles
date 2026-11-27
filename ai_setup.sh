@@ -74,17 +74,7 @@ setup_claude_plugins() {
 setup_shiiman_claude_code_plugins() {
     local marketplace="shiiman-claude-code-plugins"
     local marketplace_repo="shiiman/claude-code-plugins"
-    local plugins=(
-        "shiiman-common"
-        "shiiman-claude"
-        "shiiman-git"
-        "shiiman-github"
-        "shiiman-go"
-        "shiiman-terraform"
-        "shiiman-workflow"
-        "shiiman-google"
-        "shiiman-slack"
-    )
+    local plugin="shiiman-google@${marketplace}"
 
     # マーケットプレイスの追加（未設定の場合のみ）
     if ! claude plugin marketplace list 2>/dev/null | grep -q "$marketplace"; then
@@ -94,16 +84,13 @@ setup_shiiman_claude_code_plugins() {
         echo "    ✓ $marketplace (マーケットプレイス設定済み)"
     fi
 
-    # 各プラグインのインストール（未インストールの場合のみ）
-    for plugin_name in "${plugins[@]}"; do
-        local plugin="${plugin_name}@${marketplace}"
-        if ! claude plugin list 2>/dev/null | grep -q "$plugin"; then
-            claude plugin install --scope user "$plugin"
-            echo "    ✓ $plugin をインストール"
-        else
-            echo "    ✓ $plugin (インストール済み)"
-        fi
-    done
+    # プラグインのインストール（未インストールの場合のみ）
+    if ! claude plugin list 2>/dev/null | grep -Fq "$plugin"; then
+        claude plugin install --scope user "$plugin"
+        echo "    ✓ $plugin をインストール"
+    else
+        echo "    ✓ $plugin (インストール済み)"
+    fi
 }
 
 # codex-plugin-cc のセットアップ
@@ -169,25 +156,8 @@ setup_claude_mcp() {
         return
     fi
 
-    # multi-agent-mcp のセットアップ
-    setup_multi_agent_mcp
     setup_notebooklm_mcp
-}
-
-# multi-agent-mcp のセットアップ
-setup_multi_agent_mcp() {
-    local mcp_name="multi-agent-mcp"
-    local mcp_repo="git+https://github.com/shiiman/multi-agent-mcp"
-
-    # MCP 設定の追加（未設定の場合のみ）
-    # uvx で GitHub から直接インストール（--refresh で毎回最新版を取得）
-    if ! claude mcp list 2>/dev/null | grep -q "$mcp_name"; then
-        claude mcp add --scope user "$mcp_name" -- \
-            uvx --refresh --from "$mcp_repo" "$mcp_name"
-        echo "    ✓ $mcp_name を Claude に追加"
-    else
-        echo "    ✓ $mcp_name (既に設定済み)"
-    fi
+    setup_google_genmedia_mcp
 }
 
 # notebooklm-mcp のセットアップ
@@ -226,9 +196,10 @@ setup_google_genmedia_mcp() {
 setup_cursor() {
     echo "Cursor設定..."
 
-    # MCP設定
-    create_symlink "$DOTFILES_DIR/ai/cursor/mcp.json" ~/.cursor/mcp.json
-    echo "  ✓ mcp.json"
+    # 廃止した空の MCP 設定へのリンクだけを解除する
+    if [ -L ~/.cursor/mcp.json ] && [ "$(readlink ~/.cursor/mcp.json)" = "$DOTFILES_DIR/ai/cursor/mcp.json" ]; then
+        unlink ~/.cursor/mcp.json
+    fi
 
     # エディタ設定
     local cursor_user_dir="$HOME/Library/Application Support/Cursor/User"
